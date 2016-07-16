@@ -1,6 +1,6 @@
 <?php
 /**
- * @var inklabs\kommerce\EntityDTO\ProductDTO $product
+ * @var \inklabs\kommerce\EntityDTO\ProductDTO $product
  */
 
 View::set_global('page_title', HTML::chars($product->name));
