@@ -1,0 +1,14 @@
+{
+  "name": "inklabs/kommerce-templates",
+  "description": "Zen Kommerce - Base Templates",
+  "keywords": ["commerce", "ecommerce", "store", "templates"],
+  "license": "MIT",
+  "type": "project",
+  "support": {
+    "source": "https://github.com/inklabs/kommerce-templates"
+  },
+  "require": {
+    "php": ">=5.5.9",
+    "inklabs/kommerce-core": "dev-master"
+  }
+}
