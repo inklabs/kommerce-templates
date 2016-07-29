@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cae5a0fab4b7f36faaf49b3fe4138ced",
-    "content-hash": "9528f9caae53c597f5ad3e62eee71f0a",
+    "hash": "f4e0734862d4ff89243a6bc897596a1e",
+    "content-hash": "d75dd5062e7bd376b24ce1c06961f089",
     "packages": [
         {
             "name": "composer/installers",
@@ -808,12 +808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/inklabs/kommerce-core.git",
-                "reference": "2f85600a4aed08a4b78b7e23a24d099017e597f7"
+                "reference": "608c464da9777ff105d42b916efff78e53060253"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inklabs/kommerce-core/zipball/2f85600a4aed08a4b78b7e23a24d099017e597f7",
-                "reference": "2f85600a4aed08a4b78b7e23a24d099017e597f7",
+                "url": "https://api.github.com/repos/inklabs/kommerce-core/zipball/608c464da9777ff105d42b916efff78e53060253",
+                "reference": "608c464da9777ff105d42b916efff78e53060253",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +850,7 @@
                 "kommerce",
                 "zen"
             ],
-            "time": "2016-07-15 17:04:57"
+            "time": "2016-07-26 21:51:28"
         },
         {
             "name": "paragonie/random_compat",
@@ -1347,6 +1347,67 @@
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
             "time": "2016-06-29 05:41:56"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.24.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.7"
+            },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.24-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2016-05-30 09:11:59"
         }
     ],
     "packages-dev": [],
