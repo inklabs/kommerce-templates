@@ -12,6 +12,8 @@ class TwigTemplate
 
     public function __construct($paths = [])
     {
+        $this->addBaseTheme($paths);
+
         $twigLoader = new Twig_Loader_Filesystem($paths);
         $this->twigEnvironment = new Twig_Environment($twigLoader);
         $this->addCustomFilters();
@@ -40,5 +42,14 @@ class TwigTemplate
         );
 
         $this->twigEnvironment->addFilter($displayPriceFilter);
+    }
+
+    /**
+     * @param array $paths
+     */
+    private function addBaseTheme(array & $paths)
+    {
+        $baseThemePath = __DIR__ . '/../../themes/base/templates';
+        $paths[] = $baseThemePath;
     }
 }
