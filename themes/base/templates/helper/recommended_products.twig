@@ -1,0 +1,15 @@
+{% if products is not empty %}
+    <div class="row">
+        <div class="col-sm-12">
+            <hr />
+            <h2 class="text-center">{% block title %}You Might Also Like{% endblock %}</h2>
+            {% if size == 'small' %}
+                {% embed "helper/product_grid_small.twig" with {'products': products } only %}
+                {% endembed %}
+            {% else %}
+                {% embed "helper/product_grid.twig" with {'products': products } only %}
+                {% endembed %}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

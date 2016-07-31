@@ -1,13 +1,26 @@
-<!-- You can combine a row and column if you just need a 12 column row -->
-<div class="row columns">
-    <nav aria-label="You are here:" role="navigation">
-        <ul class="breadcrumbs">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li class="disabled">Gene Splicing</li>
-            <li>
-                <span class="show-for-sr">Current: </span> Cloning
-            </li>
-        </ul>
-    </nav>
+{%  if breadcrumbs is defined %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <ol class="breadcrumb">
+                {# TODO:
+                <?php
+                $current_uri = URL::site(Request::current()->uri());
+                foreach ($breadcrumbs as $name => $uri) {
+                if ($current_uri == $uri) {
+                echo '<li class="active">' . $name . '</li>';
+                } else {
+                if ($uri === null) {
+                echo '<li>' . $name . '</li>';
+                } else {
+                echo '<li>' . HTML::anchor($uri, $name) . '</li>';
+                }
+                }
+                }
+                ?>
+                #}
+            </ol>
+        </div>
+    </div>
 </div>
+{% endif %}

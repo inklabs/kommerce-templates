@@ -1,0 +1,25 @@
+{# @var price \inklabs\kommerce\EntityDTO\PriceDTO #}
+{# @var discountNames string #}
+
+{% if discountNames is not empty %}
+    <span class="price-strike" data-toggle="tooltip" title="{{ discountNames }}">
+        {{ price.origUnitPrice | displayPrice }}
+    </span>
+    <span> </span>
+{% elseif price.unitPrice < price.origUnitPrice %}
+    {# TODO:
+        <?php
+            $promotionNames = [];
+            foreach ($price->catalogPromotions as $catalogPromotion) {
+                $promotionNames[] = $catalogPromotion->name;
+            }
+
+            foreach ($price->productQuantityDiscounts as $productQuantityDiscount) {
+                $promotionNames[] = $productQuantityDiscount->name;
+            }
+        ?>
+    #}
+    <span class="price-strike" data-toggle="tooltip" title="<?=HTML::chars(implode(', ', $promotionNames))?>"><?=Kommerce::display_price($price->origUnitPrice)?></span>
+    <span> </span>
+{% endif %}
+<span class="price">{{ price.unitPrice | displayPrice }}</span>

@@ -79,10 +79,12 @@
                         {% endif %}
 
                         {% if product.isInStock %}
-                            <form action="/cart/addItem"
+                            <form action="/cart/add-item"
                                   id="cart_add_item"
                                   class="form-inline"
                                   method="post">
+
+                                <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
                         {% endif %}
 
                         {% if product.options is not empty or product.textOptions is not empty %}

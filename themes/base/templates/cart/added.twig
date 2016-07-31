@@ -1,0 +1,147 @@
+{# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
+{# @var cartItem \inklabs\kommerce\EntityDTO\CartItemDTO #}
+{# @var recommendedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{% extends "layout/base.twig" %}
+
+{% block title %}{{ cartItem.product.name }}{% endblock %}
+
+{% block content %}
+    <div id="cart-added">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="thumbnail">
+                        <div class="pull-left" style="margin-right: 10px">
+                            <a href="<?=$cartItem->product->url?>">
+                                <img src="{{ cartItem.product.defaultImage }}" width="110" height="110" />
+                            </a>
+                        </div>
+                        <a href="{# TODO: <?=$cartItem->product->url?>#}">
+                            <div class="product-name">{{ cartItem.product.name }}</div>
+                        </a>
+
+                        {# TODO:
+                            <?=View::factory('helper/rating_stars_static')->set([
+                            'rating' => $cartItem->product->rating,
+                            'count' => FALSE,
+                            ])?>
+                        #}
+
+                        <div class="pull-right">Quantity in cart: {{ cartItem.quantity }}</div>
+
+                        {% embed "helper/price.twig" with {'price': cartItem.price } only %}{% endembed %}
+
+                        {#
+                            <?php
+                            /*
+                                $option_values = Arr::path($cart->data, $cart_item_id . '.option_values', []);
+                            $option_products = Arr::path($cart->data, $cart_item_id . '.option_products', []);
+
+                            <div class="table-cell">
+                                <?php foreach ($option_values as $option_id => $option_value_id) { ?>
+                                <small>
+                                        <span>
+                                            <?=Arr::path($cart->options, $option_id)->name?>:
+                                        </span>
+                                        <span class="text-muted">
+                                            <?=Arr::path($cart->option_values, $option_value_id)->name?>
+                                        </span>
+                                    <br>
+                                </small>
+                                <?php } ?>
+
+                                <?php foreach ($option_products as $option_id => $option_product_id) { ?>
+                                <small>
+                                        <span>
+                                            <?=Arr::path($cart->options, $option_id)->name?>:
+                                        </span>
+                                        <span class="text-muted">
+                                            <?=Arr::path($cart->products, $option_product_id)->name?>
+                                        </span>
+                                    <br>
+                                </small>
+                                <?php } ?>
+                            </div>
+                            */
+                            ?>
+                        #}
+
+                        <div class="clearfix"></div>
+
+                        {# TODO:
+                            <?php if ( ! empty($cartItem->product->productQuantityDiscounts)) { ?>
+                            <div class="pull-right">
+                                <?php foreach (array_reverse($cartItem->product->productQuantityDiscounts) as $productQuantityDiscount) { ?>
+                                <?php if ($cartItem->quantity < $productQuantityDiscount->quantity) { ?>
+                                <?php
+                                                $number_more = $productQuantityDiscount->quantity - $cartItem->quantity;
+                                $totalOff = (
+                                $productQuantityDiscount->price->quantityPrice
+                                -
+                                $cartItem->price->quantityPrice
+                                );
+
+                                $price_each = $totalOff / $number_more;
+                                if ($price_each >= $cartItem->price->unitPrice) {
+                                continue;
+                                }
+                                ?>
+
+                                <?=Form::open('cart/update_quantity', [
+                                                'method' => 'POST',
+                                'class' => 'form-inline',
+                                'style' => 'margin-top: 15px',
+                                ])?>
+                                <?=Form::csrf()?>
+
+                                <input type="hidden" name="id" value="<?=$cartItem->id->getHex()?>" />
+                                <input type="hidden" name="quantity" value="<?=$productQuantityDiscount->quantity?>" />
+                                <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i>
+                                    Add <?=$number_more?> more
+                                </button>
+                                <?php if ($price_each > 0) { ?>
+                                for <span class="price"><?=Kommerce::display_price($price_each)?></span> <?=ngettext('', 'each', $number_more)?>
+                                <?php } elseif ($price_each == 0) { ?>
+                                <span class="cart-free-shipping">for FREE</span>
+                                <?php } else { ?>
+                                <span class="cart-free-shipping">for <?=Kommerce::display_price(abs($totalOff))?> OFF</span>
+                                <?php } ?>
+                                </form>
+                                <?php } ?>
+                                <?php } ?>
+                            </div>
+                            #}
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="alert alert-info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="pull-right">
+                                    <a class="btn btn-default" href="<?=URL::site('cart')?>"><i class="glyphicon glyphicon-shopping-cart"></i> View Cart</a>
+
+                                    {% embed "helper/checkout_button.twig" only %}{% endembed %}
+                                </div>
+                                <strong>Order subtotal:</strong> <span class="price-small">
+                                    {% embed "helper/price.twig" with {'price': cart.cartTotal.subtotal } only %}{% endembed %}
+                                </span>
+                                <br />
+                                <strong>{{ cart.totalItems }}</strong>
+                                {% trans %}
+                                    item in your Cart
+                                {% plural cart.totalItems %}
+                                    items in your Cart
+                                {% endtrans %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            {% embed "helper/recommended_products.twig" with {'products': recommendedProducts } only %}
+                {% block title %}Recommended for you{% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}
