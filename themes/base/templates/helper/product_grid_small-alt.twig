@@ -1,0 +1,19 @@
+<div class="tabs-panel" id="lk-related-products-tab">
+    <div class="row medium-up-3 large-up-5">
+
+        {% for product in products %}
+            <div class="column">
+                {% if product.defaultImage is empty %}
+                    <img class="thumbnail" src="http://placehold.it/350x200">
+                {% else %}
+                    <img class="thumbnail" src="{{ product.defaultImage }}">
+                {% endif %}
+
+                <h5>Other Product <small>$22</small></h5>
+                <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                <a href="#" class="button hollow tiny expanded">Buy Now</a>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
