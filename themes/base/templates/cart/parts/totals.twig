@@ -51,7 +51,7 @@
                     <?php foreach ($cart->cartTotal->cartPriceRules as $cartPriceRule) { ?>
                     <div class="row">
                         <div class="col-sm-12">
-                            &nbsp;<i class="glyphicon glyphicon-minus"></i>&nbsp;
+                            &nbsp;<i class="fa fa-minus"></i>&nbsp;
                             <?=$cartPriceRule->name?>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <?=Form::csrf()?>
 
                             <button type="submit" class="btn btn-link btn-xs">
-                                <i class="glyphicon glyphicon-remove"></i>
+                                <i class="fa fa-remove"></i>
                             </button>
                             <?=$coupon->name?>
 

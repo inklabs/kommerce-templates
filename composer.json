@@ -11,6 +11,9 @@
     "php": ">=5.5.9",
     "twig/twig": "~1.24",
     "twig/extensions": "~1.3.0",
+    "twbs/bootstrap-sass": "~3.3.7",
+    "thomaspark/bootswatch": "~v3.3.7",
+    "leafo/scssphp": "0.6.5",
     "inklabs/kommerce-core": "dev-master"
   },
   "autoload": {
