@@ -60,4 +60,9 @@ class TwigTemplate
     {
         $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_I18n());
     }
+
+    public function addGlobal($name, $value)
+    {
+        $this->twigEnvironment->addGlobal($name, $value);
+    }
 }
