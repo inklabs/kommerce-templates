@@ -11,11 +11,11 @@ class TwigTemplate
     /** @var Twig_Environment */
     private $twigEnvironment;
 
-    public function __construct($paths = [])
+    public function __construct($baseTheme = 'base', $paths = [])
     {
-        $this->addBaseTheme($paths);
-
+        $this->addBaseTheme($paths, $baseTheme);
         $twigLoader = new Twig_Loader_Filesystem($paths);
+
         $this->twigEnvironment = new Twig_Environment($twigLoader);
         $this->twigEnvironment->addGlobal('CSRF_TOKEN', csrf_token());
         $this->addCustomFilters();
@@ -50,9 +50,9 @@ class TwigTemplate
     /**
      * @param array $paths
      */
-    private function addBaseTheme(array & $paths)
+    private function addBaseTheme(array & $paths, $baseTheme)
     {
-        $baseThemePath = __DIR__ . '/../../themes/base/templates';
+        $baseThemePath = __DIR__ . '/../../themes/' . $baseTheme . '/templates';
         $paths[] = $baseThemePath;
     }
 
