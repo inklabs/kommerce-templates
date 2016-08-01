@@ -1,0 +1,26 @@
+{% if breadcrumbs is defined %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <ol class="breadcrumb">
+                {# TODO:
+                <?php
+                $current_uri = URL::site(Request::current()->uri());
+                foreach ($breadcrumbs as $name => $uri) {
+                if ($current_uri == $uri) {
+                echo '<li class="active">' . $name . '</li>';
+                } else {
+                if ($uri === null) {
+                echo '<li>' . $name . '</li>';
+                } else {
+                echo '<li>' . HTML::anchor($uri, $name) . '</li>';
+                }
+                }
+                }
+                ?>
+                #}
+            </ol>
+        </div>
+    </div>
+</div>
+{% endif %}

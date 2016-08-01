@@ -1,0 +1,27 @@
+{% for product in products %}
+<div class="product-container col-md-3 col-sm-4 col-xs-6">
+    <a href="{{ product.url }}">
+        {% if product.defaultImage is empty %}
+            <img src="http://lorempixel.com/640/480" style="height: 160px">
+        {% else %}
+            <img src="{{ product.defaultImage }}" style="height: 160px">
+        {% endif %}
+    </a>
+    <a href="{{ product.url }}">
+        <div class="product-name">{{ product.name }}</div>
+    </a>
+    {# TODO:
+        <?=View::factory('helper/rating_stars_static')->set('rating', $product->rating)?>
+    #}
+
+    {% if product.isInStock %}
+        <div class="availability">
+            <span class="out-of-stock">Out of Stock</span>
+        </div>
+    {% elseif product.isPriceVisible %}
+        {% embed "helper/price.twig" with {'price': product.price } only %}{% endembed %}
+    {% endif %}
+
+    <div style="clear: both;"></div>
+</div>
+{% endfor %}
