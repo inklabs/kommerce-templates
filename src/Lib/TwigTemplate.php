@@ -11,7 +11,7 @@ class TwigTemplate
     /** @var Twig_Environment */
     private $twigEnvironment;
 
-    public function __construct($baseTheme = 'base', $paths = [])
+    public function __construct($baseTheme, $paths = [])
     {
         $this->addBaseTheme($paths, $baseTheme);
         $twigLoader = new Twig_Loader_Filesystem($paths);

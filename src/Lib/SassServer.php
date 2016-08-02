@@ -13,6 +13,7 @@ class SassServer
     private $server;
 
     /**
+     * @param string $baseTheme
      * @param string $mainScssDirectory
      * @param string | null $bootswatchTheme
      * @param string | null $formatter
@@ -20,11 +21,12 @@ class SassServer
      */
     public function __construct(
         $mainScssDirectory,
+        $baseTheme = 'base-bootstrap',
         $bootswatchTheme = 'default',
         $formatter = 'compressed',
         $cacheDir = null
     ) {
-        $kommerceScssDirectory = __DIR__ . '/../../../../../vendor/inklabs/kommerce-templates/themes/base/scss';
+        $kommerceScssDirectory = __DIR__ . '/../../../../../vendor/inklabs/kommerce-templates/themes/' . $baseTheme . '/scss';
         $bootstrapScssDirectory = __DIR__ . '/../../../../../vendor/twbs/bootstrap-sass/assets/stylesheets';
         $bootswatchScssDirectory = __DIR__ . '/../../../../../vendor/thomaspark/bootswatch/' . $bootswatchTheme;
 
@@ -35,7 +37,7 @@ class SassServer
         $scssCompiler = new Compiler();
         $scssCompiler->setImportPaths($importPaths);
 
-        $this->salt = $mainScssDirectory . $bootswatchTheme . $formatter;
+        $this->salt = $mainScssDirectory . $baseTheme . $bootswatchTheme . $formatter;
 
         switch ($formatter) {
             case 'expanded':
