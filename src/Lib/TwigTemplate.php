@@ -11,15 +11,24 @@ class TwigTemplate
     /** @var Twig_Environment */
     private $twigEnvironment;
 
-    public function __construct($baseTheme, $paths = [])
-    {
+    public function __construct(
+        $baseTheme,
+        CSRFTokenGeneratorInterface $csrfTokenGenerator,
+        RouteUrlInterface $routeUrl,
+        $paths = []
+    ) {
         $this->addBaseTheme($paths, $baseTheme);
         $twigLoader = new Twig_Loader_Filesystem($paths);
 
         $this->twigEnvironment = new Twig_Environment($twigLoader);
-        $this->twigEnvironment->addGlobal('CSRF_TOKEN', csrf_token());
-        $this->addCustomFilters();
-        $this->addExtensions();
+
+        $this->twigEnvironment->addExtension(
+            new TwigExtension(
+                $csrfTokenGenerator,
+                $routeUrl
+            )
+        );
+        $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_I18n());
     }
 
     public function enableDebug()
@@ -35,18 +44,6 @@ class TwigTemplate
         return $this->twigEnvironment;
     }
 
-    private function addCustomFilters()
-    {
-        $displayPriceFilter = new Twig_SimpleFilter(
-            'displayPrice',
-            function ($price) {
-                return '$' . number_format(($price / 100), 2);
-            }
-        );
-
-        $this->twigEnvironment->addFilter($displayPriceFilter);
-    }
-
     /**
      * @param array $paths
      */
@@ -54,11 +51,6 @@ class TwigTemplate
     {
         $baseThemePath = __DIR__ . '/../../themes/' . $baseTheme . '/templates';
         $paths[] = $baseThemePath;
-    }
-
-    private function addExtensions()
-    {
-        $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_I18n());
     }
 
     public function addGlobal($name, $value)

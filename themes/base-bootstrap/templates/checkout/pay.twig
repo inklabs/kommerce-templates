@@ -28,12 +28,12 @@
                         {% for cartItem in cart.cartItems %}
                             <tr>
                                 <td class="cart-product-image">
-                                    <a href="{{ cartItem.product.url }}">
+                                    <a href="{{ productUrl(cartItem.product) }}">
                                         <img src="{{ cartItem.product.defaultImage }}" width="110" height="110" />
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ cartItem.product.url }}">
+                                    <a href="{{ productUrl(cartItem.product) }}">
                                         <span class="cart-product-title">{{ cartItem.product.name }}</span>
                                     </a>
 

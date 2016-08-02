@@ -1,13 +1,13 @@
 {% for product in products %}
 <div class="product-container col-md-3 col-sm-4 col-xs-6">
-    <a href="{{ product.url }}">
+    <a href="{{ productUrl(product) }}">
         {% if product.defaultImage is empty %}
             <img src="http://lorempixel.com/640/480" style="height: 160px">
         {% else %}
             <img src="{{ product.defaultImage }}" style="height: 160px">
         {% endif %}
     </a>
-    <a href="{{ product.url }}">
+    <a href="{{ productUrl(product) }}">
         <div class="product-name">{{ product.name }}</div>
     </a>
     {# TODO:
