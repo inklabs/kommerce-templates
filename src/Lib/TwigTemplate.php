@@ -1,10 +1,10 @@
 <?php
 namespace inklabs\KommerceTemplates\Lib;
 
+use RuntimeException;
 use Twig_Environment;
 use Twig_Extensions_Extension_I18n;
 use Twig_Loader_Filesystem;
-use Twig_SimpleFilter;
 
 class TwigTemplate
 {
@@ -50,6 +50,11 @@ class TwigTemplate
     private function addBaseTheme(array & $paths, $baseTheme)
     {
         $baseThemePath = __DIR__ . '/../../themes/' . $baseTheme . '/templates';
+
+        if (! file_exists($baseThemePath)) {
+            throw new RuntimeException($baseThemePath . ' not found');
+        }
+
         $paths[] = $baseThemePath;
     }
 
