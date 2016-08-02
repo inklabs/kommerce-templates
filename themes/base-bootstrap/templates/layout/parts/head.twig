@@ -6,6 +6,8 @@
 <title>{% if pageTitle is empty %}Zen Kommerce{% else %}{{ pageTitle }} - Zen Kommerce{% endif %}</title>
 <link rel="icon" href="/favicon.ico" />
 <link rel="shortcut icon" href="/favicon.ico" />
-<link rel="canonical" href="{{ canonicalUrl }}" />
+{% if pageCanonicalUrl is not empty %}
+    <link rel="canonical" href="{{ pageCanonicalUrl }}" />
+{% endif %}
 <link rel="stylesheet" href="/s?p=main.scss&formatter=compact">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">

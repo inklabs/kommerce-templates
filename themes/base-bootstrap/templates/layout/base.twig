@@ -3,7 +3,8 @@
 <head>
     {% include 'layout/parts/head.twig' with {
         'pageTitle': block('pageTitle'),
-        'pageDescription': block('pageDescription')
+        'pageDescription': block('pageDescription'),
+        'pageCanonicalUrl': block('pageCanonicalUrl')
     } %}
 </head>
 <body>
