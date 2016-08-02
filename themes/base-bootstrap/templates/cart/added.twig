@@ -124,7 +124,7 @@
                                     {% embed "helper/checkout_button.twig" only %}{% endembed %}
                                 </div>
                                 <strong>Order subtotal:</strong> <span class="price-small">
-                                    {% embed "helper/price.twig" with {'price': cart.cartTotal.subtotal } only %}{% endembed %}
+                                    {{ cart.cartTotal.subtotal | displayPrice }}
                                 </span>
                                 <br />
                                 <strong>{{ cart.totalItems }}</strong>
