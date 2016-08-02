@@ -1,0 +1,26 @@
+.totals-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.totals-table th,
+.totals-table tbody > tr > td {
+  padding: 8px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border: none;
+}
+
+.totals-table th {
+  font-weight: bold;
+}
+
+.totals-table thead th {
+  vertical-align: bottom;
+}
+
+.totals-table .cart-total-price td {
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}

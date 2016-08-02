@@ -1,0 +1,21 @@
+.navbar .divider-vertical { height: 40px; border-left: 1px solid #F2F2F2; border-right: 1px solid #FFF; }
+
+.nav-sidebar > li > a {
+  padding: 3px 15px;
+}
+.nav-sidebar > li {
+  width: 100%;
+}
+
+.nav-sidebar .divider { margin: 2px 0; border-top: 1px solid #eee; }
+
+.nav-header {
+  display: block;
+  padding: 3px 15px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #999;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}

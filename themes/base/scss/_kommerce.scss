@@ -1,3 +1,11 @@
-img {
-  max-width: 100%;
-}
+@import "general";
+@import "footer";
+@import "price";
+@import "product";
+@import "cart";
+@import "totals";
+@import "navigation";
+@import "pagination";
+@import "product_grid";
+@import "search";
+@import "checkout";
