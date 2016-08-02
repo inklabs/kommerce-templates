@@ -1,5 +1,5 @@
 {% for product in products %}
-    <div class="product-container-small {% if lg_slim %}col-md-12{% endif %} col-sm-3 col-xs-6">
+    <div class="product-container-small {% if lg_slim %}medium-12{% endif %} small-3 small-6 columns">
         <a href="{{ product.url }}">
             {% if product.defaultImage is empty %}
                 <img src="http://lorempixel.com/640/480" style="height: 110px">

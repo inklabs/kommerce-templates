@@ -8,9 +8,9 @@
     <div id="cart">
         <div class="container">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="small-9 columns">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="small-12 columns">
                             <h2>Shopping Cart</h2>
                             <table class="table">
                                 <thead>
@@ -86,11 +86,11 @@
                                             <form action="cart/update-quantity" method="post" role="form">
                                                 <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
                                                 <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
-                                                <div class="pull-right" style="width: 120px">
+                                                <div class="right" style="width: 120px">
                                                     <div class="input-group input-group-sm">
                                                         <input class="form-control update-qty" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
                                                         <span class="input-group-btn">
-                                                            <button type="submit" class="btn btn-default">Update</button>
+                                                            <button type="submit" class="button default">Update</button>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -101,7 +101,7 @@
                                                 <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
 
                                                 <span class="cart-remove-item">
-                                                    <button type="submit" class="btn btn-link btn-xs">
+                                                    <button type="submit" class="button link btn-xs">
                                                         <i class="glyphicon glyphicon-trash"></i>
                                                         Remove item
                                                     </button>
@@ -124,12 +124,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-7 col-sm-offset-5">
+                        <div class="small-7 small-offset-5 columns">
                             {% embed "cart/parts/totals.twig" %}{% endembed %}
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="small-3 columns">
                     <div class="alert alert-info" id="cart-cta-box">
                         <strong>
                             Total ({{ cart.totalItems }} items):
@@ -150,7 +150,7 @@
                         <div class="input-group">
                         <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />
                           <span class="input-group-btn">
-                              <button type="submit" class="btn btn-default" id="apply-coupon">apply</button>
+                              <button type="submit" class="button default" id="apply-coupon">apply</button>
                           </span>
                     </div>
                     </form>

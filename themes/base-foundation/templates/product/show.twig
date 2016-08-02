@@ -8,20 +8,20 @@
 {% block content %}
     <div class="container">
         <div class="row" id="product">
-            <div class="col-md-9 col-sm-12">
+            <div class="medium-9 small-12 columns">
                 <div class="row">
-                    <div class="col-sm-5 text-center" id="product-image-container">
+                    <div class="small-5 columns text-center" id="product-image-container">
                         <img id="product-image" src="{{ product.defaultImage }}" />
                         {% if product.images is not empty %}
                             <div class="row" style="margin-top: 5px">
-                                <div class="col-lg-3 col-xs-4">
+                                <div class="large-3 small-4 columns">
                                     <a href="{{ product.defaultImageUrl }}" class='product-image'>
                                         <img src="{{ product.defaultImageUrl }}" style="width: 100px;" />
                                     </a>
                                 </div>
                                 {% for image in product.images %}
                                     {% if image.path != product.defaultImage %}
-                                        <div class="col-lg-3 col-xs-4">
+                                        <div class="large-3 small-4 columns">
                                             <a href="{{ image.pathUrl }}" class='product-image'>
                                                 <img src="{{ image.pathUrl }}" style="width: 100px;" />
                                             </a>
@@ -41,7 +41,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-sm-7">
+                    <div class="small-7 columns">
                         <h1>{{ product.name }}</h1>
 
                         {% if product.isInventoryRequired %}
@@ -93,7 +93,7 @@
                                 {# TODO:
                                     <?php foreach($product->options as $option) { ?>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="small-12">
                                             <div class="control-group">
                                                 <?=View::factory('product/options')->set([
                                                 'option' => $option
@@ -104,7 +104,7 @@
                                     <?php } ?>
                                     <?php foreach($product->textOptions as $textOption) { ?>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="small-12">
                                             <div class="control-group">
                                                 <?=View::factory('product/text_options')->set([
                                                 'textOption' => $textOption
@@ -121,10 +121,10 @@
                             <div class="divider"></div>
                             <div class="actions">
                                 <input type="hidden" name="id" value="{{ product.id.getHex() }}" />
-                                <button type="submit" class="btn btn-success pull-right">
+                                <button type="submit" class="button success right">
                                     <i class="fa fa-shopping-cart"></i> Add to Cart
                                 </button>
-                                <div class="input-group input-group-sm col-xs-4 col-sm-3">
+                                <div class="input-group input-group-sm small-4 small-3 columns">
                                     <span class="input-group-addon"><label for="quantity">Qty:</label></span>
                                     <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1" />
                                 </div>
@@ -163,7 +163,7 @@
                         <div class="other-actions">
                             <div id="social-actions">
                                 <a  href="https://www.facebook.com/sharer/sharer.php?u={{ product.fullUrl }}"
-                                    class="btn btn-primary btn-xs facebook-share"
+                                    class="button primary btn-xs facebook-share"
                                     target="_blank">
                                     <i class="glyphicon glyphicon-share"></i> Share on Facebook</a>
                                 </a>
@@ -174,14 +174,14 @@
 
                 {# TODO:
                 <?php if ( ! empty($reviews)) { ?>
-                <div class="col-sm-9" id="reviews">
+                <div class="small-9" id="reviews">
                     <h2>Reviews</h2>
                 </div>
                 <?php } ?>
                 #}
             </div>
 
-            <div class="col-md-3 col-sm-12">
+            <div class="medium-3 small-12 columns">
                 {% if relatedProducts is not empty %}
                     <h2 class="text-center">You Might Also Like</h2>
 
