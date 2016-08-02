@@ -9,9 +9,9 @@
     <div id="cart-added">
         <div class="container">
             <div class="row">
-                <div class="col-sm-5">
+                <div class="small-5 columns">
                     <div class="thumbnail">
-                        <div class="pull-left" style="margin-right: 10px">
+                        <div class="left" style="margin-right: 10px">
                             <a href="<?=$cartItem->product->url?>">
                                 <img src="{{ cartItem.product.defaultImage }}" width="110" height="110" />
                             </a>
@@ -27,7 +27,7 @@
                             ])?>
                         #}
 
-                        <div class="pull-right">Quantity in cart: {{ cartItem.quantity }}</div>
+                        <div class="right">Quantity in cart: {{ cartItem.quantity }}</div>
 
                         {% embed "helper/price.twig" with {'price': cartItem.price } only %}{% endembed %}
 
@@ -70,7 +70,7 @@
 
                         {# TODO:
                             <?php if ( ! empty($cartItem->product->productQuantityDiscounts)) { ?>
-                            <div class="pull-right">
+                            <div class="right">
                                 <?php foreach (array_reverse($cartItem->product->productQuantityDiscounts) as $productQuantityDiscount) { ?>
                                 <?php if ($cartItem->quantity < $productQuantityDiscount->quantity) { ?>
                                 <?php
@@ -96,7 +96,7 @@
 
                                 <input type="hidden" name="id" value="<?=$cartItem->id->getHex()?>" />
                                 <input type="hidden" name="quantity" value="<?=$productQuantityDiscount->quantity?>" />
-                                <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i>
+                                <button type="submit" class="button success"><i class="glyphicon glyphicon-shopping-cart"></i>
                                     Add <?=$number_more?> more
                                 </button>
                                 <?php if ($price_each > 0) { ?>
@@ -114,12 +114,12 @@
                         <div style="clear: both;"></div>
                     </div>
                 </div>
-                <div class="col-sm-7">
+                <div class="small-7 columns">
                     <div class="alert alert-info">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="pull-right">
-                                    <a class="btn btn-default" href="/cart"><i class="glyphicon glyphicon-shopping-cart"></i> View Cart</a>
+                            <div class="small-12 columns">
+                                <div class="right">
+                                    <a class="button default" href="/cart"><i class="glyphicon glyphicon-shopping-cart"></i> View Cart</a>
 
                                     {% embed "helper/checkout_button.twig" only %}{% endembed %}
                                 </div>

@@ -10,7 +10,7 @@
             <td colspan="100%">
                 Shipping:
                 {# TODO:
-                    <?=View::factory('cart/modify_zipcode_button')->set('extraClass', 'pull-right')->render()?>
+                    <?=View::factory('cart/modify_zipcode_button')->set('extraClass', 'right')->render()?>
                 #}
             </td>
         </tr>
@@ -50,7 +50,7 @@
                 <div class="container-fluid">
                     <?php foreach ($cart->cartTotal->cartPriceRules as $cartPriceRule) { ?>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="small-12">
                             &nbsp;<i class="glyphicon glyphicon-minus"></i>&nbsp;
                             <?=$cartPriceRule->name?>
                         </div>
@@ -59,14 +59,14 @@
 
                     <?php foreach ($cart->cartTotal->coupons as $coupon) { ?>
                     <div class="row">
-                        <div class="col-sm-10">
+                        <div class="small-10">
                             <?=Form::open('cart/remove_coupon/' . $coupon->id->getHex(), [
                             'method' => 'POST',
                             'role' => 'form',
                             ])?>
                             <?=Form::csrf()?>
 
-                            <button type="submit" class="btn btn-link btn-xs">
+                            <button type="submit" class="button link btn-xs">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </button>
                             <?=$coupon->name?>
