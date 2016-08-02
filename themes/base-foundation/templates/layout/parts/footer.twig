@@ -1,16 +1,14 @@
-<div id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="column">
-                <a href="/conditions">Conditions of Use</a>
-                | <a href="/privacy">Privacy</a>
-                {# TODO: <?=SITE_COPY?> #}
-            </div>
-        </div>
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="menu">
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/conditions">Conditions of Use</a></li>
+        </ul>
     </div>
-    {# TODO:
-        <?php if (Kommerce::isProfilingEnabled()) { ?>
-        <?=View::factory('profiler')?>
-        <?php } ?>
-    #}
+    <div class="top-bar-right">
+        <ul class="menu">
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+        </ul>
+    </div>
 </div>
