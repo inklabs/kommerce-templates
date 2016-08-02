@@ -3,7 +3,7 @@
 {% extends "layout/base.twig" %}
 
 {% block pageTitle %}{{ product.name }}{% endblock %}
-{% block pageDescription %}{{ product.description }}{% endblock %}
+{% block pageDescription %}{{ product.description | nl2br }}{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -146,7 +146,7 @@
                                 {% if tag.description is not empty %}
                                     <dl>
                                         <dt class="tag-info">
-                                            <a href="{{ tag.url }}">
+                                            <a href="{{ tagUrl(tag) }}">
                                                 {{ tag.name }}
                                             </a>
                                         </dt>

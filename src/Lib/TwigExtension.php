@@ -2,6 +2,7 @@
 namespace inklabs\KommerceTemplates\Lib;
 
 use inklabs\kommerce\EntityDTO\ProductDTO;
+use inklabs\kommerce\EntityDTO\TagDTO;
 use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
@@ -60,6 +61,18 @@ class TwigExtension extends Twig_Extension
                         [
                             'slug' => $productDTO->slug,
                             'productId' => $productDTO->id->getHex(),
+                        ]
+                    );
+                }
+             ),
+            new Twig_SimpleFunction(
+                'tagUrl',
+                function (TagDTO $tagDTO) {
+                    return $this->routeUrl->getRoute(
+                        'tag.show',
+                        [
+                            'slug' => $tagDTO->slug,
+                            'tagId' => $tagDTO->id->getHex(),
                         ]
                     );
                 }

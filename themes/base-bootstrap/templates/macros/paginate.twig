@@ -1,0 +1,139 @@
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+
+{% macro detailed(pagination) %}
+    {# First Previous 1 2 ... 12 13 14 [16] 17 18 19 ... 44 45 Next Last #}
+
+    {% set links_around_page = 2 %}
+    {% set links_around_edge = 1 %}
+    {% set total_items = pagination.maxResults %}
+    {% set items_per_page = pagination.maxResults %}
+    {% set current_page = pagination.page %}
+
+    {% set total_items = max(0, total_items) %}
+    {% set items_per_page = max(1, items_per_page) %}
+    {% set total_pages = (total_items / items_per_page) | round(0, 'ceil') %}
+    {% set current_page = min(max(1, current_page), max(1, total_pages)) %}
+    {% set current_first_item = min(((current_page - 1) * items_per_page) + 1, total_items) %}
+    {% set current_last_item = min(current_first_item + items_per_page - 1, total_items) %}
+    {% set previous_page = (current_page > 1) ? current_page - 1 : false %}
+    {% set next_page = (current_page < total_pages) ? current_page + 1 : false %}
+    {% set first_page = (current_page == 1) ? false : 1 %}
+    {% set last_page = (current_page >= total_pages) ? false : total_pages %}
+    {% set offset = ((current_page - 1) * items_per_page) %}
+
+    {# Beginning group of pages: $n1...$n2 #}
+    {% set n1 = 1 %}
+    {% set n2 = min(links_around_edge, total_pages) %}
+
+    {# Ending group of pages: $n7...$n8 #}
+    {% set n7 = max(1, total_pages - links_around_edge + 1) %}
+    {% set n8 = total_pages %}
+
+    {# Middle group of pages: $n4...$n5 #}
+    {% set n4 = max(n2 + 1, current_page - links_around_page) %}
+    {% set n5 = min(n7 - 1, current_page + links_around_page) %}
+    {% set use_middle = (n5 >= n4) %}
+
+    {# Point $n3 between $n2 and $n4 #}
+    {% set n3 = ((n2 + n4) / 2) | round(0) %}
+    {% set use_n3 = (use_middle and ((n4 - n2) > 1)) %}
+
+    {# Point $n6 between $n5 and $n7 #}
+    {% set n6 = ((n5 + n7) / 2) | round(0) %}
+    {% set use_n6 = (use_middle and ((n7 - n5) > 1)) %}
+
+    {# Links to display as array(page => content) #}
+    {% set links = {} %}
+
+    {% if links_around_edge > 0 %}
+        {# Generate links data in accordance with calculated numbers #}
+        {% if n1 <= n2 %}
+            {% for i in n1..n2 %} {# for ($i = $n1; $i <= $n2; $i++) #}
+                {% set links = links | merge({('_'~i): i}) %} {# $links[$i] = $i; #}
+            {% endfor %}
+        {% endif %}
+        {% if use_n3 %}
+            {% set links = links | merge({('_'~n3): '&hellip;'}) %} {# $links[$n3] = '&hellip;'; #}
+        {% endif %}
+    {% endif %}
+
+    {% if n4 <= n5 %}
+        {% for i in n4..n5 %}
+            {% set links = links | merge({('_'~i): i}) %} {# $links[$i] = $i; #}
+        {% endfor %}
+    {% endif %}
+
+    {% if links_around_edge > 0 %}
+        {% if use_n6 %}
+            {% set links = links | merge({('_'~n6): '&hellip;'}) %} {# $links[$n6] = '&hellip;'; #}
+        {% endif %}
+
+        {% if n7 <= n8 %}
+            {% for i in n7..n8 %}
+                {% set links = links | merge({('_'~i): i}) %} {# $links[$i] = $i; #}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+    {#
+    <pre>{{ {
+            links_around_page: links_around_page,
+            links_around_edge: links_around_edge,
+            total_items: total_items,
+            items_per_page: items_per_page,
+            current_page: current_page,
+            current_first_item: current_first_item,
+            current_last_item: current_last_item,
+            previous_page: previous_page,
+            next_page: next_page,
+            first_page: first_page,
+            last_page: last_page,
+            offset: offset,
+            n1: n1,
+            n2: n2,
+            n7: n7,
+            n8: n8,
+            n4: n4,
+            n5: n5,
+            use_middle: use_middle | json_encode,
+            n3: n3,
+            use_n3: use_n3 | json_encode,
+            n6: n6,
+            use_n6: use_n6 | json_encode,
+            links: links | json_encode
+
+        } | json_encode(constant('JSON_PRETTY_PRINT')) }}
+    </pre>
+    <pre>{{ pagination | json_encode(constant('JSON_PRETTY_PRINT')) }}
+    </pre>
+    #}
+
+    <div class="well well-sm pagination-well">
+        <div class="pull-left">
+            Showing {{ current_first_item }} - {{ current_last_item }}
+            of {{ total_items }} Results
+        </div>
+        <ul class="pagination pagination-sm pull-right">
+            {% if previous_page %}
+                <li><a href="{# <?=HTML::chars($page->url($previous_page)) ?>#}" rel="prev"><i class="fa fa-chevron-left"></i> Previous</a></li>
+            {% else %}
+                <li class="disabled"><a href="#"><i class="fa fa-chevron-left"></i> Previous</a></li>
+            {% endif %}
+
+            {% for number, content in links %}
+                {% if number == ('_'~current_page) %}
+                    <li class="active"><a href="#">{{ content }}</a></li>
+                {% else %}
+                    <li><a href="{# <?=HTML::chars($page->url($number)) ?> #}">{{ content }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if next_page %}
+                <li><a href="{# <?=HTML::chars($page->url($next_page)) ?> #}" rel="next">Next <i class="fa fa-chevron-right"></i></a></li>
+            {% else %}
+                <li class="disabled"><a href="#">Next <i class="fa fa-chevron-right"></i></a></li>
+            {% endif %}
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+{% endmacro %}
