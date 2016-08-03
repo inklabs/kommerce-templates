@@ -7,155 +7,162 @@
 {% block content %}
     <div id="cart">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-9">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2>Shopping Cart</h2>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th colspan="2">Item</th>
-                                    <th class="text-right">QTY</th>
-                                    <th class="text-right hidden-xs">Unit Price</th>
-                                    <th class="text-right">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for cartItem in cart.cartItems %}
+            {% if cart.cartItems is empty %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% include 'cart/parts/empty_cart.twig' %}
+                    </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Shopping Cart</h2>
+                                <table class="table">
+                                    <thead>
                                     <tr>
-                                        <td class="cart-product-image">
-                                            <a href="{{ productUrl(cartItem.product) }}">
-                                                <img src="{{ cartItem.product.defaultImage }}" width="110" height="110" />
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ productUrl(cartItem.product) }}">
-                                                <span class="cart-product-title">{{ cartItem.product.name }}</span>
-                                            </a>
-
-                                            <div class="hidden-sm text-muted">
-                                                <small>{{ cartItem.fullSku }}</small>
-                                            </div>
-
-                                            {# TODO:
-                                                <div>
-                                                    <?php foreach ($cartItem->cartItemOptionProducts as $cartItemOptionProduct) { ?>
-                                                        <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                <?=HTML::chars($cartItemOptionProduct->optionProduct->option->name)?>:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                <?=HTML::chars($cartItemOptionProduct->optionProduct->product->name)?>
-                                                            </span>
-                                                            <br>
-                                                        </small>
-                                                    <?php } ?>
-                                                </div>
-
-                                                <div>
-                                                    <?php foreach ($cartItem->cartItemOptionValues as $cartItemOptionValue) { ?>
-                                                        <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                <?=HTML::chars($cartItemOptionValue->optionValue->option->name)?>:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                <?=HTML::chars($cartItemOptionValue->optionValue->name)?>
-                                                            </span>
-                                                            <br>
-                                                        </small>
-                                                    <?php } ?>
-                                                </div>
-
-                                                <div>
-                                                    <?php foreach ($cartItem->cartItemTextOptionValues as $cartItemTextOptionValue) { ?>
-                                                        <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                <?=HTML::chars($cartItemTextOptionValue->textOption->name)?>:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                <?=HTML::chars($cartItemTextOptionValue->textOptionValue)?>
-                                                            </span>
-                                                            <br>
-                                                        </small>
-                                                    <?php } ?>
-                                                </div>
-                                            #}
-                                        </td>
-                                        <td class="text-right">
-                                            <form action="cart/update-quantity" method="post" role="form">
-                                                <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-                                                <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
-                                                <div class="pull-right" style="width: 120px">
-                                                    <div class="input-group input-group-sm">
-                                                        <input class="form-control update-qty" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
-                                                        <span class="input-group-btn">
-                                                            <button type="submit" class="btn btn-default">Update</button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <div class="clearfix"></div>
-                                            <form action="cart/delete-item" method="post" role="form">
-                                                <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-                                                <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
-
-                                                <span class="cart-remove-item">
-                                                    <button type="submit" class="btn btn-link btn-xs">
-                                                        <i class="fa fa-trash"></i>
-                                                        Remove item
-                                                    </button>
-                                                </span>
-                                            </form>
-                                            <div class="visible-xs">
-                                                {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
-                                            </div>
-                                        </td>
-                                        <td class="text-right hidden-xs">
-                                            {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
-                                        </td>
-                                        <td class="cart-right">
-                                            {{ cartItem.price.quantityPrice | displayPrice }}
-                                        </td>
+                                        <th colspan="2">Item</th>
+                                        <th class="text-right">QTY</th>
+                                        <th class="text-right hidden-xs">Unit Price</th>
+                                        <th class="text-right">Total</th>
                                     </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-7 col-sm-offset-5">
-                            {% embed "cart/parts/totals.twig" %}{% endembed %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="alert alert-info" id="cart-cta-box">
-                        <strong>
-                            Total ({{ cart.totalItems }} items):
-                            <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
-                        </strong>
-                        <br /><br />
-                        {% embed "helper/checkout_button.twig" only %}{% endembed %}
-                    </div>
-                    {# TODO:
-                        <?php if ($cart->shipmentRate->rate !== NULL) { ?>
-                        <?=View::factory('cart/modify_zipcode_button')->set('extraClass', 'btn-block')->render()?>
-                        <?php } ?>
-                    #}
-                    <br>
-                    <form action="cart/apply-coupon" method="post">
-                        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                                    </thead>
+                                    <tbody>
+                                    {% for cartItem in cart.cartItems %}
+                                        <tr>
+                                            <td class="cart-product-image">
+                                                <a href="{{ productUrl(cartItem.product) }}">
+                                                    <img src="{{ cartItem.product.defaultImage }}" width="110" height="110" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ productUrl(cartItem.product) }}">
+                                                    <span class="cart-product-title">{{ cartItem.product.name }}</span>
+                                                </a>
 
-                        <div class="input-group">
-                        <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />
-                          <span class="input-group-btn">
-                              <button type="submit" class="btn btn-default" id="apply-coupon">apply</button>
-                          </span>
+                                                <div class="hidden-sm text-muted">
+                                                    <small>{{ cartItem.fullSku }}</small>
+                                                </div>
+
+                                                {# TODO:
+                                                    <div>
+                                                        <?php foreach ($cartItem->cartItemOptionProducts as $cartItemOptionProduct) { ?>
+                                                            <small>
+                                                                <span class="hidden-sm hidden-xs">
+                                                                    <?=HTML::chars($cartItemOptionProduct->optionProduct->option->name)?>:
+                                                                </span>
+                                                                <span class="text-muted">
+                                                                    <?=HTML::chars($cartItemOptionProduct->optionProduct->product->name)?>
+                                                                </span>
+                                                                <br>
+                                                            </small>
+                                                        <?php } ?>
+                                                    </div>
+
+                                                    <div>
+                                                        <?php foreach ($cartItem->cartItemOptionValues as $cartItemOptionValue) { ?>
+                                                            <small>
+                                                                <span class="hidden-sm hidden-xs">
+                                                                    <?=HTML::chars($cartItemOptionValue->optionValue->option->name)?>:
+                                                                </span>
+                                                                <span class="text-muted">
+                                                                    <?=HTML::chars($cartItemOptionValue->optionValue->name)?>
+                                                                </span>
+                                                                <br>
+                                                            </small>
+                                                        <?php } ?>
+                                                    </div>
+
+                                                    <div>
+                                                        <?php foreach ($cartItem->cartItemTextOptionValues as $cartItemTextOptionValue) { ?>
+                                                            <small>
+                                                                <span class="hidden-sm hidden-xs">
+                                                                    <?=HTML::chars($cartItemTextOptionValue->textOption->name)?>:
+                                                                </span>
+                                                                <span class="text-muted">
+                                                                    <?=HTML::chars($cartItemTextOptionValue->textOptionValue)?>
+                                                                </span>
+                                                                <br>
+                                                            </small>
+                                                        <?php } ?>
+                                                    </div>
+                                                #}
+                                            </td>
+                                            <td class="text-right">
+                                                <form action="cart/update-quantity" method="post" role="form">
+                                                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                                                    <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
+                                                    <div class="pull-right" style="width: 120px">
+                                                        <div class="input-group input-group-sm">
+                                                            <input class="form-control update-qty" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
+                                                            <span class="input-group-btn">
+                                                                <button type="submit" class="btn btn-default">Update</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="clearfix"></div>
+                                                <form action="cart/delete-item" method="post" role="form">
+                                                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                                                    <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
+
+                                                    <span class="cart-remove-item">
+                                                        <button type="submit" class="btn btn-link btn-xs">
+                                                            <i class="fa fa-trash"></i>
+                                                            Remove item
+                                                        </button>
+                                                    </span>
+                                                </form>
+                                                <div class="visible-xs">
+                                                    {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                                                </div>
+                                            </td>
+                                            <td class="text-right hidden-xs">
+                                                {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                                            </td>
+                                            <td class="cart-right">
+                                                {{ cartItem.price.quantityPrice | displayPrice }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7 col-sm-offset-5">
+                                {% embed "cart/parts/totals.twig" %}{% endembed %}
+                            </div>
+                        </div>
                     </div>
-                    </form>
+                    <div class="col-sm-3">
+                        <div class="alert alert-info" id="cart-cta-box">
+                            <strong>
+                                Total ({{ cart.totalItems }} items):
+                                <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
+                            </strong>
+                            <br /><br />
+                            {% embed "helper/checkout_button.twig" only %}{% endembed %}
+                        </div>
+                        {# TODO:
+                            <?php if ($cart->shipmentRate->rate !== NULL) { ?>
+                            <?=View::factory('cart/modify_zipcode_button')->set('extraClass', 'btn-block')->render()?>
+                            <?php } ?>
+                        #}
+                        <br>
+                        <form action="cart/apply-coupon" method="post">
+                            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+
+                            <div class="input-group">
+                            <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />
+                              <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-default" id="apply-coupon">apply</button>
+                              </span>
+                        </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
 
             {% embed "helper/recommended_products.twig" with {'products': recommendedProducts, 'size': 'small' } only %}
             {% endembed %}
