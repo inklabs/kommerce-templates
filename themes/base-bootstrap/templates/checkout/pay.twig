@@ -110,19 +110,13 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <div class="row">
-                        <div class="col-sm-11 col-sm-offset-1" id="totals_container">
-                            {% embed "cart/parts/totals.twig" %}{% endembed %}
-                        </div>
+                    <div id="totals_container">
+                        {% embed "cart/parts/totals.twig" %}{% endembed %}
                     </div>
                     {% if cart.shipmentRate.deliveryMethod is not null %}
-                        <div class="row">
-                            <div class="col-sm-11 col-sm-offset-1">
-                                {# TODO:
-                                    <?=View::factory('cart/modify_zipcode_button')->set('class', 'btn btn-default btn-sm')->render()?>
-                                #}
-                            </div>
-                        </div>
+                        {# TODO:
+                            <?=View::factory('cart/modify_zipcode_button')->set('class', 'btn btn-default btn-sm')->render()?>
+                        #}
                     {% endif %}
                 </div>
                 <div class="col-sm-6">
