@@ -1,19 +1,23 @@
 {% for product in products %}
     <a href="{{ productUrl(product) }}">
-        {% if product.defaultImage is empty %}
-            <img src="http://lorempixel.com/640/480">
-        {% else %}
-            <img src="{{ product.defaultImage }}">
-        {% endif %}
-    </a>
-
-    <a href="{{ productUrl(product) }}">{{ product.name }}</a>
-
-    {% if product.isInStock %}
-        <div class="availability">
-            <span class="out-of-stock">Out of Stock</span>
+        <div class="media-object">
+            <div class="media-object-section">
+                <div class="thumbnail">
+                    {% if product.defaultImage is empty %}
+                        <img src="//placehold.it/100x100">
+                    {% else %}
+                        <img src="{{ product.defaultImage }}">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="media-object-section">
+                <h4>{{ product.name }}</h4>
+                {% if product.isInStock %}
+                    <p>Out of Stock</p>
+                {% elseif product.isPriceVisible %}
+                    <p>{{ product.price.quantityPrice | displayPrice }}</p>
+                {% endif %}
+            </div>
         </div>
-    {% elseif product.isPriceVisible %}
-        <li>{{ product.price.quantityPrice | displayPrice }}</li>
-    {% endif %}
+    </a>
 {% endfor %}
