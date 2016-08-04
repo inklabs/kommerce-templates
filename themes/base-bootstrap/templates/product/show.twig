@@ -90,18 +90,18 @@
                         {% if product.options is not empty or product.textOptions is not empty %}
                             <div class="divider"></div>
                             <div class="actions">
-                                {# TODO:
-                                    <?php foreach($product->options as $option) { ?>
+                                {% for option in product.options %}
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="control-group">
-                                                <?=View::factory('product/options')->set([
-                                                'option' => $option
-                                                ])?>
+                                                {% embed "product/parts/options.twig" with {'option': option } only %}
+                                                {% endembed %}
                                             </div>
                                         </div>
                                     </div>
                                     <?php } ?>
+
+                                    {#
                                     <?php foreach($product->textOptions as $textOption) { ?>
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -112,8 +112,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php } ?>
-                                #}
+                                    #}
+                                {% endfor %}
                             </div>
                         {% endif %}
 
