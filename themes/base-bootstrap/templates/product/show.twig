@@ -99,20 +99,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php } ?>
+                                {% endfor %}
 
-                                    {#
-                                    <?php foreach($product->textOptions as $textOption) { ?>
+                                {% for textOption in product.textOptions %}
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="control-group">
-                                                <?=View::factory('product/text_options')->set([
-                                                'textOption' => $textOption
-                                                ])?>
+                                                {% embed "product/parts/text_options.twig" with {'textOption': textOption } only %}
+                                                {% endembed %}
                                             </div>
                                         </div>
                                     </div>
-                                    #}
                                 {% endfor %}
                             </div>
                         {% endif %}

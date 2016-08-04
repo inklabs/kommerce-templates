@@ -72,21 +72,19 @@
                                                     {% endfor %}
                                                 </div>
 
-                                                {# TODO:
-                                                    <div>
-                                                        <?php foreach ($cartItem->cartItemTextOptionValues as $cartItemTextOptionValue) { ?>
-                                                            <small>
-                                                                <span class="hidden-sm hidden-xs">
-                                                                    <?=HTML::chars($cartItemTextOptionValue->textOption->name)?>:
-                                                                </span>
-                                                                <span class="text-muted">
-                                                                    <?=HTML::chars($cartItemTextOptionValue->textOptionValue)?>
-                                                                </span>
-                                                                <br>
-                                                            </small>
-                                                        <?php } ?>
-                                                    </div>
-                                                #}
+                                                <div>
+                                                    {% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
+                                                        <small>
+                                                            <span class="hidden-sm hidden-xs">
+                                                                {{ cartItemTextOptionValue.textOption.name }}:
+                                                            </span>
+                                                            <span class="text-muted">
+                                                                {{ cartItemTextOptionValue.textOptionValue }}
+                                                            </span>
+                                                            <br>
+                                                        </small>
+                                                    {% endfor %}
+                                                </div>
                                             </td>
                                             <td class="text-right">
                                                 <form action="cart/update-quantity" method="post" role="form">

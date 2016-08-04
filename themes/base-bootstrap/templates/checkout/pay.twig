@@ -51,57 +51,54 @@
                                         <span class="visible-sm">{{ cartItem.quantity }}</span>
                                     </div>
 
-                                    {#
-                                        <?php if (
-                                                    ! empty($cartItem->cartItemOptionProducts)
-                                        OR ! empty($cartItem->cartItemOptionValues)
-                                        OR ! empty($cartItem->cartItemTextOptionValues)
-                                        ) { ?>
+                                    {% if cartItem.cartItemOptionProducts is not empty
+                                        or cartItem.cartItemOptionValues is not empty
+                                        or cartItem.cartItemTextOptionValues is not empty
+                                    %}
                                         <hr class="small-margin" />
-                                        <?php } ?>
+                                    {% endif %}
 
-                                        <div>
-                                            <?php foreach ($cartItem->cartItemOptionProducts as $cartItemOptionProduct) { ?>
+                                    <div>
+                                        {% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
                                             <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                <?=HTML::chars($cartItemOptionProduct->optionProduct->option->name)?>:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                <?=HTML::chars($cartItemOptionProduct->optionProduct->product->name)?>
-                                                            </span>
+                                                <span class="hidden-sm hidden-xs">
+                                                    {{ cartItemOptionProduct.optionProduct.option.name }}:
+                                                </span>
+                                                <span class="text-muted">
+                                                    {{ cartItemOptionProduct.optionProduct.product.name }}
+                                                </span>
                                                 <br>
                                             </small>
-                                            <?php } ?>
-                                        </div>
+                                        {% endfor %}
+                                    </div>
 
-                                        <div>
-                                            <?php foreach ($cartItem->cartItemOptionValues as $cartItemOptionValue) { ?>
+                                    <div>
+                                        {% for cartItemOptionValue in cartItem.cartItemOptionValues %}
                                             <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                <?=HTML::chars($cartItemOptionValue->optionValue->option->name)?>:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                <?=HTML::chars($cartItemOptionValue->optionValue->name)?>
-                                                            </span>
+                                                <span class="hidden-sm hidden-xs">
+                                                    {{ cartItemOptionValue.optionValue.option.name }}:
+                                                </span>
+                                                <span class="text-muted">
+                                                    {{ cartItemOptionValue.optionValue.name }}
+                                                </span>
                                                 <br>
                                             </small>
-                                            <?php } ?>
-                                        </div>
+                                        {% endfor %}
+                                    </div>
 
-                                        <div>
-                                            <?php foreach ($cartItem->cartItemTextOptionValues as $cartItemTextOptionValue) { ?>
+                                    <div>
+                                        {% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
                                             <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                <?=HTML::chars($cartItemTextOptionValue->textOption->name)?>:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                <?=HTML::chars($cartItemTextOptionValue->textOptionValue)?>
-                                                            </span>
+                                                <span class="hidden-sm hidden-xs">
+                                                    {{ cartItemTextOptionValue.textOption.name }}:
+                                                </span>
+                                                <span class="text-muted">
+                                                    {{ cartItemTextOptionValue.textOptionValue }}
+                                                </span>
                                                 <br>
                                             </small>
-                                            <?php } ?>
-                                        </div>
-                                    #}
+                                        {% endfor %}
+                                    </div>
                                 </td>
                                 <td class="cart-right">
                                     {{ cartItem.price.quantityPrice | displayPrice }}
