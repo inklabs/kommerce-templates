@@ -7,6 +7,37 @@
 
 {% block content %}
 
-    Product
+    <h3>{{ product.name | default('Product Name Not Found') }}</h3>
+    {% if product.description is not empty %}
+    <dl>
+        <dt>Description</dt>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+        <dd>{{ product.description | nl2br }}</dd>
+    </dl>
+    {% endif %}
+    <p>{{ product.description }}</p>
 
 {% endblock %}

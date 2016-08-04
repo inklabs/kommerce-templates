@@ -3,14 +3,22 @@
 <head>
     {% include 'layout/base/head.twig' %}
 </head>
-<body>
-    {% include 'layout/base/topbar.twig' %}
+<body id="kc-foundation">
 
-    {% block content %}{% endblock %}
+    <header id="kc-topbar">
+        {% include 'layout/base/topbar.twig' %}
+    </header>
 
-    {% include 'layout/components/flash-messages.twig' %}
+    <main id="kc-container">
 
-    {% include 'layout/base/footer.twig' %}
+        <section id="kc-content">
+            {% block content %}{% endblock %}
+        </section>
+
+        <footer id="kc-footer">
+            {% include 'layout/base/footer.twig' %}
+        </footer>
+    </main>
 
     <script type="text/javascript" src="/assets/app.js"></script>
 </body>
