@@ -44,36 +44,35 @@
                                                 <div class="hidden-sm text-muted">
                                                     <small>{{ cartItem.fullSku }}</small>
                                                 </div>
+                                                <div>
+                                                    {% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
+                                                        <small>
+                                                            <span class="hidden-sm hidden-xs">
+                                                                {{ cartItemOptionProduct.optionProduct.option.name }}:
+                                                            </span>
+                                                            <span class="text-muted">
+                                                                {{ cartItemOptionProduct.optionProduct.product.name }}
+                                                            </span>
+                                                            <br>
+                                                        </small>
+                                                    {% endfor %}
+                                                </div>
+
+                                                <div>
+                                                    {% for cartItemOptionValue in cartItem.cartItemOptionValues %}
+                                                        <small>
+                                                            <span class="hidden-sm hidden-xs">
+                                                                {{ cartItemOptionValue.optionValue.option.name }}:
+                                                            </span>
+                                                            <span class="text-muted">
+                                                                {{ cartItemOptionValue.optionValue.name }}
+                                                            </span>
+                                                            <br>
+                                                        </small>
+                                                    {% endfor %}
+                                                </div>
 
                                                 {# TODO:
-                                                    <div>
-                                                        <?php foreach ($cartItem->cartItemOptionProducts as $cartItemOptionProduct) { ?>
-                                                            <small>
-                                                                <span class="hidden-sm hidden-xs">
-                                                                    <?=HTML::chars($cartItemOptionProduct->optionProduct->option->name)?>:
-                                                                </span>
-                                                                <span class="text-muted">
-                                                                    <?=HTML::chars($cartItemOptionProduct->optionProduct->product->name)?>
-                                                                </span>
-                                                                <br>
-                                                            </small>
-                                                        <?php } ?>
-                                                    </div>
-
-                                                    <div>
-                                                        <?php foreach ($cartItem->cartItemOptionValues as $cartItemOptionValue) { ?>
-                                                            <small>
-                                                                <span class="hidden-sm hidden-xs">
-                                                                    <?=HTML::chars($cartItemOptionValue->optionValue->option->name)?>:
-                                                                </span>
-                                                                <span class="text-muted">
-                                                                    <?=HTML::chars($cartItemOptionValue->optionValue->name)?>
-                                                                </span>
-                                                                <br>
-                                                            </small>
-                                                        <?php } ?>
-                                                    </div>
-
                                                     <div>
                                                         <?php foreach ($cartItem->cartItemTextOptionValues as $cartItemTextOptionValue) { ?>
                                                             <small>

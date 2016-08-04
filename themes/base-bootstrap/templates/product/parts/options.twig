@@ -4,7 +4,7 @@
 {% if option.type.isSelect %}
     <label for="option_{{ option.id.getHex() }}" class="control-label">{{ option.name }}</label>
     <div class="controls">
-        <select name="option_{{ option.id.getHex() }}"
+        <select name="option[{{ option.id.getHex() }}]"
                 id="option_{{ option.id.getHex() }}"
                 class="form-control">
 
