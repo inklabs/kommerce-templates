@@ -1,0 +1,61 @@
+// Import all of the foundation mixins, but none of the actual code.
+@import '../../../node_modules/foundation-sites/scss/foundation';
+
+// Include the entire foundation library
+@include foundation-everything;
+
+// Individual individual components
+//@include foundation-global-styles; normalize.scss
+//@include foundation-accordion-menu;
+//@include foundation-accordion;
+//@include foundation-badge;
+//@include foundation-breadcrumbs;
+//@include foundation-button-group;
+//@include foundation-button;
+//@include foundation-callout;
+//@include foundation-close-button;
+//@include foundation-drilldown-menu;
+//@include foundation-dropdown-menu;
+//@include foundation-dropdown;
+//@include foundation-everything($flex: false);
+//@include foundation-flex-classes;
+//@include foundation-flex-grid;
+//@include foundation-flex-video;
+//@include foundation-float-classes;
+//@include foundation-form-checkbox;
+//@include foundation-form-error;
+//@include foundation-form-fieldset;
+//@include foundation-form-helptext;
+//@include foundation-form-label;
+//@include foundation-form-prepostfix;
+//@include foundation-form-select;
+//@include foundation-form-text;
+//@include foundation-forms;
+//@include foundation-grid;
+//@include foundation-label;
+//@include foundation-media-object;
+//@include foundation-menu-icon;
+//@include foundation-menu;
+//@include foundation-meter-element;
+//@include foundation-off-canvas;
+//@include foundation-orbit;
+//@include foundation-pagination;
+//@include foundation-print-styles;
+//@include foundation-progress-bar;
+//@include foundation-progress-element;
+//@include foundation-range-input;
+//@include foundation-reveal;
+//@include foundation-slider;
+//@include foundation-sticky;
+//@include foundation-switch;
+//@include foundation-table($nest: false);
+//@include foundation-tabs;
+//@include foundation-text-alignment;
+//@include foundation-thumbnail;
+//@include foundation-title-bar;
+//@include foundation-tooltip;
+//@include foundation-top-bar;
+//@include foundation-typography-base;
+//@include foundation-typography-helpers;
+//@include foundation-typography;
+//@include foundation-visibility-classes;
