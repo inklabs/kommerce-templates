@@ -1,0 +1,19 @@
+{% for product in products %}
+    <a href="{{ productUrl(product) }}">
+        {% if product.defaultImage is empty %}
+            <img src="http://lorempixel.com/640/480">
+        {% else %}
+            <img src="{{ product.defaultImage }}">
+        {% endif %}
+    </a>
+
+    <a href="{{ productUrl(product) }}">{{ product.name }}</a>
+
+    {% if product.isInStock %}
+        <div class="availability">
+            <span class="out-of-stock">Out of Stock</span>
+        </div>
+    {% elseif product.isPriceVisible %}
+        <li>{{ product.price.quantityPrice | displayPrice }}</li>
+    {% endif %}
+{% endfor %}

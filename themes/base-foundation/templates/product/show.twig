@@ -8,36 +8,74 @@
 {% block content %}
 
     <h3>{{ product.name | default('Product Name Not Found') }}</h3>
+
+    <ul>
+        <li>{{ product.price.quantityPrice | displayPrice }}</li>
+        {% if product.isInventoryRequired %}
+            <li>
+                {% if product.quantity > 0 %}
+                    <span>In stock</span>
+                {% else %}
+                    <span>Out of stock</span>
+                {% endif %}
+            </li>
+        {% endif %}
+        {% if product.productQuantityDiscounts is not empty %}
+            <li>TODO Product Quantity Discounts</li>
+        {% endif %}
+    </ul>
+
     {% if product.description is not empty %}
-    <dl>
-        <dt>Description</dt>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-        <dd>{{ product.description | nl2br }}</dd>
-    </dl>
+        <dl>
+            <dt>Description</dt>
+            <dd>{{ product.description | nl2br }}</dd>
+        </dl>
     {% endif %}
-    <p>{{ product.description }}</p>
+
+
+    {% if product.isInStock %}
+        <form action="/cart/add-item" id="cart_add_item" method="post">
+
+        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+    {% endif %}
+
+    {#{% if product.options is not empty or product.textOptions is not empty %}#}
+    {#{% for option in product.options %}#}
+    {#{% embed "product/parts/options.twig" with {'option': option } only %}#}
+    {#{% endembed %}#}
+    {#{% endfor %}#}
+    {#{% endif %}#}
+
+    {% if product.isInStock %}
+        <input type="hidden" name="id" value="{{ product.id.getHex() }}"/>
+        <div class="input-group">
+            <span class="input-group-label">Qty:</span>
+            <input class="input-group-field" name="quantity" type="number" value="1">
+            <div class="input-group-button">
+                <input type="submit" class="button" value="Add to Cart">
+            </div>
+        </div>
+        </form>
+    {% endif %}
+
+
+
+
+    {% if relatedProducts is not empty %}
+        <h2 class="text-center">You Might Also Like</h2>
+
+        {% embed "helpers/related-products-grid.twig" with {'products': relatedProducts } only %}
+        {% endembed %}
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
