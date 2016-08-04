@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% include 'layout/parts/head.twig' %}
+    {% include 'layout/base/head.twig' %}
 </head>
 <body>
-    {% include 'layout/parts/topbar.twig' %}
+    {% include 'layout/base/topbar.twig' %}
+
+    {% block content %}{% endblock %}
+
     {% include 'layout/components/flash-messages.twig' %}
-    {% include 'layout/parts/breadcrumbs.twig' %}
-    <div id="body">
-        {% block content %}{% endblock %}
-    </div>
-    {% include 'layout/components/base-modal.twig' %}
-    {% include 'layout/parts/scripts.twig' %}
-    {% include 'layout/parts/footer-checkout.twig' %}
+
+    {% include 'layout/base/scripts.twig' %}
+    {% include 'layout/base/footer.twig' %}
 </body>
 </html>
