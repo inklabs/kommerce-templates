@@ -11,7 +11,7 @@
 
     {% set total_items = max(0, total_items) %}
     {% set items_per_page = max(1, items_per_page) %}
-    {% set total_pages = (total_items / items_per_page) | round(0, 'ceil') %}
+    {% set total_pages = (total_items / items_per_page) | ceil %}
     {% set current_page = min(max(1, current_page), max(1, total_pages)) %}
     {% set current_first_item = min(((current_page - 1) * items_per_page) + 1, total_items) %}
     {% set current_last_item = min(current_first_item + items_per_page - 1, total_items) %}

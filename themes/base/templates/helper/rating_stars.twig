@@ -1,0 +1,13 @@
+{# @var rating float #}
+{# @var includeCount bool #}
+
+{% if rating != (rating | floor) %}
+	{% set isHalf = true %}
+{% endif %}
+
+<div class="rating">
+	<div class="star{{ rating | floor }}{% if isHalf %}h{% endif %}"></div>
+	{% if includeCount %}
+		{{ rating }} / 5
+	{% endif %}
+</div>

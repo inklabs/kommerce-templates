@@ -41,6 +41,8 @@ class TwigExtension extends Twig_Extension
     public function getFilters()
     {
         return [
+            new Twig_SimpleFilter('ceil', 'ceil'),
+            new Twig_SimpleFilter('floor', 'floor'),
             new Twig_SimpleFilter(
                 'displayPrice',
                 function ($price) {

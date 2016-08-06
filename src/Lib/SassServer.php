@@ -26,10 +26,12 @@ class SassServer
         $formatter = 'compressed',
         $cacheDir = null
     ) {
+        $baseScssDirectory = __DIR__ . '/../../../../../vendor/inklabs/kommerce-templates/themes/base/scss';
         $kommerceScssDirectory = __DIR__ . '/../../../../../vendor/inklabs/kommerce-templates/themes/' . $baseTheme . '/scss';
         $bootstrapScssDirectory = __DIR__ . '/../../../../../vendor/twbs/bootstrap-sass/assets/stylesheets';
         $bootswatchScssDirectory = __DIR__ . '/../../../../../vendor/thomaspark/bootswatch/' . $bootswatchTheme;
 
+        $importPaths[] = $baseScssDirectory;
         $importPaths[] = $kommerceScssDirectory;
         $importPaths[] = $bootstrapScssDirectory;
         $importPaths[] = $bootswatchScssDirectory;

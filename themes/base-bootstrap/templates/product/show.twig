@@ -35,7 +35,8 @@
                             <div class="divider"></div>
 
                             <div class="review-actions">
-                                {# TODO: Render Rating Stars for product.rating #}
+                                {% embed "helper/rating_stars.twig" with {'rating': product.rating } only %}{% endembed %}
+
                                 {# TODO: Render Reviews #}
                             </div>
                         {% endif %}

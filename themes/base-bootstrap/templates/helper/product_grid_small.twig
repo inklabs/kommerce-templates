@@ -11,9 +11,7 @@
             <div class="product-name">{{ product.name }}</div>
         </a>
 
-        {# TODO:
-            <?=View::factory('helper/rating_stars_static')->set('rating', $product->rating)?>
-        #}
+        {% embed "helper/rating_stars.twig" with {'rating': product.rating } only %}{% endembed %}
 
         {% if product.isInStock %}
             <div class="availability">
