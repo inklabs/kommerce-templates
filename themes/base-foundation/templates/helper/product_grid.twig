@@ -1,0 +1,20 @@
+{% for product in products %}
+
+    <a href="{{ productUrl(product) }}">
+        {% if product.defaultImage is empty %}
+            <img src="//placehold.it/100x100&text=FallbackImg">
+        {% else %}
+            <img src="{{ product.defaultImage }}">
+        {% endif %}
+    </a>
+    <a href="{{ productUrl(product) }}">{{ productUrl(product) }}</a>
+
+    {% embed "helper/rating_stars.twig" with {'rating': product.rating } only %}{% endembed %}
+
+    {% if product.isInStock %}
+        Out of Stock
+    {% elseif product.isPriceVisible %}
+        {% embed "helper/price.twig" with {'price': product.price } only %}{% endembed %}
+    {% endif %}
+
+{% endfor %}

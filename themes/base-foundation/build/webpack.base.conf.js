@@ -9,7 +9,7 @@ module.exports = {
     'app': './src/js/app.js'
   },
   output: {
-    path: projectRoot + '/dist/',
+    path: projectRoot + '/assets/',
     filename: '[name].js'
   },
   resolve: {

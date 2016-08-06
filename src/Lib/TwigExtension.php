@@ -56,6 +56,18 @@ class TwigExtension extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction(
+                'assetUrl',
+                function ($path) {
+                    return $this->routeUrl->getRoute(
+                        'product.show',
+                        [
+                            'slug' => $productDTO->slug,
+                            'productId' => $productDTO->id->getHex(),
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
                 'productUrl',
                 function (ProductDTO $productDTO) {
                     return $this->routeUrl->getRoute(

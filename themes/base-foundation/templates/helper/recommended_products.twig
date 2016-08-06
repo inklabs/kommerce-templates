@@ -1,0 +1,10 @@
+{% if products is not empty %}
+    <h2>{% block title %}You Might Also Like{% endblock %}</h2>
+    {% if size == 'small' %}
+        {% embed "helper/product_grid_small.twig" with {'products': products } only %}
+        {% endembed %}
+    {% else %}
+        {% embed "helper/product_grid.twig" with {'products': products } only %}
+        {% endembed %}
+    {% endif %}
+{% endif %}

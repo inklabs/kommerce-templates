@@ -1,0 +1,91 @@
+{# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
+{# @var recommendedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{% extends "layout/base.twig" %}
+
+{% block pageTitle %}Shopping Cart{% endblock %}
+
+{% block content %}
+    {% if cart.cartItems is empty %}
+        {% include 'cart/parts/empty_cart.twig' %}
+    {% else %}
+        <h2>Shopping Cart</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th colspan="2">Item</th>
+                <th>QTY</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cartItem in cart.cartItems %}
+                <tr>
+                    <td>
+                        <a href="{{ productUrl(cartItem.product) }}">
+                            <img src="{{ cartItem.product.defaultImage }}" width="110" height="110"/>
+                        </a>
+                    </td>
+                    <td>
+                        <h2>{{ cartItem.product.name }}</h2>
+
+                        <a href="{{ productUrl(cartItem.product) }}">{{ productUrl(cartItem.product) }}</a>
+
+                        <p>{{ cartItem.fullSku }}</p>
+
+                        {% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
+                            {{ cartItemOptionProduct.optionProduct.option.name }}:
+                            {{ cartItemOptionProduct.optionProduct.product.name }}
+                        {% endfor %}
+
+                        {% for cartItemOptionValue in cartItem.cartItemOptionValues %}
+                            {{ cartItemOptionValue.optionValue.option.name }}:
+                            {{ cartItemOptionValue.optionValue.name }}
+                        {% endfor %}
+
+                        {% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
+                            {{ cartItemTextOptionValue.textOption.name }}:
+                            {{ cartItemTextOptionValue.textOptionValue }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <form action="cart/update-quantity" method="post" role="form">
+                            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                            <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}"/>
+                            <input type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
+                            <button type="submit">Update</button>
+                        </form>
+                        <form action="cart/delete-item" method="post" role="form">
+                            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                            <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
+                            <button type="submit">Remove item</button>
+                        </form>
+                        {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                    </td>
+                    <td>
+                        {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                    </td>
+                    <td>
+                        {{ cartItem.price.quantityPrice | displayPrice }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% embed "cart/parts/totals.twig" %}{% endembed %}
+        <p>Total ({{ cart.totalItems }} items):</p>
+        <p>{{ cart.cartTotal.total | displayPrice }}</p>
+
+        {% embed "helper/checkout_button.twig" only %}{% endembed %}
+
+        <form action="cart/apply-coupon" method="post">
+            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+            <input type="text" name="coupon_code" value="" placeholder="coupon code"/>
+            <button type="submit">apply</button>
+        </form>
+
+    {% endif %}
+
+    {% embed "helper/recommended_products.twig" with {'products': recommendedProducts, 'size': 'small' } only %}
+    {% endembed %}
+{% endblock %}
