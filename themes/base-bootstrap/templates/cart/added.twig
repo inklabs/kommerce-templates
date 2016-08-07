@@ -26,86 +26,53 @@
 
                         {% embed "helper/price.twig" with {'price': cartItem.price } only %}{% endembed %}
 
-                        {#
-                            <?php
-                            /*
-                                $option_values = Arr::path($cart->data, $cart_item_id . '.option_values', []);
-                            $option_products = Arr::path($cart->data, $cart_item_id . '.option_products', []);
-
-                            <div class="table-cell">
-                                <?php foreach ($option_values as $option_id => $option_value_id) { ?>
-                                <small>
-                                        <span>
-                                            <?=Arr::path($cart->options, $option_id)->name?>:
-                                        </span>
-                                        <span class="text-muted">
-                                            <?=Arr::path($cart->option_values, $option_value_id)->name?>
-                                        </span>
-                                    <br>
-                                </small>
-                                <?php } ?>
-
-                                <?php foreach ($option_products as $option_id => $option_product_id) { ?>
-                                <small>
-                                        <span>
-                                            <?=Arr::path($cart->options, $option_id)->name?>:
-                                        </span>
-                                        <span class="text-muted">
-                                            <?=Arr::path($cart->products, $option_product_id)->name?>
-                                        </span>
-                                    <br>
-                                </small>
-                                <?php } ?>
-                            </div>
-                            */
-                            ?>
-                        #}
+                        <div class="table-cell">
+                            {% embed 'cart/parts/cart_item_options.twig' with {'cartItem': cartItem } only %}{% endembed %}
+                        </div>
 
                         <div class="clearfix"></div>
 
-                        {# TODO:
-                            <?php if ( ! empty($cartItem->product->productQuantityDiscounts)) { ?>
+                        {% if cartItem.product.productQuantityDiscounts is not empty %}
                             <div class="pull-right">
-                                <?php foreach (array_reverse($cartItem->product->productQuantityDiscounts) as $productQuantityDiscount) { ?>
-                                <?php if ($cartItem->quantity < $productQuantityDiscount->quantity) { ?>
-                                <?php
-                                                $number_more = $productQuantityDiscount->quantity - $cartItem->quantity;
-                                $totalOff = (
-                                $productQuantityDiscount->price->quantityPrice
-                                -
-                                $cartItem->price->quantityPrice
-                                );
+                                {% for productQuantityDiscount in (cartItem.product.productQuantityDiscounts | reverse) %}
+                                    {% if cartItem.quantity < productQuantityDiscount.quantity %}
+                                        {% set numberMore = productQuantityDiscount.quantity - cartItem.quantity %}
+                                        {% set totalOff = productQuantityDiscount.price.quantityPrice - cartItem.price.quantityPrice %}
+                                        {% set priceEach = totalOff / numberMore %}
 
-                                $price_each = $totalOff / $number_more;
-                                if ($price_each >= $cartItem->price->unitPrice) {
-                                continue;
-                                }
-                                ?>
+                                        {% if priceEach < cartItem.price.unitPrice %}
+                                            <form action="/cart/update-quantity" method="post" class="form-inline" style="margin-top: 15px">
+                                                <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
 
-                                <?=Form::open('cart/update_quantity', [
-                                                'method' => 'POST',
-                                'class' => 'form-inline',
-                                'style' => 'margin-top: 15px',
-                                ])?>
-                                <?=Form::csrf()?>
-
-                                <input type="hidden" name="id" value="<?=$cartItem->id->getHex()?>" />
-                                <input type="hidden" name="quantity" value="<?=$productQuantityDiscount->quantity?>" />
-                                <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i>
-                                    Add <?=$number_more?> more
-                                </button>
-                                <?php if ($price_each > 0) { ?>
-                                for <span class="price"><?=Kommerce::display_price($price_each)?></span> <?=ngettext('', 'each', $number_more)?>
-                                <?php } elseif ($price_each == 0) { ?>
-                                <span class="cart-free-shipping">for FREE</span>
-                                <?php } else { ?>
-                                <span class="cart-free-shipping">for <?=Kommerce::display_price(abs($totalOff))?> OFF</span>
-                                <?php } ?>
-                                </form>
-                                <?php } ?>
-                                <?php } ?>
+                                                <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
+                                                <input type="hidden" name="quantity" value="{{ productQuantityDiscount.quantity }}" />
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i>
+                                                    Add {{ numberMore }} more
+                                                </button>
+                                                {% if priceEach > 0 %}
+                                                    for
+                                                    <span class="price">
+                                                        {{ priceEach | displayPrice }}
+                                                    </span>
+                                                    {% trans %}
+                                                    {% plural numberMore %}
+                                                        each
+                                                    {% endtrans %}
+                                                {% elseif priceEach == 0 %}
+                                                    <span class="cart-free-shipping">for FREE</span>
+                                                {% else %}
+                                                    <span class="cart-free-shipping">
+                                                        for
+                                                        {{ totalOff | displayPrice }}
+                                                        OFF
+                                                    </span>
+                                                {% endif %}
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                             </div>
-                            #}
+                        {% endif %}
                         <div style="clear: both;"></div>
                     </div>
                 </div>

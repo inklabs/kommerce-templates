@@ -61,21 +61,19 @@
                         {% if product.productQuantityDiscounts is not empty %}
                             <div class="divider"></div>
                             <div class="discount-prices">
-                                {# TODO:
-                                    <?php foreach (array_reverse($product->productQuantityDiscounts) as $discount) { ?>
-                                        Buy <?=$discount->quantity?> or more for
+                                {% for discount in (product.productQuantityDiscounts | reverse ) %}
+                                    Buy {{ discount.quantity }} or more for
 
-                                        <?php if ($product->price->unitPrice < $discount->price->unitPrice) { ?>
-                                            <span class="price-strike"><?=Kommerce::display_price($discount->price->unitPrice)?></span>
-                                            <?=Kommerce::display_price($product->price->unitPrice)?>
-                                        <?php } else { ?>
-                                            <?=Kommerce::display_price($discount->price->unitPrice)?>
-                                        <?php } ?>
+                                    {% if product.price.unitPrice < discount.price.unitPrice %}
+                                        <span class="price-strike">{{ discount.price.unitPrice | displayPrice }}</span>
+                                        {{ product.price.unitPrice | displayPrice }}
+                                    {% else %}
+                                        {{ discount.price.unitPrice | displayPrice }}
+                                    {% endif %}
 
-                                        each
-                                        <br />
-                                    <?php } ?>
-                                #}
+                                    each
+                                    <br />
+                                {% endfor %}
                             </div>
                         {% endif %}
 

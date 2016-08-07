@@ -44,50 +44,11 @@
                                                 <div class="hidden-sm text-muted">
                                                     <small>{{ cartItem.fullSku }}</small>
                                                 </div>
-                                                <div>
-                                                    {% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
-                                                        <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                {{ cartItemOptionProduct.optionProduct.option.name }}:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                {{ cartItemOptionProduct.optionProduct.product.name }}
-                                                            </span>
-                                                            <br>
-                                                        </small>
-                                                    {% endfor %}
-                                                </div>
 
-                                                <div>
-                                                    {% for cartItemOptionValue in cartItem.cartItemOptionValues %}
-                                                        <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                {{ cartItemOptionValue.optionValue.option.name }}:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                {{ cartItemOptionValue.optionValue.name }}
-                                                            </span>
-                                                            <br>
-                                                        </small>
-                                                    {% endfor %}
-                                                </div>
-
-                                                <div>
-                                                    {% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
-                                                        <small>
-                                                            <span class="hidden-sm hidden-xs">
-                                                                {{ cartItemTextOptionValue.textOption.name }}:
-                                                            </span>
-                                                            <span class="text-muted">
-                                                                {{ cartItemTextOptionValue.textOptionValue }}
-                                                            </span>
-                                                            <br>
-                                                        </small>
-                                                    {% endfor %}
-                                                </div>
+                                                {% embed 'cart/parts/cart_item_options.twig' with {'cartItem': cartItem } only %}{% endembed %}
                                             </td>
                                             <td class="text-right">
-                                                <form action="cart/update-quantity" method="post" role="form">
+                                                <form action="/cart/update-quantity" method="post" role="form">
                                                     <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
                                                     <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
                                                     <div class="pull-right" style="width: 120px">

@@ -1,0 +1,42 @@
+{# @var cartItem \inklabs\kommerce\EntityDTO\CartItemDTO #}
+<div>
+    {% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
+        <small>
+            <span class="hidden-sm hidden-xs">
+                {{ cartItemOptionProduct.optionProduct.option.name }}:
+            </span>
+            <span class="text-muted">
+                {{ cartItemOptionProduct.optionProduct.product.name }}
+            </span>
+            <br>
+        </small>
+    {% endfor %}
+</div>
+
+<div>
+    {% for cartItemOptionValue in cartItem.cartItemOptionValues %}
+        <small>
+            <span class="hidden-sm hidden-xs">
+                {{ cartItemOptionValue.optionValue.option.name }}:
+            </span>
+            <span class="text-muted">
+                {{ cartItemOptionValue.optionValue.name }}
+            </span>
+            <br>
+        </small>
+    {% endfor %}
+</div>
+
+<div>
+    {% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
+        <small>
+            <span class="hidden-sm hidden-xs">
+                {{ cartItemTextOptionValue.textOption.name }}:
+            </span>
+            <span class="text-muted">
+                {{ cartItemTextOptionValue.textOptionValue }}
+            </span>
+            <br>
+        </small>
+    {% endfor %}
+</div>
