@@ -7,19 +7,20 @@
     </span>
     <span> </span>
 {% elseif price.unitPrice < price.origUnitPrice %}
-    {# TODO:
-        <?php
-            $promotionNames = [];
-            foreach ($price->catalogPromotions as $catalogPromotion) {
-                $promotionNames[] = $catalogPromotion->name;
-            }
+    {% set promotionNames = [] %}
 
-            foreach ($price->productQuantityDiscounts as $productQuantityDiscount) {
-                $promotionNames[] = $productQuantityDiscount->name;
-            }
-        ?>
+    {% for catalogPromotion in price.catalogPromotions %}
+        {% set promotionNames = promotionNames | merge([catalogPromotion.name])  %}
+    {% endfor %}
+
+    {# TODO:
+        foreach ($price->productQuantityDiscounts as $productQuantityDiscount) {
+            $promotionNames[] = $productQuantityDiscount->name;
+        }
     #}
-    <span class="price-strike" data-toggle="tooltip" title="<?=HTML::chars(implode(', ', $promotionNames))?>"><?=Kommerce::display_price($price->origUnitPrice)?></span>
-    <span> </span>
+    <span class="price-strike" data-toggle="tooltip" title="{{ promotionNames | join(', ') }}">
+        {{ price.origUnitPrice | displayPrice }}
+    </span>
+    &nbsp;
 {% endif %}
 <span class="price">{{ price.unitPrice | displayPrice }}</span>
