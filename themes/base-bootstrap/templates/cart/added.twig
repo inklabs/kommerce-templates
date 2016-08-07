@@ -36,6 +36,10 @@
                             <div class="pull-right">
                                 {% for productQuantityDiscount in (cartItem.product.productQuantityDiscounts | reverse) %}
                                     {% if cartItem.quantity < productQuantityDiscount.quantity %}
+                                        {# TODO:
+                                            Account for OptionProducts, OptionValues, CatalogPromotions, and Coupons
+                                            This logic may need to be moved to kommerce-core
+                                        #}
                                         {% set numberMore = productQuantityDiscount.quantity - cartItem.quantity %}
                                         {% set totalOff = productQuantityDiscount.price.quantityPrice - cartItem.price.quantityPrice %}
                                         {% set priceEach = totalOff / numberMore %}
