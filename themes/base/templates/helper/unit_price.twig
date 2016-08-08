@@ -13,11 +13,10 @@
         {% set promotionNames = promotionNames | merge([catalogPromotion.name])  %}
     {% endfor %}
 
-    {# TODO:
-        foreach ($price->productQuantityDiscounts as $productQuantityDiscount) {
-            $promotionNames[] = $productQuantityDiscount->name;
-        }
-    #}
+    {% for productQuantityDiscount in price.productQuantityDiscounts %}
+        {% set promotionNames = promotionNames | merge([productQuantityDiscount.name]) %}
+    {% endfor %}
+
     <span class="price-strike" data-toggle="tooltip" title="{{ promotionNames | join(', ') }}">
         {{ price.origUnitPrice | displayPrice }}
     </span>
