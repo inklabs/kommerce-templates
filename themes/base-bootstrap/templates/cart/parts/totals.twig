@@ -9,9 +9,10 @@
         <tr>
             <td colspan="100%">
                 Shipping:
-                {# TODO:
-                    <?=View::factory('cart/modify_zipcode_button')->set('extraClass', 'pull-right')->render()?>
-                #}
+
+                <div class="pull-right">
+                    {% embed "cart/parts/modify_shipping_button.twig" %}{% endembed %}
+                </div>
             </td>
         </tr>
     {% elseif cart.cartTotal.shipping == 0 %}
@@ -22,25 +23,21 @@
             </td>
         </tr>
     {% elseif cart.cartTotal.shipping > 0 %}
-        {# TODO:
-        <?php
-                    $shippingName = $cart->shippingAddress->zip5;
-        if ( ! empty($cart->shippingAddress->state)) {
-        $shippingName .= '-' . $cart->shippingAddress->state;
-        }
-        ?>
+        {% set shippingName = cart.shippingAddress.zip5 %}
+        {% if cart.shippingAddress.state is not empty %}
+            {% set shippingName =  shippingName ~ '-' ~ cart.shippingAddress.state %}
+        {% endif %}
         <tr>
             <td>
-                        <span data-toggle="tooltip" data-original-title="<?=$shippingName?>">
-                            Shipping &amp; Handling:
-                            <span class="text-muted">(<?=HTML::chars($cart->shipmentRate->deliveryMethod->name)?>)</span>
-                        </span>
+                <span data-toggle="tooltip" data-original-title="{{ shippingName }}">
+                    Shipping &amp; Handling:
+                    <span class="text-muted">({{ cart.shipmentRate.deliveryMethod.name }})</span>
+                </span>
             </td>
             <td class="text-right">
-                <?=Kommerce::display_price($cart->cartTotal->shipping)?>
+                {{ cart.cartTotal.shipping | displayPrice }}
             </td>
         </tr>
-        #}
     {% endif %}
     {# TODO:
         <?php if (! empty($cart->cartTotal->coupons) || ! empty($cart->cartTotal->cartPriceRules)) { ?>

@@ -1,0 +1,21 @@
+{# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
+
+{% set class = 'btn btn-info btn-sm' %}
+
+{% if env.shippingType.isFlatRate %}
+    <a href="cart/estimate-tax" class="btn btn-info btn-sm estimate-tax">
+        {% if cart.shipmentRate.rate.amount is null %}
+            Estimate Tax
+        {% else %}
+            Modify Zipcode
+        {% endif %}
+    </a>
+{% else %}
+    <a href="cart/estimate-shipping" class="btn btn-info btn-sm estimate-shipping">
+        {% if cart.shipmentRate.rate.amount is null %}
+            Estimate Shipping & Tax
+        {% else %}
+            Modify Shipping
+        {% endif %}
+    </a>
+{% endif %}
