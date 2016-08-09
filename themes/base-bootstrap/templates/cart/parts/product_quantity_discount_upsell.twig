@@ -23,20 +23,18 @@
                         {% if priceEach > 0 %}
                             for
                             <span class="price">
-                                                        {{ priceEach | displayPrice }}
-                                                    </span>
+                                {{ priceEach | displayPrice }}
+                            </span>
                             {% trans %}
                             {% plural numberMore %}
-                            each
+                                each
                             {% endtrans %}
                         {% elseif priceEach == 0 %}
                             <span class="cart-free-shipping">for FREE</span>
                         {% else %}
                             <span class="cart-free-shipping">
-                                                        for
-                                {{ totalOff | displayPrice }}
-                                OFF
-                                                    </span>
+                                for {{ totalOff | displayPrice }} OFF
+                            </span>
                         {% endif %}
                     </form>
                 {% endif %}
