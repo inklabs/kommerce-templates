@@ -31,53 +31,6 @@
                         </div>
 
                         <div class="clearfix"></div>
-
-                        {% if cartItem.product.productQuantityDiscounts is not empty %}
-                            <div class="pull-right">
-                                {% for productQuantityDiscount in (cartItem.product.productQuantityDiscounts | reverse) %}
-                                    {% if cartItem.quantity < productQuantityDiscount.quantity %}
-                                        {# TODO:
-                                            Account for OptionProducts, OptionValues, CatalogPromotions, and Coupons
-                                            This logic may need to be moved to kommerce-core
-                                        #}
-                                        {% set numberMore = productQuantityDiscount.quantity - cartItem.quantity %}
-                                        {% set totalOff = productQuantityDiscount.price.quantityPrice - cartItem.price.quantityPrice %}
-                                        {% set priceEach = totalOff / numberMore %}
-
-                                        {% if priceEach < cartItem.price.unitPrice %}
-                                            <form action="/cart/update-quantity" method="post" class="form-inline" style="margin-top: 15px">
-                                                <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-
-                                                <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
-                                                <input type="hidden" name="quantity" value="{{ productQuantityDiscount.quantity }}" />
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i>
-                                                    Add {{ numberMore }} more
-                                                </button>
-                                                {% if priceEach > 0 %}
-                                                    for
-                                                    <span class="price">
-                                                        {{ priceEach | displayPrice }}
-                                                    </span>
-                                                    {% trans %}
-                                                    {% plural numberMore %}
-                                                        each
-                                                    {% endtrans %}
-                                                {% elseif priceEach == 0 %}
-                                                    <span class="cart-free-shipping">for FREE</span>
-                                                {% else %}
-                                                    <span class="cart-free-shipping">
-                                                        for
-                                                        {{ totalOff | displayPrice }}
-                                                        OFF
-                                                    </span>
-                                                {% endif %}
-                                            </form>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        <div style="clear: both;"></div>
                     </div>
                 </div>
                 <div class="col-sm-7">
