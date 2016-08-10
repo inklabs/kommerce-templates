@@ -1,0 +1,97 @@
+{# @var shipmentRates \inklabs\kommerce\EntityDTO\ShipmentRateDTO[] #}
+{# @var shipping array #}
+
+{% extends "layout/base.twig" %}
+
+{% block pageTitle %}Estimate Shipping{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well well-sm">
+                <h5>Estimate Shipping &amp; Tax</h5>
+                <form action="/cart/estimate-shipping" method="post">
+                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="shipping-zip5" class="control-label">Zipcode</label>
+                            <input type="text"
+                                   name="shipping[zip5]"
+                                   value="{{ shipping['zip5'] }}"
+                                   id="shipping-zip5"
+                                   class="form-control"
+                                   required="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="shipping-isResidential" class="radio-inline">
+                                <input type="checkbox"
+                                       name="shipping[isResidential]"
+                                       {% if shipping.isResidential %}
+                                           checked="checked"
+                                       {% endif %}
+                                       id="shipping-isResidential">
+                                Residential Address?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        {% if shipmentRates is empty %}
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Get Quote
+                            </button>
+                        {% else %}
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Update Zipcode
+                            </button>
+                        {% endif %}
+                    </div>
+                </form>
+
+                {% if shipmentRates is not empty %}
+                    <form action="/cart/apply-shipping-method" method="post">
+                        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+
+                        <input type="hidden" name="shipping[zip5]" value="{{ shipping.zip5 }}">
+                        <input type="hidden" name="shipping[isResidential]" value="{{ shipping.isResidential }}">
+                        <hr />
+
+                        <h2>Choose your delivery option:</h2>
+                        {% for shipmentRate in shipmentRates %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label class="radio-inline">
+
+                                        <input type="radio"
+                                               name="shipping[shipmentRateExternalId]"
+                                               value="{{ shipmentRate.externalId }}"
+                                               class="ship-method"
+                                               {% if shipmentRate.externalId == shipping.shipmentRateExternalId %}
+                                                   checked="checked"
+                                               {% endif %}
+                                               required="">
+
+                                        {{ shipmentRate.rate.amount | displayPrice }}
+                                        {{ shipmentRate.deliveryMethod.name }} Shipping
+                                        <div data-content="{{ shipmentRate.carrier }}:{{ shipmentRate.service }}"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="form-group" style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                                <i class="fa fa-ok-sign"></i>
+                                Update Total
+                            </button>
+                            <a href="/cart" class="btn">Cancel</a>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

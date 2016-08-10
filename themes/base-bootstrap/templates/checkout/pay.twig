@@ -184,10 +184,13 @@
 
                             <div class="row">
                                 <div class="form-group col-sm-12">
-                                    <label class="radio-inline">
-                                        <?=Form::checkbox('shipping[isResidential]', NULL, (bool) Arr::get($shipping, 'isResidential', true), [
-                                                'id' => 'shipping-isResidential',
-                                        ])?>
+                                    <label for="shipping-isResidential" class="radio-inline">
+                                    <input type="checkbox"
+                                           name="shipping[isResidential]"
+                                           {% if shipping.isResidential %}
+                                               checked="checked"
+                                           {% endif %}
+                                           id="shipping-isResidential">
                                         Residential Address?
                                     </label>
                                 </div>

@@ -1,11 +1,12 @@
 {# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
+
 <table class="totals-table table">
     <tbody>
     <tr class="cart-subtotal">
         <td>Subtotal:</td>
         <td class="text-right">{{ cart.cartTotal.subtotal | displayPrice }}</td>
     </tr>
-    {% if cart.shipmentRate.deliverMethod is null %}
+    {% if cart.shipmentRate.deliveryMethod is null %}
         <tr>
             <td colspan="100%">
                 Shipping:
