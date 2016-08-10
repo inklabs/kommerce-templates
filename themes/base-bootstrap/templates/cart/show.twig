@@ -103,11 +103,10 @@
                             <br /><br />
                             {% embed "helper/checkout_button.twig" only %}{% endembed %}
                         </div>
-                        {# TODO:
-                            <?php if ($cart->shipmentRate->rate !== NULL) { ?>
-                            <?=View::factory('cart/modify_zipcode_button')->set('extraClass', 'btn-block')->render()?>
-                            <?php } ?>
-                        #}
+                        {% if cart.shipmentRate.rate is not null %}
+                            {% embed "cart/parts/modify_shipping_button.twig" with {'extraClass': 'btn-block'} %}{% endembed %}
+                        {% endif %}
+
                         <br>
                         <form action="cart/apply-coupon" method="post">
                             <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
