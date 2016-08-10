@@ -40,47 +40,46 @@
             </td>
         </tr>
     {% endif %}
-    {# TODO:
-        <?php if (! empty($cart->cartTotal->coupons) || ! empty($cart->cartTotal->cartPriceRules)) { ?>
+
+    {% if cart.cartTotal.coupons is not empty or cart.cartTotal.cartPriceRules is not empty %}
         <tr class="cart-discounts">
             <td>
                 Discounts
                 <div class="container-fluid">
-                    <?php foreach ($cart->cartTotal->cartPriceRules as $cartPriceRule) { ?>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            &nbsp;<i class="fa fa-minus"></i>&nbsp;
-                            <?=$cartPriceRule->name?>
+                    {% for cartPriceRule in cart.cartTotal.cartPriceRules %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                &nbsp;<i class="fa fa-minus"></i>&nbsp;
+                                {{ cartPriceRule.name }}
+                            </div>
                         </div>
-                    </div>
-                    <?php } ?>
+                    {% endfor %}
 
-                    <?php foreach ($cart->cartTotal->coupons as $coupon) { ?>
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <?=Form::open('cart/remove_coupon/' . $coupon->id->getHex(), [
-                            'method' => 'POST',
-                            'role' => 'form',
-                            ])?>
-                            <?=Form::csrf()?>
+                    {% for coupon in cart.cartTotal.coupons %}
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <form action="/cart/remove-coupon"
+                                      method="post"
+                                      role="form">
+                                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                                    <input type="hidden" name="couponId" value="{{ coupon.id.getHex() }}">
 
-                            <button type="submit" class="btn btn-link btn-xs">
-                                <i class="fa fa-remove"></i>
-                            </button>
-                            <?=$coupon->name?>
-
-                            <?=Form::close()?>
+                                    <button type="submit" class="btn btn-link btn-xs">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                    {{ coupon.name }}
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    <?php } ?>
+                    {% endfor %}
                 </div>
             </td>
             <td class="text-right">
-                (<?=Kommerce::display_price($cart->cartTotal->discount)?>)
+                ({{ cart.cartTotal.discount | displayPrice }})
             </td>
         </tr>
-        <?php } ?>
-    #}
+    {% endif %}
+
     {% if cart.cartTotal.tax is not empty %}
         <tr>
             <td>Tax:</td>
