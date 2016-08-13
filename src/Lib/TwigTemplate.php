@@ -4,6 +4,7 @@ namespace inklabs\KommerceTemplates\Lib;
 use RuntimeException;
 use Twig_Environment;
 use Twig_Extensions_Extension_I18n;
+use Twig_Extensions_Extension_Text;
 use Twig_Loader_Filesystem;
 
 class TwigTemplate
@@ -30,6 +31,7 @@ class TwigTemplate
             )
         );
         $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_I18n());
+        $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_Text());
     }
 
     public function enableDebug()
