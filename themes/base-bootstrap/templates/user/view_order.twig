@@ -3,12 +3,10 @@
 
 {% block pageTitle %}Order #{{ order.referenceNumber }}{% endblock %}
 
-{# TODO: #}
-{#$breadcrumbs = [#}
-    {#'Your Account' => '/user/account',#}
-    {#'Order Details' => $order->url,#}
-{#];#}
-{#View::set_global('breadcrumbs', $breadcrumbs);#}
+{% set breadcrumbs = {
+    'Your Account': 'user/account',
+    'Order Details': 'user/view-order/' ~ order.id.getHex()
+} %}
 
 {% block content %}
     <div class="container">

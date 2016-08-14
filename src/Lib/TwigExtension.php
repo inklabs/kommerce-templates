@@ -1,6 +1,7 @@
 <?php
 namespace inklabs\KommerceTemplates\Lib;
 
+use inklabs\kommerce\EntityDTO\OrderDTO;
 use inklabs\kommerce\EntityDTO\ProductDTO;
 use inklabs\kommerce\EntityDTO\TagDTO;
 use inklabs\kommerce\Lib\Slug;
@@ -64,12 +65,12 @@ class TwigExtension extends Twig_Extension
         return [
             new Twig_SimpleFunction(
                 'assetUrl',
-                function ($path) {
+                function ($theme, $path) {
                     return $this->routeUrl->getRoute(
-                        'product.show',
+                        'asset.serve',
                         [
-                            'slug' => $productDTO->slug,
-                            'productId' => $productDTO->id->getHex(),
+                            'theme' => $theme,
+                            'path' => $path,
                         ]
                     );
                 }
@@ -96,6 +97,18 @@ class TwigExtension extends Twig_Extension
                             'tagId' => $tagDTO->id->getHex(),
                         ]
                     );
+                }
+             ),
+            new Twig_SimpleFunction(
+                'orderUrl',
+                function (OrderDTO $order) {
+                    return '/user/view-order/' . $order->id->getHex();
+                }
+             ),
+            new Twig_SimpleFunction(
+                'currentPath',
+                function () {
+                    return request()->path();
                 }
              ),
         ];

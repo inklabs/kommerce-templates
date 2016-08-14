@@ -1,0 +1,69 @@
+{# @var user \inklabs\kommerce\EntityDTO\UserDTO #}
+{# @var orders \inklabs\kommerce\EntityDTO\OrderDTO[] #}
+{% import 'macros/order.twig' as orderMacro %}
+{% extends "layout/base.twig" %}
+
+{% block pageTitle %}User Account - {{ user.fullName }}{% endblock %}
+
+{% set breadcrumbs = {
+    'Your Account': 'user/account',
+} %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h2>Your Account</h2>
+            <div class="col-sm-5">
+                <table class="table">
+                    <tdata>
+                        <tr>
+                            <th>Name:</th>
+                            <td>{{ user.firstName }} {{ user.lastName }}</td>
+                        </tr>
+                        <tr>
+                            <th>E-mail:</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Password:</th>
+                            <td>
+                                <a href="/user/account/change_password"
+                                   class="btn btn-default btn-xs pull-right">
+                                    Edit Password
+                                </a>
+                            </td>
+                        </tr>
+                    </tdata>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Your Orders</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tdata>
+                        {% for order in orders %}
+                            <tr>
+                                <td><a href="{{ orderUrl(order) }}">{{ order.referenceNumber }}</a></td>
+                                <td>{{ order.createdFormatted }}</td>
+                                <td>{{ orderMacro.statusLabel(order) }}</td>
+                                <td>{{ order.totalQuantity }}</td>
+                                <td>{{ order.total.total | displayPrice }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tdata>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
