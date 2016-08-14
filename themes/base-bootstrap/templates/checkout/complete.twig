@@ -12,7 +12,10 @@
                 <div class="alert alert-info">
                     <h3>Thank you, your order has been placed.</h3>
                     <p>An email confirmation has been sent to you.</p>
-                    <p>Order Number: <strong>{{ order.referenceNumber }}</strong></p>
+                    <p>
+                        Order Number:
+                        <a href="/user/view-order/{{ order.id.getHex() }}">{{ order.referenceNumber }}</a>
+                    </p>
                 </div>
             </div>
             <div class="col-sm-6">
