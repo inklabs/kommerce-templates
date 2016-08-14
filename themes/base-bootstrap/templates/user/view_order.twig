@@ -1,0 +1,17 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+{% extends "layout/base.twig" %}
+
+{% block pageTitle %}Order #{{ order.referenceNumber }}{% endblock %}
+
+{# TODO: #}
+{#$breadcrumbs = [#}
+    {#'Your Account' => '/user/account',#}
+    {#'Order Details' => $order->url,#}
+{#];#}
+{#View::set_global('breadcrumbs', $breadcrumbs);#}
+
+{% block content %}
+    <div class="container">
+        {% embed "helper/order_details.twig" with {'order': order} only %}{% endembed %}
+    </div>
+{% endblock %}

@@ -3,6 +3,7 @@ namespace inklabs\KommerceTemplates\Lib;
 
 use inklabs\kommerce\EntityDTO\ProductDTO;
 use inklabs\kommerce\EntityDTO\TagDTO;
+use inklabs\kommerce\Lib\Slug;
 use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
@@ -47,6 +48,12 @@ class TwigExtension extends Twig_Extension
                 'displayPrice',
                 function ($price) {
                     return '$' . number_format(($price / 100), 2);
+                }
+            ),
+            new Twig_SimpleFilter(
+                'slug',
+                function ($string) {
+                    return Slug::get($string);
                 }
             ),
         ];

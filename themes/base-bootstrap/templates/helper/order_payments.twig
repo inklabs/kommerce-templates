@@ -1,0 +1,33 @@
+{# order \inklabs\KohanaKommerce\EntityDTO\OrderDTO #}
+{% for payment in order.payments %}
+    <div>
+        {% if payment.chargeResponse.last4 is not empty %}
+            <i class="fa fa-2x fa-cc-{{ payment.chargeResponse.brand | slug }}"></i>
+            Ending in {{ payment.chargeResponse.last4 }}
+        {% elseif payment.checkNumber is not empty %}
+            Check #:
+            <span class="text-muted">
+                {{ checkNumber }}
+            </span>
+            <br>
+            Check Date:
+            <span class="text-muted">
+                {{ payment.checkDate }}
+                {# TODO: Format date #}
+                {#<?=Kommerce::formatDate($payment->checkDate)?>#}
+            </span>
+            <br>
+            Memo:
+            <span class="text-muted">
+                {{ payment.memo }}
+            </span>
+        {% endif %}
+        <br>
+        Amount: {{ payment.amount | displayPrice }}<br>
+        <span class="text-muted small">
+            {{ payment.created.getTimestamp() }}
+            {# TODO: Format date #}
+            {#<?=Kommerce::format_date_time($payment->created->getTimestamp())?>#}
+        </span>
+    </div>
+{% endfor %}
