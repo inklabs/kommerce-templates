@@ -48,7 +48,7 @@
                                                 {% embed 'cart/parts/cart_item_options.twig' with {'cartItem': cartItem } only %}{% endembed %}
                                             </td>
                                             <td class="text-right">
-                                                <form action="/cart/update-quantity" method="post" role="form">
+                                                <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
                                                     <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
                                                     <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
                                                     <div class="pull-right" style="width: 120px">
@@ -61,7 +61,7 @@
                                                     </div>
                                                 </form>
                                                 <div class="clearfix"></div>
-                                                <form action="cart/delete-item" method="post" role="form">
+                                                <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
                                                     <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
                                                     <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
 
@@ -108,7 +108,7 @@
                         {% endif %}
 
                         <br>
-                        <form action="cart/apply-coupon" method="post">
+                        <form action="{{ routeUrl('cart.apply-coupon') }}" method="post">
                             <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
 
                             <div class="input-group">

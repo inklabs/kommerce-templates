@@ -147,6 +147,12 @@ class TwigExtension extends Twig_Extension
                 }
              ),
             new Twig_SimpleFunction(
+                'routeUrl',
+                function ($name, $parameters = [], $absolute = false) {
+                    return $this->routeUrl->getRoute($name, $parameters, $absolute);
+                }
+             ),
+            new Twig_SimpleFunction(
                 'currentPath',
                 function () {
                     return request()->path();
