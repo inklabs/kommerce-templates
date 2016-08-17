@@ -40,9 +40,9 @@ class TwigExtension extends Twig_Extension
     public function __construct(
         CSRFTokenGeneratorInterface $csrfTokenGenerator,
         RouteUrlInterface $routeUrl,
-        $timezone = 'America/Los_Angeles',
-        $dateFormat = 'F j, Y',
-        $timeFormat = 'g:i a T'
+        $timezone,
+        $dateFormat,
+        $timeFormat
     ) {
         if (! $this->isValidTimezone($timezone)) {
             throw new InvalidArgumentException();

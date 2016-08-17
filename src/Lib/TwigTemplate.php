@@ -26,9 +26,9 @@ class TwigTemplate
         CSRFTokenGeneratorInterface $csrfTokenGenerator,
         RouteUrlInterface $routeUrl,
         $paths = [],
-        $timezone = 'America/Los_Angeles',
-        $dateFormat = 'F j, Y',
-        $timeFormat = 'g:i a T'
+        $timezone,
+        $dateFormat,
+        $timeFormat
     ) {
         $this->addBaseTheme($paths, $baseTheme);
         $this->addBaseTheme($paths, 'base');
