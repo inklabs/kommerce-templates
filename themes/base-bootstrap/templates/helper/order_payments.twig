@@ -12,9 +12,7 @@
             <br>
             Check Date:
             <span class="text-muted">
-                {{ payment.checkDate }}
-                {# TODO: Format date #}
-                {#<?=Kommerce::formatDate($payment->checkDate)?>#}
+                {{ payment.checkDate | formatDate }}
             </span>
             <br>
             Memo:
