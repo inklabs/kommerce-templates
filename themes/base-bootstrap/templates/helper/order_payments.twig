@@ -25,9 +25,7 @@
         <br>
         Amount: {{ payment.amount | displayPrice }}<br>
         <span class="text-muted small">
-            {{ payment.created.getTimestamp() }}
-            {# TODO: Format date #}
-            {#<?=Kommerce::format_date_time($payment->created->getTimestamp())?>#}
+            {{ payment.created | formatDate }}
         </span>
     </div>
 {% endfor %}

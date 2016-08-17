@@ -1,9 +1,12 @@
 <?php
 namespace inklabs\KommerceTemplates\Lib;
 
+use DateTime;
+use DateTimeZone;
 use inklabs\kommerce\EntityDTO\OrderDTO;
 use inklabs\kommerce\EntityDTO\ProductDTO;
 use inklabs\kommerce\EntityDTO\TagDTO;
+use inklabs\kommerce\Exception\InvalidArgumentException;
 use inklabs\kommerce\Lib\Slug;
 use Twig_Extension;
 use Twig_SimpleFilter;
@@ -17,12 +20,39 @@ class TwigExtension extends Twig_Extension
     /** @var RouteUrlInterface */
     private $routeUrl;
 
+    /** @var string */
+    private $dateFormat;
+
+    /** @var string */
+    private $timeFormat;
+
+    /** @var string */
+    private $timezone;
+
+    /**
+     * @param CSRFTokenGeneratorInterface $csrfTokenGenerator
+     * @param RouteUrlInterface $routeUrl
+     * @param string $timezone
+     * @param string $dateFormat
+     * @param string $timeFormat
+     * @throws InvalidArgumentException
+     */
     public function __construct(
         CSRFTokenGeneratorInterface $csrfTokenGenerator,
-        RouteUrlInterface $routeUrl
+        RouteUrlInterface $routeUrl,
+        $timezone = 'America/Los_Angeles',
+        $dateFormat = 'F j, Y',
+        $timeFormat = 'g:i a T'
     ) {
+        if (! $this->isValidTimezone($timezone)) {
+            throw new InvalidArgumentException();
+        }
+
         $this->routeUrl = $routeUrl;
         $this->csrfTokenGenerator = $csrfTokenGenerator;
+        $this->timezone = $timezone;
+        $this->dateFormat = $dateFormat;
+        $this->timeFormat = $timeFormat;
     }
 
     /**
@@ -49,6 +79,17 @@ class TwigExtension extends Twig_Extension
                 'displayPrice',
                 function ($price) {
                     return '$' . number_format(($price / 100), 2);
+                }
+            ),
+            new Twig_SimpleFilter(
+                'formatDate',
+                function (DateTime $dateTime) {
+                    $format = $this->dateFormat . ' ' . $this->timeFormat;
+
+                    $output = clone $dateTime;
+                    $output->setTimezone(new DateTimeZone($this->timezone));
+
+                    return $output->format($format);
                 }
             ),
             new Twig_SimpleFilter(
@@ -112,5 +153,14 @@ class TwigExtension extends Twig_Extension
                 }
              ),
         ];
+    }
+
+    /**
+     * @param string $timezone
+     * @return bool
+     */
+    private function isValidTimezone($timezone)
+    {
+        return in_array($timezone, DateTimeZone::listIdentifiers());
     }
 }

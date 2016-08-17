@@ -55,7 +55,7 @@
                         {% for order in orders %}
                             <tr>
                                 <td><a href="{{ orderUrl(order) }}">{{ order.referenceNumber }}</a></td>
-                                <td>{{ order.createdFormatted }}</td>
+                                <td>{{ order.created | formatDate }}</td>
                                 <td>{{ orderMacro.statusLabel(order) }}</td>
                                 <td>{{ order.totalQuantity }}</td>
                                 <td>{{ order.total.total | displayPrice }}</td>
