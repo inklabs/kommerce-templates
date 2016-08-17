@@ -12,11 +12,23 @@ class TwigTemplate
     /** @var Twig_Environment */
     private $twigEnvironment;
 
+    /**
+     * @param string $baseTheme
+     * @param CSRFTokenGeneratorInterface $csrfTokenGenerator
+     * @param RouteUrlInterface $routeUrl
+     * @param string[] $paths
+     * @param string $timezone
+     * @param string $dateFormat
+     * @param string $timeFormat
+     */
     public function __construct(
         $baseTheme,
         CSRFTokenGeneratorInterface $csrfTokenGenerator,
         RouteUrlInterface $routeUrl,
-        $paths = []
+        $paths = [],
+        $timezone = 'America/Los_Angeles',
+        $dateFormat = 'F j, Y',
+        $timeFormat = 'g:i a T'
     ) {
         $this->addBaseTheme($paths, $baseTheme);
         $this->addBaseTheme($paths, 'base');
@@ -27,7 +39,10 @@ class TwigTemplate
         $this->twigEnvironment->addExtension(
             new TwigExtension(
                 $csrfTokenGenerator,
-                $routeUrl
+                $routeUrl,
+                $timezone,
+                $dateFormat,
+                $timeFormat
             )
         );
         $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_I18n());
@@ -48,7 +63,8 @@ class TwigTemplate
     }
 
     /**
-     * @param array $paths
+     * @param string[] $paths
+     * @param string $baseTheme
      */
     private function addBaseTheme(array & $paths, $baseTheme)
     {
