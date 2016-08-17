@@ -27,8 +27,8 @@ class TwigTemplate
         RouteUrlInterface $routeUrl,
         $paths = [],
         $timezone,
-        $dateFormat,
-        $timeFormat
+        $dateFormat = 'F j, Y',
+        $timeFormat = 'g:i a T'
     ) {
         $this->addBaseTheme($paths, $baseTheme);
         $this->addBaseTheme($paths, 'base');
