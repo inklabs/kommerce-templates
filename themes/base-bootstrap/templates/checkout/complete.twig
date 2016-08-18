@@ -14,7 +14,7 @@
                     <p>An email confirmation has been sent to you.</p>
                     <p>
                         Order Number:
-                        <a href="/user/view-order/{{ order.id.getHex() }}">{{ order.referenceNumber }}</a>
+                        <a href="{{ orderUrl(order) }}">{{ order.referenceNumber }}</a>
                     </p>
                 </div>
             </div>

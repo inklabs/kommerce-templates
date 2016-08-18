@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="pull-right">
-                                    <a class="btn btn-default" href="/cart"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                                    <a class="btn btn-default" href="{{ routeUrl('cart.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
 
                                     {% embed "helper/checkout_button.twig" only %}{% endembed %}
                                 </div>

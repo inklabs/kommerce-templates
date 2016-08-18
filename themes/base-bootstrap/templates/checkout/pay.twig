@@ -117,7 +117,7 @@
                     {% endif %}
                 </div>
                 <div class="col-sm-6">
-                    <form action="/checkout/pay" method="post" id="main-form" class="form" role="form">
+                    <form action="{{ routeUrl('checkout.pay') }}" method="post" id="main-form" class="form" role="form">
                         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
 
                         {% if user is defined %}

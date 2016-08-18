@@ -78,7 +78,7 @@
                         {% endif %}
 
                         {% if product.isInStock %}
-                            <form action="/cart/add-item"
+                            <form action="{{ routeUrl('cart.add-item') }}"
                                   id="cart_add_item"
                                   class="form-inline"
                                   method="post">

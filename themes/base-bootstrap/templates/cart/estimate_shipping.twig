@@ -10,7 +10,7 @@
         <div class="col-sm-12">
             <div class="well well-sm">
                 <h5>Estimate Shipping &amp; Tax</h5>
-                <form action="/cart/estimate-shipping" method="post">
+                <form action="{{ routeUrl('cart.estimate-shipping') }}" method="post">
                     <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
                     <div class="row">
                         <div class="form-group col-sm-12">
@@ -52,7 +52,7 @@
                 </form>
 
                 {% if shipmentRates is not empty %}
-                    <form action="/cart/apply-shipping-method" method="post">
+                    <form action="{{ routeUrl('cart.apply-shipping-method') }}" method="post">
                         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
 
                         <input type="hidden" name="shipping[zip5]" value="{{ shipping.zip5 }}">
@@ -87,7 +87,7 @@
                                 <i class="fa fa-ok-sign"></i>
                                 Update Total
                             </button>
-                            <a href="/cart" class="btn">Cancel</a>
+                            <a href="{{ routeUrl('cart.show') }}" class="btn">Cancel</a>
                         </div>
                     </form>
                 {% endif %}
