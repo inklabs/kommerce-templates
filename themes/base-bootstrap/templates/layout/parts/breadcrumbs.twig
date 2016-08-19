@@ -1,18 +1,18 @@
 {% if breadcrumbs is defined %}
-    {% set currentPath = currentPath() %}
+    {% set currentUrl = currentUrl() %}
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <ol class="breadcrumb">
-                    {% for name, path in breadcrumbs %}
-                        {% if currentPath == path %}
+                    {% for name, url in breadcrumbs %}
+                        {% if currentUrl == url %}
                             <li class="active">{{ name }}</li>
                         {% else %}
-                            {% if path is empty %}
+                            {% if url is empty %}
                                 <li>{{ name }}</li>
                             {% else %}
                                 <li>
-                                    <a href="/{{ path }}">{{ name }}</a>
+                                    <a href="{{ url }}">{{ name }}</a>
                                 </li>
                             {% endif %}
                         {% endif %}

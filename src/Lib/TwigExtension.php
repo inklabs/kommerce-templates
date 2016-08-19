@@ -143,12 +143,17 @@ class TwigExtension extends Twig_Extension
             new Twig_SimpleFunction(
                 'orderUrl',
                 function (OrderDTO $order) {
-                    return '/user/view-order/' . $order->id->getHex();
+                    return $this->routeUrl->getRoute(
+                        'user.account.view-order',
+                        [
+                            'orderId' => $order->id->getHex()
+                        ]
+                    );
                 }
              ),
             new Twig_SimpleFunction(
                 'routeUrl',
-                function ($name, $parameters = [], $absolute = false) {
+                function ($name, $parameters = [], $absolute = true) {
                     return $this->routeUrl->getRoute($name, $parameters, $absolute);
                 }
              ),
@@ -156,6 +161,12 @@ class TwigExtension extends Twig_Extension
                 'currentPath',
                 function () {
                     return request()->path();
+                }
+             ),
+            new Twig_SimpleFunction(
+                'currentUrl',
+                function () {
+                    return request()->url();
                 }
              ),
         ];

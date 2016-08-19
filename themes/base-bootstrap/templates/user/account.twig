@@ -6,7 +6,7 @@
 {% block pageTitle %}User Account - {{ user.fullName }}{% endblock %}
 
 {% set breadcrumbs = {
-    'Your Account': 'user/account',
+    'Your Account': routeUrl('user.account'),
 } %}
 
 {% block content %}
