@@ -129,6 +129,17 @@ class TwigExtension extends Twig_Extension
                 }
              ),
             new Twig_SimpleFunction(
+                'adminProductUrl',
+                function (ProductDTO $productDTO) {
+                    return $this->routeUrl->getRoute(
+                        'admin.product.edit',
+                        [
+                            'productId' => $productDTO->id->getHex(),
+                        ]
+                    );
+                }
+             ),
+            new Twig_SimpleFunction(
                 'tagUrl',
                 function (TagDTO $tagDTO) {
                     return $this->routeUrl->getRoute(

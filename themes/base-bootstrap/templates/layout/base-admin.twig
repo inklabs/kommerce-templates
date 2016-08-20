@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'layout/parts/head.twig' with {
+        'pageTitle': block('pageTitle'),
+        'pageDescription': block('pageDescription'),
+        'pageCanonicalUrl': block('pageCanonicalUrl')
+    } %}
+</head>
+<body>
+    {% include 'layout/parts/header.twig' %}
+    {% include 'layout/parts/flash_messages.twig' %}
+    {% include 'layout/parts/breadcrumbs.twig' %}
+    {#{% include 'macros/macros.twig' %}#}
+    <div id="body">
+        {% block content %}{% endblock %}
+    </div>
+    {% include 'layout/parts/base_modal.twig' %}
+    {% include 'layout/parts/footer.twig' %}
+</body>
+</html>

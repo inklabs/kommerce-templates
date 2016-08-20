@@ -5,7 +5,7 @@
 
     {% set links_around_page = 2 %}
     {% set links_around_edge = 1 %}
-    {% set total_items = pagination.maxResults %}
+    {% set total_items = pagination.total %}
     {% set items_per_page = pagination.maxResults %}
     {% set current_page = pagination.page %}
 
@@ -42,71 +42,7 @@
     {% set n6 = ((n5 + n7) / 2) | round(0) %}
     {% set use_n6 = (use_middle and ((n7 - n5) > 1)) %}
 
-    {# Links to display as array(page => content) #}
-    {% set links = {} %}
-
-    {% if links_around_edge > 0 %}
-        {# Generate links data in accordance with calculated numbers #}
-        {% if n1 <= n2 %}
-            {% for i in n1..n2 %} {# for ($i = $n1; $i <= $n2; $i++) #}
-                {% set links = links | merge({('_'~i): i}) %} {# $links[$i] = $i; #}
-            {% endfor %}
-        {% endif %}
-        {% if use_n3 %}
-            {% set links = links | merge({('_'~n3): '&hellip;'}) %} {# $links[$n3] = '&hellip;'; #}
-        {% endif %}
-    {% endif %}
-
-    {% if n4 <= n5 %}
-        {% for i in n4..n5 %}
-            {% set links = links | merge({('_'~i): i}) %} {# $links[$i] = $i; #}
-        {% endfor %}
-    {% endif %}
-
-    {% if links_around_edge > 0 %}
-        {% if use_n6 %}
-            {% set links = links | merge({('_'~n6): '&hellip;'}) %} {# $links[$n6] = '&hellip;'; #}
-        {% endif %}
-
-        {% if n7 <= n8 %}
-            {% for i in n7..n8 %}
-                {% set links = links | merge({('_'~i): i}) %} {# $links[$i] = $i; #}
-            {% endfor %}
-        {% endif %}
-    {% endif %}
-
-    {#
-    <pre>{{ {
-            links_around_page: links_around_page,
-            links_around_edge: links_around_edge,
-            total_items: total_items,
-            items_per_page: items_per_page,
-            current_page: current_page,
-            current_first_item: current_first_item,
-            current_last_item: current_last_item,
-            previous_page: previous_page,
-            next_page: next_page,
-            first_page: first_page,
-            last_page: last_page,
-            offset: offset,
-            n1: n1,
-            n2: n2,
-            n7: n7,
-            n8: n8,
-            n4: n4,
-            n5: n5,
-            use_middle: use_middle | json_encode,
-            n3: n3,
-            use_n3: use_n3 | json_encode,
-            n6: n6,
-            use_n6: use_n6 | json_encode,
-            links: links | json_encode
-
-        } | json_encode(constant('JSON_PRETTY_PRINT')) }}
-    </pre>
-    <pre>{{ pagination | json_encode(constant('JSON_PRETTY_PRINT')) }}
-    </pre>
-    #}
+    {# <pre>{{ pagination | json_encode(constant('JSON_PRETTY_PRINT')) }}</pre> #}
 
     <div class="well well-sm pagination-well">
         <div class="pull-left">
@@ -115,21 +51,57 @@
         </div>
         <ul class="pagination pagination-sm pull-right">
             {% if previous_page %}
-                <li><a href="{# <?=HTML::chars($page->url($previous_page)) ?>#}" rel="prev"><i class="fa fa-chevron-left"></i> Previous</a></li>
+                <li><a href="?page={{ previous_page }}" rel="prev"><i class="fa fa-chevron-left"></i> Previous</a></li>
             {% else %}
                 <li class="disabled"><a href="#"><i class="fa fa-chevron-left"></i> Previous</a></li>
             {% endif %}
 
-            {% for number, content in links %}
-                {% if number == ('_'~current_page) %}
-                    <li class="active"><a href="#">{{ content }}</a></li>
-                {% else %}
-                    <li><a href="{# <?=HTML::chars($page->url($number)) ?> #}">{{ content }}</a></li>
+            {% set links = {} %}
+            {% set ellipsis = '<i class="fa fa-ellipsis-h"></i>' %}
+
+            {% if links_around_edge > 0 %}
+                {% if n1 <= n2 %}
+                    {% for i in n1..n2 %} {# for ($i = $n1; $i <= $n2; $i++) #}
+                        {% if i == current_page %}
+                            <li class="active"><a href="#">{{ i }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
-            {% endfor %}
+                {% if use_n3 %}
+                    <li><a href="?page={{ n3 }}"><i class="fa fa-ellipsis-h"></i></a></li>
+                {% endif %}
+            {% endif %}
+
+            {% if n4 <= n5 %}
+                {% for i in n4..n5 %}
+                    {% if i == current_page %}
+                        <li class="active"><a href="#">{{ i }}</a></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% if links_around_edge > 0 %}
+                {% if use_n6 %}
+                    <li><a href="?page={{ n6 }}"><i class="fa fa-ellipsis-h"></i></a></li>
+                {% endif %}
+
+                {% if n7 <= n8 %}
+                    {% for i in n7..n8 %}
+                        {% if i == current_page %}
+                            <li class="active"><a href="#">{{ i }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
 
             {% if next_page %}
-                <li><a href="{# <?=HTML::chars($page->url($next_page)) ?> #}" rel="next">Next <i class="fa fa-chevron-right"></i></a></li>
+                <li><a href="?page={{ next_page }}" rel="next">Next <i class="fa fa-chevron-right"></i></a></li>
             {% else %}
                 <li class="disabled"><a href="#">Next <i class="fa fa-chevron-right"></i></a></li>
             {% endif %}

@@ -1,0 +1,107 @@
+{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{% import 'macros/paginate.twig' as paginate %}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Products{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.product.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Product
+                    </a>
+                </div>
+
+                <h1>Products</h1>
+                <form action="{{ routeUrl('admin.product') }}"
+                      method="post"
+                      class="form-search">
+                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search SKU/Name'} only %}{% endembed %}
+                </form>
+
+                {{ paginate.detailed(pagination) }}
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <th>SKU</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>
+                                    {% if product.defaultImage is not null %}
+                                        <a href="{{ adminProductUrl(product) }}">
+                                            <img src="{{ product.defaultImage }}"
+                                                 width="50"
+                                                 height="50"
+                                                 style="width: 50px; height: 50px;">
+                                        </a>
+                                    {% endif %}
+                                </td>
+                                <td>{{ product.sku }}</td>
+                                <td><a href="{{ adminProductUrl(product) }}">{{ product.name }}</a></td>
+                                <td>{{ product.unitPrice | displayPrice }}</td>
+                                <td>{{ product.quantity }}</td>
+                                <td>{{ product.isActive ? 'yes' : 'no' }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {{ paginate.detailed(pagination) }}
+            </div>
+        </div>
+    </div>
+{% verbatim %}
+<script type="text/javascript">
+$(function() {
+	var products = new Bloodhound({
+		datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
+		queryTokenizer: Bloodhound.tokenizers.whitespace,
+		remote: "/admin/product/api/%QUERY?product_ts=<?=Cache::instance()->get('sphinx:product')?>",
+		limit: 10
+	})
+
+	products.initialize();
+
+	$('.typeahead').typeahead({
+		minLength: 2,
+		highlight: true,
+	}, {
+		displayKey: 'value',
+		source: products.ttAdapter(),
+		templates: {
+			suggestion: Handlebars.compile([
+				'<div class="row">',
+					'<div class="col-sm-2">',
+						'{{#if defaultImageUrl}}',
+							'<a href="{{adminUrl}}">',
+								'<img src="{{defaultImageUrl}}" style="height: 40px" />',
+							'</a>',
+						'{{/if}}',
+					'</div>',
+					'<div class="col-sm-10">',
+						'<a href="{{adminUrl}}">',
+							'<p>{{name}} - <small class="text-muted">{{sku}}</small></p>',
+						'</a>',
+						'<p>{{description}}</p>',
+					'</div>',
+				'</div>'
+			].join(' '))
+		}
+	});
+});
+</script>
+{% endverbatim %}
+{% endblock %}
