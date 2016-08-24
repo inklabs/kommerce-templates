@@ -13,6 +13,9 @@ class SassServer
     /** @var Server */
     private $server;
 
+    /** @var array */
+    private $paths;
+
     /**
      * @param string $rootScssDirectory
      * @param string $baseTheme
@@ -27,17 +30,21 @@ class SassServer
         $formatter = 'compressed',
         $cacheDir = null
     ) {
-        $this->addImportPath($paths, __DIR__ . '/../../themes/base/scss');
-        $this->addImportPath($paths, __DIR__ . '/../../themes/' . $baseTheme . '/scss');
+        $this->paths = $paths;
+        $kommerceTemplatesPath = realpath(__DIR__ . '/../..');
+        $this->addImportPath($kommerceTemplatesPath . '/themes/' . $baseTheme . '/scss');
 
         if ($baseTheme === 'base-bootstrap') {
-            $this->addImportPath($paths, __DIR__ . '/../../../../../vendor/twbs/bootstrap-sass/assets/stylesheets');
+            $vendorPath = realpath(__DIR__ . '/../../../../../vendor');
+            $this->addImportPath($vendorPath . '/twbs/bootstrap-sass/assets/stylesheets');
         }
 
-        $scssCompiler = new Compiler();
-        $scssCompiler->setImportPaths($paths);
+        $this->addImportPath($kommerceTemplatesPath . '/themes/base/scss');
 
-        $this->salt = $rootScssDirectory . json_encode($paths);
+        $scssCompiler = new Compiler();
+        $scssCompiler->setImportPaths($this->paths);
+
+        $this->salt = $formatter . $rootScssDirectory . json_encode($paths);
 
         switch ($formatter) {
             case 'expanded':
@@ -59,20 +66,19 @@ class SassServer
 
     public function serve()
     {
-        //$this->salt = time();
+        $this->salt = time();
         $this->server->serve($this->salt);
     }
 
-        /**
-     * @param string[] $paths
+    /**
      * @param string $baseThemePath
      */
-    private function addImportPath(array & $paths, $baseThemePath)
+    private function addImportPath($baseThemePath)
     {
         if (! file_exists($baseThemePath)) {
             throw new RuntimeException($baseThemePath . ' not found');
         }
 
-        $paths[] = $baseThemePath;
+        $this->paths[] = $baseThemePath;
     }
 }
