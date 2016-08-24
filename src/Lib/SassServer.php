@@ -66,7 +66,7 @@ class SassServer
 
     public function serve()
     {
-        $this->salt = time();
+        //$this->salt = time();
         $this->server->serve($this->salt);
     }
 
