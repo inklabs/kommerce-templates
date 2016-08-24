@@ -3,6 +3,7 @@ namespace inklabs\KommerceTemplates\Lib;
 
 use Leafo\ScssPhp\Compiler;
 use Leafo\ScssPhp\Server;
+use RuntimeException;
 
 class SassServer
 {
@@ -13,33 +14,30 @@ class SassServer
     private $server;
 
     /**
+     * @param string $rootScssDirectory
      * @param string $baseTheme
-     * @param string $mainScssDirectory
-     * @param string | null $bootswatchTheme
+     * @param array $paths
      * @param string | null $formatter
      * @param string | null $cacheDir
      */
     public function __construct(
-        $mainScssDirectory,
+        $rootScssDirectory,
         $baseTheme = 'base-bootstrap',
-        $bootswatchTheme = 'default',
+        $paths = [],
         $formatter = 'compressed',
         $cacheDir = null
     ) {
-        $baseScssDirectory = __DIR__ . '/../../../../../vendor/inklabs/kommerce-templates/themes/base/scss';
-        $kommerceScssDirectory = __DIR__ . '/../../../../../vendor/inklabs/kommerce-templates/themes/' . $baseTheme . '/scss';
-        $bootstrapScssDirectory = __DIR__ . '/../../../../../vendor/twbs/bootstrap-sass/assets/stylesheets';
-        $bootswatchScssDirectory = __DIR__ . '/../../../../../vendor/thomaspark/bootswatch/' . $bootswatchTheme;
+        $this->addImportPath($paths, __DIR__ . '/../../themes/base/scss');
+        $this->addImportPath($paths, __DIR__ . '/../../themes/' . $baseTheme . '/scss');
 
-        $importPaths[] = $baseScssDirectory;
-        $importPaths[] = $kommerceScssDirectory;
-        $importPaths[] = $bootstrapScssDirectory;
-        $importPaths[] = $bootswatchScssDirectory;
+        if ($baseTheme === 'base-bootstrap') {
+            $this->addImportPath($paths, __DIR__ . '/../../../../../vendor/twbs/bootstrap-sass/assets/stylesheets');
+        }
 
         $scssCompiler = new Compiler();
-        $scssCompiler->setImportPaths($importPaths);
+        $scssCompiler->setImportPaths($paths);
 
-        $this->salt = $mainScssDirectory . $baseTheme . $bootswatchTheme . $formatter;
+        $this->salt = $rootScssDirectory . json_encode($paths);
 
         switch ($formatter) {
             case 'expanded':
@@ -55,7 +53,7 @@ class SassServer
                 break;
         }
 
-        $this->server = new Server($mainScssDirectory, $cacheDir, $scssCompiler);
+        $this->server = new Server($rootScssDirectory, $cacheDir, $scssCompiler);
         $this->server->showErrorsAsCSS(true);
     }
 
@@ -63,5 +61,18 @@ class SassServer
     {
         //$this->salt = time();
         $this->server->serve($this->salt);
+    }
+
+        /**
+     * @param string[] $paths
+     * @param string $baseThemePath
+     */
+    private function addImportPath(array & $paths, $baseThemePath)
+    {
+        if (! file_exists($baseThemePath)) {
+            throw new RuntimeException($baseThemePath . ' not found');
+        }
+
+        $paths[] = $baseThemePath;
     }
 }
