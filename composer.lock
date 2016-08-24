@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ac4012a4b7b03e634a823d26a67d0681",
-    "content-hash": "d87b21c638ba7db9ef71ffa474ef8366",
+    "hash": "dd3f65fd9774ba0f5d812537e34d2a36",
+    "content-hash": "d15080c279ff2b8cc60648c694e4ddd2",
     "packages": [
         {
             "name": "composer/installers",
@@ -854,22 +854,17 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "dev-master",
+            "version": "v0.6.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/inklabs/scssphp.git",
-                "reference": "5bc9673fb6f40d2de62fdebb54b816fa5ed057b1"
+                "url": "https://github.com/leafo/scssphp.git",
+                "reference": "0649d38dfef6808be1a89040a3312e8bda0b3aed"
             },
-            "archive": {
-                "exclude": [
-                    "/Makefile",
-                    "/.gitattributes",
-                    "/.gitignore",
-                    "/.travis.yml",
-                    "/box.json.dist",
-                    "/phpunit.xml.dist",
-                    "/tests"
-                ]
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/0649d38dfef6808be1a89040a3312e8bda0b3aed",
+                "reference": "0649d38dfef6808be1a89040a3312e8bda0b3aed",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
@@ -888,11 +883,7 @@
                     "Leafo\\ScssPhp\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Leafo\\ScssPhp\\Test\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -912,7 +903,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2016-08-24 07:08:38"
+            "time": "2016-06-20 15:25:08"
         },
         {
             "name": "paragonie/random_compat",
@@ -1581,7 +1572,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "leafo/scssphp": 20,
         "inklabs/kommerce-core": 20
     },
     "prefer-stable": false,
