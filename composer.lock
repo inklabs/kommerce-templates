@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f2dd94c86578e30dce1b409669e455c3",
-    "content-hash": "309f521c652b09469c6fd4cba4f04098",
+    "hash": "dd3f65fd9774ba0f5d812537e34d2a36",
+    "content-hash": "d15080c279ff2b8cc60648c694e4ddd2",
     "packages": [
         {
             "name": "composer/installers",
@@ -808,12 +808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/inklabs/kommerce-core.git",
-                "reference": "608c464da9777ff105d42b916efff78e53060253"
+                "reference": "79172302d63857de2c88a3152e0a1180a73c28dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inklabs/kommerce-core/zipball/608c464da9777ff105d42b916efff78e53060253",
-                "reference": "608c464da9777ff105d42b916efff78e53060253",
+                "url": "https://api.github.com/repos/inklabs/kommerce-core/zipball/79172302d63857de2c88a3152e0a1180a73c28dd",
+                "reference": "79172302d63857de2c88a3152e0a1180a73c28dd",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +850,7 @@
                 "kommerce",
                 "zen"
             ],
-            "time": "2016-07-26 21:51:28"
+            "time": "2016-08-13 00:11:41"
         },
         {
             "name": "leafo/scssphp",
@@ -1400,64 +1400,6 @@
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
             "time": "2016-07-26 08:04:17"
-        },
-        {
-            "name": "thomaspark/bootswatch",
-            "version": "v3.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thomaspark/bootswatch.git",
-                "reference": "4b0d3762f309326a6d66fa4ea18945a7fc11f8ef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thomaspark/bootswatch/zipball/4b0d3762f309326a6d66fa4ea18945a7fc11f8ef",
-                "reference": "4b0d3762f309326a6d66fa4ea18945a7fc11f8ef",
-                "shasum": ""
-            },
-            "suggest": {
-                "robloach/component-installer": "Allows installation of Components via Composer"
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "name": "bootswatch",
-                    "files": [
-                        "README.md",
-                        "LICENSE",
-                        "amelia/*",
-                        "cerulean/*",
-                        "cosmo/*",
-                        "cyborg/*",
-                        "darkly/*",
-                        "flatly/*",
-                        "fonts/*",
-                        "journal/*",
-                        "lumen/*",
-                        "paper/*",
-                        "readable/*",
-                        "sandstone/*",
-                        "simplex/*",
-                        "slate/*",
-                        "spacelab/*",
-                        "superhero/*",
-                        "united/*",
-                        "yeti/*"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "thomaspark",
-                    "email": "thomas@bootswatch.com"
-                }
-            ],
-            "description": "Themes for Bootstrap",
-            "time": "2016-07-30 21:56:26"
         },
         {
             "name": "twbs/bootstrap-sass",
