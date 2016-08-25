@@ -64,9 +64,12 @@ class SassServer
         $this->server->showErrorsAsCSS(true);
     }
 
-    public function serve()
+    public function serve($resetSalt = false)
     {
-        //$this->salt = time();
+        if ($resetSalt) {
+            $this->salt = time();
+        }
+
         $this->server->serve($this->salt);
     }
 
