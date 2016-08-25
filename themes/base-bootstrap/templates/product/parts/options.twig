@@ -16,7 +16,7 @@
                     {% set value = value ~ ' (+' ~ (price | displayPrice) ~ ')' %}
                 {% endif %}
 
-                <option value="{{ key }}">{{ value }}</option>
+                <option value="{{ key }}"{% if loop.first %} selected{% endif %}>{{ value }}</option>
             {% endfor %}
 
             {% for optionValue in option.optionValues %}
@@ -28,7 +28,7 @@
                     {% set value = value ~ ' (+' ~ (price | displayPrice) ~ ')' %}
                 {% endif %}
 
-                <option value="{{ key }}">{{ value }}</option>
+                <option value="{{ key }}"{% if loop.first %} selected{% endif %}>{{ value }}</option>
             {% endfor %}
         </select>
     </div>
