@@ -1,6 +1,6 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
 {# @var relatedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
-{% extends "layout/base.twig" %}
+{% extends 'layout/base.twig' %}
 
 {% block pageTitle %}{{ product.name }}{% endblock %}
 {% block pageDescription %}{{ product.description | nl2br }}{% endblock %}

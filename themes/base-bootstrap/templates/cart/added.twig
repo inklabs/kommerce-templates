@@ -1,7 +1,7 @@
 {# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
 {# @var cartItem \inklabs\kommerce\EntityDTO\CartItemDTO #}
 {# @var recommendedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
-{% extends "layout/base.twig" %}
+{% extends 'layout/base.twig' %}
 
 {% block pageTitle %}{{ cartItem.product.name }}{% endblock %}
 
@@ -20,11 +20,11 @@
                             <div class="product-name">{{ cartItem.product.name }}</div>
                         </a>
 
-                        {% embed "helper/rating-stars.twig" with {'rating': cartItem.product.rating } only %}{% endembed %}
+                        {% embed 'helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}{% endembed %}
 
                         <div class="pull-right">Quantity in cart: {{ cartItem.quantity }}</div>
 
-                        {% embed "helper/price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                        {% embed 'helper/price.twig' with {'price': cartItem.price } only %}{% endembed %}
 
                         <div class="table-cell">
                             {% embed 'cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}{% endembed %}
@@ -40,7 +40,7 @@
                                 <div class="pull-right">
                                     <a class="btn btn-default" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
 
-                                    {% embed "helper/checkout-button.twig" only %}{% endembed %}
+                                    {% embed 'helper/checkout-button.twig' only %}{% endembed %}
                                 </div>
                                 <strong>Order subtotal:</strong> <span class="price-small">
                                     {{ cart.cartTotal.subtotal | displayPrice }}
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <hr />
-            {% embed "helper/recommended-products.twig" with {'products': recommendedProducts } only %}
+            {% embed 'helper/recommended-products.twig' with {'products': recommendedProducts } only %}
                 {% block title %}Recommended for you{% endblock %}
             {% endembed %}
         </div>

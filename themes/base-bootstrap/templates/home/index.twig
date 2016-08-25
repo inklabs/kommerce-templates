@@ -1,4 +1,4 @@
-{% extends "layout/base.twig" %}
+{% extends 'layout/base.twig' %}
 
 {% block pageTitle %}Welcome{% endblock %}
 
@@ -10,7 +10,7 @@
             <div class="col-sm-12">
                 <h1>Welcome</h1>
 
-                {% embed "helper/recommended-products.twig" with {'products': recommendedProducts } only %}
+                {% embed 'helper/recommended-products.twig' with {'products': recommendedProducts } only %}
                     {% block title %}Recommended for you{% endblock %}
                 {% endembed %}
             </div>

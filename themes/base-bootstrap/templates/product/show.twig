@@ -1,6 +1,6 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
 {# @var relatedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
-{% extends "layout/base.twig" %}
+{% extends 'layout/base.twig' %}
 
 {% block pageTitle %}{{ product.name }}{% endblock %}
 {% block pageDescription %}{{ product.description | nl2br }}{% endblock %}
@@ -35,7 +35,7 @@
                             <div class="divider"></div>
 
                             <div class="review-actions">
-                                {% embed "helper/rating-stars.twig" with {'rating': product.rating } only %}{% endembed %}
+                                {% embed 'helper/rating-stars.twig' with {'rating': product.rating } only %}{% endembed %}
 
                                 {# TODO: Render Reviews #}
                             </div>
@@ -55,7 +55,7 @@
                             </div>
                         {% endif %}
 
-                        {% embed "helper/price.twig" with {'price': product.price } only %}{% endembed %}
+                        {% embed 'helper/price.twig' with {'price': product.price } only %}{% endembed %}
                         <br />
 
                         {% if product.productQuantityDiscounts is not empty %}
@@ -93,7 +93,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="control-group">
-                                                {% embed "product/parts/options.twig" with {'option': option } only %}
+                                                {% embed 'product/parts/options.twig' with {'option': option } only %}
                                                 {% endembed %}
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="control-group">
-                                                {% embed "product/parts/text-options.twig" with {'textOption': textOption } only %}
+                                                {% embed 'product/parts/text-options.twig' with {'textOption': textOption } only %}
                                                 {% endembed %}
                                             </div>
                                         </div>
@@ -181,7 +181,7 @@
                 {% if relatedProducts is not empty %}
                     <h2 class="text-center">You Might Also Like</h2>
 
-                    {% embed "helper/product-grid-small.twig" with {'products': relatedProducts, 'lg_slim': true } only %}
+                    {% embed 'helper/product-grid-small.twig' with {'products': relatedProducts, 'lg_slim': true } only %}
                     {% endembed %}
 
                 {% endif %}
