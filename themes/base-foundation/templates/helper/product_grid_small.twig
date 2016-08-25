@@ -10,7 +10,7 @@
 
         <a href="{{ productUrl(product) }}">{{ productUrl(product) }}</a>
 
-        {% embed "helper/rating_stars.twig" with {'rating': product.rating } only %}{% endembed %}
+        {% embed "helper/rating-stars.twig" with {'rating': product.rating } only %}{% endembed %}
 
         {% if product.isInStock %}
             <div class="availability">

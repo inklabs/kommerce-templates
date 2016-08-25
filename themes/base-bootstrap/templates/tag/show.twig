@@ -36,7 +36,7 @@
                 {% else %}
                     {{ paginate.detailed(pagination) }}
 
-                    {% embed "helper/product_grid.twig" with {'products': products } only %}
+                    {% embed "helper/product-grid.twig" with {'products': products } only %}
                     {% endembed %}
 
                     <div class="clearfix"></div>
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        {% embed "helper/recommended_products.twig" with {
+        {% embed "helper/recommended-products.twig" with {
             'products': recommendedProducts,
             'size': 'small'
         } only %}

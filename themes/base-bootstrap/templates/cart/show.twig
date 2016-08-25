@@ -10,7 +10,7 @@
             {% if cart.cartItems is empty %}
                 <div class="row">
                     <div class="col-sm-12">
-                        {% include 'cart/parts/empty_cart.twig' %}
+                        {% include 'cart/parts/empty-cart.twig' %}
                     </div>
                 </div>
             {% else %}
@@ -45,7 +45,7 @@
                                                     <small>{{ cartItem.fullSku }}</small>
                                                 </div>
 
-                                                {% embed 'cart/parts/cart_item_options.twig' with {'cartItem': cartItem } only %}{% endembed %}
+                                                {% embed 'cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}{% endembed %}
                                             </td>
                                             <td class="text-right">
                                                 <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
@@ -73,11 +73,11 @@
                                                     </span>
                                                 </form>
                                                 <div class="visible-xs">
-                                                    {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                                                    {% embed "helper/unit-price.twig" with {'price': cartItem.price } only %}{% endembed %}
                                                 </div>
                                             </td>
                                             <td class="text-right hidden-xs">
-                                                {% embed "helper/unit_price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                                                {% embed "helper/unit-price.twig" with {'price': cartItem.price } only %}{% endembed %}
                                             </td>
                                             <td class="cart-right">
                                                 {{ cartItem.price.quantityPrice | displayPrice }}
@@ -101,10 +101,10 @@
                                 <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
                             </strong>
                             <br /><br />
-                            {% embed "helper/checkout_button.twig" only %}{% endembed %}
+                            {% embed "helper/checkout-button.twig" only %}{% endembed %}
                         </div>
                         {% if cart.shipmentRate.rate is not null %}
-                            {% embed "cart/parts/modify_shipping_button.twig" with {'extraClass': 'btn-block'} %}{% endembed %}
+                            {% embed "cart/parts/modify-shipping-button.twig" with {'extraClass': 'btn-block'} %}{% endembed %}
                         {% endif %}
 
                         <br>
@@ -122,7 +122,7 @@
                 </div>
             {% endif %}
 
-            {% embed "helper/recommended_products.twig" with {'products': recommendedProducts, 'size': 'small' } only %}
+            {% embed "helper/recommended-products.twig" with {'products': recommendedProducts, 'size': 'small' } only %}
             {% endembed %}
         </div>
     </div>

@@ -35,7 +35,7 @@
                             <div class="divider"></div>
 
                             <div class="review-actions">
-                                {% embed "helper/rating_stars.twig" with {'rating': product.rating } only %}{% endembed %}
+                                {% embed "helper/rating-stars.twig" with {'rating': product.rating } only %}{% endembed %}
 
                                 {# TODO: Render Reviews #}
                             </div>
@@ -104,7 +104,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="control-group">
-                                                {% embed "product/parts/text_options.twig" with {'textOption': textOption } only %}
+                                                {% embed "product/parts/text-options.twig" with {'textOption': textOption } only %}
                                                 {% endembed %}
                                             </div>
                                         </div>
@@ -181,7 +181,7 @@
                 {% if relatedProducts is not empty %}
                     <h2 class="text-center">You Might Also Like</h2>
 
-                    {% embed "helper/product_grid_small.twig" with {'products': relatedProducts, 'lg_slim': true } only %}
+                    {% embed "helper/product-grid-small.twig" with {'products': relatedProducts, 'lg_slim': true } only %}
                     {% endembed %}
 
                 {% endif %}

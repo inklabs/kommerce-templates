@@ -15,7 +15,7 @@
     </h2>
 
     <div>
-        {% embed "helper/rating_stars.twig" with {'rating': cartItem.product.rating } only %}{% endembed %}
+        {% embed "helper/rating-stars.twig" with {'rating': cartItem.product.rating } only %}{% endembed %}
     </div>
 
     <p>Quantity in cart: {{ cartItem.quantity }}</p>
@@ -27,7 +27,7 @@
     <a href="/cart">View Cart</a>
 
     <div>
-        {% embed "helper/checkout_button.twig" only %}{% endembed %}
+        {% embed "helper/checkout-button.twig" only %}{% endembed %}
     </div>
 
     <p>Order subtotal:</p>
@@ -40,7 +40,7 @@
     <p>items in your Cart</p>
     {% endtrans %}
 
-    {% embed "helper/recommended_products.twig" with {'products': recommendedProducts } only %}
+    {% embed "helper/recommended-products.twig" with {'products': recommendedProducts } only %}
         {% block title %}Recommended for you{% endblock %}
     {% endembed %}
 
