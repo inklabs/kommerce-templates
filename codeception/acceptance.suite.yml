@@ -8,5 +8,15 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://localhost:8000
         - \Helper\Acceptance
+    config:
+        PhpBrowser:
+            url: http://localhost:8000
+env:
+    laravel:
+        # no changes
+    kohana:
+        modules:
+            config:
+                PhpBrowser:
+                    url: http://localhost:4406
