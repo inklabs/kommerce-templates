@@ -11,12 +11,12 @@
             <div class="col-md-9 col-sm-12">
                 <div class="row">
                     <div class="col-sm-5 text-center" id="product-image-container">
-                        <img id="product-image" src="{{ product.defaultImage }}" />
+                        <img id="product-image" src="{{ productImageUrl(product) }}" />
                         {% if product.images is not empty %}
                             <div class="row" style="margin-top: 5px">
                                 <div class="col-lg-3 col-xs-4">
-                                    <a href="{{ product.defaultImageUrl }}" class='product-image'>
-                                        <img src="{{ product.defaultImageUrl }}" style="width: 100px;" />
+                                    <a href="{{ productImageUrl(product) }}" class='product-image'>
+                                        <img src="{{ productImageUrl(product) }}" style="width: 100px;" />
                                     </a>
                                 </div>
                                 {% for image in product.images %}

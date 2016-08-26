@@ -7,7 +7,7 @@
 
 {% block content %}
     <a href="{{ productUrl(cartItem.product) }}">
-        <img src="{{ cartItem.product.defaultImage }}" width="110" height="110"/>
+        <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110"/>
     </a>
 
     <h2>

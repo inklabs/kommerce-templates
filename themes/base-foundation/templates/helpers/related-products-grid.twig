@@ -7,7 +7,7 @@
     {% if product.defaultImage is empty %}
         <img src="//placehold.it/100x100">
     {% else %}
-        <img src="{{ product.defaultImage }}">
+        <img src="{{ productImageUrl(product) }}">
     {% endif %}
 
     {% if product.isInStock %}

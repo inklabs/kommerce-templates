@@ -1,0 +1,15 @@
+{% for tag in tags %}
+    <div class="product-container col-md-3 col-sm-4 col-xs-6">
+        <div class="center">
+            <a href="{{ tagUrl(tag) }}">
+                <img src="{{ tagImageUrl(tag) }}"
+                     width="160"
+                     height="160"
+                     style="width: 160px; height: 160px">
+            </a>
+        </div>
+        <a href="{{ tagUrl(tag) }}">
+            <h3 class="product-name">{{ tag.name }}</h3>
+        </a>
+    </div>
+{% endfor %}

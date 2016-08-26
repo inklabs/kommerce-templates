@@ -1,11 +1,7 @@
 {% for product in products %}
 <div class="product-container col-md-3 col-sm-4 col-xs-6">
     <a href="{{ productUrl(product) }}">
-        {% if product.defaultImage is empty %}
-            <img src="http://lorempixel.com/640/480" style="height: 160px">
-        {% else %}
-            <img src="{{ product.defaultImage }}" style="height: 160px">
-        {% endif %}
+        <img src="{{ productImageUrl(product) }}" style="height: 160px">
     </a>
     <a href="{{ productUrl(product) }}">
         <div class="product-name">{{ product.name }}</div>
@@ -13,7 +9,7 @@
 
     {% embed 'helper/rating-stars.twig' with {'rating': product.rating } only %}{% endembed %}
 
-    {% if product.isInStock %}
+    {% if not product.isInStock %}
         <div class="availability">
             <span class="out-of-stock">Out of Stock</span>
         </div>

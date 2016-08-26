@@ -41,14 +41,12 @@
                         {% for product in products %}
                             <tr>
                                 <td>
-                                    {% if product.defaultImage is not null %}
-                                        <a href="{{ adminProductUrl(product) }}">
-                                            <img src="{{ product.defaultImage }}"
-                                                 width="50"
-                                                 height="50"
-                                                 style="width: 50px; height: 50px;">
-                                        </a>
-                                    {% endif %}
+                                    <a href="{{ adminProductUrl(product) }}">
+                                        <img src="{{ productImageUrl(product) }}"
+                                             width="50"
+                                             height="50"
+                                             style="width: 50px; height: 50px;">
+                                    </a>
                                 </td>
                                 <td>{{ product.sku }}</td>
                                 <td><a href="{{ adminProductUrl(product) }}">{{ product.name }}</a></td>

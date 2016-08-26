@@ -14,6 +14,8 @@ use Twig_SimpleFunction;
 
 class TwigExtension extends Twig_Extension
 {
+    const IMAGE_PLACEHOLDER_URL = '/asset/kohana-kommerce/img/placeholder.png';
+
     /** @var CSRFTokenGeneratorInterface */
     private $csrfTokenGenerator;
 
@@ -127,7 +129,7 @@ class TwigExtension extends Twig_Extension
                         ]
                     );
                 }
-             ),
+            ),
             new Twig_SimpleFunction(
                 'adminProductUrl',
                 function (ProductDTO $productDTO) {
@@ -138,7 +140,37 @@ class TwigExtension extends Twig_Extension
                         ]
                     );
                 }
-             ),
+            ),
+            new Twig_SimpleFunction(
+                'productImageUrl',
+                function (ProductDTO $productDTO) {
+                    if ($productDTO->defaultImage === null) {
+                        return self::IMAGE_PLACEHOLDER_URL;
+                    }
+
+                    return $this->routeUrl->getRoute(
+                        'product.image',
+                        [
+                            'imagePath' => $productDTO->defaultImage,
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
+                'tagImageUrl',
+                function (TagDTO $tagDTO) {
+                    if ($tagDTO->defaultImage === null) {
+                        return self::IMAGE_PLACEHOLDER_URL;
+                    }
+
+                    return $this->routeUrl->getRoute(
+                        'tag.image',
+                        [
+                            'imagePath' => $tagDTO->defaultImage,
+                        ]
+                    );
+                }
+            ),
             new Twig_SimpleFunction(
                 'tagUrl',
                 function (TagDTO $tagDTO) {
@@ -150,7 +182,7 @@ class TwigExtension extends Twig_Extension
                         ]
                     );
                 }
-             ),
+            ),
             new Twig_SimpleFunction(
                 'orderUrl',
                 function (OrderDTO $order) {
@@ -161,25 +193,25 @@ class TwigExtension extends Twig_Extension
                         ]
                     );
                 }
-             ),
+            ),
             new Twig_SimpleFunction(
                 'routeUrl',
                 function ($name, $parameters = [], $absolute = true) {
                     return $this->routeUrl->getRoute($name, $parameters, $absolute);
                 }
-             ),
+            ),
             new Twig_SimpleFunction(
                 'currentPath',
                 function () {
                     return request()->path();
                 }
-             ),
+            ),
             new Twig_SimpleFunction(
                 'currentUrl',
                 function () {
                     return request()->url();
                 }
-             ),
+            ),
         ];
     }
 
@@ -189,6 +221,6 @@ class TwigExtension extends Twig_Extension
      */
     private function isValidTimezone($timezone)
     {
-        return in_array($timezone, DateTimeZone::listIdentifiers());
+        return in_array($timezone, DateTimeZone::listIdentifiers(), true);
     }
 }

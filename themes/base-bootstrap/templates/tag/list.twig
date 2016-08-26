@@ -1,0 +1,32 @@
+{# @var tags \inklabs\kommerce\EntityDTO\TagDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{% import 'macros/paginate.twig' as paginate %}
+{% extends 'layout/base.twig' %}
+
+{% block pageTitle %}Tags{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Tags</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% if tags is empty %}
+                    No tags
+                {% else %}
+                    {{ paginate.detailed(pagination) }}
+
+                    {% embed 'helper/tag-grid.twig' with {'tags': tags } only %}
+                    {% endembed %}
+
+                    <div class="clearfix"></div>
+                    {{ paginate.detailed(pagination) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
