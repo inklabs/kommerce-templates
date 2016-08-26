@@ -14,8 +14,6 @@ use Twig_SimpleFunction;
 
 class TwigExtension extends Twig_Extension
 {
-    const IMAGE_PLACEHOLDER_URL = '/asset/kohana-kommerce/img/placeholder.png';
-
     /** @var CSRFTokenGeneratorInterface */
     private $csrfTokenGenerator;
 
@@ -147,7 +145,7 @@ class TwigExtension extends Twig_Extension
                     $imagePath = $productDTO->defaultImage;
 
                     if ($imagePath === null) {
-                        return self::IMAGE_PLACEHOLDER_URL;
+                        return $this->getPlaceholderUrl();
                     }
 
                     if ($this->containsExternalUrl($imagePath)) {
@@ -168,7 +166,7 @@ class TwigExtension extends Twig_Extension
                     $imagePath = $tagDTO->defaultImage;
 
                     if ($imagePath === null) {
-                        return self::IMAGE_PLACEHOLDER_URL;
+                        return $this->getPlaceholderUrl();
                     }
 
                     if ($this->containsExternalUrl($imagePath)) {
@@ -243,5 +241,16 @@ class TwigExtension extends Twig_Extension
     private function containsExternalUrl($path)
     {
         return strstr($path, '://') !== false;
+    }
+
+    private function getPlaceholderUrl()
+    {
+        return $this->routeUrl->getRoute(
+            'asset.serve',
+            [
+                'theme' => 'base',
+                'path' => 'img/placeholder.png',
+            ]
+        );
     }
 }
