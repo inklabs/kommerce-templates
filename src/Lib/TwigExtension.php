@@ -144,14 +144,20 @@ class TwigExtension extends Twig_Extension
             new Twig_SimpleFunction(
                 'productImageUrl',
                 function (ProductDTO $productDTO) {
-                    if ($productDTO->defaultImage === null) {
+                    $imagePath = $productDTO->defaultImage;
+
+                    if ($imagePath === null) {
                         return self::IMAGE_PLACEHOLDER_URL;
+                    }
+
+                    if ($this->containsExternalUrl($imagePath)) {
+                        return $imagePath;
                     }
 
                     return $this->routeUrl->getRoute(
                         'product.image',
                         [
-                            'imagePath' => $productDTO->defaultImage,
+                            'imagePath' => $imagePath,
                         ]
                     );
                 }
@@ -159,14 +165,20 @@ class TwigExtension extends Twig_Extension
             new Twig_SimpleFunction(
                 'tagImageUrl',
                 function (TagDTO $tagDTO) {
-                    if ($tagDTO->defaultImage === null) {
+                    $imagePath = $tagDTO->defaultImage;
+
+                    if ($imagePath === null) {
                         return self::IMAGE_PLACEHOLDER_URL;
+                    }
+
+                    if ($this->containsExternalUrl($imagePath)) {
+                        return $imagePath;
                     }
 
                     return $this->routeUrl->getRoute(
                         'tag.image',
                         [
-                            'imagePath' => $tagDTO->defaultImage,
+                            'imagePath' => $imagePath,
                         ]
                     );
                 }
@@ -222,5 +234,14 @@ class TwigExtension extends Twig_Extension
     private function isValidTimezone($timezone)
     {
         return in_array($timezone, DateTimeZone::listIdentifiers(), true);
+    }
+
+    /**
+     * @param string $path
+     * @return bool
+     */
+    private function containsExternalUrl($path)
+    {
+        return strstr($path, '://') !== false;
     }
 }
