@@ -52,7 +52,9 @@
                 </form>
 
                 {% if shipmentRates is not empty %}
-                    <form action="{{ routeUrl('cart.apply-shipping-method') }}" method="post">
+                    <form action="{{ routeUrl('cart.apply-shipping-method') }}"
+                          method="post"
+                          id="apply-shipping-method-form">
                         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
 
                         <input type="hidden" name="shipping[zip5]" value="{{ shipping.zip5 }}">
