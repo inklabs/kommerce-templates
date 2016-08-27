@@ -1,0 +1,19 @@
+.tag-container {
+  padding: 10px;
+  text-align: center;
+  height: 200px;
+}
+
+.tag-container img {
+  margin: 0 auto;
+  height: 160px;
+}
+
+.tag-container .tag-name {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+}

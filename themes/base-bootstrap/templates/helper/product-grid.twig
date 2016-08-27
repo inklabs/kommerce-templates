@@ -1,22 +1,22 @@
 {% for product in products %}
-<div class="product-container col-md-3 col-sm-4 col-xs-6">
-    <a href="{{ productUrl(product) }}">
-        <img src="{{ productImageUrl(product) }}" style="height: 160px">
-    </a>
-    <a href="{{ productUrl(product) }}">
-        <div class="product-name">{{ product.name }}</div>
-    </a>
+    <div class="product-container col-md-3 col-sm-4 col-xs-6">
+        <a href="{{ productUrl(product) }}">
+            <img src="{{ productImageUrl(product) }}">
+        </a>
+        <a href="{{ productUrl(product) }}">
+            <div class="product-name">{{ product.name }}</div>
+        </a>
 
-    {% embed 'helper/rating-stars.twig' with {'rating': product.rating } only %}{% endembed %}
+        {% embed 'helper/rating-stars.twig' with {'rating': product.rating } only %}{% endembed %}
 
-    {% if not product.isInStock %}
-        <div class="availability">
-            <span class="out-of-stock">Out of Stock</span>
-        </div>
-    {% elseif product.isPriceVisible %}
-        {% embed 'helper/price.twig' with {'price': product.price } only %}{% endembed %}
-    {% endif %}
+        {% if not product.isInStock %}
+            <div class="availability">
+                <span class="out-of-stock">Out of Stock</span>
+            </div>
+        {% elseif product.isPriceVisible %}
+            {% embed 'helper/price.twig' with {'price': product.price } only %}{% endembed %}
+        {% endif %}
 
-    <div style="clear: both;"></div>
-</div>
+        <div class="clearfix"></div>
+    </div>
 {% endfor %}

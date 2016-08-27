@@ -1,7 +1,7 @@
 {% for product in products %}
     <div class="product-container-small {% if lg_slim %}col-md-12{% endif %} col-sm-3 col-xs-6">
         <a href="{{ productUrl(product) }}">
-            <img src="{{ productImageUrl(product) }}" style="height: 110px">
+            <img src="{{ productImageUrl(product) }}">
         </a>
         <a href="{{ productUrl(product) }}">
             <div class="product-name">{{ product.name }}</div>
@@ -9,7 +9,7 @@
 
         {% embed 'helper/rating-stars.twig' with {'rating': product.rating } only %}{% endembed %}
 
-        {% if product.isInStock %}
+        {% if not product.isInStock %}
             <div class="availability">
                 <span class="out-of-stock">Out of Stock</span>
             </div>
@@ -17,6 +17,6 @@
             {% embed 'helper/price.twig' with {'price': product.price } only %}{% endembed %}
         {% endif %}
 
-        <div style="clear: both;"></div>
+        <div class="clearfix"></div>
     </div>
 {% endfor %}
