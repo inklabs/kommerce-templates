@@ -7,7 +7,7 @@
         <td class="text-right">{{ cart.cartTotal.subtotal | displayPrice }}</td>
     </tr>
     {% if cart.shipmentRate.deliveryMethod is null %}
-        <tr>
+        <tr class="cart-shipping">
             <td colspan="100%">
                 Shipping:
 
@@ -17,7 +17,7 @@
             </td>
         </tr>
     {% elseif cart.cartTotal.shipping == 0 %}
-        <tr class="cart-free-shipping">
+        <tr class="cart-shipping cart-free-shipping">
             <td><span data-toggle="tooltip" data-original-title="<?=Kommerce::display_price($cart->cartTotal->shipping)?> Value">Shipping:</span></td>
             <td class="text-right">
                 FREE
@@ -28,7 +28,7 @@
         {% if cart.shippingAddress.state is not empty %}
             {% set shippingName =  shippingName ~ '-' ~ cart.shippingAddress.state %}
         {% endif %}
-        <tr>
+        <tr class="cart-shipping">
             <td>
                 <span data-toggle="tooltip" data-original-title="{{ shippingName }}">
                     Shipping &amp; Handling:

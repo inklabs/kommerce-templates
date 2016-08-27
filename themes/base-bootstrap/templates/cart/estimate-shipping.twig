@@ -70,6 +70,7 @@
                                         <input type="radio"
                                                name="shipping[shipmentRateExternalId]"
                                                value="{{ shipmentRate.externalId }}"
+                                               data-value="{{ shipmentRate.rate.amount | displayPrice }}"
                                                class="ship-method"
                                                {% if shipmentRate.externalId == shipping.shipmentRateExternalId %}
                                                    checked="checked"

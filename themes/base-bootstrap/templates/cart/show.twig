@@ -79,7 +79,7 @@
                                             <td class="text-right hidden-xs">
                                                 {% embed 'helper/unit-price.twig' with {'price': cartItem.price } only %}{% endembed %}
                                             </td>
-                                            <td class="cart-right">
+                                            <td class="text-right">
                                                 {{ cartItem.price.quantityPrice | displayPrice }}
                                             </td>
                                         </tr>

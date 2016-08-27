@@ -2,6 +2,8 @@
 
 class GuestCheckoutCest
 {
+    const SHIP_METHOD_SELECTOR = 'input[class="ship-method"]:nth-child(1)';
+
     public function addProductToCart(AcceptanceTester $I)
     {
         $I->wantTo('add a product to the cart');
@@ -29,10 +31,13 @@ class GuestCheckoutCest
         $I->click('Get Quote');
 
         $I->see('Choose your delivery option');
-        //$option = $I->grabValueFrom("(//input[contains(@class, 'ship-method')])[1]");
-        $option = $I->grabAttributeFrom('input[class="ship-method"]:nth-child(1)', 'value');
+        $option = $I->grabAttributeFrom(self::SHIP_METHOD_SELECTOR, 'value');
+        $shippingTotal = $I->grabAttributeFrom(self::SHIP_METHOD_SELECTOR, 'data-value');
         $I->selectOption('shipping[shipmentRateExternalId]', $option);
         $I->click('Update Total');
+
+        $I->see('Shopping Cart');
+        $I->see($shippingTotal, '.cart-shipping');
 
         $I->click('Secure Checkout');
 
