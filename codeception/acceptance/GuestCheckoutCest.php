@@ -36,11 +36,46 @@ class GuestCheckoutCest
         $I->selectOption('shipping[shipmentRateExternalId]', $option);
         $I->click('Update Total');
 
+        $I->amOnPage('/cart');
         $I->see('Shopping Cart');
         $I->see($shippingTotal, '.cart-shipping');
+        $cartTotal = $I->grabTextFrom("//tr[contains(@class,'cart-total-price')]//td[2]");
 
         $I->click('Secure Checkout');
 
         $I->see('Order Summary');
+        $faker = Faker\Factory::create();
+
+        $firstName = $faker->firstName;
+        $lastName = $faker->lastName;
+        $streetAddress = $faker->streetAddress;
+        $city = $faker->city;
+        $stateAbbreviation = $faker->stateAbbr;
+        $email = $faker->safeEmail;
+        $zipcode = $faker->postcode;
+        $nameOnCard = $firstName . ' ' . $lastName;
+        $billingZipcode = $zipcode;
+        $cardNumber = '4242424242424242';
+        $cvc = '123';
+        $month = '01';
+        $year = '2020';
+
+        $I->fillField('First Name', $firstName);
+        $I->fillField('Last Name', $lastName);
+        $I->fillField('Street Address', $streetAddress);
+        $I->fillField('City', $city);
+        $I->fillField('State', $stateAbbreviation);
+        $I->fillField('Zipcode', $zipcode);
+        $I->fillField('Email Address', $email);
+
+        $I->fillField('creditCard[name]', $nameOnCard);
+        $I->fillField('creditCard[zip5]', $billingZipcode);
+        $I->fillField('creditCard[number]', $cardNumber);
+        $I->fillField('creditCard[cvc]', $cvc);
+        $I->selectOption('creditCard[expirationMonth]', $month);
+        $I->selectOption('creditCard[expirationYear]', $year);
+
+        $I->click('Place your order');
+        $I->see('Your payment of ' . $cartTotal . ' has been made!');
     }
 }

@@ -1,5 +1,7 @@
 {# @var flashMessages array #}
-{% if flashMessages is not empty %}
+{# @var templateFlashMessages array #}
+
+{% if flashMessages is not empty or templateFlashMessages is not empty %}
     <div id="messages">
         <div class="container-fluid">
             <div class="row">
@@ -23,6 +25,29 @@
                                 {% endif %}
 
                                 {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% for type, messages in templateFlashMessages %}
+                        {% if type == 'error' %}
+                            {% set type = 'danger' %}
+                        {% endif %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                                {% if type == 'success' %}
+                                    <i class="fa fa-check-circle"></i>
+                                {% elseif type == 'info' %}
+                                    <i class="fa fa-info-circle"></i>
+                                {% elseif type == 'warning' %}
+                                    <i class="fa fa-exclamation-triangle"></i>
+                                {% elseif type == 'danger' %}
+                                    <i class="fa fa-exclamation-circle"></i>
+                                {% endif %}
+
+                                {% embed 'flash/' ~ message.flashTemplate with message.data %}{% endembed %}
                             </div>
                         {% endfor %}
                     {% endfor %}
