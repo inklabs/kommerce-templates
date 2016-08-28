@@ -13,7 +13,7 @@ function addSpinners() {
     });
 
     $(document.body).on('submit', 'form', function (e) {
-        var $button = $(this).find('.btn[type="submit"]:focus');
+        var $button = $(this).find('.btn[type=submit]');
         if ($button.length) {
             addButtonSpinner($button);
         }
