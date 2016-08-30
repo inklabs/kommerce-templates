@@ -1,6 +1,6 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
 
-{% macro statusLabel(order) %}
+{% macro label(order) %}
     {% if order.status.isPending %}
         {% set labelName = 'primary' %}
     {% elseif order.status.isProcessing or order.status.isShipped %}

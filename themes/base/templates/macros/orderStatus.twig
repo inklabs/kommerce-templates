@@ -1,0 +1,5 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+
+{% macro label(order) %}
+    <span>{{ order.status.name }}</span>
+{% endmacro %}

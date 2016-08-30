@@ -1,6 +1,5 @@
 {# @var user \inklabs\kommerce\EntityDTO\UserDTO #}
 {# @var orders \inklabs\kommerce\EntityDTO\OrderDTO[] #}
-{% import 'macros/order.twig' as orderMacro %}
 {% extends 'layout/base.twig' %}
 
 {% block pageTitle %}User Account - {{ user.fullName }}{% endblock %}
@@ -57,7 +56,7 @@
                             <tr>
                                 <td><a href="{{ orderUrl(order) }}">{{ order.referenceNumber }}</a></td>
                                 <td>{{ order.created | formatDate }}</td>
-                                <td>{{ orderMacro.statusLabel(order) }}</td>
+                                <td>{{ orderStatus.label(order) }}</td>
                                 <td>{{ order.totalQuantity }}</td>
                                 <td>{{ order.total.total | displayPrice }}</td>
                             </tr>

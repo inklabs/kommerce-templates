@@ -6,11 +6,15 @@ use Twig_Environment;
 use Twig_Extensions_Extension_I18n;
 use Twig_Extensions_Extension_Text;
 use Twig_Loader_Filesystem;
+use Twig_TemplateInterface;
 
 class TwigTemplate
 {
     /** @var Twig_Environment */
     private $twigEnvironment;
+
+    /** @var \string[] */
+    private $paths;
 
     /**
      * @param string $baseTheme
@@ -30,9 +34,10 @@ class TwigTemplate
         $dateFormat = 'F j, Y',
         $timeFormat = 'g:i a T'
     ) {
-        $this->addBaseTheme($paths, $baseTheme);
-        $this->addBaseTheme($paths, 'base');
-        $twigLoader = new Twig_Loader_Filesystem($paths);
+        $this->paths = $paths;
+        $this->addBaseTheme($baseTheme);
+        $this->addBaseTheme('base');
+        $twigLoader = new Twig_Loader_Filesystem($this->paths);
 
         $this->twigEnvironment = new Twig_Environment($twigLoader);
 
@@ -47,6 +52,8 @@ class TwigTemplate
         );
         $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_I18n());
         $this->twigEnvironment->addExtension(new Twig_Extensions_Extension_Text());
+
+        $this->addMacros();
     }
 
     public function enableDebug()
@@ -63,22 +70,48 @@ class TwigTemplate
     }
 
     /**
-     * @param string[] $paths
      * @param string $baseTheme
      */
-    private function addBaseTheme(array & $paths, $baseTheme)
+    private function addBaseTheme($baseTheme)
     {
-        $baseThemePath = __DIR__ . '/../../themes/' . $baseTheme . '/templates';
+        $baseThemePath = realpath(__DIR__ . '/../../themes/' . $baseTheme . '/templates');
 
         if (! file_exists($baseThemePath)) {
             throw new RuntimeException($baseThemePath . ' not found');
         }
 
-        $paths[] = $baseThemePath;
+        $this->paths[] = $baseThemePath;
     }
 
     public function addGlobal($name, $value)
     {
         $this->twigEnvironment->addGlobal($name, $value);
+    }
+
+    private function addMacros()
+    {
+        foreach ($this->getPathMacros() as $name => $path) {
+            $this->twigEnvironment->addGlobal(
+                $name,
+                $this->twigEnvironment->loadTemplate($path)
+            );
+        }
+    }
+
+    /**
+     * @return \Generator
+     */
+    private function getPathMacros()
+    {
+        foreach (array_reverse($this->paths) as $path) {
+            $pathMacros = glob($path . '/macros/*');
+
+            foreach ($pathMacros as $pathMacro) {
+                $name = basename($pathMacro, '.twig');
+                $filename = basename($pathMacro);
+
+                yield $name => 'macros/' . $filename;
+            }
+        }
     }
 }
