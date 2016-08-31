@@ -190,17 +190,13 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-sm-12">
-                                    <label for="shipping-isResidential" class="radio-inline">
-                                    <input type="checkbox"
-                                           name="shipping[isResidential]"
-                                           {% if shipping.isResidential %}
-                                               checked="checked"
-                                           {% endif %}
-                                           id="shipping-isResidential">
-                                        Residential Address?
-                                    </label>
-                                </div>
+                                {{ bootstrapForm.checkboxGroup(
+                                    'shipping',
+                                    'isResidential',
+                                    shipping.isResidential,
+                                    'Residential Address?',
+                                    'col-sm-12'
+                                ) }}
                             </div>
 
                             <div class="row">

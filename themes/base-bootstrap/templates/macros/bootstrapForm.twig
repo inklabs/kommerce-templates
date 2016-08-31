@@ -1,4 +1,4 @@
-{% macro inputGroup(group, key, value, name, formGroupClass, extra) -%}
+{% macro inputGroup(group, key, value, name, formGroupClass, extra = {}) -%}
     <div class="form-group {{ formGroupClass }}">
         {{ form.labelRaw(group ~ '-' ~ key, name, 'control-label') }}
         {{ form.input(
@@ -8,6 +8,22 @@
             'text',
             'form-control',
             extra
+        ) }}
+    </div>
+{%- endmacro %}
+
+{% macro checkboxGroup(group, key, value, name, formGroupClass, extra = {}) -%}
+    <div class="form-group {{ formGroupClass }}">
+        {{ form.labelRaw(
+            group ~ '-' ~ key,
+            form.checkbox(
+                group ~ '[' ~ key ~ ']',
+                value,
+                group ~ '-' ~ key,
+                '',
+                extra
+            ) ~ '&nbsp;' ~ name,
+            'radio-inline'
         ) }}
     </div>
 {%- endmacro %}

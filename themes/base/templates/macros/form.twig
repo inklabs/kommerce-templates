@@ -6,6 +6,13 @@
     {{ form.input(name, value, id, 'hidden') }}
 {%- endmacro %}
 
+{% macro checkbox(name, value, id, class, extra = {}) -%}
+    {% if value %}
+        {% set extra = extra|merge({'checked': 'checked'}) %}
+    {% endif %}
+    {{ form.input(name, '1', id, 'checkbox', class, extra) }}
+{%- endmacro %}
+
 {% macro input(name, value, id, type, class, extra = {}) -%}
     <input {{ html.attributes({
             'type': type|default('text'),
