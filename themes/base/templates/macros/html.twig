@@ -1,0 +1,8 @@
+{% macro attributes(params) %}
+    {%- for key, value in params -%}
+        {{ key }}="{{ value }}"
+        {%- if not loop.last -%}
+            {{- ' ' -}}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}

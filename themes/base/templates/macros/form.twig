@@ -1,0 +1,35 @@
+{% macro csrf() -%}
+    {{ form.hidden('_token', CSRF_TOKEN) }}
+{%- endmacro %}
+
+{% macro hidden(name, value, id) -%}
+    {{ form.input(name, value, id, 'hidden') }}
+{%- endmacro %}
+
+{% macro input(name, value, id, type, class, extra = {}) -%}
+    <input {{ html.attributes({
+            'type': type|default('text'),
+            'name': name,
+            'id': id|default(name),
+            'value': value,
+            'class': class
+        }|merge(extra)) }}>
+{%- endmacro %}
+
+{% macro label(id, content, class) -%}
+    <label {{ html.attributes({
+        'for': id,
+        'class': class
+    }) }}>
+        {{- content -}}
+    </label>
+{%- endmacro %}
+
+{% macro labelRaw(id, content, class) -%}
+    <label {{ html.attributes({
+        'for': id,
+        'class': class
+    }) }}>
+        {{- content|raw -}}
+    </label>
+{%- endmacro %}

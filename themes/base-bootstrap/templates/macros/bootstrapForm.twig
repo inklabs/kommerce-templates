@@ -1,0 +1,13 @@
+{% macro inputGroup(group, key, value, name, formGroupClass, extra) -%}
+    <div class="form-group {{ formGroupClass }}">
+        {{ form.labelRaw(group ~ '-' ~ key, name, 'control-label') }}
+        {{ form.input(
+            group ~ '[' ~ key ~ ']',
+            value,
+            group ~ '-' ~ key,
+            'text',
+            'form-control',
+            extra
+        ) }}
+    </div>
+{%- endmacro %}
