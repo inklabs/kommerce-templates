@@ -62,14 +62,6 @@ class TwigTemplate
     }
 
     /**
-     * @return Twig_Environment
-     */
-    public function getTwigEnvironment()
-    {
-        return $this->twigEnvironment;
-    }
-
-    /**
      * @param string $baseTheme
      */
     private function addBaseTheme($baseTheme)
@@ -113,5 +105,11 @@ class TwigTemplate
                 yield $name => 'macros/' . $filename;
             }
         }
+    }
+
+    public function render($name, $context)
+    {
+        return $this->twigEnvironment
+            ->render($name, $context);
     }
 }
