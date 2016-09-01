@@ -24,19 +24,32 @@
 {%- endmacro %}
 
 {% macro label(id, content, class) -%}
-    <label {{ htmlAttributes({
-        'for': id,
-        'class': class
-    }) }}>
+    <label {{ htmlAttributes({'for': id, 'class': class}) }}>
         {{- content -}}
     </label>
 {%- endmacro %}
 
 {% macro labelRaw(id, content, class) -%}
-    <label {{ htmlAttributes({
-        'for': id,
-        'class': class
-    }) }}>
+    <label {{ htmlAttributes({'for': id, 'class': class}) }}>
         {{- content|raw -}}
     </label>
+{%- endmacro %}
+
+{% macro select(name, selectedValue, possibleValues, id, class, extra = {}) -%}
+    <select {{ htmlAttributes({
+        'name': name,
+        'id': id|default(name),
+        'class': class
+    }|merge(extra)) }}>
+        {% for value, name in possibleValues %}
+            {%- set optionExtra = {} -%}
+            {%- if selectedValue == value -%}
+                {% set optionExtra = {'selected': 'selected'} %}
+            {%- endif -%}
+
+            <option {{ htmlAttributes({'value': value}|merge(optionExtra)) }}>
+                {{- name -}}
+            </option>
+        {% endfor -%}
+    </select>
 {%- endmacro %}

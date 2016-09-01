@@ -314,28 +314,28 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label for="creditCard-expirationMonth" class="control-label">Expires</label>
-                                        <select name="creditCard[expirationMonth]"
-                                                id="'creditCard-expirationMonth"
-                                                class="form-control"
-                                                required="">
-                                            {% for key,val in months %}
-                                                <option value="{{ key }}" {{ creditCard.expirationMonth == val ? ' selected' : ''}}>{{ val }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label for="creditCard-expirationYear" class="control-label">&nbsp;</label>
-                                        <select name="creditCard[expirationYear]"
-                                                id="'creditCard-expirationYear"
-                                                class="form-control"
-                                                required="">
-                                            {% for key,val in years %}
-                                                <option value="{{ key }}" {{ creditCard.expirationYear == val ? ' selected' : ''}}>{{ val }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
+                                    {{ bootstrapForm.selectGroup(
+                                        'creditCard',
+                                        'expirationMonth',
+                                        creditCard.expirationMonth,
+                                        months,
+                                        'Expires',
+                                        'col-sm-3',
+                                        {
+                                            'required': ''
+                                        }
+                                    ) }}
+                                    {{ bootstrapForm.selectGroup(
+                                        'creditCard',
+                                        'expirationYear',
+                                        creditCard.expirationYear,
+                                        years,
+                                        '&nbsp;',
+                                        'col-sm-3',
+                                        {
+                                            'required': ''
+                                        }
+                                    ) }}
                                     <div class="span6" id="accepted-cards">
                                         <img src="{{ assetUrl('base', 'img/cards.png') }}" width="180" height="24" style="width: 180px; height: 24px;" alt="Credit cards accepted: Visa, Mastercard, American Express, Discover" />
                                     </div>
