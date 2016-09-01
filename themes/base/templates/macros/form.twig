@@ -14,7 +14,7 @@
 {%- endmacro %}
 
 {% macro input(name, value, id, type, class, extra = {}) -%}
-    <input {{ html.attributes({
+    <input {{ htmlAttributes({
             'type': type|default('text'),
             'name': name,
             'id': id|default(name),
@@ -24,7 +24,7 @@
 {%- endmacro %}
 
 {% macro label(id, content, class) -%}
-    <label {{ html.attributes({
+    <label {{ htmlAttributes({
         'for': id,
         'class': class
     }) }}>
@@ -33,7 +33,7 @@
 {%- endmacro %}
 
 {% macro labelRaw(id, content, class) -%}
-    <label {{ html.attributes({
+    <label {{ htmlAttributes({
         'for': id,
         'class': class
     }) }}>

@@ -222,6 +222,21 @@ class TwigExtension extends Twig_Extension
                     return request()->url();
                 }
             ),
+            new Twig_SimpleFunction(
+                'htmlAttributes',
+                function (array $params) {
+                    $attributes = [];
+
+                    foreach ($params as $key => $value) {
+                        $attributes[] = $key . '="' . $value . '"';
+                    }
+
+                    return implode(' ', $attributes);
+                },
+                [
+                    'is_safe' => ['html'],
+                ]
+            ),
         ];
     }
 
