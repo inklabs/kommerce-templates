@@ -5,11 +5,14 @@ class AssetLocationService
 {
     public function getAssetFilePathByTheme($theme, $path)
     {
-        $basePath = __DIR__ . '/../../base-themes/' . $theme . '/assets/' . $path;
-        if (file_exists($basePath)) {
-            return $basePath;
+        $kommerceTemplatesPath = realpath(__DIR__ . '/../..');
+        if ($theme == 'base-theme') {
+            $basePath = $kommerceTemplatesPath . '/base-theme/assets/' . $path;
+            if (file_exists($basePath)) {
+                return $basePath;
+            }
         }
 
-        return __DIR__ . '/../../themes/' . $theme . '/assets/' . $path;
+        return $kommerceTemplatesPath . '/themes/' . $theme . '/assets/' . $path;
     }
 }
