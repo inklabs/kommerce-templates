@@ -1,4 +1,4 @@
-# Kommerce Base Foundation Theme
+# Kommerce Base Foundation Theme (Deprecated)
 
 ## Install Requirements
 Node (using [nvm](https://github.com/creationix/nvm) preferably, I am running 5.11.1)

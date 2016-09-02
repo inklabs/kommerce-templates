@@ -12,32 +12,29 @@ class TwigTemplate
 {
     /** @var Twig_Environment */
     private $twigEnvironment;
-
-    /** @var \string[] */
-    private $paths;
+    /**
+     * @var TwigThemeConfig
+     */
+    private $themeConfig;
 
     /**
-     * @param string $baseTheme
+     * @param TwigThemeConfig $themeConfig
      * @param CSRFTokenGeneratorInterface $csrfTokenGenerator
      * @param RouteUrlInterface $routeUrl
-     * @param string[] $paths
      * @param string $timezone
      * @param string $dateFormat
      * @param string $timeFormat
      */
     public function __construct(
-        $baseTheme,
+        TwigThemeConfig $themeConfig,
         CSRFTokenGeneratorInterface $csrfTokenGenerator,
         RouteUrlInterface $routeUrl,
-        $paths = [],
         $timezone,
         $dateFormat = 'F j, Y',
         $timeFormat = 'g:i a T'
     ) {
-        $this->paths = $paths;
-        $this->addBaseTheme($baseTheme);
-        $this->addBaseTheme('base');
-        $twigLoader = new Twig_Loader_Filesystem($this->paths);
+        $this->themeConfig = $themeConfig;
+        $twigLoader = new Twig_Loader_Filesystem($themeConfig->getTwigTemplatePaths());
 
         $this->twigEnvironment = new Twig_Environment($twigLoader);
 
@@ -61,20 +58,6 @@ class TwigTemplate
         $this->twigEnvironment->enableDebug();
     }
 
-    /**
-     * @param string $baseTheme
-     */
-    private function addBaseTheme($baseTheme)
-    {
-        $baseThemePath = realpath(__DIR__ . '/../../themes/' . $baseTheme . '/templates');
-
-        if (! file_exists($baseThemePath)) {
-            throw new RuntimeException($baseThemePath . ' not found');
-        }
-
-        $this->paths[] = $baseThemePath;
-    }
-
     public function addGlobal($name, $value)
     {
         $this->twigEnvironment->addGlobal($name, $value);
@@ -95,13 +78,13 @@ class TwigTemplate
      */
     private function getPathMacros()
     {
-        foreach (array_reverse($this->paths) as $path) {
+        foreach (array_reverse($this->themeConfig->getTwigTemplatePaths()) as $path) {
             $pathMacros = glob($path . '/macros/*');
 
             foreach ($pathMacros as $pathMacro) {
                 $name = basename($pathMacro, '.twig');
-                $filename = basename($pathMacro);
 
+                $filename = basename($pathMacro);
                 yield $name => 'macros/' . $filename;
             }
         }

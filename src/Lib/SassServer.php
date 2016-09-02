@@ -18,33 +18,22 @@ class SassServer
 
     /**
      * @param string $rootScssDirectory
-     * @param string $baseTheme
-     * @param array $paths
+     * @param TwigThemeConfig $themeConfig
      * @param string | null $formatter
      * @param string | null $cacheDir
      */
     public function __construct(
         $rootScssDirectory,
-        $baseTheme = 'base-bootstrap',
-        $paths = [],
+        TwigThemeConfig $themeConfig,
         $formatter = 'compressed',
         $cacheDir = null
     ) {
-        $this->paths = $paths;
-        $kommerceTemplatesPath = realpath(__DIR__ . '/../..');
-        $this->addImportPath($kommerceTemplatesPath . '/themes/' . $baseTheme . '/scss');
-
-        if ($baseTheme === 'base-bootstrap') {
-            $vendorPath = realpath(__DIR__ . '/../../../../../vendor');
-            $this->addImportPath($vendorPath . '/twbs/bootstrap-sass/assets/stylesheets');
-        }
-
-        $this->addImportPath($kommerceTemplatesPath . '/themes/base/scss');
+        $scssImportPaths = $themeConfig->getScssImportPaths();
 
         $scssCompiler = new Compiler();
-        $scssCompiler->setImportPaths($this->paths);
+        $scssCompiler->setImportPaths($scssImportPaths);
 
-        $this->salt = $formatter . $rootScssDirectory . json_encode($paths);
+        $this->salt = $formatter . $rootScssDirectory . json_encode($scssImportPaths);
 
         switch ($formatter) {
             case 'expanded':
@@ -71,17 +60,5 @@ class SassServer
         }
 
         $this->server->serve($this->salt);
-    }
-
-    /**
-     * @param string $baseThemePath
-     */
-    private function addImportPath($baseThemePath)
-    {
-        if (! file_exists($baseThemePath)) {
-            throw new RuntimeException($baseThemePath . ' not found');
-        }
-
-        $this->paths[] = $baseThemePath;
     }
 }
