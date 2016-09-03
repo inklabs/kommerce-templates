@@ -17,9 +17,8 @@
 
                 <h1>Products</h1>
                 <form action="{{ routeUrl('admin.product') }}"
-                      method="post"
+                      method="get"
                       class="form-search">
-                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
                     {% embed 'helper/search-bar.twig' with {'placeholder': 'Search SKU/Name'} only %}{% endembed %}
                 </form>
 

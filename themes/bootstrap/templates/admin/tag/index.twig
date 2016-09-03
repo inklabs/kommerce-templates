@@ -1,0 +1,60 @@
+{# @var tags \inklabs\kommerce\EntityDTO\TagDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Tags{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.tag.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Tag
+                    </a>
+                </div>
+
+                <h1>Tags</h1>
+                <form action="{{ routeUrl('admin.tag') }}"
+                      method="get"
+                      class="form-search">
+                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name'} only %}{% endembed %}
+                </form>
+
+                {{ paginate.detailed(pagination) }}
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <th>Name</th>
+                            <th>Sort Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tag in tags %}
+                            <tr>
+                                <td>
+                                    <a href="{{ adminTagUrl(tag) }}">
+                                        <img src="{{ tagImageUrl(tag) }}"
+                                             width="50"
+                                             height="50"
+                                             style="width: 50px; height: 50px;">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ adminTagUrl(tag) }}">
+                                        {{ tag.name }}
+                                    </a>
+                                <td>{{ tag.sortOrder }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {{ paginate.detailed(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

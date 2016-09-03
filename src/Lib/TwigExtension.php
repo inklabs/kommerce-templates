@@ -140,6 +140,17 @@ class TwigExtension extends Twig_Extension
                 }
             ),
             new Twig_SimpleFunction(
+                'adminTagUrl',
+                function (TagDTO $tagDTO) {
+                    return $this->routeUrl->getRoute(
+                        'admin.tag.edit',
+                        [
+                            'tagId' => $tagDTO->id->getHex(),
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
                 'productImageUrl',
                 function (ProductDTO $productDTO) {
                     $imagePath = $productDTO->defaultImage;
