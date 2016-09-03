@@ -1,0 +1,86 @@
+{# @var coupons \inklabs\kommerce\EntityDTO\CouponDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Coupons{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.coupon.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Coupon
+                    </a>
+                </div>
+
+                <h1>Coupons</h1>
+                <form action="{{ routeUrl('admin.coupon') }}"
+                      method="get"
+                      class="form-search">
+                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name'} only %}{% endembed %}
+                </form>
+
+                {{ paginate.detailed(pagination) }}
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Discount</th>
+                            <th>Redemptions</th>
+                            <th>Min Order</th>
+                            <th>Max Order</th>
+                            <th>Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for coupon in coupons %}
+                            <tr>
+                                <td>
+                                    <a href="{{ adminCouponUrl(coupon) }}">
+                                        {{ coupon.code }}
+                                    </a>
+                                </td>
+                                <td>{{ coupon.name }}</td>
+                                <td>{{ coupon | displayPromotionValue }}</td>
+                                <td>
+                                    {{ coupon.redemptions }} of
+                                    {% if coupon.maxRedemptions is null %}
+                                        [unlimited]
+                                    {% else %}
+                                        {{ coupon.maxRedemptions }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if coupon.minOrderValue is null %}
+                                        [no minimum]
+                                    {% else %}
+                                        {{ coupon.minOrderValue | displayPrice }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if coupon.maxOrderValue is null %}
+                                        [no maximum]
+                                    {% else %}
+                                        {{ coupon.maxOrderValue | displayPrice }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ coupon.start | formatDate }}
+                                    -
+                                    {{ coupon.end | formatDate }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr><td colspan="100%">No coupons</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {{ paginate.detailed(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

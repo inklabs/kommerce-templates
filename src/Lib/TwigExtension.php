@@ -3,6 +3,8 @@ namespace inklabs\KommerceTemplates\Lib;
 
 use DateTime;
 use DateTimeZone;
+use inklabs\kommerce\EntityDTO\AbstractPromotionDTO;
+use inklabs\kommerce\EntityDTO\CouponDTO;
 use inklabs\kommerce\EntityDTO\OrderDTO;
 use inklabs\kommerce\EntityDTO\ProductDTO;
 use inklabs\kommerce\EntityDTO\TagDTO;
@@ -82,8 +84,22 @@ class TwigExtension extends Twig_Extension
                 }
             ),
             new Twig_SimpleFilter(
+                'displayPromotionValue',
+                function (AbstractPromotionDTO $promotion) {
+                    if ($promotion->type->isFixed || $promotion->type->isExact) {
+                        return '$' . number_format(($promotion->value / 100), 2);
+                    } elseif ($promotion->type->isPercent) {
+                        return $promotion->value . '%';
+                    }
+                }
+            ),
+            new Twig_SimpleFilter(
                 'formatDate',
-                function (DateTime $dateTime) {
+                function (DateTime $dateTime = null) {
+                    if ($dateTime === null) {
+                        return '';
+                    }
+
                     $format = $this->dateFormat . ' ' . $this->timeFormat;
 
                     $output = clone $dateTime;
@@ -146,6 +162,17 @@ class TwigExtension extends Twig_Extension
                         'admin.tag.edit',
                         [
                             'tagId' => $tagDTO->id->getHex(),
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
+                'adminCouponUrl',
+                function (CouponDTO $couponDTO) {
+                    return $this->routeUrl->getRoute(
+                        'admin.coupon.edit',
+                        [
+                            'couponId' => $couponDTO->id->getHex(),
                         ]
                     );
                 }
