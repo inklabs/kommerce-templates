@@ -1,15 +1,15 @@
-{# @var users \inklabs\kommerce\EntityDTO\UserDTO[] #}
+{# @var options \inklabs\kommerce\EntityDTO\OptionDTO[] #}
 {# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
 {% extends 'layout/base-admin.twig' %}
 
-{% block pageTitle %}Users{% endblock %}
+{% block pageTitle %}Options{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Users</h1>
-                <form action="{{ routeUrl('admin.user') }}"
+                <h1>Options</h1>
+                <form action="{{ routeUrl('admin.option') }}"
                       method="get"
                       class="form-search">
                     {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name/Email'} only %}{% endembed %}
@@ -20,23 +20,17 @@
                 <table class="table table-condensed">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>External ID</th>
                             <th>Name</th>
-                            <th>email</th>
-                            <th>logins</th>
-                            <th>Last Login</th>
+                            <th>Description</th>
+                            <th>Sort Order</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user in users %}
+                        {% for option in options %}
                             <tr>
-                                <td>{{ user.id.getHex() }}</td>
-                                <td>{{ user.externalId }}</td>
-                                <td>{{ user.firstName }} {{ user.lastName }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.totalLogins }}</td>
-                                <td>{{ user.lastLogin | formatDate }}</td>
+                                <td><a href="{{ adminOptionUrl(option) }}">{{ option.name }}</a></td>
+                                <td>{{ option.description | truncate(60) }}</td>
+                                <td>{{ option.sortOrder }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
