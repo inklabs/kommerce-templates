@@ -1,0 +1,38 @@
+<div id="header">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-align-justify"></i></button>
+                <a class="navbar-brand" href="{{ routeUrl('home') }}">{{ SITE_NAME | default('Kommerce') }} | Admin</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-left text-center">
+                <li><a href="{{ routeUrl('admin.order') }}">Orders</a></li>
+                <li><a href="{{ routeUrl('admin.user') }}">Customers</a></li>
+                <li><a href="{{ routeUrl('admin.product') }}">Inventory</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Promotions <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ routeUrl('admin.coupon') }}">Coupons</a></li>
+                        <li><a href="{{ routeUrl('admin.catalog-promotion') }}">Catalog Promotions</a></li>
+                        <li><a href="{{ routeUrl('admin.cart-price-rule') }}">Cart Price Rules</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ routeUrl('admin.settings') }}">Settings</a></li>
+
+                <li class="divider-vertical hidden-xs"></li>
+            </ul>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right text-center">
+                    <li><a href="{{ routeUrl('home') }}">Store Front</a></li>
+
+                    <li class="divider-vertical hidden-xs"></li>
+
+                    <li><a href="{{ routeUrl('logout') }}">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

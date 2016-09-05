@@ -1,0 +1,21 @@
+{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Orders{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Orders</h1>
+
+                {{ paginate.detailed(pagination) }}
+
+                <h2>TODO</h2>
+
+                {{ paginate.detailed(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
