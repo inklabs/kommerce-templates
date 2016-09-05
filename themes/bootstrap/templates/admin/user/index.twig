@@ -9,10 +9,38 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>Users</h1>
+                <form action="{{ routeUrl('admin.user') }}"
+                      method="get"
+                      class="form-search">
+                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name/Email'} only %}{% endembed %}
+                </form>
 
                 {{ paginate.detailed(pagination) }}
 
-                <h2>TODO</h2>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>External ID</th>
+                            <th>Name</th>
+                            <th>email</th>
+                            <th>logins</th>
+                            <th>Last Login</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id.getHex() }}</td>
+                                <td>{{ user.externalId }}</td>
+                                <td>{{ user.firstName }} {{ user.lastName }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.totalLogins }}</td>
+                                <td>{{ user.lastLoginFormatted }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
                 {{ paginate.detailed(pagination) }}
             </div>
