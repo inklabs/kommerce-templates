@@ -156,6 +156,17 @@ class TwigExtension extends Twig_Extension
                 }
             ),
             new Twig_SimpleFunction(
+                'adminOrderUrl',
+                function (OrderDTO $orderDTO) {
+                    return $this->routeUrl->getRoute(
+                        'admin.order.edit',
+                        [
+                            'orderId' => $orderDTO->id->getHex(),
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
                 'adminTagUrl',
                 function (TagDTO $tagDTO) {
                     return $this->routeUrl->getRoute(
