@@ -2,7 +2,11 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>Order Details</h2>
-        <?=View::factory('helper/order_headline')?>
+        Ordered on {{ order.created | formatDate }}
+        |
+        Order #{{ order.referenceNumber }}
+        |
+        {{ orderStatus.label(order) }}
     </div>
 </div>
 
@@ -20,7 +24,7 @@
                 <div class="col-sm-4">
                     <strong>Payment Information</strong>
                     <div>
-                        {% embed 'helper/order-payments.twig' %}{% endembed %}
+                        {% include 'helper/order-payments.twig' %}
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -91,7 +95,7 @@
                 {% for orderItem in order.orderItems %}
                     <tr>
                         <td style="width: 75px">
-                            {% if orderitem.product is not null %}
+                            {% if orderItem.product is not null %}
                                 <img src="{{ productImageUrl(orderItem.product) }}">
                             {% endif %}
                         </td>
@@ -103,7 +107,7 @@
                             {% endif %}
                             <span class="small text-muted">{{ orderItem.sku }}</span><br>
 
-                            {% embed 'helper/order-item-options.twig' with {'orderItem': orderItem} only %}{% endembed %}
+                            {% include 'helper/order-item-options.twig' with {'orderItem': orderItem} only %}
 
                             {# TODO: Add to cart if in stock
                             <?php if (orderItem.product !== null && orderItem.product.isInStock) { ?>
@@ -161,12 +165,12 @@
 
                             <div class="visible-xs">
                                 <br>
-                                {% embed 'helper/unit-price.twig' with {'price': orderItem.price } only %}{% endembed %}
+                                {% include 'helper/unit-price.twig' with {'price': orderItem.price } only %}
                             </div>
                         </td>
                         <td class="text-right">{{ orderItem.quantity }}</td>
                         <td class="text-right hidden-xs">
-                            {% embed 'helper/unit-price.twig' with {'price': orderItem.price } only %}{% endembed %}
+                            {% include 'helper/unit-price.twig' with {'price': orderItem.price } only %}
                         </td>
                         <td class="text-right">{{ orderItem.price.quantityPrice | displayPrice }}</td>
                     </tr>

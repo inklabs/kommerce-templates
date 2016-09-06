@@ -1,0 +1,10 @@
+{# @var shipmentRate \inklabs\kommerce\EntityDTO\ShipmentRateDTO #}
+
+{% if shipmentRate is null or shipmentRate.deliveryMethod is null %}
+    n/a
+{% else %}
+    Delivery Method: {{ shipmentRate.deliveryMethod.name }}<br>
+    Cost: {{ shipmentRate.rate.amount | displayPrice }}<br>
+    Carrier: {{ shipmentRate.carrier }}<br>
+    Service: {{ shipmentRate.service }}<br>
+{% endif %}
