@@ -160,7 +160,7 @@ class TwigExtension extends Twig_Extension
                 'adminOrderUrl',
                 function (OrderDTO $orderDTO) {
                     return $this->routeUrl->getRoute(
-                        'admin.order.edit',
+                        'admin.order.view',
                         [
                             'orderId' => $orderDTO->id->getHex(),
                         ]
