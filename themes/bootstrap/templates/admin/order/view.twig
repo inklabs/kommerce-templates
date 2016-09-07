@@ -6,18 +6,8 @@
 {% block content %}
     <div class="container">
 
-        {% include 'admin/order/navigation.twig' %}
+        {% include 'admin/order/order-header.twig' %}
 
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Order Details</h2>
-                Ordered on {{ order.created | formatDate }}
-                |
-                Order #{{ order.referenceNumber }}
-                |
-                {{ orderStatus.label(order) }}
-            </div>
-        </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="well">
