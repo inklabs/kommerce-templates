@@ -2,10 +2,9 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <h2>Order Details</h2>
-        Created {{ order.created | formatDate }}
-        |
         Order #{{ order.referenceNumber }}
+        |
+        {{ order.created | formatDate }}
         |
         {{ orderStatus.label(order) }}
         <br>

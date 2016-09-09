@@ -23,6 +23,16 @@
         }|merge(extra)) }}>
 {%- endmacro %}
 
+{% macro textarea(name, value, class, extra = {}) -%}
+    <textarea {{ htmlAttributes({
+            'name': name,
+            'id': id|default(name),
+            'class': class
+        }|merge(extra)) }}>
+        {{- value -}}
+    </textarea>
+{%- endmacro %}
+
 {% macro label(id, content, class) -%}
     <label {{ htmlAttributes({'for': id, 'class': class}) }}>
         {{- content -}}

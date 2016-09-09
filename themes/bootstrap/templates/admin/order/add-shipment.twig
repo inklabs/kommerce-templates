@@ -1,0 +1,116 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Add Shipment - Order #{{ order.referenceNumber }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'admin/order/order-header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <strong>Billing Address</strong>
+                            {% include 'helper/order-address.twig' with {'address': order.billingAddress} %}
+                        </div>
+                        <div class="col-sm-4">
+                            <strong>Shipping Address</strong>
+                            {% include 'helper/order-address.twig' with {'address': order.shippingAddress} %}
+                        </div>
+                        <div class="col-sm-4">
+                            <strong>Chosen Shipping Option</strong>
+                            <div>
+                            {% include 'helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form action="{{ routeUrl('admin.order.add-shipment.post') }}"
+              method="post"
+              id="new-shipment">
+            {{ form.csrf() }}
+            {{ form.hidden('orderId', order.id.getHex()) }}
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Items to Ship</th>
+                                <th class="text-right">Qty</th>
+                                <th class="text-right">Qty to Ship</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             {% for orderItem in order.orderItems %}
+                                <tr>
+                                    <td style="width: 75px">
+                                        {% if orderItem.product is not null %}
+                                            <img src="{{ productImageUrl(orderItem.product) }}">
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if orderItem.product is not null %}
+                                            <a href="{{ productUrl(orderItem.product) }}">{{ orderItem.name }}</a>
+                                        {% else %}
+                                            {{ orderItem.name | nl2br }}
+                                        {% endif %}
+                                        <span class="small text-muted">{{ orderItem.sku }}</span><br>
+
+                                        <div>
+                                            {% include 'helper/order-item-options.twig' %}
+                                        </div>
+                                    </td>
+                                    <td class="text-right">{{ orderItem.quantity }}</td>
+                                    <td class="text-right">
+                                        {{ form.input('orderItemQty[' ~ orderItem.id.getHex() ~ ']', orderItem.quantity) }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <strong>Shipment Comments</strong>
+                    {{ form.textarea(
+                        'comment',
+                        '',
+                        'form-control',
+                        {
+                            'placeholder': 'Enter shipping message to customer',
+                            'rows': 4
+                        }
+                    )}}
+                </div>
+                <div class="col-sm-6">
+                    <div class="well">
+                        <p>
+                            {{ form.labelRaw(
+                                'notifyCustomer',
+                                form.checkbox('notifyCustomer', true) ~ ' Notify Customer'
+                            )}}
+                        </p>
+                        <button type="submit"
+                                name="action"
+                                value="create-shipping-label"
+                                class="btn btn-primary">
+                            <i class="fa fa-truck"></i> Create Shipping Label
+                        </button>
+                        <button type="submit"
+                                name="action"
+                                value="create-with-tracking-code"
+                                class="btn btn-info">
+                            <i class="fa fa-thumb-tack"></i> Create with Tracking Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
