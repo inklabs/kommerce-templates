@@ -23,71 +23,70 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($shipment->shipmentTrackers as $shipmentTracker) { ?>
+                                        {% for shipmentTracker in shipment.shipmentTrackers %}
                                             <tr>
                                                 <td>
-                                                    <?php if ($shipmentTracker->shipmentRate->rate->amount === null) { ?>
+                                                    {% if shipmentTracker.shipmentRate.rate.amount is null %}
                                                         n/a
-                                                    <?php } else { ?>
-                                                        <?=Kommerce::display_price($shipmentTracker->shipmentRate->rate->amount)?>
-                                                    <?php } ?>
+                                                    {% else %}
+                                                        {{ shipmentTracker.shipmentRate.rate.amount | displayPrice }}
+                                                    {% endif %}
                                                 </td>
                                                 <td>
-                                                    <?php if ($shipmentTracker->shipmentRate->carrier !== null) { ?>
-                                                        <?=HTML::chars($shipmentTracker->shipmentRate->carrier)?>
-                                                        <?=HTML::chars($shipmentTracker->shipmentRate->service)?>
+                                                    {% if shipmentTracker.shipmentRate.carrier is not null %}
+                                                        {{ shipmentTracker.shipmentRate.carrier }}
+                                                        {{ shipmentTracker.shipmentRate.service }}
                                                         <br>
-                                                    <?php } elseif ($shipmentTracker->carrier !== null) { ?>
-                                                        <?=HTML::chars($shipmentTracker->carrier->name)?>
+                                                    {% elseif shipmentTracker.carrier is not null %}
+                                                        {{ shipmentTracker.carrier.name }}
                                                         <br>
-                                                    <?php } ?>
-                                                    <strong>Tracking:</strong> <?=HTML::chars($shipmentTracker->trackingCode)?>
+                                                    {% endif %}
+                                                    <strong>Tracking:</strong> {{ shipmentTracker.trackingCode }}
                                                     <div class="text-muted">
                                                         <div class="text-muted">
-                                                            <?php if ($shipmentTracker->shipmentRate->deliveryDays !== null) { ?>
+                                                            {% if shipmentTracker.shipmentRate.deliveryDays is not null %}
                                                                 <strong>Delivery Days:</strong>
-                                                                <?=(int) $shipmentTracker->shipmentRate->deliveryDays?>
+                                                                {{ shipmentTracker.shipmentRate.deliveryDays }}
                                                                 <br>
-                                                            <?php } ?>
-                                                            <?php if ($shipmentTracker->shipmentRate->deliveryDate !== null) { ?>
+                                                            {% endif %}
+                                                            {% if shipmentTracker.shipmentRate.deliveryDate is not null %}
                                                                 <strong>Delivery Date:</strong>
-                                                                <?=Kommerce::format_date_time($shipmentTracker->shipmentRate->deliveryDate->getTimestamp())?>
-                                                                <?php if ($shipmentTracker->shipmentRate->isDeliveryDateGuaranteed) { ?>
+
+                                                                {{ shipmentTracker.shipmentRate.deliveryDate.getTimestamp() | formatDate }}
+                                                                {% if shipmentTracker.shipmentRate.isDeliveryDateGuaranteed %}
                                                                     <span style="color: green">
                                                                         <strong><i class="fa fa-check"></i> Guaranteed</strong>
                                                                     </span>
-                                                                <?php } ?>
+                                                                {% endif %}
                                                                 <br>
-                                                            <?php } ?>
+                                                            {% endif %}
                                                             <strong>Created:</strong>
-                                                            <?=Kommerce::format_date_time($shipmentTracker->created->getTimestamp())?>
+                                                            {{ shipmentTracker.created | formatDate }}
                                                             <br>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="text-right">
-                                                    <?php if ($shipmentTracker->shipmentLabel->url === null) { ?>
+                                                    {% if shipmentTracker.shipmentLabel.url is null %}
                                                         n/a
-                                                    <?php } else { ?>
-                                                        <a href="<?=$shipmentTracker->shipmentLabel->url?>">
-                                                            <img src="<?=$shipmentTracker->shipmentLabel->url?>" style="max-height: 150px" />
+                                                    {% else %}
+                                                        <a href="{{ shipmentTracker.shipmentLabel.url }}">
+                                                            <img src="{{ shipmentTracker.shipmentLabel.url }}" style="max-height: 150px" />
                                                         </a>
-                                                    <?php } ?>
+                                                    {% endif %}
                                                 </td>
                                             </tr>
-                                        <?php } ?>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                                 <h2>Comments</h2>
-                                <?php if (empty($shipment->shipmentComments)) { ?>
+                                {% for shipmentComment in shipment.shipmentComments %}
+                                    <p>
+                                        {{ shipmentComment.comment }}
+                                    </p>
+                                {% else %}
                                     <div class="text-muted">No comments</div>
-                                <?php } else { ?>
-                                    <?php foreach ($shipment->shipmentComments as $shipmentComment) { ?>
-                                        <p>
-                                            <?=HTML::chars($shipmentComment->comment)?>
-                                        </p>
-                                    <?php } ?>
-                                <?php } ?>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

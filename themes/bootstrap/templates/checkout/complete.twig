@@ -14,7 +14,12 @@
                     <p>An email confirmation has been sent to you.</p>
                     <p>
                         Order Number:
-                        <a href="{{ orderUrl(order) }}">{{ order.referenceNumber }}</a>
+                        <a id="new-order-number"
+                           data-order-id="{{ order.id.getHex() }}"
+                           data-reference-number="{{ order.referenceNumber }}"
+                           href="{{ orderUrl(order) }}">
+                            {{ order.referenceNumber }}
+                        </a>
                     </p>
                 </div>
             </div>

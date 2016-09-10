@@ -9,12 +9,13 @@
             <div class="col-sm-12">
                 <h2>Add Shipment Tracking Code</h2>
                 <div class="well well-sm">
-                    <form action="{{ routeUrl('admin.order.add-shipment.post') }}"
+                    <form action="{{ routeUrl('admin.order.add-shipment-with-tracking-code') }}"
                           method="post"
                           class="form"
                           role="form">
                         {{ form.csrf() }}
                         {{ form.hidden('coment', comment) }}
+                        {{ form.hidden('orderId', order.id.getHex()) }}
                         {% for orderItemId, quantity in orderItemQty %}
                             {{ form.hidden('orderItemQty[' ~ orderItemId ~ ']', quantity) }}
                         {% endfor %}

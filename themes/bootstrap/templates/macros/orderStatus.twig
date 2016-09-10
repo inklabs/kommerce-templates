@@ -13,5 +13,5 @@
         {% set labelname = 'warning' %}
     {% endif %}
 
-    <span class="label label-{{ labelName }}">{{ order.status.name }}</span>
+    <span class="label label-{{ labelName }} order-status">{{ order.status.name }}</span>
 {% endmacro %}
