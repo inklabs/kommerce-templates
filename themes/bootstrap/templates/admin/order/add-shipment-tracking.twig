@@ -1,0 +1,59 @@
+{# @var shipmentCarrierTypes array #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Add Shipment with Tracking Code - Order #{{ order.referenceNumber }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Add Shipment Tracking Code</h2>
+                <div class="well well-sm">
+                    <form action="{{ routeUrl('admin.order.add-shipment.post') }}"
+                          method="post"
+                          class="form"
+                          role="form">
+                        {{ form.csrf() }}
+                        {{ form.hidden('coment', comment) }}
+                        {% for orderItemId, quantity in orderItemQty %}
+                            {{ form.hidden('orderItemQty[' ~ orderItemId ~ ']', quantity) }}
+                        {% endfor %}
+
+                        <div class="row">
+                            {{ bootstrapForm.selectGroup(
+                                'shipment',
+                                'carrier',
+                                shipment.carrier,
+                                shipmentCarrierTypes,
+                                'Carrier',
+                                'col-sm-6',
+                                {
+                                    'required': '',
+                                    'autofocus': ''
+                                }
+                            ) }}
+                        </div>
+
+                        <div class="row">
+                            {{ bootstrapForm.inputGroup(
+                                'shipment',
+                                'trackingCode',
+                                shipment.trackingCode,
+                                'Tracking Code',
+                                'col-sm-6',
+                                {
+                                    'required': ''
+                                }
+                            ) }}
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Create Shipment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
