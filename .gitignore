@@ -6,3 +6,4 @@
 /vendor
 
 tests/_output/*
+.DS_Store
