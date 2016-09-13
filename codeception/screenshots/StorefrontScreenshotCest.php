@@ -1,4 +1,7 @@
 <?php
+namespace screenshots;
+
+use ScreenshotsTester;
 
 class StorefrontCest
 {

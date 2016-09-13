@@ -14,16 +14,16 @@
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
 
-    const SHIP_METHOD_SELECTOR = 'input[class="ship-method"]:nth-child(1)';
+        const SHIP_METHOD_SELECTOR = 'input[class="ship-method"]:nth-child(1)';
 
-   /**
-    * Define custom actions here
-    */
+    /**
+     * Define custom actions here
+     */
     public function addProductToCart()
     {
         $I = $this;
@@ -116,5 +116,34 @@ class AcceptanceTester extends \Codeception\Actor
 
         $I->click('Place your order');
         $I->see('Your payment of ' . $cartTotal . ' has been made!');
+    }
+
+    public function addShipmentTrackingCode()
+    {
+        $I = $this;
+        $I->wantTo('add a shipment tracking code to the order');
+        $I->click('Ship');
+        $I->click('Create with Tracking Code');
+        $I->selectOption('Carrier', 'UPS');
+        $I->fillField('Tracking Code', '1Z9999999999999999');
+        $I->click('Create Shipment');
+        $I->see('Added Tracking Code');
+        $I->see('Shipped', '.order-status');
+    }
+
+    public function buyShippingLabel()
+    {
+        $I = $this;
+        $I->click('Ship');
+        $I->click('Create Shipping Label');
+        $I->see('Parcel Dimensions');
+        $I->fillField('Length (in)', 9);
+        $I->fillField('Width (in)', 9);
+        $I->fillField('Height (in)', 9);
+        $I->click('Get Shipping Rates');
+        $I->see('Shipping Rates');
+        $I->click('Buy Shipping Label');
+        $I->see('Added Shipping Label');
+        $I->see('Shipped', '.order-status');
     }
 }

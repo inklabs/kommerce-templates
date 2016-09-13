@@ -33,7 +33,9 @@
                         {% for order in orders %}
                             <tr>
                                 <td>
-                                    <a href="{{ adminOrderUrl(order) }}">{{ order.referenceNumber }}</a>
+                                    <a href="{{ adminOrderUrl(order) }}">
+                                        <div class="order-number">{{ order.referenceNumber }}</div>
+                                    </a>
                                 </td>
                                 <td>
                                     {% if order.user is not null %}

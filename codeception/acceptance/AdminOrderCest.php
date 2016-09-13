@@ -19,12 +19,7 @@ class AdminOrderCest
         $I->see('Order #' . $referenceNumber);
         $I->see('Pending', '.order-status');
 
-        $I->click('Ship');
-        $I->click('Create with Tracking Code');
-        $I->selectOption('Carrier', 'UPS');
-        $I->fillField('Tracking Code', '1Z9999999999999999');
-        $I->click('Create Shipment');
-        $I->see('Added Tracking Code');
-        $I->see('Shipped', '.order-status');
+        $I->addShipmentTrackingCode();
+        $I->buyShippingLabel();
     }
 }
