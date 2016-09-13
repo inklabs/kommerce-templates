@@ -20,6 +20,7 @@
                       role="form"
                       id="set-order-status-form">
                     {{ form.csrf() }}
+                    {{ form.hidden('orderId', order.id.getHex()) }}
 
                     <div class="form-group">
                         {{ form.select(

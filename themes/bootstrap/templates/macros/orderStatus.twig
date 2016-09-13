@@ -10,7 +10,7 @@
     {% elseif order.status.isComplete %}
         {% set labelName = 'success' %}
     {% elseif order.status.isCanceled %}
-        {% set labelname = 'warning' %}
+        {% set labelName = 'warning' %}
     {% endif %}
 
     <span class="label label-{{ labelName }} order-status">{{ order.status.name }}</span>
