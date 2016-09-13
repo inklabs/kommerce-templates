@@ -52,7 +52,7 @@
                                                             {% if shipmentTracker.shipmentRate.deliveryDate is not null %}
                                                                 <strong>Delivery Date:</strong>
 
-                                                                {{ shipmentTracker.shipmentRate.deliveryDate.getTimestamp() | formatDate }}
+                                                                {{ shipmentTracker.shipmentRate.deliveryDate | formatDate }}
                                                                 {% if shipmentTracker.shipmentRate.isDeliveryDateGuaranteed %}
                                                                     <span style="color: green">
                                                                         <strong><i class="fa fa-check"></i> Guaranteed</strong>

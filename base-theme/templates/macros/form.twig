@@ -13,6 +13,13 @@
     {{ form.input(name, '1', id, 'checkbox', class, extra) }}
 {%- endmacro %}
 
+{% macro radio(name, selectedValue, value, id, class, extra = {}) -%}
+    {% if selectedValue == value %}
+        {% set extra = extra|merge({'checked': 'checked'}) %}
+    {% endif %}
+    {{ form.input(name, value, id, 'radio', class, extra) }}
+{%- endmacro %}
+
 {% macro input(name, value, id, type, class, extra = {}) -%}
     <input {{ htmlAttributes({
             'type': type|default('text'),
