@@ -15,7 +15,6 @@
                           class="form"
                           role="form">
                         {{ form.csrf() }}
-                        {{ form.hidden('notifyCustomer', notifyCustomer) }}
                         {{ form.hidden('comment', comment) }}
                         {{ form.hidden('orderId', order.id.getHex()) }}
                         {% for orderItemId, quantity in orderItemQty %}
@@ -89,7 +88,6 @@
                               class="form"
                               role="form">
                             {{ form.csrf() }}
-                            {{ form.hidden('notifyCustomer', notifyCustomer) }}
                             {{ form.hidden('comment', comment) }}
                             {{ form.hidden('orderId', order.id.getHex()) }}
                             {% for orderItemId, quantity in orderItemQty %}
