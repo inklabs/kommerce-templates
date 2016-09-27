@@ -85,6 +85,12 @@ class TwigExtension extends Twig_Extension
                 }
             ),
             new Twig_SimpleFilter(
+                'floatPrice',
+                function ($price) {
+                    return number_format(($price / 100), 2, null, '');
+                }
+            ),
+            new Twig_SimpleFilter(
                 'displayPromotionValue',
                 function (AbstractPromotionDTO $promotion) {
                     if ($promotion->type->isFixed || $promotion->type->isExact) {

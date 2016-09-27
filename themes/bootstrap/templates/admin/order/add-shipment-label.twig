@@ -22,51 +22,47 @@
                         {% endfor %}
 
                         <div class="row">
-                            {{ bootstrapForm.inputGroup(
-                                'shipment',
-                                'weightLbs',
-                                shipment.weightLbs,
-                                'Weight (lbs)',
-                                'col-sm-4',
-                                {
-                                    'required': ''
-                                }
-                            ) }}
+                            <div class="form-group col-sm-4">
+                                <label for="shipment-weightLbs" class="control-label">Weight (lbs)</label>
+                                <input type="text"
+                                       id="shipment-weightLbs"
+                                       name="shipment[weightLbs]"
+                                       value="{{ shipment.weightLbs }}"
+                                       class="form-control"
+                                       required=""/>
+                            </div>
                         </div>
 
                         <div class="row">
-                            {{ bootstrapForm.inputGroup(
-                                'shipment',
-                                'length',
-                                shipment.length,
-                                'Length (in)',
-                                'col-sm-4',
-                                {
-                                    'required': ''
-                                }
-                            ) }}
+                            <div class="form-group col-sm-4">
+                                <label for="shipment-length" class="control-label">Length (in)</label>
+                                <input type="text"
+                                       id="shipment-length"
+                                       name="shipment[length]"
+                                       value="{{ shipment.length }}"
+                                       class="form-control"
+                                       required=""/>
+                            </div>
 
-                            {{ bootstrapForm.inputGroup(
-                                'shipment',
-                                'width',
-                                shipment.width,
-                                'Width (in)',
-                                'col-sm-4',
-                                {
-                                    'required': ''
-                                }
-                            ) }}
+                            <div class="form-group col-sm-4">
+                                <label for="shipment-width" class="control-label">Width (in)</label>
+                                <input type="text"
+                                       id="shipment-width"
+                                       name="shipment[width]"
+                                       value="{{ shipment.width }}"
+                                       class="form-control"
+                                       required=""/>
+                            </div>
 
-                            {{ bootstrapForm.inputGroup(
-                                'shipment',
-                                'height',
-                                shipment.height,
-                                'Height (in)',
-                                'col-sm-4',
-                                {
-                                    'required': ''
-                                }
-                            ) }}
+                            <div class="form-group col-sm-4">
+                                <label for="shipment-height" class="control-label">Height (in)</label>
+                                <input type="text"
+                                       id="shipment-height"
+                                       name="shipment[height]"
+                                       value="{{ shipment.height }}"
+                                       class="form-control"
+                                       required=""/>
+                            </div>
                         </div>
                     <div class="form-actions">
                             <button type="submit" class="btn btn-primary btn-block">

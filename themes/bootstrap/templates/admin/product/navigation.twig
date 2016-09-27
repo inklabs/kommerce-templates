@@ -1,0 +1,14 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+
+{% set navigation = [
+    {
+        'name': 'Edit',
+        'url' : routeUrl('admin.product.edit', {'productId': product.id.getHex()})
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include 'helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>

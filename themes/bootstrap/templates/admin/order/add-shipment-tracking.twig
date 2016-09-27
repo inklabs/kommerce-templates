@@ -14,38 +14,39 @@
                           class="form"
                           role="form">
                         {{ form.csrf() }}
-                        {{ form.hidden('coment', comment) }}
+                        {{ form.hidden('comment', comment) }}
                         {{ form.hidden('orderId', order.id.getHex()) }}
                         {% for orderItemId, quantity in orderItemQty %}
                             {{ form.hidden('orderItemQty[' ~ orderItemId ~ ']', quantity) }}
                         {% endfor %}
 
                         <div class="row">
-                            {{ bootstrapForm.selectGroup(
-                                'shipment',
-                                'carrier',
-                                shipment.carrier,
-                                shipmentCarrierTypes,
-                                'Carrier',
-                                'col-sm-6',
-                                {
-                                    'required': '',
-                                    'autofocus': ''
-                                }
-                            ) }}
+                            <div class="form-group col-sm-6">
+                                <label for="shipment-carrier" class="control-label">Carrier</label>
+                                {{ form.select(
+                                    'shipment[carrier]',
+                                    shipment.carrier,
+                                    shipmentCarrierTypes,
+                                    'shipment-carrier',
+                                    'form-control',
+                                    {
+                                        'required': '',
+                                        'autofocus': ''
+                                    }
+                                ) }}
+                            </div>
                         </div>
 
                         <div class="row">
-                            {{ bootstrapForm.inputGroup(
-                                'shipment',
-                                'trackingCode',
-                                shipment.trackingCode,
-                                'Tracking Code',
-                                'col-sm-6',
-                                {
-                                    'required': ''
-                                }
-                            ) }}
+                            <div class="form-group col-sm-6">
+                                <label for="shipment-trackingCode" class="control-label">Tracking Code</label>
+                                <input type="text"
+                                       id="shipment-trackingCode"
+                                       name="shipment[trackingCode]"
+                                       value="{{ shipment.trackingCode }}"
+                                       class="form-control"
+                                       required=""/>
+                            </div>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary btn-block">
