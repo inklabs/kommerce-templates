@@ -44,7 +44,7 @@
                         <li><a href="{{ paginationPath }}{{ i }}">{{ i }}</a></li>
                     {% endfor %}
                 {% elseif showAlwaysFirstAndLast %}
-                    <li><a href="#">Previous</a></li>
+                    <li class="disabled"><a href="#" rel="prev"><i class="fa fa-chevron-left"></i> Previous</a></li>
                 {% endif %}
 
                 <li class="active"><a href="#">{{ currentPage }}</a></li>
@@ -67,7 +67,7 @@
 
                     <li><a href="{{ paginationPath }}{{ currentPage + 1 }}" rel="next">Next <i class="fa fa-chevron-right"></i></a></li>
                 {% elseif showAlwaysFirstAndLast %}
-                    <li><a href="{{ paginationPath }}{{ currentPage + 1 }}">Next</a></li>
+                    <li class="disabled"><a href="#" rel="next">Next <i class="fa fa-chevron-right"></i></a></li>
                 {% endif %}
             </ul>
         {% else %}
