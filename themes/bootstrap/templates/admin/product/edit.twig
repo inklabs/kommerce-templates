@@ -16,6 +16,7 @@
                       role="form">
                     <fieldset>
                         {{ form.csrf() }}
+                        {{ form.hidden('productId', product.id.hex ) }}
                         <div class="well">
                             <h2>Required:</h2>
 
