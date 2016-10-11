@@ -128,36 +128,33 @@
 
                                     {% include 'helper/order-item-options.twig' with {'orderItem': orderItem} only %}
 
-                                    {# TODO: Attachments
                                     <div class="row">
-                                        <?php foreach ($orderItem->attachments as $attachment) { ?>
+                                        {% for attachment in orderItem.attachments %}
                                             <div class="col-md-4">
                                                 <div class="thumbnail" style="height: 180px">
-                                                    <img src="<?=$attachment->uri?>" style="max-width: 150px; max-height: 150px" />
+                                                    <img src="{{ attachment.uri }}" style="max-width: 150px; max-height: 150px" />
                                                     <br>
-                                                    <?=Form::open('admin/attachment/deleteAttachment', [
-                                                        'id' => 'deleteAttachment',
-                                                        'method' => 'POST',
-                                                        'class' => 'form-inline',
-                                                    ])?>
-                                                        <?=Form::csrf()?>
-                                                        <input type="hidden" name="attachmentId" value="<?=$attachment->id->getHex()?>" />
-                                                        <input type="hidden" name="orderId" value="<?=$order->id->getHex()?>" />
+                                                    <form action="{{ routeUrl('admin.attachment.deleteAttachment') }}"
+                                                          method="post"
+                                                          id="deleteAttachmentForm">
+                                                        {{ form.csrf() }}
+                                                        {{ form.hidden('attachmentId', attachment.id.hex) }}
+                                                        {{ form.hidden('orderId', order.id.hex) }}
                                                         <button type="submit" class="btn btn-danger btn-xs">
-                                                            <i class="glyphicon glyphicon-remove-sign"></i> Remove
+                                                            <i class="fa fa-remove-sign"></i> Remove
                                                         </button>
-                                                    <?=Form::close()?>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        <?php } ?>
+                                        {% endfor %}
                                     </div>
                                     <div class="clear"></div>
-                                    <?php if ($orderItem->areAttachmentsEnabled) { ?>
-                                        <?=HTML::anchor($orderItem->adminAttachmentForOrderItemUrl, '<i class="glyphicon glyphicon-plus-sign"></i> Upload Attachment', [
-                                            'class' => 'btn btn-xs btn-success upload-attachment',
-                                        ])?>
-                                    <?php } ?>
-                                    #}
+                                    {% if orderItem.areAttachmentsEnabled %}
+                                        <a href="{{ routeUrl('admin.attachment.createForOrderItem') }}"
+                                           class="btn btn-xs btn-success upload-attachment">
+                                            <i class="fa fa-upload"></i> Upload Attachment
+                                        </a>
+                                    {% endif %}
 
                                     <div class="visible-xs">
                                         <br>
