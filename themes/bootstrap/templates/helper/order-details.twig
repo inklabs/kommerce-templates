@@ -150,18 +150,17 @@
                             <?php } ?>
                             #}
 
-                            {# TODO: Attachments
                             {% for attachment in orderItem.attachments %}
-                                <img src="{{ attachment.uri }}" style="max-height: 150px" />
+                                <img src="{{ attachmentImageUrl(attachment) }}" style="max-height: 150px" />
                             {% endfor %}
 
                             <div class="clear"></div>
-                            <?php if (orderItem.areAttachmentsEnabled) { ?>
-                                <?=HTML::anchor(orderItem.userAttachmentForOrderItemUrl, '<i class="glyphicon glyphicon-plus-sign"></i> Upload Attachment', [
-                                    'class' => 'btn btn-xs btn-success upload-attachment',
-                                ])?>
-                            <?php } ?>
-                            #}
+                            {% if orderItem.areAttachmentsEnabled %}
+                                <a href="{{ routeUrl('user.attachment.createForOrderItem', {'orderItemId': orderItem.id.hex}) }}"
+                                   class="btn btn-xs btn-success upload-attachment">
+                                    <i class="fa fa-upload"></i> Upload Attachment
+                                </a>
+                            {% endif %}
 
                             <div class="visible-xs">
                                 <br>
