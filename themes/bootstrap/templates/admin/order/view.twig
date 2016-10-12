@@ -132,7 +132,7 @@
                                         {% for attachment in orderItem.attachments %}
                                             <div class="col-md-4">
                                                 <div class="thumbnail" style="height: 180px">
-                                                    <img src="{{ attachment.uri }}" style="max-width: 150px; max-height: 150px" />
+                                                    <img src="{{ attachmentImageUrl(attachment) }}" style="max-width: 150px; max-height: 150px" />
                                                     <br>
                                                     <form action="{{ routeUrl('admin.attachment.deleteAttachment') }}"
                                                           method="post"
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="clear"></div>
                                     {% if orderItem.areAttachmentsEnabled %}
-                                        <a href="{{ routeUrl('admin.attachment.createForOrderItem') }}"
+                                        <a href="{{ routeUrl('admin.attachment.createForOrderItem', {'orderItemId': orderItem.id.hex}) }}"
                                            class="btn btn-xs btn-success upload-attachment">
                                             <i class="fa fa-upload"></i> Upload Attachment
                                         </a>

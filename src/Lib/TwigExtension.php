@@ -4,6 +4,7 @@ namespace inklabs\KommerceTemplates\Lib;
 use DateTime;
 use DateTimeZone;
 use inklabs\kommerce\EntityDTO\AbstractPromotionDTO;
+use inklabs\kommerce\EntityDTO\AttachmentDTO;
 use inklabs\kommerce\EntityDTO\CouponDTO;
 use inklabs\kommerce\EntityDTO\OptionDTO;
 use inklabs\kommerce\EntityDTO\OrderDTO;
@@ -220,7 +221,7 @@ class TwigExtension extends Twig_Extension
                     }
 
                     return $this->routeUrl->getRoute(
-                        'product.image',
+                        'image.path',
                         [
                             'imagePath' => $imagePath,
                         ]
@@ -241,7 +242,28 @@ class TwigExtension extends Twig_Extension
                     }
 
                     return $this->routeUrl->getRoute(
-                        'tag.image',
+                        'image.path',
+                        [
+                            'imagePath' => $imagePath,
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
+                'attachmentImageUrl',
+                function (AttachmentDTO $attachmentDTO) {
+                    $imagePath = $attachmentDTO->uri;
+
+                    if ($imagePath === null) {
+                        return $this->getPlaceholderUrl();
+                    }
+
+                    if ($this->containsExternalUrl($imagePath)) {
+                        return $imagePath;
+                    }
+
+                    return $this->routeUrl->getRoute(
+                        'image.path',
                         [
                             'imagePath' => $imagePath,
                         ]
