@@ -40,6 +40,15 @@
                                 {# TODO: Render Reviews #}
                             </div>
                         {% endif %}
+
+                        {% if product.areAttachmentsEnabled %}
+                            {% if user is not empty %}
+                                <a href="{{ routeUrl('user.attachment.createForProduct', {'productId': product.id.hex}) }}"
+                                   class="btn btn-xs btn-success upload-attachment">
+                                    <i class="fa fa-upload"></i> Upload Attachment
+                                </a>
+                            {% endif %}
+                        {% endif %}
                     </div>
 
                     <div class="col-sm-7">

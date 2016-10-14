@@ -1,0 +1,53 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends 'layout/base.twig' %}
+
+{% block pageTitle %}Upload Attachment - Order #{{ order.referenceNumber }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Upload Attachment to Product</h1>
+
+                <div class="well well-sm">
+                    <div class="form-group">
+                        <form action="{{ routeUrl('user.attachment.createForProduct.post') }}"
+                              method="post"
+                              class="form"
+                              enctype="multipart/form-data">
+                            {{ form.csrf() }}
+                            {{ form.hidden('productId', product.id.hex) }}
+
+                            <input type="file" name="image">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+                        </form>
+                    </div>
+                </div>
+
+                <hr />
+
+                <h2>Product:</h2>
+                <div style="width: 75px">
+                    <img src="{{ productImageUrl(product) }}"/>
+                </div>
+                <div>
+                   <a href="{{ productUrl(product) }}">
+                       {{ product.name }}
+                   </a>
+                    <span class="small text-muted">{{ product.sku }}</span><br>
+                </div>
+                {% embed 'helper/price.twig' with {'price': product.price } only %}{% endembed %}
+                {# TODO
+                <h3>Attachments:</h3>
+                {% for attachment in orderItem.attachments %}
+                    <img src="{{ attachmentImageUrl(attachment) }}" style="max-height: 150px" />
+                {% else %}
+                    <div class="text-muted">
+                        no attachments
+                    </div>
+                {% endfor %}
+                #}
+            </div>
+        </div>
+    </div>
+{% endblock %}
