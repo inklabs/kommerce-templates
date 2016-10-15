@@ -6,6 +6,7 @@ use DateTimeZone;
 use inklabs\kommerce\EntityDTO\AbstractPromotionDTO;
 use inklabs\kommerce\EntityDTO\AttachmentDTO;
 use inklabs\kommerce\EntityDTO\CouponDTO;
+use inklabs\kommerce\EntityDTO\ImageDTO;
 use inklabs\kommerce\EntityDTO\OptionDTO;
 use inklabs\kommerce\EntityDTO\OrderDTO;
 use inklabs\kommerce\EntityDTO\ProductDTO;
@@ -203,6 +204,27 @@ class TwigExtension extends Twig_Extension
                         'admin.coupon.edit',
                         [
                             'couponId' => $couponDTO->id->getHex(),
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
+                'imageUrl',
+                function (ImageDTO $imageDTO) {
+                    $imagePath = $imageDTO->path;
+
+                    if ($imagePath === null) {
+                        return $this->getPlaceholderUrl();
+                    }
+
+                    if ($this->containsExternalUrl($imagePath)) {
+                        return $imagePath;
+                    }
+
+                    return $this->routeUrl->getRoute(
+                        'image.path',
+                        [
+                            'imagePath' => $imagePath,
                         ]
                     );
                 }

@@ -1,0 +1,116 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Product Images - {{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include 'admin/product/product-header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Images:</h3>
+
+                {% for image in product.images %}
+                    <div class="col-sm-4">
+                        <div class="thumbnail">
+                            <div class="text-center" style="height: 160px;">
+                                <img src="{{ imageUrl(image) }}" style="max-width: 100%; max-height: 100%;" />
+                            </div>
+                            <br />
+                            <p>
+                                <?php if ($image->path == $product->defaultImage) { ?>
+                                    <div class="label label-primary pull-right">Default</div>
+
+                                    <?=View::factory(
+                                        'admin/unset_default_image_form',
+                                        [
+                                            'setDefaultAction' => 'admin/product/set_default_image/' . $product->id->getHex(),
+                                        ]
+                                    )?>
+                                <?php } else { ?>
+                                    <?=View::factory(
+                                        'admin/set_default_image_form',
+                                        [
+                                            'setDefaultAction' => 'admin/product/set_default_image/' . $product->id->getHex(),
+                                            'path' => $image->path
+                                        ]
+                                    )?>
+                                <?php } ?>
+
+                                <br>
+                                <?=Form::open('admin/product/delete_image/' . $product->id->getHex(), [
+                                    'method' => 'POST',
+                                    'id' => 'delete-image-form',
+                                    'class' => 'form',
+                                ])?>
+                                    <?=Form::csrf()?>
+
+                                    <?=Form::hidden('id', $image->id->getHex())?>
+                                    <button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove-sign"></i> Remove</button>
+                                <?=Form::close()?>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="clearfix"></div>
+
+                <div class="well well-sm">
+                    <div class="form-group">
+                        <form action="{{ routeUrl('admin.product.upload-image') }}"
+                              method="post"
+                              class="form"
+                              enctype="multipart/form-data">
+                            {{ form.csrf() }}
+                            {{ form.hidden('productId', product.id.hex) }}
+
+                            <input type="file" name="image">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>Tag Images:</h3>
+
+                <?php if (empty($product->tagImages)) { ?>
+                    No tag images
+                <?php } else { ?>
+                    <?php foreach ($product->tagImages as $image) { ?>
+                        <div class="col-sm-4">
+                            <div class="thumbnail">
+                                <div class="text-center" style="height: 160px;">
+                                    <img src="<?=$image->pathUrl?>" style="max-width: 100%; max-height: 100%;" />
+                                </div>
+                                <br />
+                                <p>
+                                    <?php if ($image->path == $product->defaultImage) { ?>
+                                        <?=HTML::anchor('admin/product/images/' . $product->id->getHex(), 'Default', array(
+                                            'class' => 'btn btn-primary btn-xs disabled'
+                                        ))?>
+                                        <br>
+                                        <?=View::factory(
+                                            'admin/unset_default_image_form',
+                                            [
+                                                'setDefaultAction' => 'admin/product/set_default_image/' . $product->id->getHex(),
+                                            ]
+                                        )?>
+                                    <?php } else { ?>
+                                        <?=View::factory(
+                                            'admin/set_default_image_form',
+                                            [
+                                                'setDefaultAction' => 'admin/product/set_default_image/' . $product->id->getHex(),
+                                                'path' => $image->path
+                                            ]
+                                        )?>
+                                    <?php } ?>
+                                </p>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+{% endblock %}
