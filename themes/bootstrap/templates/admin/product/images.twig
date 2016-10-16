@@ -20,27 +20,7 @@
                             </div>
                             <br />
                             <p>
-                                {% if image.path == product.defaultImage %}
-                                    <div class="label label-primary pull-right">Default</div>
-
-                                    <form action="{{ routeUrl('admin.product.unset-default-image') }}"
-                                          method="post"
-                                          class="form-inline">
-                                        {{ form.csrf() }}
-                                        {{ form.hidden('productId', product.id.hex) }}
-
-                                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-minus-circle"></i> Unset Default</button>
-                                    </form>
-                                {% else %}
-                                    <form action="{{ routeUrl('admin.product.set-default-image') }}"
-                                          method="post"
-                                          class="form-inline">
-                                        {{ form.csrf() }}
-                                        {{ form.hidden('productId', product.id.hex) }}
-
-                                        <button type="submit" class="btn btn-default btn-xs">Set Default</button>
-                                    </form>
-                                {% endif %}
+                                {% include 'admin/product/parts/set-default-image.twig' %}
 
                                 <br>
                                 <form action="{{ routeUrl('admin.product.delete-image') }}"
@@ -76,42 +56,21 @@
 
                 <h3>Tag Images:</h3>
 
-                <?php if (empty($product->tagImages)) { ?>
-                    No tag images
-                <?php } else { ?>
-                    <?php foreach ($product->tagImages as $image) { ?>
-                        <div class="col-sm-4">
-                            <div class="thumbnail">
-                                <div class="text-center" style="height: 160px;">
-                                    <img src="<?=$image->pathUrl?>" style="max-width: 100%; max-height: 100%;" />
-                                </div>
-                                <br />
-                                <p>
-                                    <?php if ($image->path == $product->defaultImage) { ?>
-                                        <?=HTML::anchor('admin/product/images/' . $product->id->getHex(), 'Default', array(
-                                            'class' => 'btn btn-primary btn-xs disabled'
-                                        ))?>
-                                        <br>
-                                        <?=View::factory(
-                                            'admin/unset_default_image_form',
-                                            [
-                                                'setDefaultAction' => 'admin/product/set_default_image/' . $product->id->getHex(),
-                                            ]
-                                        )?>
-                                    <?php } else { ?>
-                                        <?=View::factory(
-                                            'admin/set_default_image_form',
-                                            [
-                                                'setDefaultAction' => 'admin/product/set_default_image/' . $product->id->getHex(),
-                                                'path' => $image->path
-                                            ]
-                                        )?>
-                                    <?php } ?>
-                                </p>
+                {% for image in product.tagImages %}
+                    <div class="col-sm-4">
+                        <div class="thumbnail">
+                            <div class="text-center" style="height: 160px;">
+                                <img src="<?=$image->pathUrl?>" style="max-width: 100%; max-height: 100%;" />
                             </div>
+                            <br />
+                            <p>
+                                {% include 'admin/product/parts/set-default-image.twig' %}
+                            </p>
                         </div>
-                    <?php } ?>
-                <?php } ?>
+                    </div>
+                {% else %}
+                    No tag images
+                {% endfor %}
             </div>
         </div>
     </div>
