@@ -1,0 +1,18 @@
+{# @var tag \inklabs\kommerce\EntityDTO\TagDTO #}
+
+{% set navigation = [
+    {
+        'name': 'Edit',
+        'url' : routeUrl('admin.tag.edit', {'tagId': tag.id.getHex()})
+    },
+    {
+        'name': 'Images',
+        'url' : routeUrl('admin.tag.images', {'tagId': tag.id.getHex()})
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include 'helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>
