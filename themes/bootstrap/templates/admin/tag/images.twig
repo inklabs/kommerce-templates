@@ -1,18 +1,18 @@
-{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{# @var tag \inklabs\kommerce\EntityDTO\TagDTO #}
 {% extends 'layout/base-admin.twig' %}
 
-{% block pageTitle %}Product Images - {{ product.name }}{% endblock %}
+{% block pageTitle %}Tag Images - {{ tag.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include 'admin/product/product-header.twig' %}
+        {% include 'admin/tag/parts/header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
                 <h3>Images:</h3>
 
-                {% for image in product.images %}
+                {% for image in tag.images %}
                     <div class="col-sm-4">
                         <div class="thumbnail">
                             <div class="text-center" style="height: 160px;">
@@ -20,14 +20,14 @@
                             </div>
                             <br />
                             <p>
-                                {% include 'admin/product/parts/set-default-image.twig' %}
+                                {% include 'admin/tag/parts/set-default-image.twig' %}
 
                                 <br>
-                                <form action="{{ routeUrl('admin.product.delete-image') }}"
+                                <form action="{{ routeUrl('admin.tag.delete-image') }}"
                                       method="post"
                                       class="form">
                                     {{ form.csrf() }}
-                                    {{ form.hidden('productId', product.id.hex) }}
+                                    {{ form.hidden('tagId', tag.id.hex) }}
                                     {{ form.hidden('imageId', image.id.hex) }}
 
                                     <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</button>
@@ -41,36 +41,18 @@
 
                 <div class="well well-sm">
                     <div class="form-group">
-                        <form action="{{ routeUrl('admin.product.upload-image') }}"
+                        <form action="{{ routeUrl('admin.tag.upload-image') }}"
                               method="post"
                               class="form"
                               enctype="multipart/form-data">
                             {{ form.csrf() }}
-                            {{ form.hidden('productId', product.id.hex) }}
+                            {{ form.hidden('tagId', tag.id.hex) }}
 
                             <input type="file" name="image">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
                         </form>
                     </div>
                 </div>
-
-                <h3>Tag Images:</h3>
-
-                {% for image in product.tagImages %}
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <div class="text-center" style="height: 160px;">
-                                <img src="{{ imageUrl(image) }}" style="max-width: 100%; max-height: 100%;" />
-                            </div>
-                            <br />
-                            <p>
-                                {% include 'admin/product/parts/set-default-image.twig' %}
-                            </p>
-                        </div>
-                    </div>
-                {% else %}
-                    No tag images
-                {% endfor %}
             </div>
         </div>
     </div>
