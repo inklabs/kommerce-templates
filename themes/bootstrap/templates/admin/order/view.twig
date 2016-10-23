@@ -124,6 +124,7 @@
                                     {% else %}
                                         {{ orderItem.name | nl2br }}
                                     {% endif %}
+                                    <br>
                                     <span class="small text-muted">{{ orderItem.sku }}</span><br>
 
                                     {% include 'helper/order-item-options.twig' with {'orderItem': orderItem} only %}
