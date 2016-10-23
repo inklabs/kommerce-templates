@@ -1,9 +1,10 @@
 {# @var placeholder string #}
+{# @var queryString string #}
 
 <div class="input-group col-sm-4">
     <input type="text"
            name="q"
-           value="{# TODO: Add query #}"
+           value="{{ queryString }}"
            placeholder="{{ placeholder }}"
            class="form-control typeahead">
 

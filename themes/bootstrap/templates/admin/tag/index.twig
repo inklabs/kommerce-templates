@@ -1,5 +1,6 @@
 {# @var tags \inklabs\kommerce\EntityDTO\TagDTO[] #}
 {# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
 {% extends 'layout/base-admin.twig' %}
 
 {% block pageTitle %}Tags{% endblock %}
@@ -19,7 +20,7 @@
                 <form action="{{ routeUrl('admin.tag') }}"
                       method="get"
                       class="form-search">
-                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name'} only %}{% endembed %}
+                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}{% endembed %}
                 </form>
 
                 {{ paginate.detailed(pagination) }}

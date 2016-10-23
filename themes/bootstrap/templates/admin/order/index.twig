@@ -1,5 +1,6 @@
 {# @var orders \inklabs\kommerce\EntityDTO\OrderDTO[] #}
 {# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
 {% extends 'layout/base-admin.twig' %}
 
 {% block pageTitle %}Orders{% endblock %}
@@ -12,7 +13,7 @@
                 <form action="{{ routeUrl('admin.order') }}"
                       method="get"
                       class="form-search">
-                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search SKU/Name'} only %}{% endembed %}
+                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search SKU/Name', 'queryString': queryString} only %}{% endembed %}
                 </form>
 
                 {{ paginate.detailed(pagination) }}
