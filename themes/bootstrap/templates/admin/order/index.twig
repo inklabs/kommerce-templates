@@ -69,8 +69,10 @@
                                         </span>
                                     </div>
                                 </td>
-                                <td class="hidden-xs text-muted">{{ order.shippingAddress.email }}</td>
-                                <td class="hidden-xs text-muted">{{ order.created | formatDate }}</td>
+                                <td class="hidden-xs small text-muted">
+                                    {{ order.shippingAddress.email }}
+                                </td>
+                                <td class="hidden-xs small text-muted">{{ order.created | formatDate }}</td>
                             </tr>
                         {% else %}
                             <td colspan="100%">No orders</td>
