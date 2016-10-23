@@ -150,10 +150,21 @@
                                     </div>
                                     <div class="clear"></div>
                                     {% if orderItem.areAttachmentsEnabled %}
-                                        <a href="{{ routeUrl('admin.attachment.createForOrderItem', {'orderItemId': orderItem.id.hex}) }}"
-                                           class="btn btn-xs btn-success upload-attachment">
-                                            <i class="fa fa-upload"></i> Upload Attachment
-                                        </a>
+                                        <div class="well well-sm">
+                                            <h4>Upload Attachment</h4>
+                                            <div class="form-group">
+                                                <form action="{{ routeUrl('admin.attachment.createForOrderItem.post') }}"
+                                                      method="post"
+                                                      class="form"
+                                                      enctype="multipart/form-data">
+                                                    {{ form.csrf() }}
+                                                    {{ form.hidden('orderItemId', orderItem.id.hex) }}
+
+                                                    <input type="file" name="image">
+                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     {% endif %}
 
                                     <div class="visible-xs">
