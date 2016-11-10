@@ -1,0 +1,76 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Product Tags - {{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include 'admin/product/product-header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Tags:</h3>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;"></th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tag in product.tags %}
+                            <tr>
+                                <td>
+                                    <a href="{{ adminTagUrl(tag) }}">
+                                        <img src="{{ tagImageUrl(tag) }}"
+                                             width="35"
+                                             height="35"
+                                             style="width: 35px; height: 35px;">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ adminTagUrl(tag) }}">
+                                        {{ tag.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <form action="{{ routeUrl('admin.product.remove-tag') }}"
+                                          method="post"
+                                          class="form">
+                                        {{ form.csrf() }}
+                                        {{ form.hidden('productId', product.id.hex) }}
+                                        {{ form.hidden('tagId', tag.id.hex) }}
+
+                                        <button type="submit" class="btn btn-danger btn-xs pull-right"><i class="fa fa-minus"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr><td colspan="100%">No linked tags</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h4>Add Tag:</h4>
+                <form action="{{ routeUrl('admin.product.add-tag') }}"
+                      method="post">
+                    {{ form.csrf() }}
+                    {{ form.hidden('productId', product.id.hex) }}
+
+                    <div class="input-group col-sm-4">
+                        <input type="text"
+                               name="tagId"
+                               value=""
+                               class="form-control typeahead"/>
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-plus"></i> Add</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

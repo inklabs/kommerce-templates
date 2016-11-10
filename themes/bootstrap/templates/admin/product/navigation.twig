@@ -3,11 +3,15 @@
 {% set navigation = [
     {
         'name': 'Edit',
-        'url' : routeUrl('admin.product.edit', {'productId': product.id.getHex()})
+        'url' : routeUrl('admin.product.edit', {'productId': product.id.hex})
     },
     {
         'name': 'Images',
-        'url' : routeUrl('admin.product.images', {'productId': product.id.getHex()})
+        'url' : routeUrl('admin.product.images', {'productId': product.id.hex})
+    },
+    {
+        'name': 'Tags',
+        'url' : routeUrl('admin.product.tags', {'productId': product.id.hex})
     }
 ] %}
 
