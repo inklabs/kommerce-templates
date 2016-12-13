@@ -1,0 +1,93 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Product Options - {{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include 'admin/product/product-header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Options:</h3>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for optionProduct in product.optionProducts %}
+                            <tr>
+                                <td>
+                                    <a href="{{ adminOptionUrl(optionProduct.option) }}">{{ optionProduct.option.name }}</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr><td colspan="100%">No linked options</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <hr />
+                <h2>Tag Options:</h2>
+
+                {% if product.options is empty and product.textOptions is empty %}
+                    No tag options
+                {% else %}
+                    <h3>Options</h3>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Sort Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for option in product.options %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ adminOptionUrl(option) }}">{{ option.name }}</a>
+                                    </td>
+                                    <td>{{ option.sortOrder }}</td>
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="100%">No tag options</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    {# TODO: Text Options
+                    <h3>Text Options</h3>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Sort Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for textOption in product.textOptions %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ adminTextOptionUrl(textOption) }}">{{ textOption.name }}</a>
+                                    </td>
+                                    <td>{{ textOption.sortOrder }}</td>
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="100%">No tag text options</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    #}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
