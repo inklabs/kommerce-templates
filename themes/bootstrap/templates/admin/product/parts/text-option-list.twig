@@ -1,0 +1,29 @@
+{# @var textOptions \inklabs\kommerce\EntityDTO\TextOption[] #}
+<h3>Text Options</h3>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Sort Order</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for textOption in textOptions %}
+            <tr>
+                <td>
+                    {#<a href="{{ adminTextOptionUrl(textOption) }}">{{ textOption.name }}</a>#}
+                    {{ textOption.name }}
+                </td>
+                <td>
+                    <div title="{{ textOption.description }}">
+                        {{ textOption.description|truncate(50)}}
+                    </div>
+                </td>
+                <td>{{ textOption.sortOrder }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No text options</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
