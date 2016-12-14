@@ -3,11 +3,15 @@
 {% set navigation = [
     {
         'name': 'Edit',
-        'url' : routeUrl('admin.tag.edit', {'tagId': tag.id.getHex()})
+        'url' : routeUrl('admin.tag.edit', {'tagId': tag.id.hex})
     },
     {
         'name': 'Images',
-        'url' : routeUrl('admin.tag.images', {'tagId': tag.id.getHex()})
+        'url' : routeUrl('admin.tag.images', {'tagId': tag.id.hex})
+    },
+    {
+        'name': 'Options',
+        'url' : routeUrl('admin.tag.options', {'tagId': tag.id.hex})
     }
 ] %}
 
