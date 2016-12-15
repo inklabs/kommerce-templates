@@ -1,0 +1,180 @@
+{# @var coupon \inklabs\kommerce\EntityDTO\CouponDTO #}
+{% extends 'layout/base-admin.twig' %}
+
+{% block pageTitle %}Coupon - {{ coupon.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include 'admin/coupon/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.coupon.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('couponId', coupon.id.hex ) }}
+                        <div class="well">
+                            <div class="row form-group">
+                                <label for="coupon-name" class="control-label col-sm-3">Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text"
+                                           id="coupon-name"
+                                           name="coupon[name]"
+                                           value="{{ coupon.name }}"
+                                           class="form-control"
+                                           maxlength="255"
+                                           required=""/>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="coupon-code" class="control-label col-sm-3">Code</label>
+                                <div class="col-sm-8">
+                                    <input type="text"
+                                           id="coupon-code"
+                                           name="coupon[code]"
+                                           value="{{ coupon.code }}"
+                                           class="form-control"
+                                           maxlength="255"
+                                           required=""/>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="coupon-type" class="control-label col-sm-3">Discount Type</label>
+                                <div class="col-sm-3">
+                                    {{ form.select(
+                                        'coupon[type]',
+                                        coupon.type.id,
+                                        coupon.type.nameMap,
+                                        'coupon-type',
+                                        'form-control input-sm',
+                                        {
+                                            'required': 'true'
+                                        }
+                                    ) }}
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="coupon-value" class="control-label col-sm-3">Discount Value</label>
+                                <div class="col-sm-3">
+                                    {% if coupon.type.isFixed or coupon.type.isExact %}
+                                        <div class="input-group">
+                                            <div class="input-group-addon">$</div>
+                                            <input type="text"
+                                                   id="coupon-value"
+                                                   name="coupon[value]"
+                                                   value="{{ coupon.value | floatPrice }}"
+                                                   class="form-control"
+                                                   required=""/>
+                                        </div>
+                                    {% elseif coupon.type.isPercent %}
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   id="coupon-value"
+                                                   name="coupon[value]"
+                                                   value="{{ coupon.value }}"
+                                                   class="form-control"
+                                                   required=""/>
+                                            <div class="input-group-addon">%</div>
+                                        </div>
+                                    {% else %}
+                                        <input type="text"
+                                               id="coupon-value"
+                                               name="coupon[value]"
+                                               value="{{ coupon.value }}"
+                                               class="form-control"
+                                               required=""/>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="coupon-minOrderValue" class="control-label col-sm-3">Min Order Value</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text"
+                                               id="coupon-minOrderValue"
+                                               name="coupon[minOrderValue]"
+                                               value="{{ coupon.minOrderValue | floatPrice('') }}"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="coupon-maxOrderValue" class="control-label col-sm-3">Max Order Value</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text"
+                                               id="coupon-maxOrderValue"
+                                               name="coupon[maxOrderValue]"
+                                               value="{{ coupon.maxOrderValue | floatPrice('') }}"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="coupon-maxRedemptions" class="control-label col-sm-3">Max Redemptions</label>
+                                <div class="col-sm-3">
+                                    <input type="text"
+                                           id="coupon-maxRedemptions"
+                                           name="coupon[maxRedemptions]"
+                                           value="{{ coupon.maxRedemptions }}"
+                                           class="form-control"
+                                           required=""/>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-sm-3" for="coupon-start">Start</label>
+                                <div class="date datetimepicker col-sm-3">
+                                    <div class="input-group">
+                                        <input type="datetime"
+                                           id="coupon-start"
+                                           name="coupon[start]"
+                                           value="{{ coupon.startFormatted }}"
+                                           class="form-control"
+                                           data-date-format="yyyy-mm-dd"/>
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-sm-3" for="coupon-end">End</label>
+                                <div class="date datetimepicker col-sm-3">
+                                    <div class="input-group">
+                                        <input type="datetime"
+                                           id="coupon-end"
+                                           name="coupon[end]"
+                                           value="{{ coupon.endFormatted }}"
+                                           class="form-control"
+                                           data-date-format="yyyy-mm-dd"/>
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="well">
+                            <div class="pull-right text-muted text-right">
+                                <span title="Created">{{ coupon.createdFormatted }}<?</span><br>
+                                <span title="Updated">{{ coupon.updatedFormatted }}<?</span><br>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.coupon') }}" class="btn btn-default">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

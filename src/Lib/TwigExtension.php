@@ -88,7 +88,11 @@ class TwigExtension extends Twig_Extension
             ),
             new Twig_SimpleFilter(
                 'floatPrice',
-                function ($price) {
+                function ($price, $nullDisplayValue = null) {
+                    if ($nullDisplayValue !== null && $price === null) {
+                        return $nullDisplayValue;
+                    }
+
                     return number_format(($price / 100), 2, null, '');
                 }
             ),
