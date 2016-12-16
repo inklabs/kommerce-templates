@@ -45,26 +45,30 @@
                                         {{ coupon.code }}
                                     </a>
                                 </td>
-                                <td>{{ coupon.name }}</td>
+                                <td>
+                                    <a href="{{ adminCouponUrl(coupon) }}">
+                                        {{ coupon.name }}
+                                    </a>
+                                </td>
                                 <td>{{ coupon | displayPromotionValue }}</td>
                                 <td>
                                     {{ coupon.redemptions }} of
                                     {% if coupon.maxRedemptions is null %}
-                                        [unlimited]
+                                        <span class="text-muted small">[unlimited]</span>
                                     {% else %}
                                         {{ coupon.maxRedemptions }}
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if coupon.minOrderValue is null %}
-                                        [no minimum]
+                                        <span class="text-muted small">[no minimum]</span>
                                     {% else %}
                                         {{ coupon.minOrderValue | displayPrice }}
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if coupon.maxOrderValue is null %}
-                                        [no maximum]
+                                        <span class="text-muted small">[no maximum]</span>
                                     {% else %}
                                         {{ coupon.maxOrderValue | displayPrice }}
                                     {% endif %}
