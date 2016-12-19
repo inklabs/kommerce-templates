@@ -21,7 +21,6 @@
                 <table class="table table-condensed">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>External ID</th>
                             <th>Name</th>
                             <th>email</th>
@@ -32,8 +31,13 @@
                     <tbody>
                         {% for user in users %}
                             <tr>
-                                <td>{{ user.id.getHex() }}</td>
-                                <td>{{ user.externalId }}</td>
+                                <td>
+                                    {% if user.externalId is not null %}
+                                        {{ user.externalId }}
+                                    {% else %}
+                                        <span class="text-muted small">[none]</span>
+                                    {% endif %}
+                                </td>
                                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.totalLogins }}</td>
