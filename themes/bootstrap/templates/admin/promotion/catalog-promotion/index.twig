@@ -28,7 +28,6 @@
                 <table class="table table-condensed">
                     <thead>
                         <tr>
-                            <th>Code</th>
                             <th>Name</th>
                             <th>Tag</th>
                             <th>Discount</th>
@@ -41,11 +40,6 @@
                     <tbody>
                         {% for catalogPromotion in catalogPromotions %}
                             <tr>
-                                <td>
-                                    <a href="{{ adminCatalogPromotionUrl(catalogPromotion) }}">
-                                        {{ catalogPromotion.code }}
-                                    </a>
-                                </td>
                                 <td>
                                     <a href="{{ adminCatalogPromotionUrl(catalogPromotion) }}">
                                         {{ catalogPromotion.name }}
