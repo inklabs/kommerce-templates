@@ -23,7 +23,7 @@
                                 {% include 'admin/tag/parts/set-default-image.twig' %}
 
                                 <br>
-                                <form action="{{ routeUrl('admin.tag.delete-image') }}"
+                                <form action="{{ routeUrl('admin.tag.remove-image') }}"
                                       method="post"
                                       class="form">
                                     {{ form.csrf() }}
