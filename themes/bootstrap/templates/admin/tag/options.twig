@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                {% include 'admin/parts/option-list.twig' with {'options': tag.options} only %}
+                {% include 'admin/tag/parts/option-list.twig' with {'options': tag.options, 'tag': tag} only %}
 
                 <h4>Add Option:</h4>
                 <form action="{{ routeUrl('admin.tag.add-option') }}"
@@ -32,7 +32,7 @@
 
                 <hr>
 
-                {% include 'admin/parts/text-option-list.twig' with {'textOptions': tag.textOptions} only %}
+                {% include 'admin/tag/parts/text-option-list.twig' with {'textOptions': tag.textOptions} only %}
             </div>
         </div>
     </div>
