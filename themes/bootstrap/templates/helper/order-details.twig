@@ -16,15 +16,15 @@
             <div class="row">
                 <div class="col-sm-4">
                     <strong>Shipping Address</strong>
-                    {% embed 'helper/order-address.twig' with {'address': order.shippingAddress } only %}{% endembed %}
+                    {% embed '@theme/helper/order-address.twig' with {'address': order.shippingAddress } only %}{% endembed %}
                     <hr>
                     <strong>Billing Address</strong>
-                    {% embed 'helper/order-address.twig' with {'address': order.billingAddress } only %}{% endembed %}
+                    {% embed '@theme/helper/order-address.twig' with {'address': order.billingAddress } only %}{% endembed %}
                 </div>
                 <div class="col-sm-4">
                     <strong>Payment Information</strong>
                     <div>
-                        {% include 'helper/order-payments.twig' %}
+                        {% include '@theme/helper/order-payments.twig' %}
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -107,7 +107,7 @@
                             {% endif %}
                             <span class="small text-muted">{{ orderItem.sku }}</span><br>
 
-                            {% include 'helper/order-item-options.twig' with {'orderItem': orderItem} only %}
+                            {% include '@theme/helper/order-item-options.twig' with {'orderItem': orderItem} only %}
 
                             {# TODO: Add to cart if in stock
                             <?php if (orderItem.product !== null && orderItem.product.isInStock) { ?>
@@ -164,12 +164,12 @@
 
                             <div class="visible-xs">
                                 <br>
-                                {% include 'helper/unit-price.twig' with {'price': orderItem.price } only %}
+                                {% include '@theme/helper/unit-price.twig' with {'price': orderItem.price } only %}
                             </div>
                         </td>
                         <td class="text-right">{{ orderItem.quantity }}</td>
                         <td class="text-right hidden-xs">
-                            {% include 'helper/unit-price.twig' with {'price': orderItem.price } only %}
+                            {% include '@theme/helper/unit-price.twig' with {'price': orderItem.price } only %}
                         </td>
                         <td class="text-right">{{ orderItem.price.quantityPrice | displayPrice }}</td>
                     </tr>

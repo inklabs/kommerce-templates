@@ -1,11 +1,11 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Invoice - Order #{{ order.referenceNumber }}{% endblock %}
 
 {% block content %}
     <div class="container">
-        {% include 'admin/order/order-header.twig' %}
+        {% include '@theme/admin/order/order-header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">

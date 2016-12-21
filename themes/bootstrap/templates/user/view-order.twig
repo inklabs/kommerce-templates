@@ -1,5 +1,5 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
-{% extends 'layout/base.twig' %}
+{% extends '@theme/layout/base.twig' %}
 
 {% block pageTitle %}Order #{{ order.referenceNumber }}{% endblock %}
 
@@ -10,6 +10,6 @@
 
 {% block content %}
     <div class="container">
-        {% embed 'helper/order-details.twig' with {'order': order} only %}{% endembed %}
+        {% embed '@theme/helper/order-details.twig' with {'order': order} only %}{% endembed %}
     </div>
 {% endblock %}

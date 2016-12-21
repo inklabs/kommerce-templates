@@ -1,7 +1,7 @@
 {# @var users \inklabs\kommerce\EntityDTO\UserDTO[] #}
 {# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
 {# @var queryString string #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Users{% endblock %}
 
@@ -13,7 +13,7 @@
                 <form action="{{ routeUrl('admin.user') }}"
                       method="get"
                       class="form-search">
-                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name/Email', 'queryString': queryString} only %}{% endembed %}
+                    {% embed '@theme/helper/search-bar.twig' with {'placeholder': 'Search Name/Email', 'queryString': queryString} only %}{% endembed %}
                 </form>
 
                 {{ paginate.detailed(pagination) }}

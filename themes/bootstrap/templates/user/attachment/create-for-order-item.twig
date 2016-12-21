@@ -1,5 +1,5 @@
 {# @var orderItem \inklabs\kommerce\EntityDTO\OrderItemDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Upload Attachment - Order #{{ order.referenceNumber }}{% endblock %}
 
@@ -42,7 +42,7 @@
                     {% endif %}
                     <span class="small text-muted">{{ orderItem.sku }}</span><br>
 
-                    {% include 'helper/order-item-options.twig' %}
+                    {% include '@theme/helper/order-item-options.twig' %}
 
                 </div>
                 <div>QTY: {{ orderItem.quantity }}</div>

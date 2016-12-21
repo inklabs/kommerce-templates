@@ -48,7 +48,7 @@
                                     <i class="fa fa-exclamation-circle"></i>
                                 {% endif %}
 
-                                {% embed 'flash/' ~ message.flashTemplate with message.data %}{% endembed %}
+                                {% embed message.flashTemplate with message.data %}{% endembed %}
                             </div>
                         {% endfor %}
                     {% endfor %}

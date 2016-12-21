@@ -1,7 +1,7 @@
 {# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
 {# @var cartItem \inklabs\kommerce\EntityDTO\CartItemDTO #}
 {# @var recommendedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
-{% extends 'layout/base.twig' %}
+{% extends '@theme/layout/base.twig' %}
 
 {% block pageTitle %}{{ cartItem.product.name }}{% endblock %}
 
@@ -15,19 +15,19 @@
     </h2>
 
     <div>
-        {% embed "helper/rating-stars.twig" with {'rating': cartItem.product.rating } only %}{% endembed %}
+        {% embed '@theme/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}{% endembed %}
     </div>
 
     <p>Quantity in cart: {{ cartItem.quantity }}</p>
 
     <div>
-        {% embed "helper/price.twig" with {'price': cartItem.price } only %}{% endembed %}
+        {% embed '@theme/helper/price.twig' with {'price': cartItem.price } only %}{% endembed %}
     </div>
 
     <a href="/cart">View Cart</a>
 
     <div>
-        {% embed "helper/checkout-button.twig" only %}{% endembed %}
+        {% embed '@theme/helper/checkout-button.twig' only %}{% endembed %}
     </div>
 
     <p>Order subtotal:</p>
@@ -40,7 +40,7 @@
     <p>items in your Cart</p>
     {% endtrans %}
 
-    {% embed "helper/recommended-products.twig" with {'products': recommendedProducts } only %}
+    {% embed '@theme/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
         {% block title %}Recommended for you{% endblock %}
     {% endembed %}
 

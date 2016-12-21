@@ -1,12 +1,12 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Product Images - {{ product.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include 'admin/product/parts/header.twig' %}
+        {% include '@theme/admin/product/parts/header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
@@ -20,7 +20,7 @@
                             </div>
                             <br />
                             <p>
-                                {% include 'admin/product/parts/set-default-image.twig' %}
+                                {% include '@theme/admin/product/parts/set-default-image.twig' %}
 
                                 <br>
                                 <form action="{{ routeUrl('admin.product.remove-image') }}"
@@ -64,7 +64,7 @@
                             </div>
                             <br />
                             <p>
-                                {% include 'admin/product/parts/set-default-image.twig' %}
+                                {% include '@theme/admin/product/parts/set-default-image.twig' %}
                             </p>
                         </div>
                     </div>

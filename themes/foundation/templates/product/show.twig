@@ -1,6 +1,6 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
 {# @var relatedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
-{% extends 'layout/base.twig' %}
+{% extends '@theme/layout/base.twig' %}
 
 {% block pageTitle %}{{ product.name }}{% endblock %}
 {% block pageDescription %}{{ product.description | nl2br }}{% endblock %}
@@ -47,7 +47,7 @@
     {% if relatedProducts is not empty %}
         <h2>You Might Also Like</h2>
 
-        {% embed "helpers/related-products-grid.twig" with {'products': relatedProducts } only %}
+        {% embed '@theme/helpers/related-products-grid.twig' with {'products': relatedProducts } only %}
         {% endembed %}
 
     {% endif %}

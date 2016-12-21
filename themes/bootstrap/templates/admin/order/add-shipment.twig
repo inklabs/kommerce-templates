@@ -1,11 +1,11 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Add Shipment - Order #{{ order.referenceNumber }}{% endblock %}
 
 {% block content %}
     <div class="container">
-        {% include 'admin/order/order-header.twig' %}
+        {% include '@theme/admin/order/order-header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
@@ -13,16 +13,16 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <strong>Billing Address</strong>
-                            {% include 'helper/order-address.twig' with {'address': order.billingAddress} %}
+                            {% include '@theme/helper/order-address.twig' with {'address': order.billingAddress} %}
                         </div>
                         <div class="col-sm-4">
                             <strong>Shipping Address</strong>
-                            {% include 'helper/order-address.twig' with {'address': order.shippingAddress} %}
+                            {% include '@theme/helper/order-address.twig' with {'address': order.shippingAddress} %}
                         </div>
                         <div class="col-sm-4">
                             <strong>Chosen Shipping Option</strong>
                             <div>
-                            {% include 'helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} %}
+                            {% include '@theme/helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} %}
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                         <span class="small text-muted">{{ orderItem.sku }}</span><br>
 
                                         <div>
-                                            {% include 'helper/order-item-options.twig' %}
+                                            {% include '@theme/helper/order-item-options.twig' %}
                                         </div>
                                     </td>
                                     <td class="text-right">{{ orderItem.quantity }}</td>

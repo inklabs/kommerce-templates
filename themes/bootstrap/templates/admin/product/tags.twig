@@ -1,18 +1,17 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Product Tags - {{ product.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include 'admin/product/parts/header.twig' %}
+        {% include '@theme/admin/product/parts/header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
                 <br>
-
-                {% embed 'admin/tag/parts/tag-list.twig' with {'tags': product.tags} %}
+                {% embed '@theme/admin/tag/parts/tag-list.twig' with {'tags': product.tags} %}
                     {% block thead %}
                         <th>Actions</th>
                     {% endblock %}

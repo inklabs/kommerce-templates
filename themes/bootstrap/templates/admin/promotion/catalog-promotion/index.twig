@@ -1,7 +1,7 @@
 {# @var catalogPromotions \inklabs\kommerce\EntityDTO\CatalogPromotionDTO[] #}
 {# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
 {# @var queryString string #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Catalog Promotion{% endblock %}
 
@@ -20,7 +20,7 @@
                 <form action="{{ routeUrl('admin.catalog-promotion') }}"
                       method="get"
                       class="form-search">
-                    {% embed 'helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}{% endembed %}
+                    {% embed '@theme/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}{% endembed %}
                 </form>
 
                 {{ paginate.detailed(pagination) }}

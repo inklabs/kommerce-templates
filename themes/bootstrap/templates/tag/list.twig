@@ -1,6 +1,6 @@
 {# @var tags \inklabs\kommerce\EntityDTO\TagDTO[] #}
 {# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
-{% extends 'layout/base.twig' %}
+{% extends '@theme/layout/base.twig' %}
 
 {% block pageTitle %}Tags{% endblock %}
 
@@ -19,7 +19,7 @@
                 {% else %}
                     {{ paginate.detailed(pagination) }}
 
-                    {% embed 'helper/tag-grid.twig' with {'tags': tags } only %}
+                    {% embed '@theme/helper/tag-grid.twig' with {'tags': tags } only %}
                     {% endembed %}
 
                     <div class="clearfix"></div>

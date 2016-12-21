@@ -1,11 +1,11 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Shipments - Order #{{ order.referenceNumber }}{% endblock %}
 
 {% block content %}
     <div class="container">
-        {% include 'admin/order/order-header.twig' %}
+        {% include '@theme/admin/order/order-header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
@@ -13,16 +13,16 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <strong>Shipping Address</strong>
-                            {% include 'helper/billing-address.twig' with {'address': order.shippingAddress} only %}
+                            {% include '@theme/helper/billing-address.twig' with {'address': order.shippingAddress} only %}
                         </div>
                         <div class="col-sm-4">
                             <strong>Billing Address</strong>
-                            {% include 'helper/billing-address.twig' with {'address': order.billingAddress} only %}
+                            {% include '@theme/helper/billing-address.twig' with {'address': order.billingAddress} only %}
                         </div>
                         <div class="col-sm-4">
                             <strong>Chosen Shipping Option</strong>
                             <div>
-                                {% include 'helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} only %}
+                                {% include '@theme/helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} only %}
                                 <?=View::factory('admin/order/shipment_rate')?>
                             </div>
                         </div>

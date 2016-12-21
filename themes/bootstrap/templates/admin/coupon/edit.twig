@@ -1,12 +1,12 @@
 {# @var coupon \inklabs\kommerce\EntityDTO\CouponDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Coupon - {{ coupon.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include 'admin/coupon/parts/header.twig' %}
+        {% include '@theme/admin/coupon/parts/header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">

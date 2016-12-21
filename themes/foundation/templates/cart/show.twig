@@ -1,12 +1,12 @@
 {# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
 {# @var recommendedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
-{% extends 'layout/base.twig' %}
+{% extends '@theme/layout/base.twig' %}
 
 {% block pageTitle %}Shopping Cart{% endblock %}
 
 {% block content %}
     {% if cart.cartItems is empty %}
-        {% include 'cart/parts/empty-cart.twig' %}
+        {% include '@theme/cart/parts/empty-cart.twig' %}
     {% else %}
         <h2>Shopping Cart</h2>
         <table class="table">
@@ -60,10 +60,10 @@
                             <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
                             <button type="submit">Remove item</button>
                         </form>
-                        {% embed "helper/unit-price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                        {% embed '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}{% endembed %}
                     </td>
                     <td>
-                        {% embed "helper/unit-price.twig" with {'price': cartItem.price } only %}{% endembed %}
+                        {% embed '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}{% endembed %}
                     </td>
                     <td>
                         {{ cartItem.price.quantityPrice | displayPrice }}
@@ -72,11 +72,11 @@
             {% endfor %}
             </tbody>
         </table>
-        {% embed "cart/parts/totals.twig" %}{% endembed %}
+        {% embed '@theme/cart/parts/totals.twig' %}{% endembed %}
         <p>Total ({{ cart.totalItems }} items):</p>
         <p>{{ cart.cartTotal.total | displayPrice }}</p>
 
-        {% embed "helper/checkout-button.twig" only %}{% endembed %}
+        {% embed '@theme/helper/checkout-button.twig' only %}{% endembed %}
 
         <form action="cart/apply-coupon" method="post">
             <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
@@ -86,6 +86,6 @@
 
     {% endif %}
 
-    {% embed "helper/recommended-products.twig" with {'products': recommendedProducts, 'size': 'small' } only %}
+    {% embed '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small' } only %}
     {% endembed %}
 {% endblock %}

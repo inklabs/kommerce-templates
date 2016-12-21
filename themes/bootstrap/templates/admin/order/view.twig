@@ -1,12 +1,12 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Order #{{ order.referenceNumber }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include 'admin/order/order-header.twig' %}
+        {% include '@theme/admin/order/order-header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
@@ -14,21 +14,21 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <strong>Shipping Address</strong>
-                            {% include 'helper/billing-address.twig' with {'address': order.shippingAddress} only %}
+                            {% include '@theme/helper/billing-address.twig' with {'address': order.shippingAddress} only %}
                             <hr>
                             <strong>Billing Address</strong>
-                            {% include 'helper/billing-address.twig' with {'address': order.billingAddress} only %}
+                            {% include '@theme/helper/billing-address.twig' with {'address': order.billingAddress} only %}
 
                         </div>
                         <div class="col-sm-4">
                             <strong>Payment Information</strong>
                             <div>
-                                {% include 'helper/order-payments.twig' %}
+                                {% include '@theme/helper/order-payments.twig' %}
                             </div>
                             <hr>
                             <strong>Chosen Shipping Option</strong>
                             <div>
-                                {% include 'helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} only %}
+                                {% include '@theme/helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} only %}
                                 <?=View::factory('admin/order/shipment_rate')?>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                                     <br>
                                     <span class="small text-muted">{{ orderItem.sku }}</span><br>
 
-                                    {% include 'helper/order-item-options.twig' with {'orderItem': orderItem} only %}
+                                    {% include '@theme/helper/order-item-options.twig' with {'orderItem': orderItem} only %}
 
                                     <div class="row">
                                         {% for attachment in orderItem.attachments %}
@@ -170,7 +170,7 @@
 
                                     <div class="visible-xs">
                                         <br>
-                                        {% include 'helper/unit-price.twig' with {
+                                        {% include '@theme/helper/unit-price.twig' with {
                                             'price': orderItem.price,
                                             'discountNames': orderItem.discountNames
                                         } only %}
@@ -180,7 +180,7 @@
                                     {{ orderItem.quantity}}
                                 </td>
                                 <td class="text-right hidden-xs">
-                                    {% include 'helper/unit-price.twig' with {
+                                    {% include '@theme/helper/unit-price.twig' with {
                                         'price': orderItem.price,
                                         'discountNames': orderItem.discountNames
                                     } only %}

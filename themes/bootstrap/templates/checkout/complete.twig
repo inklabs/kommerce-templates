@@ -1,7 +1,7 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
 {# @var user \inklabs\kommerce\EntityDTO\UserDTO #}
 
-{% extends 'layout/base.twig' %}
+{% extends '@theme/layout/base.twig' %}
 
 {% block pageTitle %}Order Received{% endblock %}
 
@@ -50,6 +50,6 @@
             </div>
         </div>
 
-        {% embed 'helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small'} only %}{% endembed %}
+        {% embed '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small'} only %}{% endembed %}
     </div>
 {% endblock %}

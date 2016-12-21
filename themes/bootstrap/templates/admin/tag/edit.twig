@@ -1,12 +1,12 @@
 {# @var tag \inklabs\kommerce\EntityDTO\TagDTO #}
-{% extends 'layout/base-admin.twig' %}
+{% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Tag - {{ tag.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include 'admin/tag/parts/header.twig' %}
+        {% include '@theme/admin/tag/parts/header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">

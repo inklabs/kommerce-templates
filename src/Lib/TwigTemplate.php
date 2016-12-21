@@ -41,7 +41,8 @@ class TwigTemplate
         $debugEnabled = false
     ) {
         $this->themeConfig = $themeConfig;
-        $twigLoader = new Twig_Loader_Filesystem($themeConfig->getTwigTemplatePaths());
+        $twigLoader = new Twig_Loader_Filesystem();
+        $twigLoader->setPaths($themeConfig->getTwigTemplatePaths(), 'theme');
 
         $this->twigEnvironment = new Twig_Environment($twigLoader);
 
@@ -105,7 +106,7 @@ class TwigTemplate
                 $name = basename($pathMacro, '.twig');
 
                 $filename = basename($pathMacro);
-                yield $name => 'macros/' . $filename;
+                yield $name => '@theme/macros/' . $filename;
             }
         }
     }

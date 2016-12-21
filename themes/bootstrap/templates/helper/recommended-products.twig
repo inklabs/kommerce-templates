@@ -4,10 +4,10 @@
             <hr />
             <h2 class="text-center">{% block title %}You Might Also Like{% endblock %}</h2>
             {% if size == 'small' %}
-                {% embed 'helper/product-grid-small.twig' with {'products': products } only %}
+                {% embed '@theme/helper/product-grid-small.twig' with {'products': products } only %}
                 {% endembed %}
             {% else %}
-                {% embed 'helper/product-grid.twig' with {'products': products } only %}
+                {% embed '@theme/helper/product-grid.twig' with {'products': products } only %}
                 {% endembed %}
             {% endif %}
         </div>

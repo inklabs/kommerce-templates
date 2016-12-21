@@ -1,5 +1,5 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
-{% extends 'layout/base.twig' %}
+{% extends '@theme/layout/base.twig' %}
 
 {% block pageTitle %}Upload Attachment - Order #{{ order.referenceNumber }}{% endblock %}
 
@@ -36,7 +36,7 @@
                    </a>
                     <span class="small text-muted">{{ product.sku }}</span><br>
                 </div>
-                {% embed 'helper/price.twig' with {'price': product.price } only %}{% endembed %}
+                {% embed '@theme/helper/price.twig' with {'price': product.price } only %}{% endembed %}
                 {# TODO
                 <h3>Attachments:</h3>
                 {% for attachment in orderItem.attachments %}
