@@ -24,36 +24,7 @@
                 </form>
 
                 {{ paginate.detailed(pagination) }}
-
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <td></td>
-                            <th>Name</th>
-                            <th>Sort Order</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for tag in tags %}
-                            <tr>
-                                <td>
-                                    <a href="{{ adminTagUrl(tag) }}">
-                                        <img src="{{ tagImageUrl(tag) }}"
-                                             width="50"
-                                             height="50"
-                                             style="width: 50px; height: 50px;">
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{ adminTagUrl(tag) }}">
-                                        {{ tag.name }}
-                                    </a>
-                                <td>{{ tag.sortOrder }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
+                {% include 'admin/tag/parts/tag-list.twig' with {'tags': tags} only %}
                 {{ paginate.detailed(pagination) }}
             </div>
         </div>
