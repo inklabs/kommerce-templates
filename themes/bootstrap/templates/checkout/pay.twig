@@ -43,7 +43,7 @@
 
                                     <div class="cart-unit-price">
                                         <span class="hidden-sm">Unit Price:</span>
-                                        {% embed '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}{% endembed %}
+                                        {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
                                     </div>
 
                                     <div class="cart-qty">
@@ -108,7 +108,7 @@
                         </tbody>
                     </table>
                     <div id="totals_container">
-                        {% embed '@theme/cart/parts/totals.twig' %}{% endembed %}
+                        {% include '@theme/cart/parts/totals.twig' %}
                     </div>
                     {% if cart.shipmentRate.deliveryMethod is not null %}
                         {# TODO:
@@ -350,7 +350,7 @@
                             <i class="fa fa-lock"></i> Place your order
                         </button>
                         <div class="pull-right">
-                            {% embed '@theme/helper/secure-logos.twig' only %}{% endembed %}
+                            {% include '@theme/helper/secure-logos.twig' only %}
                         </div>
                     </form>
                 </div>

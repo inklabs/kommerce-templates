@@ -15,19 +15,19 @@
     </h2>
 
     <div>
-        {% embed '@theme/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}{% endembed %}
+        {% include '@theme/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
     </div>
 
     <p>Quantity in cart: {{ cartItem.quantity }}</p>
 
     <div>
-        {% embed '@theme/helper/price.twig' with {'price': cartItem.price } only %}{% endembed %}
+        {% include '@theme/helper/price.twig' with {'price': cartItem.price } only %}
     </div>
 
     <a href="/cart">View Cart</a>
 
     <div>
-        {% embed '@theme/helper/checkout-button.twig' only %}{% endembed %}
+        {% include '@theme/helper/checkout-button.twig' only %}
     </div>
 
     <p>Order subtotal:</p>

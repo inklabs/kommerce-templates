@@ -20,7 +20,7 @@
                 <form action="{{ routeUrl('admin.product') }}"
                       method="get"
                       class="form-search">
-                    {% embed '@theme/helper/search-bar.twig' with {'placeholder': 'Search SKU/Name', 'queryString': queryString} only %}{% endembed %}
+                    {% include '@theme/helper/search-bar.twig' with {'placeholder': 'Search SKU/Name', 'queryString': queryString} only %}
                 </form>
 
                 {{ paginate.detailed(pagination) }}

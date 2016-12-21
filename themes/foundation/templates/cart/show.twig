@@ -60,10 +60,10 @@
                             <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
                             <button type="submit">Remove item</button>
                         </form>
-                        {% embed '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}{% endembed %}
+                        {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
                     </td>
                     <td>
-                        {% embed '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}{% endembed %}
+                        {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
                     </td>
                     <td>
                         {{ cartItem.price.quantityPrice | displayPrice }}
@@ -72,11 +72,11 @@
             {% endfor %}
             </tbody>
         </table>
-        {% embed '@theme/cart/parts/totals.twig' %}{% endembed %}
+        {% include '@theme/cart/parts/totals.twig' %}
         <p>Total ({{ cart.totalItems }} items):</p>
         <p>{{ cart.cartTotal.total | displayPrice }}</p>
 
-        {% embed '@theme/helper/checkout-button.twig' only %}{% endembed %}
+        {% include '@theme/helper/checkout-button.twig' only %}
 
         <form action="cart/apply-coupon" method="post">
             <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
@@ -86,6 +86,5 @@
 
     {% endif %}
 
-    {% embed '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small' } only %}
-    {% endembed %}
+    {% include '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small' } only %}
 {% endblock %}

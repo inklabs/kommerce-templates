@@ -7,14 +7,14 @@
             <div class="product-name">{{ product.name }}</div>
         </a>
 
-        {% embed '@theme/helper/rating-stars.twig' with {'rating': product.rating } only %}{% endembed %}
+        {% include '@theme/helper/rating-stars.twig' with {'rating': product.rating } only %}
 
         {% if not product.isInStock %}
             <div class="availability">
                 <span class="out-of-stock">Out of Stock</span>
             </div>
         {% elseif product.isPriceVisible %}
-            {% embed '@theme/helper/price.twig' with {'price': product.price } only %}{% endembed %}
+            {% include '@theme/helper/price.twig' with {'price': product.price } only %}
         {% endif %}
 
         <div class="clearfix"></div>

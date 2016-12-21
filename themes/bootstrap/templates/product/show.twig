@@ -35,7 +35,7 @@
                             <div class="divider"></div>
 
                             <div class="review-actions">
-                                {% embed '@theme/helper/rating-stars.twig' with {'rating': product.rating } only %}{% endembed %}
+                                {% include '@theme/helper/rating-stars.twig' with {'rating': product.rating } only %}
 
                                 {# TODO: Render Reviews #}
                             </div>
@@ -64,7 +64,7 @@
                             </div>
                         {% endif %}
 
-                        {% embed '@theme/helper/price.twig' with {'price': product.price } only %}{% endembed %}
+                        {% include '@theme/helper/price.twig' with {'price': product.price } only %}
                         <br />
 
                         {% if product.productQuantityDiscounts is not empty %}
@@ -102,8 +102,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="control-group">
-                                                {% embed '@theme/product/parts/options.twig' with {'option': option } only %}
-                                                {% endembed %}
+                                                {% include '@theme/product/parts/options.twig' with {'option': option } only %}
                                             </div>
                                         </div>
                                     </div>
@@ -113,8 +112,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="control-group">
-                                                {% embed '@theme/product/parts/text-options.twig' with {'textOption': textOption } only %}
-                                                {% endembed %}
+                                                {% include '@theme/product/parts/text-options.twig' with {'textOption': textOption } only %}
                                             </div>
                                         </div>
                                     </div>
@@ -190,8 +188,7 @@
                 {% if relatedProducts is not empty %}
                     <h2 class="text-center">You Might Also Like</h2>
 
-                    {% embed '@theme/helper/product-grid-small.twig' with {'products': relatedProducts, 'lg_slim': true } only %}
-                    {% endembed %}
+                    {% include '@theme/helper/product-grid-small.twig' with {'products': relatedProducts, 'lg_slim': true } only %}
 
                 {% endif %}
             </div>

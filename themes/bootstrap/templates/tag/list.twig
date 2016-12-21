@@ -19,8 +19,7 @@
                 {% else %}
                     {{ paginate.detailed(pagination) }}
 
-                    {% embed '@theme/helper/tag-grid.twig' with {'tags': tags } only %}
-                    {% endembed %}
+                    {% include '@theme/helper/tag-grid.twig' with {'tags': tags } only %}
 
                     <div class="clearfix"></div>
                     {{ paginate.detailed(pagination) }}

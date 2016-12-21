@@ -50,6 +50,6 @@
             </div>
         </div>
 
-        {% embed '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small'} only %}{% endembed %}
+        {% include '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small'} only %}
     </div>
 {% endblock %}

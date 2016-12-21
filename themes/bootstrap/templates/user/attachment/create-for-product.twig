@@ -36,7 +36,7 @@
                    </a>
                     <span class="small text-muted">{{ product.sku }}</span><br>
                 </div>
-                {% embed '@theme/helper/price.twig' with {'price': product.price } only %}{% endembed %}
+                {% include '@theme/helper/price.twig' with {'price': product.price } only %}
                 {# TODO
                 <h3>Attachments:</h3>
                 {% for attachment in orderItem.attachments %}

@@ -33,8 +33,7 @@
                 {% else %}
                     {{ paginate.detailed(pagination) }}
 
-                    {% embed '@theme/helper/product-grid.twig' with {'products': products } only %}
-                    {% endembed %}
+                    {% include '@theme/helper/product-grid.twig' with {'products': products } only %}
 
                     <div class="clearfix"></div>
                     {{ paginate.detailed(pagination) }}
@@ -42,10 +41,9 @@
             </div>
         </div>
 
-        {% embed '@theme/helper/recommended-products.twig' with {
+        {% include '@theme/helper/recommended-products.twig' with {
             'products': recommendedProducts,
             'size': 'small'
         } only %}
-        {% endembed %}
     </div>
 {% endblock %}

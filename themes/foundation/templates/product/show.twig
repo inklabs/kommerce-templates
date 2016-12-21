@@ -32,7 +32,6 @@
         </dl>
     {% endif %}
 
-
     {% if product.isInStock %}
         <form action="/cart/add-item" id="cart_add_item" method="post">
         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
@@ -47,8 +46,7 @@
     {% if relatedProducts is not empty %}
         <h2>You Might Also Like</h2>
 
-        {% embed '@theme/helpers/related-products-grid.twig' with {'products': relatedProducts } only %}
-        {% endembed %}
+        {% include '@theme/helpers/related-products-grid.twig' with {'products': relatedProducts } only %}
 
     {% endif %}
 

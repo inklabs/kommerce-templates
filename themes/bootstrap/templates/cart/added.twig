@@ -20,14 +20,14 @@
                             <div class="product-name">{{ cartItem.product.name }}</div>
                         </a>
 
-                        {% embed '@theme/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}{% endembed %}
+                        {% include '@theme/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
 
                         <div class="pull-right">Quantity in cart: {{ cartItem.quantity }}</div>
 
-                        {% embed '@theme/helper/price.twig' with {'price': cartItem.price } only %}{% endembed %}
+                        {% include '@theme/helper/price.twig' with {'price': cartItem.price } only %}
 
                         <div class="table-cell">
-                            {% embed '@theme/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}{% endembed %}
+                            {% include '@theme/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
                         </div>
 
                         <div class="clearfix"></div>
@@ -40,7 +40,7 @@
                                 <div class="pull-right">
                                     <a class="btn btn-default" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
 
-                                    {% embed '@theme/helper/checkout-button.twig' only %}{% endembed %}
+                                    {% include '@theme/helper/checkout-button.twig' only %}
                                 </div>
                                 <strong>Order subtotal:</strong> <span class="price-small">
                                     {{ cart.cartTotal.subtotal | displayPrice }}

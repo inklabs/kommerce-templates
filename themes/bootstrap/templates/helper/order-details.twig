@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-sm-4">
                     <strong>Shipping Address</strong>
-                    {% embed '@theme/helper/order-address.twig' with {'address': order.shippingAddress } only %}{% endembed %}
+                    {% include '@theme/helper/order-address.twig' with {'address': order.shippingAddress } only %}
                     <hr>
                     <strong>Billing Address</strong>
-                    {% embed '@theme/helper/order-address.twig' with {'address': order.billingAddress } only %}{% endembed %}
+                    {% include '@theme/helper/order-address.twig' with {'address': order.billingAddress } only %}
                 </div>
                 <div class="col-sm-4">
                     <strong>Payment Information</strong>
