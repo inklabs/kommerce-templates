@@ -1,0 +1,161 @@
+{# @var catalogPromotion \inklabs\kommerce\EntityDTO\CatalogPromotionDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}CatalogPromotion - {{ catalogPromotion.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/promotion/catalog-promotion/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.catalog-promotion.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('catalogPromotionId', catalogPromotion.id.hex ) }}
+                        <div class="well">
+                            <div class="row form-group">
+                                <label for="catalogPromotion-name" class="control-label col-sm-3">Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text"
+                                           id="catalogPromotion-name"
+                                           name="catalogPromotion[name]"
+                                           value="{{ catalogPromotion.name }}"
+                                           class="form-control"
+                                           maxlength="255"
+                                           required=""/>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="catalogPromotion-type" class="control-label col-sm-3">Discount Type</label>
+                                <div class="col-sm-3">
+                                    {{ form.select(
+                                        'catalogPromotion[type]',
+                                        catalogPromotion.type.id,
+                                        catalogPromotion.type.nameMap,
+                                        'catalogPromotion-type',
+                                        'form-control input-sm',
+                                        {
+                                            'required': 'true'
+                                        }
+                                    ) }}
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="catalogPromotion-value" class="control-label col-sm-3">Discount Value</label>
+                                <div class="col-sm-3">
+                                    {% if catalogPromotion.type.isFixed or catalogPromotion.type.isExact %}
+                                        <div class="input-group">
+                                            <div class="input-group-addon">$</div>
+                                            <input type="text"
+                                                   id="catalogPromotion-value"
+                                                   name="catalogPromotion[value]"
+                                                   value="{{ catalogPromotion.value | floatPrice }}"
+                                                   class="form-control"
+                                                   required=""/>
+                                        </div>
+                                    {% elseif catalogPromotion.type.isPercent %}
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   id="catalogPromotion-value"
+                                                   name="catalogPromotion[value]"
+                                                   value="{{ catalogPromotion.value }}"
+                                                   class="form-control"
+                                                   required=""/>
+                                            <div class="input-group-addon">%</div>
+                                        </div>
+                                    {% else %}
+                                        <input type="text"
+                                               id="catalogPromotion-value"
+                                               name="catalogPromotion[value]"
+                                               value="{{ catalogPromotion.value }}"
+                                               class="form-control"
+                                               required=""/>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="catalogPromotion-maxRedemptions" class="control-label col-sm-3">Max Redemptions</label>
+                                <div class="col-sm-3">
+                                    <input type="text"
+                                           id="catalogPromotion-maxRedemptions"
+                                           name="catalogPromotion[maxRedemptions]"
+                                           value="{{ catalogPromotion.maxRedemptions }}"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="catalogPromotion-reducesTaxSubtotal" class="control-label col-sm-3">
+                                    Reduces Tax Subtotal
+                                </label>
+                                {{ form.checkbox(
+                                    'catalogPromotion[reducesTaxSubtotal]',
+                                    catalogPromotion.reducesTaxSubtotal,
+                                    'catalogPromotion-reducesTaxSubtotal'
+                                ) }}
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-sm-3" for="catalogPromotion-start">Start</label>
+                                <div class="date datetimepicker col-sm-3">
+                                    <div class="input-group">
+                                        <input type="datetime"
+                                           id="catalogPromotion-start"
+                                           name="catalogPromotion[start]"
+                                           value="{{ catalogPromotion.startFormatted }}"
+                                           class="form-control"
+                                           data-date-format="yyyy-mm-dd"/>
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-sm-3" for="catalogPromotion-end">End</label>
+                                <div class="date datetimepicker col-sm-3">
+                                    <div class="input-group">
+                                        <input type="datetime"
+                                           id="catalogPromotion-end"
+                                           name="catalogPromotion[end]"
+                                           value="{{ catalogPromotion.endFormatted }}"
+                                           class="form-control"
+                                           data-date-format="yyyy-mm-dd"/>
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="catalogPromotion-tagId" class="control-label col-sm-3">Tag</label>
+                                <div class="col-sm-6">
+                                    <input type="text"
+                                           id="catalogPromotion-tagId"
+                                           name="catalogPromotion[tagId]"
+                                           value="{{ catalogPromotion.tag.id.hex }}"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="well">
+                            <div class="pull-right text-muted text-right">
+                                <span title="Created">{{ catalogPromotion.createdFormatted }}<?</span><br>
+                                <span title="Updated">{{ catalogPromotion.updatedFormatted }}<?</span><br>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.catalog-promotion') }}" class="btn btn-default">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
