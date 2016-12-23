@@ -1,0 +1,31 @@
+{# @var optionProducts \inklabs\kommerce\EntityDTO\OptionProductDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Unit Price</th>
+            <th>Shipping Weight</th>
+            <th>Sort Order</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for optionProduct in optionProducts %}
+            <tr>
+                <td>{{ optionProduct.name }}</td>
+                <td>{{ optionProduct.sku }}</td>
+                <td>{{ optionProduct.product.unitPrice|displayPrice }}</td>
+                <td>{{ optionProduct.shippingWeight }}</td>
+                <td>{{ optionProduct.sortOrder }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <span class="text-muted">No option products.</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
