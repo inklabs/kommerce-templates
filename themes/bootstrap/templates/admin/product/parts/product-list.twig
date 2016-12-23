@@ -24,7 +24,7 @@
                 </td>
                 <td>{{ product.sku }}</td>
                 <td><a href="{{ adminProductUrl(product) }}">{{ product.name }}</a></td>
-                <td>{{ product.unitPrice | displayPrice }}</td>
+                <td>{{ product.unitPrice|displayPrice }}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.isActive ? 'yes' : 'no' }}</td>
                 {% block tbody %}{% endblock %}

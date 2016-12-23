@@ -13,13 +13,13 @@
                 <br>
                 {% embed '@theme/admin/tag/parts/tag-list.twig' with {'tags': product.tags} %}
                     {% block thead %}
-                        <th>Actions</th>
+                        <th class="text-right">Actions</th>
                     {% endblock %}
                     {% block tbody %}
                         <td>
                             <form action="{{ routeUrl('admin.product.remove-tag') }}"
                                   method="post"
-                                  class="form">
+                                  class="form pull-right">
                                 {{ form.csrf() }}
                                 {{ form.hidden('productId', product.id.hex) }}
                                 {{ form.hidden('tagId', tag.id.hex) }}
