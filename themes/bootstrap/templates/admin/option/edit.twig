@@ -1,0 +1,68 @@
+{# @var option \inklabs\kommerce\EntityDTO\OptionDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Option - {{ option.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/option/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.option.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('optionId', option.id.hex ) }}
+                        <div class="well">
+                            <h2>Required:</h2>
+
+                            <div class="row form-group">
+                                <label for="option-name" class="control-label col-sm-3">Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text"
+                                           id="option-name"
+                                           name="option[name]"
+                                           value="{{ option.name }}"
+                                           class="form-control col-sm-3"
+                                           maxlength="255"
+                                           required=""/>
+                                </div>
+                            </div>
+
+                            <h2>Optional:</h2>
+
+                            <div class="row form-group">
+                                <label for="option-description" class="control-label col-sm-3">Description</label>
+                                <div class="col-sm-8">
+                                    <textarea name="option[description]"
+                                              id="option-description"
+                                              class="form-control"
+                                              rows="5"
+                                              maxlength="65535">
+                                        {{- option.description -}}
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="well">
+                            <div class="pull-right text-muted text-right">
+                                <span title="Created">{{ option.createdFormatted }}</span><br>
+                                <span title="Updated">{{ option.updatedFormatted }}</span><br>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.option') }}" class="btn btn-default">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
