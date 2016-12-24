@@ -4,8 +4,8 @@ class AdminSettingCest
 {
     public function viewAllSettings(AcceptanceTester $I)
     {
-        $I->wantTo('view all settings');
-        $I->amOnPage('/admin/settings');
-        $I->see('Settings');
+        $I->wantTo('view sales tax settings');
+        $I->amOnPage('/admin/settings/sales-tax');
+        $I->see('Sales Tax Settings');
     }
 }
