@@ -1,0 +1,72 @@
+{# @var tag \inklabs\kommerce\EntityDTO\TagDTO #}
+<h2>Required:</h2>
+
+<div class="row form-group">
+    <label for="tag-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="tag-name"
+               name="tag[name]"
+               value="{{ tag.name }}"
+               class="form-control col-sm-3"
+               maxlength="255"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="tag-isActive" class="control-label col-sm-3">Is Active</label>
+    {{ form.checkbox(
+        'tag[isActive]',
+        tag.isActive,
+        'tag-isActive'
+    ) }}
+</div>
+
+<div class="row form-group">
+    <label for="tag-isVisible" class="control-label col-sm-3">Is Visible</label>
+    {{ form.checkbox(
+        'tag[isVisible]',
+        tag.isVisible,
+        'tag-isVisible'
+    ) }}
+</div>
+
+<div class="row form-group">
+    <label for="tag-areAttachmentsEnabled" class="control-label col-sm-3">
+        Are Attachments Enabled
+    </label>
+    {{ form.checkbox(
+        'tag[areAttachmentsEnabled]',
+        tag.areAttachmentsEnabled,
+        'tag-areAttachmentsEnabled'
+    ) }}
+</div>
+
+<hr>
+<h2>Optional:</h2>
+
+<div class="row form-group">
+    <label for="tag-code" class="control-label col-sm-3">Code</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="tag-code"
+               name="tag[code]"
+               value="{{ tag.code }}"
+               class="form-control"
+               maxlength="64"/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="tag-description" class="control-label col-sm-3">Description</label>
+    <div class="col-sm-8">
+        <textarea name="tag[description]"
+                  id="tag-description"
+                  class="form-control"
+                  rows="5"
+                  maxlength="65535">
+            {{- tag.description -}}
+        </textarea>
+    </div>
+</div>
