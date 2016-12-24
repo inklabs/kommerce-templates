@@ -1,5 +1,7 @@
-{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
-{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var stateTaxRates \inklabs\kommerce\EntityDTO\TaxRateDTO[] #}
+{# @var zip5TaxRates \inklabs\kommerce\EntityDTO\TaxRateDTO[] #}
+{# @var zip5RangeTaxRates \inklabs\kommerce\EntityDTO\TaxRateDTO[] #}
+{# @var validStatesMap array #}
 {% extends '@theme/layout/base-admin.twig' %}
 
 {% block pageTitle %}Settings{% endblock %}
@@ -18,15 +20,76 @@
 
                 <div class="well well-sm">
                     <h2>Zipcode Rates</h2>
-                    TODO
+                    <div id="zipcode-rates" class="fluid-control-group">
+                        {% for taxRate in zip5TaxRates %}
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="taxRate-{{ taxRate.id.hex }}-zip5" class="control-label">Zipcode</label>
+                                    <input type="text"
+                                           id="taxRate-{{ taxRate.id.hex }}-zip5"
+                                           name="taxRate[{{ taxRate.id.hex }}][zip5]"
+                                           value="{{ taxRate.zip5 }}"
+                                           class="form-control"
+                                           maxlength="5"
+                                           required=""/>
+                                </div>
+                                {% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                            </div>
+                        {% endfor %}
+                    </div>
 
                     <hr />
                     <h2>Zipcode Range Rates</h2>
-                    TODO
+                    <div id="zipcode-rates" class="fluid-control-group">
+                        {% for taxRate in zip5RangeTaxRates %}
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label for="taxRate-{{ taxRate.id.hex }}-zip5From" class="control-label">Start</label>
+                                    <input type="text"
+                                           id="taxRate-{{ taxRate.id.hex }}-zip5From"
+                                           name="taxRate[{{ taxRate.id.hex }}][zip5From]"
+                                           value="{{ taxRate.zip5From }}"
+                                           class="form-control"
+                                           maxlength="5"
+                                           required=""/>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="taxRate-{{ taxRate.id.hex }}-zip5To" class="control-label">End</label>
+                                    <input type="text"
+                                           id="taxRate-{{ taxRate.id.hex }}-zip5To"
+                                           name="taxRate[{{ taxRate.id.hex }}][zip5To]"
+                                           value="{{ taxRate.zip5To }}"
+                                           class="form-control"
+                                           maxlength="5"
+                                           required=""/>
+                                </div>
+                                {% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                            </div>
+                        {% endfor %}
+                    </div>
 
                     <hr />
                     <h2>State Rates</h2>
-                    TODO
+                    <div id="zipcode-rates" class="fluid-control-group">
+                        {% for taxRate in stateTaxRates %}
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="taxRate-{{ taxRate.id.hex }}-state" class="control-label">State</label>
+                                    {{ form.select(
+                                        'taxRate[' ~ taxRate.id.hex ~ '][state]',
+                                        taxRate.state,
+                                        validStatesMap,
+                                        'coupon-type',
+                                        'form-control input-sm',
+                                        {
+                                            'required': 'true'
+                                        }
+                                    ) }}
+                                </div>
+                                {% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

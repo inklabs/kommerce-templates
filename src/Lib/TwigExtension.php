@@ -98,6 +98,16 @@ class TwigExtension extends Twig_Extension
                 }
             ),
             new Twig_SimpleFilter(
+                'floatPercent',
+                function ($percent, $nullDisplayValue = null) {
+                    if ($nullDisplayValue !== null && $percent === null) {
+                        return $nullDisplayValue;
+                    }
+
+                    return number_format($percent, 2, null, '');
+                }
+            ),
+            new Twig_SimpleFilter(
                 'displayPromotionValue',
                 function (AbstractPromotionDTO $promotion) {
                     if ($promotion->type->isFixed || $promotion->type->isExact) {
