@@ -6,7 +6,7 @@ class AssetLocationService
     public function getAssetFilePathByTheme($theme, $path)
     {
         $kommerceTemplatesPath = realpath(__DIR__ . '/../..');
-        if ($theme == 'base-theme') {
+        if ($theme == 'base') {
             $basePath = $kommerceTemplatesPath . '/base-theme/assets/' . $path;
             if (file_exists($basePath)) {
                 return $basePath;
