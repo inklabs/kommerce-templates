@@ -1,0 +1,22 @@
+{{ form.hidden('type', 'zip5RangeTaxRate') }}
+<div class="form-group col-sm-2">
+    <label for="taxRate-{{ taxRate.id.hex }}-zip5From" class="control-label">Start</label>
+    <input type="text"
+           id="taxRate-{{ taxRate.id.hex }}-zip5From"
+           name="taxRate[zip5From]"
+           value="{{ taxRate.zip5From }}"
+           class="form-control"
+           maxlength="5"
+           required=""/>
+</div>
+<div class="form-group col-sm-2">
+    <label for="taxRate-{{ taxRate.id.hex }}-zip5To" class="control-label">End</label>
+    <input type="text"
+           id="taxRate-{{ taxRate.id.hex }}-zip5To"
+           name="taxRate[zip5To]"
+           value="{{ taxRate.zip5To }}"
+           class="form-control"
+           maxlength="5"
+           required=""/>
+</div>
+{% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}

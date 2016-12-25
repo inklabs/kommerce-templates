@@ -1,37 +1,23 @@
-<form action="{{ routeUrl('admin.settings.sales-tax.edit') }}"
-      method="post"
-      class="form">
-    {{ form.csrf() }}
-    {{ form.hidden('taxRateId', taxRate.id.hex) }}
-
-    {% block head %}{% endblock %}
-
-    <div class="form-group col-sm-3">
-        <label for="taxRate-{{ taxRate.id.hex }}-rate" class="control-label">Rate</label>
-        <div class="input-group">
-            <input type="text"
-                   id="taxRate-{{ taxRate.id.hex }}-rate"
-                   name="taxRate[rate]"
-                   value="{{ taxRate.rate|floatPercent }}"
-                   class="form-control"
-                   maxlength="5"
-                   required=""/>
-            <span class="input-group-addon">%</span>
-        </div>
+<div class="form-group col-sm-3">
+    <label for="taxRate-{{ taxRate.id.hex }}-rate" class="control-label">Rate</label>
+    <div class="input-group">
+        <input type="text"
+               id="taxRate-{{ taxRate.id.hex }}-rate"
+               name="taxRate[rate]"
+               value="{{ taxRate.rate|floatPercent('') }}"
+               class="form-control"
+               maxlength="5"
+               required=""/>
+        <span class="input-group-addon">%</span>
     </div>
+</div>
 
-    <div class="form-group col-sm-3">
-        <label for="taxRate-{{ taxRate.id.hex }}-applyToShipping" class="control-label">Apply to Shipping</label>
-        <div class="clearfix"></div>
-        {{ form.checkbox(
-            'taxRate[applyToShipping]',
-            taxRate.applyToShipping,
-            'taxRate-' ~ taxRate.id.hex ~ '-applyToShipping'
-        ) }}
-    </div>
-    <div class="form-group col-sm-2">
-        <br>
-        <button type="submit" name="action" value="delete" class="btn btn-danger btn-xs pull-right" title="Delete Tax Rate"><i class="fa fa-remove"></i></button>
-        <button type="submit" name="action" value="edit" class="btn btn-default btn-xs pull-right" title="Edit Tax Rate">Update</button>
-    </div>
-</form>
+<div class="form-group col-sm-3">
+    <label for="taxRate-{{ taxRate.id.hex }}-applyToShipping" class="control-label">Apply to Shipping</label>
+    <div class="clearfix"></div>
+    {{ form.checkbox(
+        'taxRate[applyToShipping]',
+        taxRate.applyToShipping,
+        'taxRate-' ~ taxRate.id.hex ~ '-applyToShipping'
+    ) }}
+</div>
