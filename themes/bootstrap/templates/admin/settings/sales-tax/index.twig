@@ -23,17 +23,21 @@
                     <div id="zipcode-rates" class="fluid-control-group">
                         {% for taxRate in zip5TaxRates %}
                             <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label for="taxRate-{{ taxRate.id.hex }}-zip5" class="control-label">Zipcode</label>
-                                    <input type="text"
-                                           id="taxRate-{{ taxRate.id.hex }}-zip5"
-                                           name="taxRate[{{ taxRate.id.hex }}][zip5]"
-                                           value="{{ taxRate.zip5 }}"
-                                           class="form-control"
-                                           maxlength="5"
-                                           required=""/>
-                                </div>
-                                {% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                                {% embed '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                                    {% block head %}
+                                        {{ form.hidden('type', 'zip5TaxRate') }}
+                                        <div class="form-group col-sm-4">
+                                            <label for="taxRate-{{ taxRate.id.hex }}-zip5" class="control-label">Zipcode</label>
+                                            <input type="text"
+                                                   id="taxRate-{{ taxRate.id.hex }}-zip5"
+                                                   name="taxRate[zip5]"
+                                                   value="{{ taxRate.zip5 }}"
+                                                   class="form-control"
+                                                   maxlength="5"
+                                                   required=""/>
+                                        </div>
+                                    {% endblock %}
+                                {% endembed %}
                             </div>
                         {% endfor %}
                     </div>
@@ -43,27 +47,31 @@
                     <div id="zipcode-rates" class="fluid-control-group">
                         {% for taxRate in zip5RangeTaxRates %}
                             <div class="row">
-                                <div class="form-group col-sm-2">
-                                    <label for="taxRate-{{ taxRate.id.hex }}-zip5From" class="control-label">Start</label>
-                                    <input type="text"
-                                           id="taxRate-{{ taxRate.id.hex }}-zip5From"
-                                           name="taxRate[{{ taxRate.id.hex }}][zip5From]"
-                                           value="{{ taxRate.zip5From }}"
-                                           class="form-control"
-                                           maxlength="5"
-                                           required=""/>
-                                </div>
-                                <div class="form-group col-sm-2">
-                                    <label for="taxRate-{{ taxRate.id.hex }}-zip5To" class="control-label">End</label>
-                                    <input type="text"
-                                           id="taxRate-{{ taxRate.id.hex }}-zip5To"
-                                           name="taxRate[{{ taxRate.id.hex }}][zip5To]"
-                                           value="{{ taxRate.zip5To }}"
-                                           class="form-control"
-                                           maxlength="5"
-                                           required=""/>
-                                </div>
-                                {% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                                {% embed '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                                    {% block head %}
+                                        {{ form.hidden('type', 'zip5RangeTaxRate') }}
+                                        <div class="form-group col-sm-2">
+                                            <label for="taxRate-{{ taxRate.id.hex }}-zip5From" class="control-label">Start</label>
+                                            <input type="text"
+                                                   id="taxRate-{{ taxRate.id.hex }}-zip5From"
+                                                   name="taxRate[zip5From]"
+                                                   value="{{ taxRate.zip5From }}"
+                                                   class="form-control"
+                                                   maxlength="5"
+                                                   required=""/>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label for="taxRate-{{ taxRate.id.hex }}-zip5To" class="control-label">End</label>
+                                            <input type="text"
+                                                   id="taxRate-{{ taxRate.id.hex }}-zip5To"
+                                                   name="taxRate[zip5To]"
+                                                   value="{{ taxRate.zip5To }}"
+                                                   class="form-control"
+                                                   maxlength="5"
+                                                   required=""/>
+                                        </div>
+                                    {% endblock %}
+                                {% endembed %}
                             </div>
                         {% endfor %}
                     </div>
@@ -73,20 +81,24 @@
                     <div id="zipcode-rates" class="fluid-control-group">
                         {% for taxRate in stateTaxRates %}
                             <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label for="taxRate-{{ taxRate.id.hex }}-state" class="control-label">State</label>
-                                    {{ form.select(
-                                        'taxRate[' ~ taxRate.id.hex ~ '][state]',
-                                        taxRate.state,
-                                        validStatesMap,
-                                        'coupon-type',
-                                        'form-control input-sm',
-                                        {
-                                            'required': 'true'
-                                        }
-                                    ) }}
-                                </div>
-                                {% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                                {% embed '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}
+                                    {% block head %}
+                                        {{ form.hidden('type', 'stateTaxRate') }}
+                                        <div class="form-group col-sm-4">
+                                            <label for="taxRate-{{ taxRate.id.hex }}-state" class="control-label">State</label>
+                                            {{ form.select(
+                                                'taxRate[state]',
+                                                taxRate.state,
+                                                validStatesMap,
+                                                'coupon-type',
+                                                'form-control input-sm',
+                                                {
+                                                    'required': 'true'
+                                                }
+                                            ) }}
+                                        </div>
+                                    {% endblock %}
+                                {% endembed %}
                             </div>
                         {% endfor %}
                     </div>
