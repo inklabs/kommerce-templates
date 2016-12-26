@@ -1,4 +1,4 @@
-{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{# @var cartPriceRules \inklabs\kommerce\EntityDTO\CartPriceRuleDTO[] #}
 {# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
 {% extends '@theme/layout/base-admin.twig' %}
 
@@ -8,12 +8,59 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Cart Price Rules</h1>
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.cart-price-rule.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Cart Price Rule
+                    </a>
+                </div>
+
+                <h1>CartPriceRules</h1>
+                <form action="{{ routeUrl('admin.cart-price-rule') }}"
+                      method="get"
+                      class="form-search">
+                    {% include '@theme/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
+                </form>
 
                 {{ paginate.detailed(pagination) }}
 
-                <h2>TODO</h2>
-
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Redemptions</th>
+                            <th>Reduces Tax Subtotal</th>
+                            <th>Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cartPriceRule in cartPriceRules %}
+                            <tr>
+                                <td>
+                                    <a href="{{ adminCartPriceRuleUrl(cartPriceRule) }}">
+                                        {{ cartPriceRule.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{ cartPriceRule.redemptions }} of
+                                    {% if cartPriceRule.maxRedemptions is null %}
+                                        <span class="text-muted small">[unlimited]</span>
+                                    {% else %}
+                                        {{ cartPriceRule.maxRedemptions }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ cartPriceRule.reducesTaxSubtotal|boolYesNo }}</td>
+                                <td>
+                                    {{ cartPriceRule.start | formatDate }}
+                                    -
+                                    {{ cartPriceRule.end | formatDate }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr><td colspan="100%">No cart price rules</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 {{ paginate.detailed(pagination) }}
             </div>
         </div>
