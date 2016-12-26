@@ -1,0 +1,14 @@
+{# @var cartPriceRule \inklabs\kommerce\EntityDTO\CartPriceRuleDTO #}
+
+{% set navigation = [
+    {
+        'name': 'Edit',
+        'url' : routeUrl('admin.cart-price-rule.edit', {'cartPriceRuleId': cartPriceRule.id.hex})
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include '@theme/helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>
