@@ -1,0 +1,24 @@
+{% set navigation = [
+    {
+        'name': 'View',
+        'url' : routeUrl('admin.settings.sales-tax')
+    },
+    {
+        'name': 'Zipcode',
+        'url' : routeUrl('admin.settings.sales-tax.zipcode')
+    },
+    {
+        'name': 'Zipcode Range',
+        'url' : routeUrl('admin.settings.sales-tax.zipcode-range')
+    },
+    {
+        'name': 'State',
+        'url' : routeUrl('admin.settings.sales-tax.state')
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include '@theme/helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>

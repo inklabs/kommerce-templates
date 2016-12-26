@@ -82,6 +82,12 @@ class TwigExtension extends Twig_Extension
             new Twig_SimpleFilter('ceil', 'ceil'),
             new Twig_SimpleFilter('floor', 'floor'),
             new Twig_SimpleFilter(
+                'boolYesNo',
+                function ($boolean) {
+                    return $boolean ? 'Yes' : 'No';
+                }
+            ),
+            new Twig_SimpleFilter(
                 'displayPrice',
                 function ($price) {
                     return '$' . number_format(($price / 100), 2);
