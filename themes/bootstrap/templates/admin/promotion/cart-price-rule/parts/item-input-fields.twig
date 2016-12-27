@@ -1,0 +1,11 @@
+{# @var cartPriceRuleItem \inklabs\kommerce\EntityDTO\AbstractCartPriceRuleItemDTO #}
+<div class="form-group col-sm-2">
+    <label for="cartPriceRuleItem-{{ cartPriceRuleItem.id.hex }}-quantity" class="control-label">Quantity</label>
+    <input type="text"
+           id="cartPriceRuleItem-{{ cartPriceRuleItem.id.hex }}-quantity"
+           name="cartPriceRuleItem[quantity]"
+           value="{{ cartPriceRuleItem.quantity }}"
+           class="form-control"
+           maxlength="5"
+           required=""/>
+</div>

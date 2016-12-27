@@ -4,6 +4,14 @@
     {
         'name': 'Edit',
         'url' : routeUrl('admin.cart-price-rule.edit', {'cartPriceRuleId': cartPriceRule.id.hex})
+    },
+    {
+        'name': 'Items <span class="text-muted">(' ~ cartPriceRule.cartPriceRuleItems|length ~ ')</span>',
+        'url' : routeUrl('admin.cart-price-rule.items', {'cartPriceRuleId': cartPriceRule.id.hex})
+    },
+    {
+        'name': 'Discounts <span class="text-muted">(' ~ cartPriceRule.cartPriceRuleDiscounts|length ~ ')</span>',
+        'url' : routeUrl('admin.cart-price-rule.discounts', {'cartPriceRuleId': cartPriceRule.id.hex})
     }
 ] %}
 
