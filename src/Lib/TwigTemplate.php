@@ -45,6 +45,7 @@ class TwigTemplate
         $twigLoader->setPaths($themeConfig->getTwigTemplatePaths(), 'theme');
 
         $this->twigEnvironment = new Twig_Environment($twigLoader);
+        $this->twigEnvironment->addglobal('timezone', $timezone);
 
         $this->twigEnvironment->addExtension(
             new TwigExtension(

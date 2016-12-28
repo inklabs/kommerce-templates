@@ -140,6 +140,36 @@ class TwigExtension extends Twig_Extension
                 }
             ),
             new Twig_SimpleFilter(
+                'formatInputDate',
+                function ($timestamp = null) {
+                    if ($timestamp === null) {
+                        return '';
+                    }
+
+                    $format = 'm/d/Y';
+                    $output = new DateTime();
+                    $output->setTimestamp($timestamp);
+                    $output->setTimezone(new DateTimeZone($this->timezone));
+
+                    return $output->format($format);
+                }
+            ),
+            new Twig_SimpleFilter(
+                'formatInputTime',
+                function ($timestamp = null) {
+                    if ($timestamp === null) {
+                        return '';
+                    }
+
+                    $format = 'g:i:sa';
+                    $output = new DateTime();
+                    $output->setTimestamp($timestamp);
+                    $output->setTimezone(new DateTimeZone($this->timezone));
+
+                    return $output->format($format);
+                }
+            ),
+            new Twig_SimpleFilter(
                 'slug',
                 function ($string) {
                     return Slug::get($string);

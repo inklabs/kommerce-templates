@@ -105,8 +105,7 @@
                id="coupon-maxRedemptions"
                name="coupon[maxRedemptions]"
                value="{{ coupon.maxRedemptions }}"
-               class="form-control"
-               required=""/>
+               class="form-control"/>
     </div>
 </div>
 <div class="row form-group">
@@ -139,35 +138,18 @@
         'coupon-canCombineWithOtherCoupons'
     ) }}
 </div>
-<div class="row form-group">
-    <label class="control-label col-sm-3" for="coupon-start">Start</label>
-    <div class="date datetimepicker col-sm-3">
-        <div class="input-group">
-            <input type="datetime"
-               id="coupon-start"
-               name="coupon[start]"
-               value="{{ coupon.startFormatted }}"
-               class="form-control"
-               data-date-format="yyyy-mm-dd"/>
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row form-group">
-    <label class="control-label col-sm-3" for="coupon-end">End</label>
-    <div class="date datetimepicker col-sm-3">
-        <div class="input-group">
-            <input type="datetime"
-               id="coupon-end"
-               name="coupon[end]"
-               value="{{ coupon.endFormatted }}"
-               class="form-control"
-               data-date-format="yyyy-mm-dd"/>
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-    </div>
-</div>
+{% include '@theme/admin/promotion/parts/date-time-timzeone-input.twig' with {
+    'label': 'Start',
+    'entityName': 'coupon',
+    'entityAttribute': 'start',
+    'timestamp': coupon.start.timestamp,
+    'defaultTime': '01:00am'
+} only %}
+{% include '@theme/admin/promotion/parts/date-time-timzeone-input.twig' with {
+    'label': 'End',
+    'entityName': 'coupon',
+    'entityAttribute': 'end',
+    'timestamp': coupon.end.timestamp,
+    'defaultTime': '12:59:59pm'
+} only %}
+
