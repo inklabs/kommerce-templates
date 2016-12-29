@@ -138,18 +138,8 @@
         'coupon-canCombineWithOtherCoupons'
     ) }}
 </div>
-{% include '@theme/admin/promotion/parts/date-time-timzeone-input.twig' with {
-    'label': 'Start',
-    'entityName': 'coupon',
-    'entityAttribute': 'start',
-    'timestamp': coupon.start.timestamp,
-    'defaultTime': '01:00am'
-} only %}
-{% include '@theme/admin/promotion/parts/date-time-timzeone-input.twig' with {
-    'label': 'End',
-    'entityName': 'coupon',
-    'entityAttribute': 'end',
-    'timestamp': coupon.end.timestamp,
-    'defaultTime': '12:59:59pm'
-} only %}
 
+{% include '@theme/admin/promotion/parts/date-time-timzeone-inputs.twig' with {
+    'entityName': 'coupon',
+    'entity': coupon,
+} only %}

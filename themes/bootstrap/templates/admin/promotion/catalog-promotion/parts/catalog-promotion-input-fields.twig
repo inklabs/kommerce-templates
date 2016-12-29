@@ -80,38 +80,7 @@
         'catalogPromotion-reducesTaxSubtotal'
     ) }}
 </div>
-<div class="row form-group">
-    <label class="control-label col-sm-3" for="catalogPromotion-start">Start</label>
-    <div class="date datetimepicker col-sm-3">
-        <div class="input-group">
-            <input type="datetime"
-               id="catalogPromotion-start"
-               name="catalogPromotion[start]"
-               value="{{ catalogPromotion.startFormatted }}"
-               class="form-control"
-               data-date-format="yyyy-mm-dd"/>
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row form-group">
-    <label class="control-label col-sm-3" for="catalogPromotion-end">End</label>
-    <div class="date datetimepicker col-sm-3">
-        <div class="input-group">
-            <input type="datetime"
-               id="catalogPromotion-end"
-               name="catalogPromotion[end]"
-               value="{{ catalogPromotion.endFormatted }}"
-               class="form-control"
-               data-date-format="yyyy-mm-dd"/>
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="row form-group">
     <label for="catalogPromotion-tagId" class="control-label col-sm-3">Tag</label>
     <div class="col-sm-6">
@@ -122,3 +91,8 @@
                class="form-control"/>
     </div>
 </div>
+
+{% include '@theme/admin/promotion/parts/date-time-timzeone-inputs.twig' with {
+    'entityName': 'catalogPromotion',
+    'entity': catalogPromotion,
+} only %}
