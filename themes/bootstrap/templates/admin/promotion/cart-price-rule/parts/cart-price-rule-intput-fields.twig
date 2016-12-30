@@ -32,35 +32,8 @@
         'cartPriceRule-reducesTaxSubtotal'
     ) }}
 </div>
-<div class="row form-group">
-    <label class="control-label col-sm-3" for="cartPriceRule-start">Start</label>
-    <div class="date datetimepicker col-sm-3">
-        <div class="input-group">
-            <input type="datetime"
-               id="cartPriceRule-start"
-               name="cartPriceRule[start]"
-               value="{{ cartPriceRule.startFormatted }}"
-               class="form-control"
-               data-date-format="yyyy-mm-dd"/>
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row form-group">
-    <label class="control-label col-sm-3" for="cartPriceRule-end">End</label>
-    <div class="date datetimepicker col-sm-3">
-        <div class="input-group">
-            <input type="datetime"
-               id="cartPriceRule-end"
-               name="cartPriceRule[end]"
-               value="{{ cartPriceRule.endFormatted }}"
-               class="form-control"
-               data-date-format="yyyy-mm-dd"/>
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-    </div>
-</div>
+
+{% include '@theme/admin/promotion/parts/date-time-timzeone-inputs.twig' with {
+    'entityName': 'cartPriceRule',
+    'entity': cartPriceRule,
+} only %}
