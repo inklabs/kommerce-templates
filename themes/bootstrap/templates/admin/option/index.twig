@@ -24,26 +24,7 @@
                 </form>
 
                 {{ paginate.detailed(pagination) }}
-
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Sort Order</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for option in options %}
-                            <tr>
-                                <td><a href="{{ adminOptionUrl(option) }}">{{ option.name }}</a></td>
-                                <td>{{ option.description | truncate(60) }}</td>
-                                <td>{{ option.sortOrder }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
+                {% include '@theme/admin/option/parts/option-list.twig' with {'options': options} only %}
                 {{ paginate.detailed(pagination) }}
             </div>
         </div>
