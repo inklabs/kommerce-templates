@@ -5,6 +5,7 @@ use DateTime;
 use DateTimeZone;
 use inklabs\kommerce\EntityDTO\AbstractPromotionDTO;
 use inklabs\kommerce\EntityDTO\AttachmentDTO;
+use inklabs\kommerce\EntityDTO\AttributeDTO;
 use inklabs\kommerce\EntityDTO\CartPriceRuleDTO;
 use inklabs\kommerce\EntityDTO\CatalogPromotionDTO;
 use inklabs\kommerce\EntityDTO\CouponDTO;
@@ -201,6 +202,17 @@ class TwigExtension extends Twig_Extension
                         [
                             'slug' => $productDTO->slug,
                             'productId' => $productDTO->id->getHex(),
+                        ]
+                    );
+                }
+            ),
+            new Twig_SimpleFunction(
+                'adminAttributeUrl',
+                function (AttributeDTO $attributeDTO) {
+                    return $this->routeUrl->getRoute(
+                        'admin.attribute.edit',
+                        [
+                            'attributeId' => $attributeDTO->id->getHex(),
                         ]
                     );
                 }
