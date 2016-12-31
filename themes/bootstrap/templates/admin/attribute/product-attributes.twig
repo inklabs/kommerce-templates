@@ -1,0 +1,38 @@
+{# @var attribute \inklabs\kommerce\EntityDTO\AttributeDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Product Attributes - {{ attribute.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/attribute/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <fieldset>
+                    <br>
+                    {% embed '@theme/admin/attribute/parts/product-attributes-list.twig' with {'productAttributes': attribute.productAttributes} %}
+                        {% block thead %}
+                            <th class="text-right">Actions</th>
+                        {% endblock %}
+                        {% block tbody %}
+                            <td>
+                                <form action="{{ routeUrl('admin.attribute.delete-product-attribute') }}"
+                                      method="post"
+                                      class="form pull-right">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('attributeId', attribute.id.hex) }}
+                                    {{ form.hidden('productAttributeId', productAttribute.id.hex) }}
+                                    <button type="submit" class="btn btn-danger btn-xs" title="Delete Product Attribute"><i class="fa fa-remove"></i></button>
+                                </form>
+                            </td>
+                        {% endblock %}
+                    {% endembed %}
+
+                    <hr>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+{% endblock %}
