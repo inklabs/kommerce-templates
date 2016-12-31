@@ -1,0 +1,14 @@
+{# @var attribute \inklabs\kommerce\EntityDTO\AttributeDTO #}
+
+{% set navigation = [
+    {
+        'name': 'Edit',
+        'url' : routeUrl('admin.attribute.edit', {'attributeId': attribute.id.hex})
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include '@theme/helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>
