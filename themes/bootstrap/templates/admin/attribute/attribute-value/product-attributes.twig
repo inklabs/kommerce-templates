@@ -1,18 +1,18 @@
-{# @var attribute \inklabs\kommerce\EntityDTO\AttributeDTO #}
+{# @var attributeValue \inklabs\kommerce\EntityDTO\AttributeValueDTO #}
 {% extends '@theme/layout/base-admin.twig' %}
 
-{% block pageTitle %}Product Attributes - {{ attribute.name }}{% endblock %}
+{% block pageTitle %}Product Attributes - {{ attributeValue.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include '@theme/admin/attribute/parts/header.twig' %}
+        {% include '@theme/admin/attribute/attribute-value/parts/header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
                 <fieldset>
                     <br>
-                    {% embed '@theme/admin/attribute/parts/product-attributes-list.twig' with {'productAttributes': attribute.productAttributes} %}
+                    {% embed '@theme/admin/attribute/attribute-value/parts/product-attributes-list.twig' with {'productAttributes': attributeValue.productAttributes} %}
                         {% block thead %}
                             <th class="text-right">Actions</th>
                         {% endblock %}

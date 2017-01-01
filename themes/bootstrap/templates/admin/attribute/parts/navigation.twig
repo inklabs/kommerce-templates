@@ -8,10 +8,6 @@
     {
         'name': 'Attribute Values <span class="text-muted">(' ~ attribute.attributeValues|length ~ ')</span>',
         'url' : routeUrl('admin.attribute.attribute-values', {'attributeId': attribute.id.hex})
-    },
-    {
-        'name': 'Product Attributes <span class="text-muted">(' ~ attribute.productAttributes|length ~ ')</span>',
-        'url' : routeUrl('admin.attribute.product-attributes', {'attributeId': attribute.id.hex})
     }
 ] %}
 

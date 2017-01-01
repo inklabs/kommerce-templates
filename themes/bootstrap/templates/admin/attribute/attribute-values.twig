@@ -16,7 +16,15 @@
                         <th class="text-right">Actions</th>
                     {% endblock %}
                     {% block tbody %}
-                        <td>
+                        <td class="text-right">
+                            <a href="{{ routeUrl('admin.attribute.attribute-value.edit', {'attributeValueId': attributeValue.id.hex}) }}"
+                               class="btn btn-default btn-xs">
+                                Edit
+                            </a>
+                            <a href="{{ routeUrl('admin.attribute.attribute-value.product-attributes', {'attributeValueId': attributeValue.id.hex}) }}"
+                               class="btn btn-default btn-xs">
+                                Products
+                            </a>
                             <form action="{{ routeUrl('admin.attribute.delete-attribute-value') }}"
                                   method="post"
                                   class="form pull-right">
