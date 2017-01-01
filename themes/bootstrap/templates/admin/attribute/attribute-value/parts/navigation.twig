@@ -6,7 +6,7 @@
         'url' : routeUrl('admin.attribute.attribute-value.edit', {'attributeValueId': attributeValue.id.hex})
     },
     {
-        'name': 'Product Attributes <span class="text-muted">(' ~ attributeValue.productAttributes|length ~ ')</span>',
+        'name': 'Products <span class="text-muted">(' ~ attributeValue.productAttributes|length ~ ')</span>',
         'url' : routeUrl('admin.attribute.attribute-value.product-attributes', {'attributeValueId': attributeValue.id.hex})
     }
 ] %}
