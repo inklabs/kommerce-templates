@@ -19,6 +19,7 @@
                       method="post"
                       role="form">
                     {{ form.csrf() }}
+                    {{ form.hidden('attributeId', attributeValue.attribute.id.getHex()) }}
                     {{ form.hidden('attributeValueId', attributeValue.id.getHex()) }}
 
                     <button type="submit" class="btn btn-danger btn-xs">
