@@ -31,23 +31,11 @@
                     {% endblock %}
                 {% endembed %}
 
-                <h4>Add Product:</h4>
-                <form action="{{ routeUrl('admin.option.add-option-product') }}"
-                      method="post">
-                    {{ form.csrf() }}
-                    {{ form.hidden('optionId', option.id.hex) }}
-
-                    <div class="input-group col-sm-4">
-                        <input type="text"
-                               name="productId"
-                               value=""
-                               class="form-control typeahead"/>
-
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-plus"></i> Add</button>
-                        </span>
-                    </div>
-                </form>
+                {% embed '@theme/admin/product/parts/add-product-form.twig' with {'action': routeUrl('admin.option.add-option-product')} %}
+                    {% block formtop %}
+                        {{ form.hidden('optionId', option.id.hex) }}
+                    {% endblock %}
+                {% endembed %}
             </div>
         </div>
     </div>

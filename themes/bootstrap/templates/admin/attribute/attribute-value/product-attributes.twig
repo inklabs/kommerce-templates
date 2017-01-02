@@ -12,7 +12,7 @@
             <div class="col-sm-12">
                 <fieldset>
                     <br>
-                    {% embed '@theme/admin/product/parts/product-list.twig' with {'products': products} %}
+                    {% embed '@theme/admin/attribute/attribute-value/parts/product-attributes-list.twig' with {'productAttributes': attributeValue.productAttributes} %}
                         {% block thead %}
                             <th class="text-right">Actions</th>
                         {% endblock %}
@@ -22,7 +22,6 @@
                                       method="post"
                                       class="form pull-right">
                                     {{ form.csrf() }}
-                                    {{ form.hidden('attributeId', attribute.id.hex) }}
                                     {{ form.hidden('productAttributeId', productAttribute.id.hex) }}
                                     <button type="submit" class="btn btn-danger btn-xs" title="Remove Product"><i class="fa fa-minus"></i></button>
                                 </form>
@@ -31,6 +30,11 @@
                     {% endembed %}
 
                     <hr>
+                    {% embed '@theme/admin/product/parts/add-product-form.twig' with {'action': routeUrl('admin.attribute.attribute-value.add-product')} %}
+                        {% block formtop %}
+                            {{ form.hidden('attributeValueId', attributeValue.id.hex) }}
+                        {% endblock %}
+                    {% endembed %}
                 </fieldset>
             </div>
         </div>
