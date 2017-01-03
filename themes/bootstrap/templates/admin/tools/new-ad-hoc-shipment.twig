@@ -1,52 +1,74 @@
-{# @var shipmentCarrierTypes array #}
-{# @var shipmentRates \inklabs\kommerce\EntityDTO\ShipmentRateDTO[] #}
 {% extends '@theme/layout/base-admin.twig' %}
 
-{% block pageTitle %}Purchase Shipping Label - Order #{{ order.referenceNumber }}{% endblock %}
+{% block pageTitle %}New Ad Hoc Shipment{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Parcel Dimensions</h2>
-                <div class="well well-sm">
-                    <form action="{{ routeUrl('admin.order.add-shipment-label') }}"
-                          method="post"
-                          class="form"
-                          role="form">
-                        {{ form.csrf() }}
-                        {{ form.hidden('comment', comment) }}
-                        {{ form.hidden('orderId', order.id.getHex()) }}
-                        {% for orderItemId, quantity in orderItemQty %}
-                            {{ form.hidden('orderItemQty[' ~ orderItemId ~ ']', quantity) }}
-                        {% endfor %}
+                <h3>New Ad Hoc Shipment</h3>
+            </div>
+        </div>
+
+        <hr>
+
+        <form action="{{ routeUrl('admin.tools.ad-hoc-shipment.new.post') }}"
+              method="post"
+              class="form"
+              role="form">
+            {{ form.csrf() }}
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>From Address</h3>
+                    <div class="well">
+                        {% include '@theme/admin/tools/parts/order-address-input-fields.twig' with {
+                            'address': fromAddress,
+                            'objectName': 'fromAddress',
+                            'companyIsRequired': true
+                        } %}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h3>To Address</h3>
+                    <div class="well">
+                        {% include '@theme/admin/tools/parts/order-address-input-fields.twig' with {
+                            'address': toAddress,
+                            'objectName': 'toAddress'
+                        } %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Parcel Dimensions</h2>
+                    <div class="well well-sm">
 
                         {% include '@theme/admin/tools/parts/shipment-input-fields.twig' %}
-                    <div class="form-actions">
+                        <div class="form-actions">
                             <button type="submit" class="btn btn-primary btn-block">
                                 Get Shipping Rates
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         {% if shipmentRates is iterable %}
+            <hr>
             <div class="row">
                 <div class="col-sm-12">
                     <h2>Shipping Rates</h2>
                     <div class="well well-sm">
-                        <form action="{{ routeUrl('admin.order.buy-shipment-label') }}"
+                        <form action="{{ routeUrl('admin.tools.ad-hoc-shipment.buy-shipment-label') }}"
                               method="post"
                               class="form"
                               role="form">
                             {{ form.csrf() }}
-                            {{ form.hidden('comment', comment) }}
-                            {{ form.hidden('orderId', order.id.getHex()) }}
-                            {% for orderItemId, quantity in orderItemQty %}
-                                {{ form.hidden('orderItemQty[' ~ orderItemId ~ ']', quantity) }}
-                            {% endfor %}
+
                             {{ form.hidden('shipment[weightLbs]', shipment.weightLbs) }}
                             {{ form.hidden('shipment[length]', shipment.length) }}
                             {{ form.hidden('shipment[width]', shipment.width) }}

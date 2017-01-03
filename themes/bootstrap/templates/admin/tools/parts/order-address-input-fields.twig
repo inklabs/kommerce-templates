@@ -1,0 +1,129 @@
+{# @var objectName string #}
+{# @var address \inklabs\kommerce\EntityDTO\OrderAddressDTO #}
+<div class="row">
+    <div class="form-group col-sm-6">
+        <label for="{{ objectName }}-firstName" class="control-label">First Name</label>
+        <input type="text"
+               id="{{ objectName }}-firstName"
+               name="{{ objectName }}[firstName]"
+               value="{{ address.firstName }}"
+               class="form-control"
+               autofocus=""
+               required=""/>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <label for="{{ objectName }}-lastName" class="control-label">Last Name</label>
+        <input type="text"
+               id="{{ objectName }}-lastName"
+               name="{{ objectName }}[lastName]"
+               value="{{ address.lastName }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        <label for="{{ objectName }}-company" class="control-label">
+            Company Name {% if not companyIsRequired %}<small class="text-muted">(optional)</small>{% endif %}
+        </label>
+        <input type="text"
+               id="{{ objectName }}-company"
+               name="{{ objectName }}[company]"
+               value="{{ address.company }}"
+               class="form-control"
+                {% if companyIsRequired %}required=""{% endif %}/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        <label for="{{ objectName }}-address1" class="control-label">Street Address</label>
+        <input type="text"
+               id="{{ objectName }}-address1"
+               name="{{ objectName }}[address1]"
+               value="{{ address.address1 }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        <label for="{{ objectName }}-address2" class="control-label">
+            Street Address 2 <small class="text-muted">(optional)</small>
+        </label>
+        <input type="text"
+               id="{{ objectName }}-address2"
+               name="{{ objectName }}[address2]"
+               value="{{ address.address2 }}"
+               class="form-control"/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        <label for="{{ objectName }}-isResidential" class="control-label">
+            Residential Address?
+
+            {{ form.checkbox(
+                objectName ~ '[isResidential]',
+                address.isResidential,
+                objectName ~ '-isResidential'
+            ) }}
+        </label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label for="{{ objectName }}-city" class="control-label">City</label>
+        <input type="text"
+               id="{{ objectName }}-city"
+               name="{{ objectName }}[city]"
+               value="{{ address.city }}"
+               class="form-control"
+               required=""/>
+    </div>
+
+    <div class="form-group col-sm-4">
+        <label for="{{ objectName }}-state" class="control-label">State</label>
+        <input type="text"
+               id="{{ objectName }}-state"
+               name="{{ objectName }}[state]"
+               value="{{ address.state }}"
+               class="form-control"
+               required=""/>
+    </div>
+
+    <div class="form-group col-sm-4">
+        <label for="{{ objectName }}-zip5" class="control-label">Zipcode</label>
+        <input type="text"
+               id="{{ objectName }}-zip5"
+               name="{{ objectName }}[zip5]"
+               value="{{ address.zip5 }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-6">
+        <label for="{{ objectName }}-phone" class="control-label">Phone Number</label>
+        <input type="text"
+               id="{{ objectName }}-phone"
+               name="{{ objectName }}[phone]"
+               value="{{ address.phone }}"
+               class="form-control"/>
+    </div>
+
+    <div class="form-group col-sm-6">
+        <label for="{{ objectName }}-email" class="control-label">Email Address</label>
+        <input type="text"
+               id="{{ objectName }}-email"
+               name="{{ objectName }}[email]"
+               value="{{ address.email }}"
+               class="form-control"/>
+    </div>
+</div>
