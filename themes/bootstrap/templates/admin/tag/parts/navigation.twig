@@ -6,15 +6,15 @@
         'url' : routeUrl('admin.tag.edit', {'tagId': tag.id.hex})
     },
     {
-        'name': 'Images',
+        'name': 'Images <span class="text-muted">(' ~ tag.images|length ~ ')</span>',
         'url' : routeUrl('admin.tag.images', {'tagId': tag.id.hex})
     },
     {
-        'name': 'Options',
+        'name': 'Options <span class="text-muted">(' ~ (tag.options|length + tag.textOptions|length) ~ ')</span>',
         'url' : routeUrl('admin.tag.options', {'tagId': tag.id.hex})
     },
     {
-        'name': 'Products',
+        'name': 'Products <span class="text-muted">(' ~ tag.products|length ~ ')</span>',
         'url' : routeUrl('admin.tag.products', {'tagId': tag.id.hex})
     }
 ] %}
