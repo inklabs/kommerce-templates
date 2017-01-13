@@ -21,7 +21,7 @@
                             {{ form.hidden('orderItemQty[' ~ orderItemId ~ ']', quantity) }}
                         {% endfor %}
 
-                        {% include '@theme/admin/tools/parts/shipment-input-fields.twig' %}
+                        {% include '@theme/admin/tools/ad-hoc-shipment/parts/shipment-input-fields.twig' %}
                     <div class="form-actions">
                             <button type="submit" class="btn btn-primary btn-block">
                                 Get Shipping Rates
