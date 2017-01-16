@@ -47,17 +47,12 @@
                     <button type="submit" class="btn btn-success">Sign In <i class="fa fa-arrow-circle-right"></i></button>
                 </form>
 
-                <form action="{{ routeUrl('user.forgot-password.post') }}"
-                      method="post"
-                      id="forgot-password"
-                      class="form"
-                      role="form">
-                    {{ form.csrf() }}
-                    {{ form.hidden('email', email) }}
-                    <div class="login-forgot-password">
-                        <button type="submit" class="btn btn-link"><em>Forgot your password?</em></button>
-                    </div>
-                </form>
+                <div class="login-forgot-password">
+                    <a href="{{ routeUrl('user.forgot-password') }}?email={{ email|url_encode }}"
+                       class="btn btn-link">
+                        <em>Forgot your password?</em>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
