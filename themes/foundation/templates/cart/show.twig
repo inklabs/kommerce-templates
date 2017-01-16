@@ -50,14 +50,14 @@
                     </td>
                     <td>
                         <form action="cart/update-quantity" method="post" role="form">
-                            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-                            <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}"/>
+                            {{ form.csrf() }}
+                            {{ form.hidden('id', cartItem.id.hex) }}
                             <input type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
                             <button type="submit">Update</button>
                         </form>
                         <form action="cart/delete-item" method="post" role="form">
-                            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-                            <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
+                            {{ form.csrf() }}
+                            {{ form.hidden('id', cartItem.id.hex) }}
                             <button type="submit">Remove item</button>
                         </form>
                         {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
@@ -79,7 +79,7 @@
         {% include '@theme/helper/checkout-button.twig' only %}
 
         <form action="cart/apply-coupon" method="post">
-            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+            {{ form.csrf() }}
             <input type="text" name="coupon_code" value="" placeholder="coupon code"/>
             <button type="submit">apply</button>
         </form>

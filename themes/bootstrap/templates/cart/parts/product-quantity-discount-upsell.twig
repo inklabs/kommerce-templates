@@ -13,10 +13,10 @@
 
                 {% if priceEach < cartItem.price.unitPrice %}
                     <form action="{{ routeUrl('cart.update-quantity') }}" method="post" class="form-inline" style="margin-top: 15px">
-                        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                        {{ form.csrf() }}
+                        {{ form.hidden('id', cartItem.id.hex) }}
+                        {{ form.hidden('quantity', productQuantityDiscount.quantity) }}
 
-                        <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
-                        <input type="hidden" name="quantity" value="{{ productQuantityDiscount.quantity }}" />
                         <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i>
                             Add {{ numberMore }} more
                         </button>

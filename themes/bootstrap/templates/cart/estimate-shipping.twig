@@ -11,7 +11,7 @@
             <div class="well well-sm">
                 <h5>Estimate Shipping &amp; Tax</h5>
                 <form action="{{ routeUrl('cart.estimate-shipping') }}" method="post">
-                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                    {{ form.csrf() }}
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="shipping-zip5" class="control-label">Zipcode</label>
@@ -55,10 +55,9 @@
                     <form action="{{ routeUrl('cart.apply-shipping-method') }}"
                           method="post"
                           id="apply-shipping-method-form">
-                        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-
-                        <input type="hidden" name="shipping[zip5]" value="{{ shipping.zip5 }}">
-                        <input type="hidden" name="shipping[isResidential]" value="{{ shipping.isResidential }}">
+                        {{ form.csrf() }}
+                        {{ form.hidden('shipping[zip5]', shipping.zip5) }}
+                        {{ form.hidden('shipping[isResidential]', shipping.isResidential) }}
                         <hr />
 
                         <h2>Choose your delivery option:</h2>

@@ -34,8 +34,8 @@
 
     {% if product.isInStock %}
         <form action="/cart/add-item" id="cart_add_item" method="post">
-        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-        <input type="hidden" name="id" value="{{ product.id.getHex() }}"/>
+            {{ form.csrf() }}
+            {{ form.hidden('id', product.id.hex) }}
             <span>Qty:</span>
             <input name="quantity" type="number" value="1">
             <input type="submit" class="button" value="Add to Cart">

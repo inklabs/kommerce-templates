@@ -49,8 +49,8 @@
                                             </td>
                                             <td class="text-right">
                                                 <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
-                                                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-                                                    <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}" />
+                                                    {{ form.csrf() }}
+                                                    {{ form.hidden('id', cartItem.id.hex) }}
                                                     <div class="pull-right" style="width: 120px">
                                                         <div class="input-group input-group-sm">
                                                             <input class="form-control update-qty" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
@@ -62,8 +62,8 @@
                                                 </form>
                                                 <div class="clearfix"></div>
                                                 <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
-                                                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-                                                    <input type="hidden" name="id" value="{{ cartItem.id.getHex() }}">
+                                                    {{ form.csrf() }}
+                                                    {{ form.hidden('id', cartItem.id.hex) }}
 
                                                     <span class="cart-remove-item">
                                                         <button type="submit" class="btn btn-link btn-xs">
@@ -109,7 +109,7 @@
 
                         <br>
                         <form action="{{ routeUrl('cart.apply-coupon') }}" method="post">
-                            <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
+                            {{ form.csrf() }}
 
                             <div class="input-group">
                             <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />

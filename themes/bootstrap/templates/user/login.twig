@@ -1,0 +1,64 @@
+{% extends '@theme/layout/base.twig' %}
+
+{% block pageTitle %}User Login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm12">
+                <h1>Please Sign In</h1>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <form action="{{ routeUrl('user.login.post') }}"
+                      method="post"
+                      id="login"
+                      class="form"
+                      role="form">
+                    {{ form.csrf() }}
+
+                    {% if formRedirect is defined %}
+                        {{ form.hidden('redirect', formRedirect) }}
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email Address</label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               value=""
+                               class="form-control"
+                               required=""
+                               autofocus="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               value=""
+                               class="form-control"
+                               required="">
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Sign In <i class="fa fa-arrow-circle-right"></i></button>
+                </form>
+
+                <form action="{{ routeUrl('user.forgot-password.post') }}"
+                      method="post"
+                      id="forgot-password"
+                      class="form"
+                      role="form">
+                    {{ form.csrf() }}
+                    {{ form.hidden('email', email) }}
+                    <div class="login-forgot-password">
+                        <button type="submit" class="btn btn-link"><em>Forgot your password?</em></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

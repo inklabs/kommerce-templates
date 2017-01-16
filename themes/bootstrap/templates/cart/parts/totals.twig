@@ -61,8 +61,8 @@
                                 <form action="{{ routeUrl('cart.remove-coupon') }}"
                                       method="post"
                                       role="form">
-                                    <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}">
-                                    <input type="hidden" name="couponId" value="{{ coupon.id.getHex() }}">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('couponId', coupon.id.hex) }}
 
                                     <button type="submit" class="btn btn-link btn-xs">
                                         <i class="fa fa-remove"></i>
