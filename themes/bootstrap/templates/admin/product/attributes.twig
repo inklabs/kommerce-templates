@@ -15,7 +15,11 @@
                         <th class="text-right">Actions</th>
                     {% endblock %}
                     {% block tbody %}
-                        <td>
+                        <td class="text-right">
+                            <a href="{{ routeUrl('admin.attribute.attribute-values', {'attributeId': productAttribute.attribute.id.hex}) }}"
+                               class="btn btn-default btn-xs">
+                                View
+                            </a>
                             <form action="{{ routeUrl('admin.product.remove-attribute-value') }}"
                                   method="post"
                                   class="form pull-right">
@@ -23,7 +27,7 @@
                                 {{ form.hidden('productId', product.id.hex) }}
                                 {{ form.hidden('productAttributeId', productAttribute.id.hex) }}
 
-                                <button type="submit" class="btn btn-danger btn-xs pull-right"><i class="fa fa-minus"></i></button>
+                                <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
                             </form>
                         </td>
                     {% endblock %}

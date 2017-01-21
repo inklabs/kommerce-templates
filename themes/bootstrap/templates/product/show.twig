@@ -134,6 +134,19 @@
                             </form>
                         {% endif %}
 
+                        {% if product.productAttributes is not empty %}
+                            <div class="divider"></div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4>Attributes:</h4>
+                                    {% for productAttribute in product.productAttributes %}
+                                        <strong>{{ productAttribute.attribute.name }}:</strong>
+                                        {{ productAttribute.attributeValue.name }} <br>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+
                         {% if product.description is not empty %}
                             <div class="divider"></div>
                             <dl>
@@ -142,26 +155,26 @@
                             </dl>
                         {% endif %}
 
-                        {% if product.tags is not empty %}
-                            <div class="divider"></div>
-                            {% for tag in product.tags if tag.isVisible %}
-                                {% if tag.description is not empty %}
-                                    <dl>
-                                        <dt class="tag-info">
-                                            <a href="{{ tagUrl(tag) }}">
-                                                {{ tag.name }}
-                                            </a>
-                                        </dt>
-                                        <dd class="tag-desc">
-                                            {{ tag.description | nl2br }}
-                                        </dd>
-                                    </dl>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                        {% for tag in product.tags if tag.isVisible %}
+                            {% if loop.first %}
+                                <div class="divider"></div>
+                            {% endif %}
+
+                            {% if tag.description is not empty %}
+                                <dl>
+                                    <dt class="tag-info">
+                                        <a href="{{ tagUrl(tag) }}">
+                                            {{ tag.name }}
+                                        </a>
+                                    </dt>
+                                    <dd class="tag-desc">
+                                        {{ tag.description | nl2br }}
+                                    </dd>
+                                </dl>
+                            {% endif %}
+                        {% endfor %}
 
                         <div class="divider"></div>
-
                         <div class="other-actions">
                             <div id="social-actions">
                                 <a  href="https://www.facebook.com/sharer/sharer.php?u={{ product.fullUrl }}"
