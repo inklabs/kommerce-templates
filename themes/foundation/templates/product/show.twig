@@ -6,22 +6,21 @@
 {% block pageDescription %}{{ product.description | nl2br }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row" id="product">
-            <div class="col-md-9 col-sm-12">
+        <div class="row">
+            <div class="medium-9 columns">
                 <div class="row">
-                    <div class="col-sm-5 text-center" id="product-image-container">
+                    <div class="medium-5 columns text-center">
                         <img id="product-image" src="{{ productImageUrl(product) }}" />
                         {% if product.images is not empty %}
                             <div class="row" style="margin-top: 5px">
-                                <div class="col-lg-3 col-xs-4">
+                                <div class="large-3 small-4 columns">
                                     <a href="{{ productImageUrl(product) }}" class='product-image'>
                                         <img src="{{ productImageUrl(product) }}" style="width: 100px;" />
                                     </a>
                                 </div>
                                 {% for image in product.images %}
                                     {% if image.path != product.defaultImage %}
-                                        <div class="col-lg-3 col-xs-4">
+                                        <div class="large-3 small-4 columns">
                                             <a href="{{ image.pathUrl }}" class='product-image'>
                                                 <img src="{{ image.pathUrl }}" style="width: 100px;" />
                                             </a>
@@ -51,7 +50,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-sm-7">
+                    <div class="medium-7 columns">
                         <h1>{{ product.name }}</h1>
 
                         {% if product.isInventoryRequired %}
@@ -98,22 +97,18 @@
                             <div class="divider"></div>
                             <div class="actions">
                                 {% for option in product.options %}
-                                    <div class="row">
-                                        <div class="col-sm-12">
+                                    <div class="row column">
                                             <div class="control-group">
                                                 {% include '@theme/product/parts/options.twig' with {'option': option } only %}
                                             </div>
-                                        </div>
                                     </div>
                                 {% endfor %}
 
                                 {% for textOption in product.textOptions %}
-                                    <div class="row">
-                                        <div class="col-sm-12">
+                                    <div class="row column">
                                             <div class="control-group">
                                                 {% include '@theme/product/parts/text-options.twig' with {'textOption': textOption } only %}
                                             </div>
-                                        </div>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -126,7 +121,7 @@
                                 <button type="submit" class="btn btn-success pull-right">
                                     <i class="fa fa-shopping-cart"></i> Add to Cart
                                 </button>
-                                <div class="input-group input-group-sm col-xs-4 col-sm-3">
+                                <div class="input-group input-group-sm col-xs-4 medium-3">
                                     <span class="input-group-addon"><label for="quantity">Qty:</label></span>
                                     <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1" />
                                 </div>
@@ -136,14 +131,12 @@
 
                         {% if product.productAttributes is not empty %}
                             <div class="divider"></div>
-                            <div class="row">
-                                <div class="col-sm-12">
+                            <div class="row column">
                                     <h4>Attributes:</h4>
                                     {% for productAttribute in product.productAttributes %}
                                         <strong>{{ productAttribute.attribute.name }}:</strong>
                                         {{ productAttribute.attributeValue.name }} <br>
                                     {% endfor %}
-                                </div>
                             </div>
                         {% endif %}
 
@@ -201,14 +194,13 @@
 
                 {# TODO:
                 <?php if ( ! empty($reviews)) { ?>
-                <div class="col-sm-9" id="reviews">
+                <div class="medium-9 columns" id="reviews">
                     <h2>Reviews</h2>
                 </div>
                 <?php } ?>
                 #}
             </div>
-
-            <div class="col-md-3 col-sm-12">
+            <div class="medium-3 columns">
                 {% if relatedProducts is not empty %}
                     <h2 class="text-center">You Might Also Like</h2>
 
@@ -217,5 +209,4 @@
                 {% endif %}
             </div>
         </div>
-    </div>
 {% endblock %}
