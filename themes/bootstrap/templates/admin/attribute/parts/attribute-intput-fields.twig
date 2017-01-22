@@ -13,6 +13,21 @@
     </div>
 </div>
 <div class="row form-group">
+    <label for="attribute-{{ attribute.id.hex }}-choiceType" class="control-label col-sm-3">Choice Type</label>
+    <div class="col-sm-3">
+        {{ form.select(
+            'attribute[choiceType]',
+            attribute.choiceType.id,
+            validAttributeChoiceTypeMap,
+            'coupon-type',
+            'form-control input-sm',
+            {
+                'required': 'true'
+            }
+        ) }}
+    </div>
+</div>
+<div class="row form-group">
     <label for="attribute-sortOrder" class="control-label col-sm-3">Sort Order</label>
     <div class="col-sm-2">
         <input type="text"
