@@ -1,0 +1,43 @@
+<div id="header">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-align-justify"></i></button>
+                <a class="navbar-brand" href="{{ routeUrl('home') }}">{{ SITE_NAME | default('Kommerce') }}</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right text-center">
+                    {% if user is not empty %}
+                        <li>
+                            <a href="{{ routeUrl('logout') }}">Sign Out</a>
+                        </li>
+                        <li class="divider-vertical hidden-xs"></li>
+                        <li>
+                            <a href="{{ routeUrl('user.account') }}">Account</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ routeUrl('user.login') }}">Sign In</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="divider-vertical hidden-xs"></li>
+
+                    <li>
+                        <a href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> Cart</a>
+                        {# TODO:
+                            <?php if ($cart !== null && $cart->totalQuantity > 0) { ?>
+                                (<?=$cart->totalQuantity?>)
+                            <?php } ?>
+                        #}
+                    </li>
+                </ul>
+
+                <div class="col-sm-3 navbar-right">
+                    {% include '@theme/helper/site-search.twig' only %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

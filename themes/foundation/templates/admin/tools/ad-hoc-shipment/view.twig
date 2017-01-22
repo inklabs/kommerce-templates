@@ -1,0 +1,83 @@
+{# @var shipmentTracker \inklabs\kommerce\EntityDTO\ShipmentTrackerDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}View Ad Hoc Shipment{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Ad Hoc Shipment</h3>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Rate</th>
+                        <th>Carrier/Service</th>
+                        <th class="text-right">Label</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {% if shipmentTracker.shipmentRate.rate.amount is null %}
+                                    n/a
+                                {% else %}
+                                    {{ shipmentTracker.shipmentRate.rate.amount | displayPrice }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if shipmentTracker.shipmentRate.carrier is not null %}
+                                    {{ shipmentTracker.shipmentRate.carrier }}
+                                    {{ shipmentTracker.shipmentRate.service }}
+                                    <br>
+                                {% elseif shipmentTracker.carrier is not null %}
+                                    {{ shipmentTracker.carrier.name }}
+                                    <br>
+                                {% endif %}
+                                <strong>Tracking:</strong> {{ shipmentTracker.trackingCode }}
+                                <div class="text-muted">
+                                    <div class="text-muted">
+                                        {% if shipmentTracker.shipmentRate.deliveryDays is not null %}
+                                            <strong>Delivery Days:</strong>
+                                            {{ shipmentTracker.shipmentRate.deliveryDays }}
+                                            <br>
+                                        {% endif %}
+                                        {% if shipmentTracker.shipmentRate.deliveryDate is not null %}
+                                            <strong>Delivery Date:</strong>
+
+                                            {{ shipmentTracker.shipmentRate.deliveryDate | formatDate }}
+                                            {% if shipmentTracker.shipmentRate.isDeliveryDateGuaranteed %}
+                                                <span style="color: green">
+                                                    <strong><i class="fa fa-check"></i> Guaranteed</strong>
+                                                </span>
+                                            {% endif %}
+                                            <br>
+                                        {% endif %}
+                                        <strong>Created:</strong>
+                                        {{ shipmentTracker.created | formatDate }}
+                                        <br>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                {% if shipmentTracker.shipmentLabel.url is null %}
+                                    n/a
+                                {% else %}
+                                    <a href="{{ shipmentTracker.shipmentLabel.url }}">
+                                        <img src="{{ shipmentTracker.shipmentLabel.url }}" style="max-height: 150px" />
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

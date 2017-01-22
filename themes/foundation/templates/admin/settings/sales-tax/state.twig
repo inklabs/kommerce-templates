@@ -1,0 +1,70 @@
+{# @var stateTaxRates \inklabs\kommerce\EntityDTO\TaxRateDTO[] #}
+{# @var validStatesMap array #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}State - Sales Tax Rules{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include '@theme/admin/settings/sales-tax/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                <div class="well well-sm">
+                    <div id="zipcode-rates" class="fluid-control-group">
+                        {% for taxRate in stateTaxRates %}
+                            <div class="row">
+                                <form action="{{ routeUrl('admin.settings.sales-tax.state.edit') }}"
+                                      method="post"
+                                      class="form">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('taxRateId', taxRate.id.hex) }}
+
+                                    {% include '@theme/admin/settings/sales-tax/parts/state-tax-rate-input-fields.twig' %}
+
+                                    <div class="form-group col-sm-1 text-right">
+                                        <br>
+                                        <button type="submit" name="action" value="edit" class="btn btn-default btn-xs" title="Edit Tax Rate">Update</button>
+                                    </div>
+                                </form>
+                                <form action="{{ routeUrl('admin.settings.sales-tax.delete') }}"
+                                      method="post"
+                                      class="form">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('taxRateId', taxRate.id.hex) }}
+                                    {{ form.hidden('location', 'admin.settings.sales-tax.state') }}
+
+                                    <div class="form-group col-sm-1 text-right">
+                                        <br>
+                                        <button type="submit" name="action" value="delete" class="btn btn-danger btn-xs" title="Delete Tax Rate"><i class="fa fa-remove"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="well well-sm">
+                    <h3>Add Tax Rate:</h3>
+                    <div class="row">
+                        <form action="{{ routeUrl('admin.settings.sales-tax.state.new') }}"
+                              method="post"
+                              class="form">
+                            {{ form.csrf() }}
+
+                            {% include '@theme/admin/settings/sales-tax/parts/state-tax-rate-input-fields.twig' %}
+
+                            <div class="form-group col-sm-2">
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-sm pull-right" title="Add Tax Rate">
+                                    <i class="fa fa-check-circle"></i>
+                                    Create
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

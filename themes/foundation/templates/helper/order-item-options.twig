@@ -1,0 +1,38 @@
+{# @var orderItem \inklabs\kommerce\EntityDTO\OrderItemDTO #}
+<div>
+    {% for orderItemOptionProduct in orderItem.orderItemOptionProducts %}
+        <small>
+            <span class="hidden-sm hidden-xs">
+                {{ orderItemOptionProduct.optionName }}:
+            </span>
+            <span class="text-muted">
+                {{ orderItemOptionProduct.optionProductName }}
+            </span>
+            <br>
+        </small>
+    {% endfor %}
+
+    {% for orderItemOptionValue in orderItem.orderItemOptionValues %}
+        <small>
+            <span class="hidden-sm hidden-xs">
+                {{ orderItemOptionValue.optionName }}:
+            </span>
+            <span class="text-muted">
+                {{ orderItemOptionValue.optionValueName }}
+            </span>
+            <br>
+        </small>
+    {% endfor %}
+
+    {% for orderItemTextOptionValue in orderItem.orderItemTextOptionValues %}
+        <small>
+            <span class="hidden-sm hidden-xs">
+                {{ orderItemTextOptionValue.textOptionName }}:
+            </span>
+            <span class="text-muted">
+                {{ orderItemTextOptionValue.textOptionValue }}
+            </span>
+            <br>
+        </small>
+    {% endfor %}
+</div>

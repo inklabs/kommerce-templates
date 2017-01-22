@@ -1,0 +1,44 @@
+{# @var cartItem \inklabs\kommerce\EntityDTO\CartItemDTO #}
+{# TODO:
+    Account for OptionProducts, OptionValues, CatalogPromotions, and Coupons
+    This logic may need to be moved to kommerce-core
+#}
+{% if cartItem.product.productQuantityDiscounts is not empty %}
+    <div class="pull-right">
+        {% for productQuantityDiscount in (cartItem.product.productQuantityDiscounts | reverse) %}
+            {% if cartItem.quantity < productQuantityDiscount.quantity %}
+                {% set numberMore = productQuantityDiscount.quantity - cartItem.quantity %}
+                {% set totalOff = productQuantityDiscount.price.quantityPrice - cartItem.price.quantityPrice %}
+                {% set priceEach = totalOff / numberMore %}
+
+                {% if priceEach < cartItem.price.unitPrice %}
+                    <form action="{{ routeUrl('cart.update-quantity') }}" method="post" class="form-inline" style="margin-top: 15px">
+                        {{ form.csrf() }}
+                        {{ form.hidden('id', cartItem.id.hex) }}
+                        {{ form.hidden('quantity', productQuantityDiscount.quantity) }}
+
+                        <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i>
+                            Add {{ numberMore }} more
+                        </button>
+                        {% if priceEach > 0 %}
+                            for
+                            <span class="price">
+                                {{ priceEach | displayPrice }}
+                            </span>
+                            {% trans %}
+                            {% plural numberMore %}
+                                each
+                            {% endtrans %}
+                        {% elseif priceEach == 0 %}
+                            <span class="cart-free-shipping">for FREE</span>
+                        {% else %}
+                            <span class="cart-free-shipping">
+                                for {{ totalOff | displayPrice }} OFF
+                            </span>
+                        {% endif %}
+                    </form>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,98 @@
+{# @var catalogPromotion \inklabs\kommerce\EntityDTO\CatalogPromotionDTO #}
+{# @var promotionTypes array #}
+<div class="row form-group">
+    <label for="catalogPromotion-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="catalogPromotion-name"
+               name="catalogPromotion[name]"
+               value="{{ catalogPromotion.name }}"
+               class="form-control"
+               maxlength="255"
+               required=""/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="catalogPromotion-type" class="control-label col-sm-3">Discount Type</label>
+    <div class="col-sm-3">
+        {{ form.select(
+            'catalogPromotion[type]',
+            catalogPromotion.type.id,
+            promotionTypes,
+            'catalogPromotion-type',
+            'form-control input-sm',
+            {
+                'required': 'true'
+            }
+        ) }}
+    </div>
+</div>
+<div class="row form-group">
+    <label for="catalogPromotion-value" class="control-label col-sm-3">Discount Value</label>
+    <div class="col-sm-3">
+        {% if catalogPromotion.type.isFixed or catalogPromotion.type.isExact %}
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text"
+                       id="catalogPromotion-value"
+                       name="catalogPromotion[value]"
+                       value="{{ catalogPromotion.value | floatPrice }}"
+                       class="form-control"
+                       required=""/>
+            </div>
+        {% elseif catalogPromotion.type.isPercent %}
+            <div class="input-group">
+                <input type="text"
+                       id="catalogPromotion-value"
+                       name="catalogPromotion[value]"
+                       value="{{ catalogPromotion.value }}"
+                       class="form-control"
+                       required=""/>
+                <div class="input-group-addon">%</div>
+            </div>
+        {% else %}
+            <input type="text"
+                   id="catalogPromotion-value"
+                   name="catalogPromotion[value]"
+                   value="{{ catalogPromotion.value }}"
+                   class="form-control"
+                   required=""/>
+        {% endif %}
+    </div>
+</div>
+<div class="row form-group">
+    <label for="catalogPromotion-maxRedemptions" class="control-label col-sm-3">Max Redemptions</label>
+    <div class="col-sm-3">
+        <input type="text"
+               id="catalogPromotion-maxRedemptions"
+               name="catalogPromotion[maxRedemptions]"
+               value="{{ catalogPromotion.maxRedemptions }}"
+               class="form-control"/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="catalogPromotion-reducesTaxSubtotal" class="control-label col-sm-3">
+        Reduces Tax Subtotal
+    </label>
+    {{ form.checkbox(
+        'catalogPromotion[reducesTaxSubtotal]',
+        catalogPromotion.reducesTaxSubtotal,
+        'catalogPromotion-reducesTaxSubtotal'
+    ) }}
+</div>
+
+<div class="row form-group">
+    <label for="catalogPromotion-tagId" class="control-label col-sm-3">Tag</label>
+    <div class="col-sm-6">
+        <input type="text"
+               id="catalogPromotion-tagId"
+               name="catalogPromotion[tagId]"
+               value="{{ catalogPromotion.tag.id.hex }}"
+               class="form-control"/>
+    </div>
+</div>
+
+{% include '@theme/admin/promotion/parts/date-time-timzeone-inputs.twig' with {
+    'entityName': 'catalogPromotion',
+    'entity': catalogPromotion,
+} only %}

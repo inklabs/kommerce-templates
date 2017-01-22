@@ -1,0 +1,47 @@
+{# @var attributeValue \inklabs\kommerce\EntityDTO\AttributeValueDTO #}
+{# @var promotionTypes array #}
+<div class="row form-group">
+    <label for="attributeValue-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="attributeValue-name"
+               name="attributeValue[name]"
+               value="{{ attributeValue.name }}"
+               class="form-control"
+               maxlength="255"
+               required=""/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="attributeValue-sku" class="control-label col-sm-3">SKU</label>
+    <div class="col-sm-2">
+        <input type="text"
+               id="attributeValue-sku"
+               name="attributeValue[sku]"
+               value="{{ attributeValue.sku }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div><div class="row form-group">
+    <label for="attributeValue-sortOrder" class="control-label col-sm-3">Sort Order</label>
+    <div class="col-sm-2">
+        <input type="text"
+               id="attributeValue-sortOrder"
+               name="attributeValue[sortOrder]"
+               value="{{ attributeValue.sortOrder|default(0) }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="attributeValue-description" class="control-label col-sm-3">Description</label>
+    <div class="col-sm-8">
+        <textarea name="attributeValue[description]"
+                  id="attributeValue-description"
+                  class="form-control"
+                  rows="5"
+                  maxlength="65535">
+            {{- attributeValue.description -}}
+        </textarea>
+    </div>
+</div>

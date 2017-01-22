@@ -1,0 +1,44 @@
+{# @var shipment array #}
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label for="shipment-weightLbs" class="control-label">Weight (lbs)</label>
+        <input type="text"
+               id="shipment-weightLbs"
+               name="shipment[weightLbs]"
+               value="{{ shipment.weightLbs }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label for="shipment-length" class="control-label">Length (in)</label>
+        <input type="text"
+               id="shipment-length"
+               name="shipment[length]"
+               value="{{ shipment.length }}"
+               class="form-control"
+               required=""/>
+    </div>
+
+    <div class="form-group col-sm-4">
+        <label for="shipment-width" class="control-label">Width (in)</label>
+        <input type="text"
+               id="shipment-width"
+               name="shipment[width]"
+               value="{{ shipment.width }}"
+               class="form-control"
+               required=""/>
+    </div>
+
+    <div class="form-group col-sm-4">
+        <label for="shipment-height" class="control-label">Height (in)</label>
+        <input type="text"
+               id="shipment-height"
+               name="shipment[height]"
+               value="{{ shipment.height }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{# @var optionProducts \inklabs\kommerce\EntityDTO\OptionProductDTO[] #}
+<h3>Product Options</h3>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Sort Order</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for optionProduct in optionProducts %}
+            <tr>
+                <td>
+                    <a href="{{ adminOptionUrl(optionProduct.option) }}">{{ optionProduct.option.name }}</a>
+                </td>
+                <td>
+                    <div title="{{ optionProduct.option.description }}">
+                        {{ optionProduct.option.description|truncate(50)}}
+                    </div>
+                </td>
+                <td>{{ optionProduct.sortOrder }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No product options</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

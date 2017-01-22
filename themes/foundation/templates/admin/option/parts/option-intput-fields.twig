@@ -1,0 +1,30 @@
+{# @var option \inklabs\kommerce\EntityDTO\OptionDTO #}
+<h2>Required:</h2>
+
+<div class="row form-group">
+    <label for="option-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="option-name"
+               name="option[name]"
+               value="{{ option.name }}"
+               class="form-control col-sm-3"
+               maxlength="255"
+               required=""/>
+    </div>
+</div>
+
+<h2>Optional:</h2>
+
+<div class="row form-group">
+    <label for="option-description" class="control-label col-sm-3">Description</label>
+    <div class="col-sm-8">
+        <textarea name="option[description]"
+                  id="option-description"
+                  class="form-control"
+                  rows="5"
+                  maxlength="65535">
+            {{- option.description -}}
+        </textarea>
+    </div>
+</div>

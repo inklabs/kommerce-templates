@@ -1,0 +1,40 @@
+{# @var cartPriceRules \inklabs\kommerce\EntityDTO\CartPriceRuleDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Redemptions</th>
+            <th>Reduces Tax Subtotal</th>
+            <th>Period</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for cartPriceRule in cartPriceRules %}
+            <tr>
+                <td>
+                    <a href="{{ adminCartPriceRuleUrl(cartPriceRule) }}">
+                        {{ cartPriceRule.name }}
+                    </a>
+                </td>
+                <td>
+                    {{ cartPriceRule.redemptions }} of
+                    {% if cartPriceRule.maxRedemptions is null %}
+                        <span class="text-muted small">[unlimited]</span>
+                    {% else %}
+                        {{ cartPriceRule.maxRedemptions }}
+                    {% endif %}
+                </td>
+                <td>{{ cartPriceRule.reducesTaxSubtotal|boolYesNo }}</td>
+                <td>
+                    {{ cartPriceRule.start | formatDate }}
+                    -
+                    {{ cartPriceRule.end | formatDate }}
+                </td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No cart price rules</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

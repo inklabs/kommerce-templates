@@ -1,0 +1,31 @@
+{# @var users \inklabs\kommerce\EntityDTO\UserDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>External ID</th>
+            <th>Name</th>
+            <th>email</th>
+            <th>logins</th>
+            <th>Last Login</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>
+                    {% if user.externalId is not null %}
+                        {{ user.externalId }}
+                    {% else %}
+                        <span class="text-muted small">[none]</span>
+                    {% endif %}
+                </td>
+                <td>{{ user.firstName }} {{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.totalLogins }}</td>
+                <td>{{ user.lastLogin | formatDate }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

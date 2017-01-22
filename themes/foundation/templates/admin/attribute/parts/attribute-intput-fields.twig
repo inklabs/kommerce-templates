@@ -1,0 +1,52 @@
+{# @var attribute \inklabs\kommerce\EntityDTO\AttributeDTO #}
+{# @var promotionTypes array #}
+<div class="row form-group">
+    <label for="attribute-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="attribute-name"
+               name="attribute[name]"
+               value="{{ attribute.name }}"
+               class="form-control"
+               maxlength="255"
+               required=""/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="attribute-{{ attribute.id.hex }}-choiceType" class="control-label col-sm-3">Choice Type</label>
+    <div class="col-sm-3">
+        {{ form.select(
+            'attribute[choiceType]',
+            attribute.choiceType.id,
+            validAttributeChoiceTypeMap,
+            'coupon-type',
+            'form-control input-sm',
+            {
+                'required': 'true'
+            }
+        ) }}
+    </div>
+</div>
+<div class="row form-group">
+    <label for="attribute-sortOrder" class="control-label col-sm-3">Sort Order</label>
+    <div class="col-sm-2">
+        <input type="text"
+               id="attribute-sortOrder"
+               name="attribute[sortOrder]"
+               value="{{ attribute.sortOrder|default(0) }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="attribute-description" class="control-label col-sm-3">Description</label>
+    <div class="col-sm-8">
+        <textarea name="attribute[description]"
+                  id="attribute-description"
+                  class="form-control"
+                  rows="5"
+                  maxlength="65535">
+            {{- attribute.description -}}
+        </textarea>
+    </div>
+</div>

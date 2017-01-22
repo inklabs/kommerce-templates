@@ -1,0 +1,43 @@
+{# @var attributeValue \inklabs\kommerce\EntityDTO\AttributeValueDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Product Attributes - {{ attributeValue.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/attribute/attribute-value/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <fieldset>
+                    <br>
+                    {% embed '@theme/admin/attribute/attribute-value/parts/product-attributes-list.twig' with {'productAttributes': attributeValue.productAttributes} %}
+                        {% block thead %}
+                            <th class="text-right">Actions</th>
+                        {% endblock %}
+                        {% block tbody %}
+                            <td>
+                                <form action="{{ routeUrl('admin.attribute.delete-product-attribute') }}"
+                                      method="post"
+                                      class="form pull-right">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('attributeValueId', attributeValue.id.hex) }}
+                                    {{ form.hidden('productAttributeId', productAttribute.id.hex) }}
+                                    <button type="submit" class="btn btn-danger btn-xs" title="Remove Product"><i class="fa fa-minus"></i></button>
+                                </form>
+                            </td>
+                        {% endblock %}
+                    {% endembed %}
+
+                    <hr>
+                    {% embed '@theme/admin/product/parts/add-product-form.twig' with {'action': routeUrl('admin.attribute.attribute-value.add-product')} %}
+                        {% block formtop %}
+                            {{ form.hidden('attributeValueId', attributeValue.id.hex) }}
+                        {% endblock %}
+                    {% endembed %}
+                </fieldset>
+            </div>
+        </div>
+    </div>
+{% endblock %}

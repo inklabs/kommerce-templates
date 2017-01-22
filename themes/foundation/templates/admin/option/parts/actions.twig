@@ -1,0 +1,29 @@
+{# @var option \inklabs\kommerce\EntityDTO\OptionDTO #}
+
+<div class="row">
+    <div class="col-sm-6">
+        Option - {{ option.name }}
+        <br>
+        <br>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="well well-sm">
+            <div class="pull-right">
+                <form action="{{ routeUrl('admin.option.delete') }}"
+                      method="post"
+                      role="form">
+                    {{ form.csrf() }}
+                    {{ form.hidden('optionId', option.id.getHex()) }}
+
+                    <button type="submit" class="btn btn-danger btn-xs">
+                        <i class="fa fa-trash"></i>
+                        Delete Option
+                    </button>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+{# @var shipmentTrackers \inklabs\kommerce\EntityDTO\ShipmentTrackerDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Carrier</th>
+            <th>Rate</th>
+            <th>Tracking #</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for shipmentTracker in shipmentTrackers %}
+            <tr>
+                <td>
+                    {% if shipmentTracker.shipmentRate.carrier is not null %}
+                        {{ shipmentTracker.shipmentRate.carrier }}
+                        {{ shipmentTracker.shipmentRate.service }}
+                    {% elseif shipmentTracker.carrier is not null %}
+                        {{ shipmentTracker.carrier.name }}
+                    {% endif %}
+                </td>
+                <td>{{ shipmentTracker.shipmentRate.rate.amount | displayPrice }}</td>
+                <td>{{ shipmentTracker.trackingCode }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No shipments</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

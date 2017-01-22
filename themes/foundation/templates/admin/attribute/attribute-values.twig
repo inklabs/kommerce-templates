@@ -1,0 +1,110 @@
+{# @var attribute \inklabs\kommerce\EntityDTO\AttributeDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Attribute Values - {{ attribute.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/attribute/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                {% embed '@theme/admin/attribute/parts/attribute-values-list.twig' with {'attributeValues': attribute.attributeValues} %}
+                    {% block thead %}
+                        <th class="text-right">Actions</th>
+                    {% endblock %}
+                    {% block tbody %}
+                        <td class="text-right">
+                            <a href="{{ routeUrl('admin.attribute.attribute-value.edit', {'attributeValueId': attributeValue.id.hex}) }}"
+                               class="btn btn-default btn-xs">
+                                Edit
+                            </a>
+                            <a href="{{ routeUrl('admin.attribute.attribute-value.product-attributes', {'attributeValueId': attributeValue.id.hex}) }}"
+                               class="btn btn-default btn-xs">
+                                Products
+                            </a>
+                            <form action="{{ routeUrl('admin.attribute.delete-attribute-value') }}"
+                                  method="post"
+                                  class="form pull-right">
+                                {{ form.csrf() }}
+                                {{ form.hidden('attributeId', attribute.id.hex) }}
+                                {{ form.hidden('attributeValueId', attributeValue.id.hex) }}
+                                <button type="submit" class="btn btn-danger btn-xs" title="Delete Attribute Value"><i class="fa fa-remove"></i></button>
+                            </form>
+                        </td>
+                    {% endblock %}
+                {% endembed %}
+
+                <hr>
+                <h2>Add Attribute Value:</h2>
+                <form action="{{ routeUrl('admin.attribute.new-attribute-value') }}"
+                      method="post"
+                      class="form-horizontal">
+
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('attributeId', attribute.id.hex) }}
+
+                        <div class="well">
+                            <div class="row form-group">
+                                <label for="attributeValue-name" class="control-label col-sm-3">Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text"
+                                           id="attributeValue-name"
+                                           name="attributeValue[name]"
+                                           value=""
+                                           class="form-control col-sm-3"
+                                           maxlength="255"
+                                           required=""/>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label for="attributeValue-sku" class="control-label col-sm-3">SKU</label>
+                                <div class="col-sm-8">
+                                    <input type="text"
+                                           id="attributeValue-sku"
+                                           name="attributeValue[sku]"
+                                           value=""
+                                           class="form-control col-sm-3"
+                                           maxlength="64"/>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label for="attributeValue-description" class="control-label col-sm-3">Description</label>
+                                <div class="col-sm-8">
+                                    <textarea name="attributeValue[description]"
+                                              id="attributeValue-description"
+                                              class="form-control"
+                                              rows="5"
+                                              maxlength="65535"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label for="attributeValue-sortOrder" class="control-label col-sm-3">Sort Order</label>
+                                <div class="col-sm-2">
+                                    <input type="text"
+                                           id="attributeValue-sortOrder"
+                                           name="attributeValue[sortOrder]"
+                                           value="0"
+                                           class="form-control"
+                                           required=""/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="well">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

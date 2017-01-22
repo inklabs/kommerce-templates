@@ -1,0 +1,22 @@
+{% for product in products %}
+    <div class="product-container col-md-3 col-sm-4 col-xs-6">
+        <a href="{{ productUrl(product) }}">
+            <img src="{{ productImageUrl(product) }}">
+        </a>
+        <a href="{{ productUrl(product) }}">
+            <div class="product-name">{{ product.name }}</div>
+        </a>
+
+        {% include '@theme/helper/rating-stars.twig' with {'rating': product.rating } only %}
+
+        {% if not product.isInStock %}
+            <div class="availability">
+                <span class="out-of-stock">Out of Stock</span>
+            </div>
+        {% elseif product.isPriceVisible %}
+            {% include '@theme/helper/price.twig' with {'price': product.price } only %}
+        {% endif %}
+
+        <div class="clearfix"></div>
+    </div>
+{% endfor %}

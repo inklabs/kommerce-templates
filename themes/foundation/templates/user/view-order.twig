@@ -1,0 +1,15 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+{% extends '@theme/layout/base.twig' %}
+
+{% block pageTitle %}Order #{{ order.referenceNumber }}{% endblock %}
+
+{% set breadcrumbs = {
+    'Your Account': routeUrl('user.account'),
+    'Order Details': orderUrl(order)
+} %}
+
+{% block content %}
+    <div class="container">
+        {% include '@theme/helper/order-details.twig' with {'order': order} only %}
+    </div>
+{% endblock %}

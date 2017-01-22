@@ -1,0 +1,39 @@
+{# @var cartPriceRule \inklabs\kommerce\EntityDTO\CartPriceRuleDTO #}
+{# @var promotionTypes array #}
+<div class="row form-group">
+    <label for="cartPriceRule-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="cartPriceRule-name"
+               name="cartPriceRule[name]"
+               value="{{ cartPriceRule.name }}"
+               class="form-control"
+               maxlength="255"
+               required=""/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="cartPriceRule-maxRedemptions" class="control-label col-sm-3">Max Redemptions</label>
+    <div class="col-sm-3">
+        <input type="text"
+               id="cartPriceRule-maxRedemptions"
+               name="cartPriceRule[maxRedemptions]"
+               value="{{ cartPriceRule.maxRedemptions }}"
+               class="form-control"/>
+    </div>
+</div>
+<div class="row form-group">
+    <label for="cartPriceRule-reducesTaxSubtotal" class="control-label col-sm-3">
+        Reduces Tax Subtotal
+    </label>
+    {{ form.checkbox(
+        'cartPriceRule[reducesTaxSubtotal]',
+        cartPriceRule.reducesTaxSubtotal,
+        'cartPriceRule-reducesTaxSubtotal'
+    ) }}
+</div>
+
+{% include '@theme/admin/promotion/parts/date-time-timzeone-inputs.twig' with {
+    'entityName': 'cartPriceRule',
+    'entity': cartPriceRule,
+} only %}

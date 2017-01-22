@@ -1,0 +1,25 @@
+{# @var orders \inklabs\kommerce\EntityDTO\OrderDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Orders{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Orders</h1>
+                <form action="{{ routeUrl('admin.order') }}"
+                      method="get"
+                      class="form-search">
+                    {% include '@theme/helper/search-bar.twig' with {'placeholder': 'Search SKU/Name', 'queryString': queryString} only %}
+                </form>
+
+                {{ paginate.detailed(pagination) }}
+                {% include '@theme/admin/order/parts/order-list.twig' with {'orders': orders} only %}
+                {{ paginate.detailed(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

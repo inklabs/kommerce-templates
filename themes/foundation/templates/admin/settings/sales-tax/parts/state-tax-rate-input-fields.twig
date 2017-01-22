@@ -1,0 +1,15 @@
+{{ form.hidden('type', 'stateTaxRate') }}
+<div class="form-group col-sm-4">
+    <label for="taxRate-{{ taxRate.id.hex }}-state" class="control-label">State</label>
+    {{ form.select(
+        'taxRate[state]',
+        taxRate.state,
+        validStatesMap,
+        'coupon-type',
+        'form-control input-sm',
+        {
+            'required': 'true'
+        }
+    ) }}
+</div>
+{% include '@theme/admin/settings/sales-tax/parts/tax-rate-input-fields.twig' %}

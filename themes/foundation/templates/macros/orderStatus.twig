@@ -1,0 +1,17 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+
+{% macro label(order) %}
+    {% if order.status.isPending %}
+        {% set labelName = 'primary' %}
+    {% elseif order.status.isProcessing or order.status.isShipped %}
+        {% set labelName = 'info' %}
+    {% elseif order.status.isPartiallyShipped %}
+        {% set labelName = 'warning' %}
+    {% elseif order.status.isComplete %}
+        {% set labelName = 'success' %}
+    {% elseif order.status.isCanceled %}
+        {% set labelName = 'warning' %}
+    {% endif %}
+
+    <span class="label label-{{ labelName }} order-status">{{ order.status.name }}</span>
+{% endmacro %}

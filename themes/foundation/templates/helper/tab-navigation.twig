@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+    {% for pill in navigation %}
+        {% if pill.onlyWhenActive %}
+            {% if currentUrl() == pill.url %}
+                <li class="active"><a href="#">{{ pill.name | raw }}</a></li>
+            {% endif %}
+        {% else %}
+            <li{% if currentUrl() == pill.url %} class="active"{% endif %}><a href="{{ pill.url }}">{{ pill.name | raw }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>

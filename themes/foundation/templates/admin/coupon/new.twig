@@ -1,0 +1,33 @@
+{# @var coupon \inklabs\kommerce\EntityDTO\CouponDTO #}
+{# @var promotionTypes array #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}New Coupon{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>New Coupon</h3>
+                <form action="{{ routeUrl('admin.coupon.new.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        <div class="well">
+                            {% include '@theme/admin/coupon/parts/coupon-intput-fields.twig' %}
+                        </div>
+
+                        <div class="well">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check-circle"></i> Create
+                            </button>
+                            <a href="{{ routeUrl('admin.coupon') }}" class="btn btn-default">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

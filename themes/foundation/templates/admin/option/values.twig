@@ -1,0 +1,122 @@
+{# @var option \inklabs\kommerce\EntityDTO\OptionDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Option Values - {{ option.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/option/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <fieldset>
+                    <br>
+
+                    {% embed '@theme/admin/option/parts/values-list.twig' with {'optionValues': option.optionValues} %}
+                        {% block thead %}
+                            <th class="text-right">Actions</th>
+                        {% endblock %}
+                        {% block tbody %}
+                            <td>
+                                <form action="{{ routeUrl('admin.option.delete-option-value') }}"
+                                      method="post"
+                                      class="form pull-right">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('optionId', option.id.hex) }}
+                                    {{ form.hidden('optionValueId', optionValue.id.hex) }}
+                                    <button type="submit" class="btn btn-danger btn-xs" title="Delete Option Value"><i class="fa fa-remove"></i></button>
+                                </form>
+                            </td>
+                        {% endblock %}
+                    {% endembed %}
+
+                    <hr>
+
+                    <h2>Add Option Value:</h2>
+                    <form action="{{ routeUrl('admin.option.add-option-value') }}"
+                          method="post"
+                          class="form-horizontal">
+
+                        <fieldset>
+                            {{ form.csrf() }}
+                            {{ form.hidden('optionId', option.id.hex) }}
+
+                            <div class="well">
+                                <div class="row form-group">
+                                    <label for="optionValue-sku" class="control-label col-sm-3">SKU</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               id="optionValue-sku"
+                                               name="optionValue[sku]"
+                                               value=""
+                                               class="form-control col-sm-3"
+                                               maxlength="64"/>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="optionValue-name" class="control-label col-sm-3">Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               id="optionValue-name"
+                                               name="optionValue[name]"
+                                               value=""
+                                               class="form-control col-sm-3"
+                                               maxlength="255"
+                                               required=""/>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="optionValue-unitPrice" class="control-label col-sm-3">Unit Price</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">$</div>
+                                            <input type="text"
+                                                   id="optionValue-unitPrice"
+                                                   name="optionValue[unitPrice]"
+                                                   value=""
+                                                   class="form-control"
+                                                   required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="optionValue-shippingWeight" class="control-label col-sm-3">Shipping Weight</label>
+                                    <div class="col-sm-2">
+                                        <input type="text"
+                                               id="optionValue-shippingWeight"
+                                               name="optionValue[shippingWeight]"
+                                               value=""
+                                               class="form-control"
+                                               required=""/>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="optionValue-sortOrder" class="control-label col-sm-3">Sort Order</label>
+                                    <div class="col-sm-2">
+                                        <input type="text"
+                                               id="optionValue-sortOrder"
+                                               name="optionValue[sortOrder]"
+                                               value=""
+                                               class="form-control"
+                                               required=""/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="well">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i> Add
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+{% endblock %}

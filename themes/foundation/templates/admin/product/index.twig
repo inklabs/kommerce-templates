@@ -1,0 +1,73 @@
+{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Products{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.product.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Product
+                    </a>
+                </div>
+
+                <h1>Products</h1>
+                <form action="{{ routeUrl('admin.product') }}"
+                      method="get"
+                      class="form-search">
+                    {% include '@theme/helper/search-bar.twig' with {'placeholder': 'Search SKU/Name', 'queryString': queryString} only %}
+                </form>
+
+                {{ paginate.detailed(pagination) }}
+                {% include '@theme/admin/product/parts/product-list.twig' with {'products': products} only %}
+                {{ paginate.detailed(pagination) }}
+            </div>
+        </div>
+    </div>
+{% verbatim %}
+<script type="text/javascript">
+$(function() {
+	var products = new Bloodhound({
+		datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
+		queryTokenizer: Bloodhound.tokenizers.whitespace,
+		remote: "/admin/product/api/%QUERY?product_ts=<?=Cache::instance()->get('sphinx:product')?>",
+		limit: 10
+	})
+
+	products.initialize();
+
+	$('.typeahead').typeahead({
+		minLength: 2,
+		highlight: true,
+	}, {
+		displayKey: 'value',
+		source: products.ttAdapter(),
+		templates: {
+			suggestion: Handlebars.compile([
+				'<div class="row">',
+					'<div class="col-sm-2">',
+						'{{#if defaultImageUrl}}',
+							'<a href="{{adminUrl}}">',
+								'<img src="{{defaultImageUrl}}" style="height: 40px" />',
+							'</a>',
+						'{{/if}}',
+					'</div>',
+					'<div class="col-sm-10">',
+						'<a href="{{adminUrl}}">',
+							'<p>{{name}} - <small class="text-muted">{{sku}}</small></p>',
+						'</a>',
+						'<p>{{description}}</p>',
+					'</div>',
+				'</div>'
+			].join(' '))
+		}
+	});
+});
+</script>
+{% endverbatim %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{# @var option \inklabs\KohanaKommerce\EntityDTO\OptionDTO #}
+{# @var selectedOptions array #}
+
+{% if option.type.isSelect %}
+    <label for="option_{{ option.id.getHex() }}" class="control-label">{{ option.name }}</label>
+    <div class="controls">
+        <select name="option[{{ option.id.getHex() }}]"
+                id="option_{{ option.id.getHex() }}"
+                class="form-control">
+
+            {% for optionProduct in option.optionProducts %}
+                {% set value = optionProduct.name %}
+                {% set key = 'OP-' ~ optionProduct.id.getHex() %}
+                {% set price = optionProduct.product.price.quantityPrice %}
+                {% if price > 0 %}
+                    {% set value = value ~ ' (+' ~ (price | displayPrice) ~ ')' %}
+                {% endif %}
+
+                <option value="{{ key }}"{% if loop.first %} selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+
+            {% for optionValue in option.optionValues %}
+                {% set value = optionValue.name %}
+                {% set key = 'OV-' ~ optionValue.id.getHex() %}
+                {% set price = optionValue.price.quantityPrice %}
+
+                {% if price > 0 %}
+                    {% set value = value ~ ' (+' ~ (price | displayPrice) ~ ')' %}
+                {% endif %}
+
+                <option value="{{ key }}"{% if loop.first %} selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% elseif option.type.isCheckbox %}
+    <label for="option_{{ option.id.getHex() }}" class="control-label">{{ option.name }}</label>
+    <div class="controls">
+        {# TODO:
+        <?=Form::checkbox(
+            'option[' . $option->id->getHex() . ']',
+            1,
+            (bool) Arr::get($selectedOptions, $option->id->getHex(), false),
+            [
+                'id' => 'option_' . $option->id->getHex()
+            ]
+        )?>
+        #}
+    </div>
+{% endif %}

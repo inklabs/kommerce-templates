@@ -1,0 +1,21 @@
+{# @var options \inklabs\kommerce\EntityDTO\OptionDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Sort Order</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for option in options %}
+            <tr>
+                <td><a href="{{ adminOptionUrl(option) }}">{{ option.name }}</a></td>
+                <td>{{ option.description | truncate(60) }}</td>
+                <td>{{ option.sortOrder }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

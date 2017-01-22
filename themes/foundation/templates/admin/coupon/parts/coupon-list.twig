@@ -1,0 +1,62 @@
+{# @var coupons \inklabs\kommerce\EntityDTO\CouponDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Discount</th>
+            <th>Redemptions</th>
+            <th>Min Order</th>
+            <th>Max Order</th>
+            <th>Period</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for coupon in coupons %}
+            <tr>
+                <td>
+                    <a href="{{ adminCouponUrl(coupon) }}">
+                        {{ coupon.code }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ adminCouponUrl(coupon) }}">
+                        {{ coupon.name }}
+                    </a>
+                </td>
+                <td>{{ coupon | displayPromotionValue }}</td>
+                <td>
+                    {{ coupon.redemptions }} of
+                    {% if coupon.maxRedemptions is null %}
+                        <span class="text-muted small">[unlimited]</span>
+                    {% else %}
+                        {{ coupon.maxRedemptions }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if coupon.minOrderValue is null %}
+                        <span class="text-muted small">[no minimum]</span>
+                    {% else %}
+                        {{ coupon.minOrderValue | displayPrice }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if coupon.maxOrderValue is null %}
+                        <span class="text-muted small">[no maximum]</span>
+                    {% else %}
+                        {{ coupon.maxOrderValue | displayPrice }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ coupon.start | formatDate }}
+                    -
+                    {{ coupon.end | formatDate }}
+                </td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No coupons</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,40 @@
+{# @var coupon \inklabs\kommerce\EntityDTO\CouponDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Coupon - {{ coupon.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/coupon/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.coupon.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('couponId', coupon.id.hex ) }}
+                        <div class="well">
+                            {% include '@theme/admin/coupon/parts/coupon-intput-fields.twig' %}
+                        </div>
+
+                        <div class="well">
+                            <div class="pull-right text-muted text-right">
+                                <span title="Created">{{ coupon.createdFormatted }}</span><br>
+                                <span title="Updated">{{ coupon.updatedFormatted }}</span><br>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.coupon') }}" class="btn btn-default">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
