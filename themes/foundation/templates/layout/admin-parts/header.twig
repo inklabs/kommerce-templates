@@ -1,80 +1,54 @@
-<div id="header">
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-align-justify"></i></button>
-                <a class="navbar-brand" href="{{ routeUrl('home') }}">{{ SITE_NAME | default('Kommerce') }} | Admin</a>
-            </div>
+<div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+    <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+    <div class="title-bar-title">
+        {{ SITE_NAME | default('Kommerce') }} | Admin
+    </div>
+</div>
 
-            <ul class="nav navbar-nav navbar-left text-center">
-                <li><a href="{{ routeUrl('admin.order') }}">Orders</a></li>
-                <li><a href="{{ routeUrl('admin.user') }}">Customers</a></li>
-                <li class="dropdown">
-                    <a href="#"
-                       class="dropdown-toggle"
-                       data-toggle="dropdown"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="false">Catalog <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ routeUrl('admin.product') }}">Products</a></li>
-                        <li><a href="{{ routeUrl('admin.tag') }}">Tags</a></li>
-                        <li><a href="{{ routeUrl('admin.option') }}">Options</a></li>
-                        <li><a href="{{ routeUrl('admin.attribute') }}">Attributes</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#"
-                       class="dropdown-toggle"
-                       data-toggle="dropdown"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="false">Promotions <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ routeUrl('admin.coupon') }}">Coupons</a></li>
-                        <li><a href="{{ routeUrl('admin.catalog-promotion') }}">Catalog Promotions</a></li>
-                        <li><a href="{{ routeUrl('admin.cart-price-rule') }}">Cart Price Rules</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#"
-                       class="dropdown-toggle"
-                       data-toggle="dropdown"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="false">Settings <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ routeUrl('admin.settings.sales-tax') }}">Sales Tax Rules</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#"
-                       class="dropdown-toggle"
-                       data-toggle="dropdown"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="false">Tools <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ routeUrl('admin.tools.ad-hoc-shipment') }}">Ad Hoc Shipments</a></li>
-                    </ul>
-                </li>
-
-                <li class="divider-vertical hidden-xs"></li>
-            </ul>
-
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right text-center">
-                    <li><a href="{{ routeUrl('home') }}">Store Front</a></li>
-
-                    <li class="divider-vertical hidden-xs"></li>
-
-                    <li><a href="{{ routeUrl('logout') }}">Sign Out</a></li>
+<div class="top-bar" id="example-menu">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">
+                {#<a href="{{ routeUrl('home') }}">{{ SITE_NAME | default('Kommerce') }} | Admin</a>#}
+                {{ SITE_NAME | default('Kommerce') }} | Admin
+            </li>
+            <li><a href="{{ routeUrl('admin.order') }}">Orders</a></li>
+            <li><a href="{{ routeUrl('admin.user') }}">Customers</a></li>
+            <li>
+                <a href="#">Catalog</a>
+                <ul class="menu vertical">
+                    <li><a href="{{ routeUrl('admin.product') }}">Products</a></li>
+                    <li><a href="{{ routeUrl('admin.tag') }}">Tags</a></li>
+                    <li><a href="{{ routeUrl('admin.option') }}">Options</a></li>
+                    <li><a href="{{ routeUrl('admin.attribute') }}">Attributes</a></li>
                 </ul>
-            </div>
-        </div>
+            </li>
+            <li>
+                <a href="#">Promotions</a>
+                <ul class="menu vertical">
+                    <li><a href="{{ routeUrl('admin.coupon') }}">Coupons</a></li>
+                    <li><a href="{{ routeUrl('admin.catalog-promotion') }}">Catalog Promotions</a></li>
+                    <li><a href="{{ routeUrl('admin.cart-price-rule') }}">Cart Price Rules</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Settings</a>
+                <ul class="menu vertical">
+                    <li><a href="{{ routeUrl('admin.settings.sales-tax') }}">Sales Tax Rules</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Tools</a>
+                <ul class="menu vertical">
+                    <li><a href="{{ routeUrl('admin.tools.ad-hoc-shipment') }}">Ad Hoc Shipments</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="dropdown menu">
+            <li><a href="{{ routeUrl('home') }}">Store Front</a></li>
+            <li><a href="{{ routeUrl('logout') }}">Sign Out</a></li>
+        </ul>
     </div>
 </div>

@@ -1,5 +1,6 @@
 {% for product in products %}
-    <div class="product-container-small {% if lg_slim %}col-md-12{% endif %} col-sm-3 col-xs-6">
+    <div class="column column-block">
+
         <a href="{{ productUrl(product) }}">
             <img src="{{ productImageUrl(product) }}">
         </a>
@@ -16,7 +17,5 @@
         {% elseif product.isPriceVisible %}
             {% include '@theme/helper/price.twig' with {'price': product.price } only %}
         {% endif %}
-
-        <div class="clearfix"></div>
     </div>
 {% endfor %}
