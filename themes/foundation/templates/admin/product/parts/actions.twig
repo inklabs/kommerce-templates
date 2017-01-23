@@ -1,33 +1,22 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
 
 <div class="row">
-    <div class="col-sm-6">
-        <img src="{{ productImageUrl(product) }}"
-             width="35"
-             height="35"
-             style="margin: 0 10px"/>
+    <div class="medium-6 columns">
+        <img src="{{ productImageUrl(product) }}">
         Product - {{ product.name }}
-        <br>
-        <br>
     </div>
 
-    <div class="col-sm-6">
-        <div class="well well-sm">
-            <div class="pull-right">
-                <form action="{{ routeUrl('admin.product.delete') }}"
-                      method="post"
-                      role="form">
-                    {{ form.csrf() }}
-                    {{ form.hidden('productId', product.id.getHex()) }}
+    <div class="medium-6 columns">
+        <form action="{{ routeUrl('admin.product.delete') }}"
+                method="post"
+                role="form">
+            {{ form.csrf() }}
+            {{ form.hidden('productId', product.id.getHex()) }}
 
-                    <button type="submit" class="btn btn-danger btn-xs">
-                        <i class="fa fa-trash"></i>
-                        Delete Product
-                    </button>
-                </form>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
+            <button type="submit" class="button alert">
+                <i class="fa fa-trash"></i>
+                Delete Product
+            </button>
+        </form>
     </div>
 </div>
