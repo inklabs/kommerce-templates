@@ -1,154 +1,145 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
 <h2>Required:</h2>
 
-<div class="row form-group">
-    <label for="product-name" class="control-label col-sm-3">Name</label>
-    <div class="col-sm-8">
-        <input type="text"
-               id="product-name"
-               name="product[name]"
-               value="{{ product.name }}"
-               class="form-control col-sm-3"
-               maxlength="255"
-               required=""/>
-    </div>
-</div>
+<label for="product-name">
+    Name
+    <input type="text"
+            id="product-name"
+            name="product[name]"
+            value="{{ product.name }}"
+            maxlength="255"
+            required=""/>
+</label>
 
-<div class="row form-group">
-    <label for="product-unitPrice" class="control-label col-sm-3">Unit Price</label>
-    <div class="col-sm-4">
+
+<label for="product-unitPrice">
+    Unit Price
         <div class="input-group">
-            <div class="input-group-addon">$</div>
-            <input type="text"
-                   id="product-unitPrice"
-                   name="product[unitPrice]"
-                   value="{{ product.unitPrice|floatPrice('') }}"
-                   class="form-control"
-                   required=""/>
+        
+        <span class="input-group-label">$</span>
+        <input type="text"
+                id="product-unitPrice"
+                name="product[unitPrice]"
+                value="{{ product.unitPrice|floatPrice('') }}"
+                class="input-group-field"
+                required=""/>
         </div>
-    </div>
-</div>
+</label>
 
-<div class="row form-group">
-    <label for="product-quantity" class="control-label col-sm-3">Quantity</label>
-    <div class="col-sm-2">
-        <input type="text"
-               id="product-quantity"
-               name="product[quantity]"
-               value="{{ product.quantity }}"
-               class="form-control"
-               required=""/>
-    </div>
-</div>
 
-<div class="row form-group">
-    <label for="product-shippingWeight" class="control-label col-sm-3">
-        Shipping Weight (oz)
-    </label>
-    <div class="col-sm-8">
-        <input type="text"
-               id="product-shippingWeight"
-               name="product[shippingWeight]"
-               value="{{ product.shippingWeight }}"
-               class="form-control"
-               maxlength="64"
-               required=""/>
-    </div>
-</div>
+<label for="product-quantity">
+    Quantity
+    <input type="text"
+                id="product-quantity"
+                name="product[quantity]"
+                value="{{ product.quantity }}"
+                required=""/>
+</label>
 
-<div class="row form-group">
-    <label for="product-isInventoryRequired" class="control-label col-sm-3">
+
+<label for="product-shippingWeight">
+    Shipping Weight (oz)
+    <input type="text"
+            id="product-shippingWeight"
+            name="product[shippingWeight]"
+            value="{{ product.shippingWeight }}"
+            maxlength="64"
+            required=""/>
+</label>
+
+
+<div class="callout secondary">
+
+    <label for="product-isInventoryRequired">
         Is Inventory Required
+        {{ form.checkbox(
+            'product[isInventoryRequired]',
+            product.isInventoryRequired,
+            'product-isInventoryRequired'
+        ) }}
     </label>
-    {{ form.checkbox(
-        'product[isInventoryRequired]',
-        product.isInventoryRequired,
-        'product-isInventoryRequired'
-    ) }}
-</div>
 
-<div class="row form-group">
-    <label for="product-isPriceVisible" class="control-label col-sm-3">
+
+    <label for="product-isPriceVisible">
         Is Price Visible
+        {{ form.checkbox(
+            'product[isPriceVisible]',
+            product.isPriceVisible,
+            'product-isPriceVisible'
+        ) }}
     </label>
-    {{ form.checkbox(
-        'product[isPriceVisible]',
-        product.isPriceVisible,
-        'product-isPriceVisible'
-    ) }}
-</div>
 
-<div class="row form-group">
-    <label for="product-isActive" class="control-label col-sm-3">Is Active</label>
-    {{ form.checkbox(
-        'product[isActive]',
-        product.isActive,
-        'product-isActive'
-    ) }}
-</div>
 
-<div class="row form-group">
-    <label for="product-isVisible" class="control-label col-sm-3">Is Visible</label>
-    {{ form.checkbox(
-        'product[isVisible]',
-        product.isVisible,
-        'product-isVisible'
-    ) }}
-</div>
+    <label for="product-isActive">
+        Is Active
+        {{ form.checkbox(
+            'product[isActive]',
+            product.isActive,
+            'product-isActive'
+        ) }}
+    </label>
 
-<div class="row form-group">
-    <label for="product-isTaxable" class="control-label col-sm-3">Is Taxable</label>
-    {{ form.checkbox(
-        'product[isTaxable]',
-        product.isTaxable,
-        'product-isTaxable'
-    ) }}
-</div>
 
-<div class="row form-group">
-    <label for="product-isShippable" class="control-label col-sm-3">Is Shippable</label>
-    {{ form.checkbox(
-        'product[isShippable]',
-        product.isShippable,
-        'product-isShippable'
-    ) }}
-</div>
+    <label for="product-isVisible">
+        Is Visible
+        {{ form.checkbox(
+            'product[isVisible]',
+            product.isVisible,
+            'product-isVisible'
+        ) }}
+    </label>
 
-<div class="row form-group">
-    <label for="product-areAttachmentsEnabled" class="control-label col-sm-3">
+
+    <label for="product-isTaxable">
+        Is Taxable
+        {{ form.checkbox(
+            'product[isTaxable]',
+            product.isTaxable,
+            'product-isTaxable'
+        ) }}
+    </label>
+
+
+    <label for="product-isShippable">
+        Is Shippable
+        {{ form.checkbox(
+            'product[isShippable]',
+            product.isShippable,
+            'product-isShippable'
+        ) }}
+    </label>
+
+
+    <label for="product-areAttachmentsEnabled">
         Are Attachments Enabled
+        {{ form.checkbox(
+            'product[areAttachmentsEnabled]',
+            product.areAttachmentsEnabled,
+            'product-areAttachmentsEnabled'
+        ) }}
     </label>
-    {{ form.checkbox(
-        'product[areAttachmentsEnabled]',
-        product.areAttachmentsEnabled,
-        'product-areAttachmentsEnabled'
-    ) }}
+
 </div>
 
-<hr>
 <h2>Optional:</h2>
 
-<div class="row form-group">
-    <label for="product-sku" class="control-label col-sm-3">SKU</label>
-    <div class="col-sm-8">
-        <input type="text"
-               id="product-sku"
-               name="product[sku]"
-               value="{{ product.sku }}"
-               class="form-control"
-               maxlength="64"/>
-    </div>
-</div>
+<label for="product-sku">
+    SKU
+    <input type="text"
+            id="product-sku"
+            name="product[sku]"
+            value="{{ product.sku }}"
+            class="form-control"
+            maxlength="64"/>
+</label>
 
-<div class="row form-group">
-    <label for="product-description" class="control-label col-sm-3">Description</label>
-    <div class="col-sm-8">
-        <textarea name="product[description]"
-                  id="product-description"
-                  class="form-control"
-                  rows="5"
-                  maxlength="65535">
-            {{- product.description -}}
-        </textarea>
-    </div>
-</div>
+<label for="product-description">
+    Description
+    <textarea name="product[description]"
+                id="product-description"
+                class="form-control"
+                rows="5"
+                maxlength="65535">
+        {{- product.description -}}
+    </textarea>
+</label>

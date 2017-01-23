@@ -10,11 +10,11 @@
         <div class="row column">
                 <form action="{{ routeUrl('admin.product.edit.post') }}"
                       method="post"
-                      class="form-horizontal"
                       role="form">
                     <fieldset>
                         {{ form.csrf() }}
                         {{ form.hidden('productId', product.id.hex ) }}
+                        
                         <div class="callout">
                             {% include '@theme/admin/product/parts/product-intput-fields.twig' %}
                         </div>
