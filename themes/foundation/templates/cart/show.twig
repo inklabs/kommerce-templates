@@ -5,86 +5,124 @@
 {% block pageTitle %}Shopping Cart{% endblock %}
 
 {% block content %}
-    {% if cart.cartItems is empty %}
-        {% include '@theme/cart/parts/empty-cart.twig' %}
-    {% else %}
-        <h2>Shopping Cart</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th colspan="2">Item</th>
-                <th>QTY</th>
-                <th>Unit Price</th>
-                <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for cartItem in cart.cartItems %}
-                <tr>
-                    <td>
-                        <a href="{{ productUrl(cartItem.product) }}">
-                            <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110"/>
-                        </a>
-                    </td>
-                    <td>
-                        <h2>{{ cartItem.product.name }}</h2>
+    <div id="cart">
+        <div class="container">
+            {% if cart.cartItems is empty %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% include '@theme/cart/parts/empty-cart.twig' %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Shopping Cart</h2>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">Item</th>
+                                        <th class="text-right">QTY</th>
+                                        <th class="text-right hidden-xs">Unit Price</th>
+                                        <th class="text-right">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for cartItem in cart.cartItems %}
+                                        <tr>
+                                            <td class="cart-product-image">
+                                                <a href="{{ productUrl(cartItem.product) }}">
+                                                    <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ productUrl(cartItem.product) }}">
+                                                    <span class="cart-product-title">{{ cartItem.product.name }}</span>
+                                                </a>
 
-                        <a href="{{ productUrl(cartItem.product) }}">{{ productUrl(cartItem.product) }}</a>
+                                                <div class="hidden-sm text-muted">
+                                                    <small>{{ cartItem.fullSku }}</small>
+                                                </div>
 
-                        <p>{{ cartItem.fullSku }}</p>
+                                                {% include '@theme/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+                                            </td>
+                                            <td class="text-right">
+                                                <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
+                                                    {{ form.csrf() }}
+                                                    {{ form.hidden('id', cartItem.id.hex) }}
+                                                    <div style="width: 120px">
+                                                        <div class="input-group input-group-sm">
+                                                            <input class="form-control update-qty" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
+                                                            <span class="input-group-btn">
+                                                                <button type="submit" class="button secondary">Update</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="clearfix"></div>
+                                                <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
+                                                    {{ form.csrf() }}
+                                                    {{ form.hidden('id', cartItem.id.hex) }}
 
-                        {% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
-                            {{ cartItemOptionProduct.optionProduct.option.name }}:
-                            {{ cartItemOptionProduct.optionProduct.product.name }}
-                        {% endfor %}
+                                                    <span class="cart-remove-item">
+                                                        <button type="submit" class="button">
+                                                            <i class="fa fa-trash"></i>
+                                                            Remove item
+                                                        </button>
+                                                    </span>
+                                                </form>
+                                                <div class="visible-xs">
+                                                    {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
+                                                </div>
+                                            </td>
+                                            <td class="text-right hidden-xs">
+                                                {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
+                                            </td>
+                                            <td class="text-right">
+                                                {{ cartItem.price.quantityPrice | displayPrice }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7 col-sm-offset-5">
+                                {% include '@theme/cart/parts/totals.twig' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="alert alert-info" id="cart-cta-box">
+                            <strong>
+                                Total ({{ cart.totalItems }} items):
+                                <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
+                            </strong>
+                            <br /><br />
+                            {% include '@theme/helper/checkout-button.twig' only %}
+                        </div>
+                        {% if cart.shipmentRate.rate is not null %}
+                            {% include '@theme/cart/parts/modify-shipping-button.twig' with {'extraClass': 'btn-block'} %}
+                        {% endif %}
 
-                        {% for cartItemOptionValue in cartItem.cartItemOptionValues %}
-                            {{ cartItemOptionValue.optionValue.option.name }}:
-                            {{ cartItemOptionValue.optionValue.name }}
-                        {% endfor %}
-
-                        {% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
-                            {{ cartItemTextOptionValue.textOption.name }}:
-                            {{ cartItemTextOptionValue.textOptionValue }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        <form action="cart/update-quantity" method="post" role="form">
+                        <br>
+                        <form action="{{ routeUrl('cart.apply-coupon') }}" method="post">
                             {{ form.csrf() }}
-                            {{ form.hidden('id', cartItem.id.hex) }}
-                            <input type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
-                            <button type="submit">Update</button>
+
+                            <div class="input-group">
+                            <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />
+                              <span class="input-group-btn">
+                                  <button type="submit" class="button secondary" id="apply-coupon">apply</button>
+                              </span>
+                        </div>
                         </form>
-                        <form action="cart/delete-item" method="post" role="form">
-                            {{ form.csrf() }}
-                            {{ form.hidden('id', cartItem.id.hex) }}
-                            <button type="submit">Remove item</button>
-                        </form>
-                        {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
-                    </td>
-                    <td>
-                        {% include '@theme/helper/unit-price.twig' with {'price': cartItem.price } only %}
-                    </td>
-                    <td>
-                        {{ cartItem.price.quantityPrice | displayPrice }}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% include '@theme/cart/parts/totals.twig' %}
-        <p>Total ({{ cart.totalItems }} items):</p>
-        <p>{{ cart.cartTotal.total | displayPrice }}</p>
+                    </div>
+                </div>
+            {% endif %}
 
-        {% include '@theme/helper/checkout-button.twig' only %}
-
-        <form action="cart/apply-coupon" method="post">
-            {{ form.csrf() }}
-            <input type="text" name="coupon_code" value="" placeholder="coupon code"/>
-            <button type="submit">apply</button>
-        </form>
-
-    {% endif %}
-
-    {% include '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small' } only %}
+            {% include '@theme/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small' } only %}
+        </div>
+    </div>
 {% endblock %}

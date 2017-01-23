@@ -1,0 +1,49 @@
+{# @var tag \inklabs\kommerce\EntityDTO\TagDTO #}
+{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{% extends '@theme/layout/base.twig' %}
+
+{% block pageTitle %}{{ tag.name }}{% endblock %}
+{% block pageDescription %}{{ tag.description | nl2br }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <img src="{{ tagImageUrl(tag) }}"
+                    width="100"
+                    height="100"
+                    style="'width: 100px; height: 100px; margin: 18px"
+                    class="pull-left">
+            </div>
+            <div class="col-sm-9">
+                <dl>
+                    <dt class="tag-info">
+                    <h1>{{ tag.name }}</h1>
+                    </dt>
+                    <dd class="tag-desc">{{ tag.description | nl2br }}</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% if products is empty %}
+                    No products
+                {% else %}
+                    {{ paginate.detailed(pagination) }}
+
+                    {% include '@theme/helper/product-grid-small.twig' with {'products': products } only %}
+
+                    <div class="clearfix"></div>
+                    {{ paginate.detailed(pagination) }}
+                {% endif %}
+            </div>
+        </div>
+
+        {% include '@theme/helper/recommended-products.twig' with {
+            'products': recommendedProducts,
+            'size': 'small'
+        } only %}
+    </div>
+{% endblock %}

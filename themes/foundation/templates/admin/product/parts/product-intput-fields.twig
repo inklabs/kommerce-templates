@@ -1,0 +1,133 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+<h2>Required:</h2>
+<label for="product-name">
+    Name
+    <input type="text"
+            id="product-name"
+            name="product[name]"
+            value="{{ product.name }}"
+            maxlength="255"
+            required=""/>
+</label>
+
+<label for="product-unitPrice">
+    Unit Price
+        <div class="input-group">
+            <span class="input-group-label">$</span>
+            <input type="text"
+                    id="product-unitPrice"
+                    name="product[unitPrice]"
+                    value="{{ product.unitPrice|floatPrice('') }}"
+                    class="input-group-field"
+                    required=""/>
+        </div>
+</label>
+
+<label for="product-quantity">
+    Quantity
+    <input type="text"
+                id="product-quantity"
+                name="product[quantity]"
+                value="{{ product.quantity }}"
+                required=""/>
+</label>
+
+<label for="product-shippingWeight">
+    Shipping Weight (oz)
+    <input type="text"
+            id="product-shippingWeight"
+            name="product[shippingWeight]"
+            value="{{ product.shippingWeight }}"
+            maxlength="64"
+            required=""/>
+</label>
+
+<div class="callout secondary">
+
+    <label for="product-isInventoryRequired">
+        Is Inventory Required
+        {{ form.checkbox(
+            'product[isInventoryRequired]',
+            product.isInventoryRequired,
+            'product-isInventoryRequired'
+        ) }}
+    </label>
+
+    <label for="product-isPriceVisible">
+        Is Price Visible
+        {{ form.checkbox(
+            'product[isPriceVisible]',
+            product.isPriceVisible,
+            'product-isPriceVisible'
+        ) }}
+    </label>
+
+    <label for="product-isActive">
+        Is Active
+        {{ form.checkbox(
+            'product[isActive]',
+            product.isActive,
+            'product-isActive'
+        ) }}
+    </label>
+
+    <label for="product-isVisible">
+        Is Visible
+        {{ form.checkbox(
+            'product[isVisible]',
+            product.isVisible,
+            'product-isVisible'
+        ) }}
+    </label>
+
+    <label for="product-isTaxable">
+        Is Taxable
+        {{ form.checkbox(
+            'product[isTaxable]',
+            product.isTaxable,
+            'product-isTaxable'
+        ) }}
+    </label>
+
+    <label for="product-isShippable">
+        Is Shippable
+        {{ form.checkbox(
+            'product[isShippable]',
+            product.isShippable,
+            'product-isShippable'
+        ) }}
+    </label>
+
+    <label for="product-areAttachmentsEnabled">
+        Are Attachments Enabled
+        {{ form.checkbox(
+            'product[areAttachmentsEnabled]',
+            product.areAttachmentsEnabled,
+            'product-areAttachmentsEnabled'
+        ) }}
+    </label>
+
+</div>
+
+<h2>Optional:</h2>
+
+<label for="product-sku">
+    SKU
+    <input type="text"
+            id="product-sku"
+            name="product[sku]"
+            value="{{ product.sku }}"
+            class="form-control"
+            maxlength="64"/>
+</label>
+
+<label for="product-description">
+    Description
+    <textarea name="product[description]"
+                id="product-description"
+                class="form-control"
+                rows="5"
+                maxlength="65535">
+        {{- product.description -}}
+    </textarea>
+</label>

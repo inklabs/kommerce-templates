@@ -1,0 +1,31 @@
+{# @var optionValues \inklabs\kommerce\EntityDTO\OptionValueDTO[] #}
+<table class="table stack">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Unit Price</th>
+            <th>Shipping Weight</th>
+            <th>Sort Order</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for optionValue in optionValues %}
+            <tr>
+                <td>{{ optionValue.name }}</td>
+                <td>{{ optionValue.sku }}</td>
+                <td>{{ optionValue.unitPrice|displayPrice }}</td>
+                <td>{{ optionValue.shippingWeight }}</td>
+                <td>{{ optionValue.sortOrder }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <span class="text-muted">No option values.</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

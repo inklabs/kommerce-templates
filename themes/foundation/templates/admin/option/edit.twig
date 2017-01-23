@@ -1,0 +1,40 @@
+{# @var option \inklabs\kommerce\EntityDTO\OptionDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Option - {{ option.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/option/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.option.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('optionId', option.id.hex ) }}
+                        <div class="well">
+                            {% include '@theme/admin/option/parts/option-intput-fields.twig' %}
+                        </div>
+
+                        <div class="well">
+                            <div class="text-muted text-right">
+                                <span title="Created">{{ option.createdFormatted }}</span><br>
+                                <span title="Updated">{{ option.updatedFormatted }}</span><br>
+                            </div>
+
+                            <button type="submit" class="button">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.option') }}" class="button secondary">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

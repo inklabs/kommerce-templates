@@ -1,0 +1,14 @@
+{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+<td>
+    <a href="{{ adminProductUrl(product) }}">
+        <img src="{{ productImageUrl(product) }}"
+             width="50"
+             height="50"
+             style="width: 50px; height: 50px;">
+    </a>
+</td>
+<td>{{ product.sku }}</td>
+<td><a href="{{ adminProductUrl(product) }}">{{ product.name }}</a></td>
+<td>{{ product.unitPrice|displayPrice }}</td>
+<td>{{ product.quantity }}</td>
+<td>{{ product.isActive ? 'yes' : 'no' }}</td>

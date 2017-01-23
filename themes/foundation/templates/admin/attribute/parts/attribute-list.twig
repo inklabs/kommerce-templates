@@ -1,0 +1,31 @@
+{# @var attributes \inklabs\kommerce\EntityDTO\AttributeDTO[] #}
+<table class="table stack">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Sort Order</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for attribute in attributes %}
+            <tr>
+                <td>
+                    <a href="{{ adminAttributeUrl(attribute) }}">
+                        {{ attribute.name }}
+                    </a>
+                </td>
+                <td>{{ attribute.description|truncate(60) }}</td>
+                <td>{{ attribute.sortOrder }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <span class="text-muted">No attributes.</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

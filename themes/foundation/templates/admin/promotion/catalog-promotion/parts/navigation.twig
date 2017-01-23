@@ -1,0 +1,14 @@
+{# @var catalogPromotion \inklabs\kommerce\EntityDTO\CatalogPromotionDTO #}
+
+{% set navigation = [
+    {
+        'name': 'Edit',
+        'url' : routeUrl('admin.catalog-promotion.edit', {'catalogPromotionId': catalogPromotion.id.hex})
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include '@theme/helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>

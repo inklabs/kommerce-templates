@@ -1,0 +1,71 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Product Images - {{ product.name }}{% endblock %}
+
+{% block content %}
+
+    {% include '@theme/admin/product/parts/header.twig' %}
+
+    <div class="row small-up-2 medium-up-3 large-up-4">
+
+        {% for image in product.images %}
+            <div class="column column-block">
+                <div class="card">
+                    <div class="card-section">
+                        <img src="{{ imageUrl(image) }}">
+                    </div>
+                    <div class="card-section">
+                        {% include '@theme/admin/product/parts/set-default-image.twig' %}
+                        <form action="{{ routeUrl('admin.product.remove-image') }}"
+                                method="post"
+                                class="form">
+                            {{ form.csrf() }}
+                            {{ form.hidden('productId', product.id.hex) }}
+                            {{ form.hidden('imageId', image.id.hex) }}
+
+                            <button type="submit" class="button alert expanded">
+                                <i class="fa fa-trash"></i> Remove
+                            </button>
+                        </form>                    
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="row column">
+        <div class="callout">
+                <form action="{{ routeUrl('admin.product.upload-image') }}"
+                        method="post"
+                        class="form"
+                        enctype="multipart/form-data">
+                    {{ form.csrf() }}
+                    {{ form.hidden('productId', product.id.hex) }}
+
+                    <input type="file" name="image">
+                    <button type="submit" class="button"><i class="fa fa-upload"></i> Upload</button>
+                </form>
+        </div>
+    </div>
+
+    <h3>Tag Images:</h3>
+    <div class="row small-up-2 medium-up-3 large-up-4 xlarge-up-6">
+
+        {% for image in product.tagImages %}
+            <div class="column column-block">
+                <div class="card">
+                    <div class="card-section">
+                        <img src="{{ imageUrl(image) }}">
+                    </div>
+                    <div class="card-section">
+                        {% include '@theme/admin/product/parts/set-default-image.twig' %}                  
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            No tag images
+        {% endfor %}
+    </div>
+
+{% endblock %}

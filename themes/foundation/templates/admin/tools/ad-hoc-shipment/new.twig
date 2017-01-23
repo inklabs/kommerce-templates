@@ -1,0 +1,129 @@
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}New Ad Hoc Shipment{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>New Ad Hoc Shipment</h3>
+            </div>
+        </div>
+
+        <hr>
+
+        <form action="{{ routeUrl('admin.tools.ad-hoc-shipment.new.post') }}"
+              method="post"
+              class="form"
+              role="form">
+            {{ form.csrf() }}
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>From Address</h3>
+                    <div class="well">
+                        {% include '@theme/admin/tools/ad-hoc-shipment/parts/order-address-input-fields.twig' with {
+                            'address': fromAddress,
+                            'objectName': 'fromAddress',
+                            'companyIsRequired': true
+                        } %}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h3>To Address</h3>
+                    <div class="well">
+                        {% include '@theme/admin/tools/ad-hoc-shipment/parts/order-address-input-fields.twig' with {
+                            'address': toAddress,
+                            'objectName': 'toAddress'
+                        } %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Parcel Dimensions</h2>
+                    <div class="well well-sm">
+
+                        {% include '@theme/admin/tools/ad-hoc-shipment/parts/shipment-input-fields.twig' %}
+                        <div class="form-actions">
+                            <button type="submit" class="button btn-block">
+                                Get Shipping Rates
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        {% if shipmentRates is iterable %}
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Shipping Rates</h2>
+                    <div class="well well-sm">
+                        <form action="{{ routeUrl('admin.tools.ad-hoc-shipment.buy-shipment-label') }}"
+                              method="post"
+                              class="form"
+                              role="form">
+                            {{ form.csrf() }}
+
+                            {{ form.hidden('shipment[weightLbs]', shipment.weightLbs) }}
+                            {{ form.hidden('shipment[length]', shipment.length) }}
+                            {{ form.hidden('shipment[width]', shipment.width) }}
+                            {{ form.hidden('shipment[height]', shipment.height) }}
+                            {{ form.hidden('shipmentExternalId', shipmentRates[0].shipmentExternalId) }}
+
+                            {% for shipmentRate in shipmentRates %}
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label class="radio-inline">
+                                            {{ form.radio(
+                                                'shipmentRateExternalId',
+                                                shipment.shipmentRateExternalId,
+                                                shipmentRate.externalId,
+                                                null,
+                                                null,
+                                                {
+                                                    'required': ''
+                                                }
+                                            ) }}
+                                            {{ shipmentRate.rate.amount | displayPrice }}
+                                            {{ shipmentRate.service }} ( {{- shipmentRate.carrier -}} )
+                                            <br>
+                                            <div class="text-muted">
+                                                {% if shipmentRate.deliveryDays is not null %}
+                                                    <strong>Delivery Days:</strong>
+                                                    {{ shipmentRate.deliveryDays }}
+                                                    <br>
+                                                {% endif %}
+                                                {% if shipmentRate.deliveryDate is not null %}
+                                                    <strong>Delivery Date:</strong>
+                                                    {{ shipmentRate.deliveryDate | formatDate }}
+                                                    {% if shipmentRate.isDeliveryDateGuaranteed %}
+                                                        <span style="color: green">
+                                                            <strong><i class="fa fa-check"></i> Guaranteed</strong>
+                                                        </span>
+                                                    {% endif %}
+                                                    <br>
+                                                {% endif %}
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div class="form-actions">
+                                <button type="submit" class="button btn-block">
+                                    <i class="fa fa-credit-card"></i> Buy Shipping Label
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

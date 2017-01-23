@@ -1,0 +1,61 @@
+{# @var shipmentCarrierTypes array #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Add Shipment with Tracking Code - Order #{{ order.referenceNumber }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Add Shipment Tracking Code</h2>
+                <div class="well well-sm">
+                    <form action="{{ routeUrl('admin.order.add-shipment-with-tracking-code') }}"
+                          method="post"
+                          class="form"
+                          role="form">
+                        {{ form.csrf() }}
+                        {{ form.hidden('comment', comment) }}
+                        {{ form.hidden('orderId', order.id.getHex()) }}
+                        {% for orderItemId, quantity in orderItemQty %}
+                            {{ form.hidden('orderItemQty[' ~ orderItemId ~ ']', quantity) }}
+                        {% endfor %}
+
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="shipment-carrier" class="control-label">Carrier</label>
+                                {{ form.select(
+                                    'shipment[carrier]',
+                                    shipment.carrier,
+                                    shipmentCarrierTypes,
+                                    'shipment-carrier',
+                                    'form-control',
+                                    {
+                                        'required': '',
+                                        'autofocus': ''
+                                    }
+                                ) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="shipment-trackingCode" class="control-label">Tracking Code</label>
+                                <input type="text"
+                                       id="shipment-trackingCode"
+                                       name="shipment[trackingCode]"
+                                       value="{{ shipment.trackingCode }}"
+                                       class="form-control"
+                                       required=""/>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="button btn-block">
+                                Create Shipment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

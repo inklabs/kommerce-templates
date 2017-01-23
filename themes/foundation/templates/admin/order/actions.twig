@@ -1,0 +1,51 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+
+<div class="row">
+    <div class="col-sm-6">
+        Order #{{ order.referenceNumber }}
+        |
+        {{ order.created | formatDate }}
+        |
+        {{ orderStatus.label(order) }}
+        <br>
+        <br>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="well well-sm">
+            <div class="pull-left">
+                <form action="{{ routeUrl('admin.order.set-status') }}"
+                      method="post"
+                      class="form-inline"
+                      role="form"
+                      id="set-order-status-form">
+                    {{ form.csrf() }}
+                    {{ form.hidden('orderId', order.id.getHex()) }}
+
+                    <div class="form-group">
+                        {{ form.select(
+                            'orderStatus',
+                            order.status.id,
+                            order.status.nameMap,
+                            'orderStatus',
+                            'form-control input-sm',
+                            {
+                                'required': 'true'
+                            }
+                        ) }}
+                        <button type="submit" class="button success">Set Order Status</button>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <a href="{{ routeUrl('admin.order.add-shipment', {'orderId': order.id.getHex()}) }}"
+                   class="button success">
+                    <i class="fa fa-truck"></i> Ship
+                </a>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{% if image.path == product.defaultImage %}
+    <form action="{{ routeUrl('admin.product.unset-default-image') }}"
+          method="post">
+        {{ form.csrf() }}
+        {{ form.hidden('productId', product.id.hex) }}
+
+        <button type="submit" class="button alert expanded">
+            <i class="fa fa-minus-circle"></i> 
+            Unset Default
+        </button>
+    </form>
+{% else %}
+    <form action="{{ routeUrl('admin.product.set-default-image') }}"
+          method="post">
+        {{ form.csrf() }}
+        {{ form.hidden('productId', product.id.hex) }}
+        {{ form.hidden('imageId', image.id.hex) }}
+
+        <button type="submit" class="button expanded">
+            Set Default
+        </button>
+    </form>
+{% endif %}

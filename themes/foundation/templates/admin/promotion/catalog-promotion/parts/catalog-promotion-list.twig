@@ -1,0 +1,64 @@
+{# @var catalogPromotions \inklabs\kommerce\EntityDTO\CatalogPromotionDTO[] #}
+<table class="table stack">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Tag</th>
+            <th>Discount</th>
+            <th>Redemptions</th>
+            <th>Min Order</th>
+            <th>Max Order</th>
+            <th>Period</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for catalogPromotion in catalogPromotions %}
+            <tr>
+                <td>
+                    <a href="{{ adminCatalogPromotionUrl(catalogPromotion) }}">
+                        {{ catalogPromotion.name }}
+                    </a>
+                </td>
+                <td>
+                    {% if catalogPromotion.tag is null %}
+                        <span class="text-muted small">[none]</span>
+                    {% else %}
+                        {{ catalogPromotion.tag.name }}
+                    {% endif %}
+                </td>
+                <td>{{ catalogPromotion | displayPromotionValue }}</td>
+                <td>
+                    {{ catalogPromotion.redemptions }} of
+                    {% if catalogPromotion.maxRedemptions is null %}
+                        <span class="text-muted small">[unlimited]</span>
+                    {% else %}
+                        {{ catalogPromotion.maxRedemptions }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if catalogPromotion.minOrderValue is null %}
+                        <span class="text-muted small">[no minimum]</span>
+                    {% else %}
+                        {{ catalogPromotion.minOrderValue | displayPrice }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if catalogPromotion.maxOrderValue is null %}
+                        <span class="text-muted small">[no maximum]</span>
+                    {% else %}
+                        {{ catalogPromotion.maxOrderValue | displayPrice }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ catalogPromotion.start | formatDate }}
+                    -
+                    {{ catalogPromotion.end | formatDate }}
+                </td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No catalog promotions</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

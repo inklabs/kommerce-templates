@@ -1,0 +1,29 @@
+{# @var cartPriceRule \inklabs\kommerce\EntityDTO\CartPriceRuleDTO #}
+
+<div class="row">
+    <div class="col-sm-6">
+        Cart Price Rule - {{ cartPriceRule.name }}
+        <br>
+        <br>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="well well-sm">
+            <div>
+                <form action="{{ routeUrl('admin.cart-price-rule.delete') }}"
+                      method="post"
+                      role="form">
+                    {{ form.csrf() }}
+                    {{ form.hidden('cartPriceRuleId', cartPriceRule.id.getHex()) }}
+
+                    <button type="submit" class="button alert">
+                        <i class="fa fa-trash"></i>
+                        Delete Cart Price Rule
+                    </button>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

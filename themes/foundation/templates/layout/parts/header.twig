@@ -1,0 +1,43 @@
+<div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+    <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+    <div class="title-bar-title">Menu</div>
+</div>
+
+<div class="top-bar" id="example-menu">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">
+                {#<a class="navbar-brand" href="{{ routeUrl('home') }}">#}
+                    {{ SITE_NAME | default('Kommerce') }}
+                {#</a>#}
+            </li>
+            <li>
+                <a href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> Cart</a>
+                {# TODO:
+                    <?php if ($cart !== null && $cart->totalQuantity > 0) { ?>
+                        (<?=$cart->totalQuantity?>)
+                    <?php } ?>
+                #}
+            </li>
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu">
+            {% if user is not empty %}
+                <li>
+                    <a href="{{ routeUrl('logout') }}">Sign Out</a>
+                </li>
+                <li class="divider-vertical hidden-xs"></li>
+                <li>
+                    <a href="{{ routeUrl('user.account') }}">Account</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ routeUrl('user.login') }}">Sign In</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

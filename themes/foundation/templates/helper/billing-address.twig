@@ -1,0 +1,30 @@
+{# @var address \inklabs\kommerce\EntityDTO\OrderAddressDTO #}
+
+{% set postalCode = address.zip5 %}
+{% if address.zip4 is not empty %}
+    {% set postalCode = postalCode ~ '-' ~ address.zip4 %}
+{% endif %}
+
+<div class="orderAddress">
+    {% if (address.fullName ~ address.address1 ~ address.city ~ address.state ~ postalCode | trim) == '' %}
+        n/a
+    {% else %}
+        {% if address.fullName is not empty %}
+            {{ address.fullName }}<br>
+        {% endif %}
+        {% if address.company is not empty %}
+            {{ address.company }}<br>
+        {% endif %}
+        {{ address.address1 }}<br>
+        {% if address.address2 is not empty %}
+            {{ address.address2 }}<br>
+        {% endif %}
+
+        {{ address.city }}, {{ address.state }} {{ postalCode }}<br>
+        United States<br>
+        {% if address.phone is not empty %}
+            {{ address.phone }}<br>
+        {% endif %}
+        {{ address.email }}
+    {% endif %}
+</div>

@@ -1,0 +1,45 @@
+{# @var options \inklabs\kommerce\EntityDTO\OptionDTO[] #}
+{# @var tag \inklabs\kommerce\EntityDTO\TagDTO[] #}
+<h3>Options</h3>
+<table class="table stack">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Sort Order</th>
+            {% if tag is defined %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for option in options %}
+            <tr>
+                <td>
+                    <a href="{{ adminOptionUrl(option) }}">{{ option.name }}</a>
+                </td>
+                <td>
+                    <div title="{{ option.description }}">
+                        {{ option.description|truncate(50)}}
+                    </div>
+                </td>
+                <td>{{ option.sortOrder }}</td>
+                {% if tag is defined %}
+                    <td>
+                        <form action="{{ routeUrl('admin.tag.remove-option') }}"
+                              method="post"
+                              class="form">
+                            {{ form.csrf() }}
+                            {{ form.hidden('tagId', tag.id.hex) }}
+                            {{ form.hidden('optionId', option.id.hex) }}
+
+                            <button type="submit" class="button alert"><i class="fa fa-minus"></i></button>
+                        </form>
+                    </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No options</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+{# @var action string #}
+<h4>Add Product:</h4>
+<form action="{{ action }}"
+      method="post">
+    {{ form.csrf() }}
+    {% block formtop %}{% endblock %}
+
+        <input type="text"
+               name="productId"
+               value=""/>
+
+            <button type="submit" class="button">
+                <i class="fa fa-plus"></i> 
+                Add
+            </button>
+</form>

@@ -1,0 +1,23 @@
+{# @var productAttributes \inklabs\kommerce\EntityDTO\ProductAttributeDTO[] #}
+<table class="table stack">
+    <thead>
+        <tr>
+            {% include '@theme/admin/product/parts/product-list-head.twig' %}
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for productAttribute in productAttributes %}
+            <tr>
+                {% include '@theme/admin/product/parts/product-list-body.twig' with {'product': productAttribute.product} %}
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <span class="text-muted">No product attributes.</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

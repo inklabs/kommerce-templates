@@ -1,0 +1,26 @@
+{# @var productAttributes \inklabs\kommerce\EntityDTO\ProductAttributeDTO[] #}
+<h3>Product Attributes</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Attribute Value</th>
+            <th>SKU</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for productAttribute in productAttributes %}
+            <tr>
+                <td>
+                    {{ productAttribute.attribute.name }}
+                </td>
+                <td>{{ productAttribute.attributeValue.name }}</td>
+                <td>{{ productAttribute.attributeValue.sku }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No product options</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

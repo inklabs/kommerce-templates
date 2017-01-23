@@ -1,0 +1,25 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+
+<div class="row column">
+    <div class="callout">
+        <div class="row">
+        <div class="medium-6 columns">
+            <img src="{{ productImageUrl(product) }}">
+        </div>
+
+        <div class="medium-6 columns">
+            <h4>Product - {{ product.name }}</h4>
+            <form action="{{ routeUrl('admin.product.delete') }}"
+                    method="post"
+                    role="form">
+                {{ form.csrf() }}
+                {{ form.hidden('productId', product.id.getHex()) }}
+
+                <button type="submit" class="button alert">
+                    <i class="fa fa-trash"></i>
+                    Delete Product
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

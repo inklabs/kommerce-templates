@@ -1,0 +1,53 @@
+{# @var products \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Products{% endblock %}
+
+{% block content %}
+
+        {% raw %}
+        <div id="app">
+            <p>{{ count }}</p>
+            <button class="button" v-on:click="addOne">Click</button>
+        </div>
+        {% endraw %}
+
+        <div class="row column">
+            <a href="{{ routeUrl('admin.product.new') }}"
+               class="button success">
+                <i class="fa fa-plus-circle"></i> New Product
+            </a>
+
+            <h1>Products</h1>
+            <form action="{{ routeUrl('admin.product') }}"
+                  method="get"
+                  class="form-search">
+                {% include '@theme/helper/search-bar.twig' with {'placeholder': 'Search SKU/Name', 'queryString': queryString} only %}
+            </form>
+
+            {{ paginate.detailed(pagination) }}
+            {% include '@theme/admin/product/parts/product-list.twig' with {'products': products} only %}
+            {{ paginate.detailed(pagination) }}
+        </div>
+
+
+
+{% endblock %}
+
+{% block extraScripts %}
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                addOne() {
+                    this.count++
+                }
+            }
+        });
+    </script>
+{% endblock %}

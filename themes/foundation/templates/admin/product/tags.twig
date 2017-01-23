@@ -1,0 +1,46 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Product Tags - {{ product.name }}{% endblock %}
+
+{% block content %}
+
+    {% include '@theme/admin/product/parts/header.twig' %}
+
+    <div class="row column">
+        {% embed '@theme/admin/tag/parts/tag-list.twig' with {'tags': product.tags} %}
+            {% block thead %}
+                <th class="text-right">Actions</th>
+            {% endblock %}
+            {% block tbody %}
+                <td>
+                    <form action="{{ routeUrl('admin.product.remove-tag') }}"
+                            method="post">
+                        {{ form.csrf() }}
+                        {{ form.hidden('productId', product.id.hex) }}
+                        {{ form.hidden('tagId', tag.id.hex) }}
+
+                        <button type="submit" class="button alert">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </form>
+                </td>
+            {% endblock %}
+        {% endembed %}
+
+        <h4>Add Tag:</h4>
+        <form action="{{ routeUrl('admin.product.add-tag') }}"
+                method="post">
+            {{ form.csrf() }}
+            {{ form.hidden('productId', product.id.hex) }}
+
+                <input type="text"
+                        name="tagId"
+                        value=""/>
+
+                <button type="submit" class="button">
+                    <i class="fa fa-plus"></i> Add
+                </button>
+        </form>
+    </div>
+{% endblock %}

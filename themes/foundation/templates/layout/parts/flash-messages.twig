@@ -1,0 +1,72 @@
+{# @var flashMessages array #}
+{# @var templateFlashMessages array #}
+{# @var flashFormErrors \Symfony\Component\Validator\ConstraintViolationInterface[] #}
+
+{% if flashMessages is iterable or templateFlashMessages is iterable or flashFormErrors is iterable %}
+        {% for type, messages in flashMessages %}
+            {% if type == 'error' %}
+                {% set type = 'alert' %}
+            {% endif %}
+            {% for message in messages %}
+                <div class="callout {{ type }}" data-closable>
+                    {% if type == 'success' %}
+                        <i class="fa fa-check-circle"></i>
+                    {% elseif type == 'info' %}
+                        <i class="fa fa-info-circle"></i>
+                    {% elseif type == 'warning' %}
+                        <i class="fa fa-exclamation-triangle"></i>
+                    {% elseif type == 'danger' %}
+                        <i class="fa fa-exclamation-circle"></i>
+                    {% endif %}
+
+                    {{ message }}
+
+                    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% for type, messages in templateFlashMessages %}
+            {% if type == 'error' %}
+                {% set type = 'alert' %}
+            {% endif %}
+            {% for message in messages %}
+                <div class="callout {{ type }}" data-closable>
+
+                    {% if type == 'success' %}
+                        <i class="fa fa-check-circle"></i>
+                    {% elseif type == 'info' %}
+                        <i class="fa fa-info-circle"></i>
+                    {% elseif type == 'warning' %}
+                        <i class="fa fa-exclamation-triangle"></i>
+                    {% elseif type == 'danger' %}
+                        <i class="fa fa-exclamation-circle"></i>
+                    {% endif %}
+
+                    {% include message.flashTemplate with message.data %}
+
+                    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% if flashFormErrors is iterable %}
+            <div class="callout alert" data-closable>
+                <i class="fa fa-exclamation-circle"></i>
+
+                <ul>
+                    {% for formError in flashFormErrors %}
+                        <li>{{ formError.getPropertyPath() }} - {{ formError.getMessage() }}</li>
+                    {% endfor %}
+                </ul>
+
+                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+{% endif %}

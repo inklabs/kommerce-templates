@@ -1,0 +1,29 @@
+{# @var attributeValues \inklabs\kommerce\EntityDTO\AttributeValueDTO[] #}
+<table class="table stack">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Description</th>
+            <th>Sort Order</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for attributeValue in attributeValues %}
+            <tr>
+                <td>{{ attributeValue.name }}</td>
+                <td>{{ attributeValue.sku }}</td>
+                <td>{{ attributeValue.description|truncate(60) }}</td>
+                <td>{{ attributeValue.sortOrder }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <span class="text-muted">No attribute values.</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

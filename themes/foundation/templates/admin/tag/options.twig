@@ -1,0 +1,39 @@
+{# @var tag \inklabs\kommerce\EntityDTO\TagDTO #}
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Tag Options - {{ tag.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@theme/admin/tag/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% include '@theme/admin/tag/parts/option-list.twig' with {'options': tag.options, 'tag': tag} only %}
+
+                <h4>Add Option:</h4>
+                <form action="{{ routeUrl('admin.tag.add-option') }}"
+                      method="post">
+                    {{ form.csrf() }}
+                    {{ form.hidden('tagId', tag.id.hex) }}
+
+                    <div class="input-group col-sm-4">
+                        <input type="text"
+                               name="optionId"
+                               value=""
+                               class="form-control typeahead"/>
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="button secondary"><i class="fa fa-plus"></i> Add</button>
+                        </span>
+                    </div>
+                </form>
+
+                <hr>
+
+                {% include '@theme/admin/tag/parts/text-option-list.twig' with {'textOptions': tag.textOptions} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{# @var catalogPromotion \inklabs\kommerce\EntityDTO\CatalogPromotionDTO #}
+
+<div class="row">
+    <div class="col-sm-6">
+        Catalog Promotion - {{ catalogPromotion.name }}
+        <br>
+        <br>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="well well-sm">
+            <div>
+                <form action="{{ routeUrl('admin.catalog-promotion.delete') }}"
+                      method="post"
+                      role="form">
+                    {{ form.csrf() }}
+                    {{ form.hidden('catalogPromotionId', catalogPromotion.id.hex) }}
+
+                    <button type="submit" class="button alert">
+                        <i class="fa fa-trash"></i>
+                        Delete Catalog Promotion
+                    </button>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
