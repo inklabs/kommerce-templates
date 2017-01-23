@@ -4,40 +4,39 @@
 {% block pageTitle %}Tag - {{ tag.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
 
-        {% include '@theme/admin/tag/parts/header.twig' %}
+    {% include '@theme/admin/tag/parts/header.twig' %}
 
-        <div class="row">
-            <div class="col-sm-12">
-                <form action="{{ routeUrl('admin.tag.edit.post') }}"
-                      method="post"
-                      class="form-horizontal"
-                      role="form">
-                    <fieldset>
-                        {{ form.csrf() }}
-                        {{ form.hidden('tagId', tag.id.hex ) }}
+    <div class="row column">
+        <form action="{{ routeUrl('admin.tag.edit.post') }}"
+                method="post"
+                role="form">
+            <fieldset>
+                {{ form.csrf() }}
+                {{ form.hidden('tagId', tag.id.hex ) }}
 
-                        <div class="well">
-                            {% include '@theme/admin/tag/parts/tag-intput-fields.twig' %}
-                        </div>
+                <div class="callout">
+                    {% include '@theme/admin/tag/parts/tag-intput-fields.twig' %}
+                </div>
 
-                        <div class="well">
-                            <div class="text-muted text-right">
-                                <span title="Created">{{ tag.createdFormatted }}</span><br>
-                                <span title="Updated">{{ tag.updatedFormatted }}</span><br>
-                            </div>
+                <div class="callout">
+                            <p title="Created">
+                                Created: 
+                                <small>{{ tag.createdFormatted }}</small>
+                            </p>
+                            <p title="Updated">
+                                Updated: 
+                                <small>{{ tag.updatedFormatted }}</small>
+                            </p>
 
-                            <button type="submit" class="button" data-loading-text="Saving...">
-                                <i class="fa fa-check-circle"></i> Save
-                            </button>
-                            <a href="{{ routeUrl('admin.tag') }}" class="button secondary">Cancel</a>
-                        </div>
+                    <button type="submit" class="button" data-loading-text="Saving...">
+                        <i class="fa fa-check-circle"></i> Save
+                    </button>
+                    <a href="{{ routeUrl('admin.tag') }}" class="button secondary">Cancel</a>
+                </div>
 
-                    </fieldset>
-                </form>
-            </div>
-        </div>
+            </fieldset>
+        </form>
     </div>
 
 {% endblock %}

@@ -1,6 +1,14 @@
 //body {
 //  background-color: tomato;
 //}
+.card-section {
+  height: 150px !important;
+  text-align: center;
+    
+  img {
+    max-height: 100%;
+  }
+}
 
 .table {
   width: 100%;
