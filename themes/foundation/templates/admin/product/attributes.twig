@@ -21,7 +21,7 @@
                             </a>
                             <form action="{{ routeUrl('admin.product.remove-attribute-value') }}"
                                   method="post"
-                                  class="form pull-right">
+                                  class="form">
                                 {{ form.csrf() }}
                                 {{ form.hidden('productId', product.id.hex) }}
                                 {{ form.hidden('productAttributeId', productAttribute.id.hex) }}

@@ -51,11 +51,11 @@
                                                 <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
                                                     {{ form.csrf() }}
                                                     {{ form.hidden('id', cartItem.id.hex) }}
-                                                    <div class="pull-right" style="width: 120px">
+                                                    <div style="width: 120px">
                                                         <div class="input-group input-group-sm">
                                                             <input class="form-control update-qty" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
                                                             <span class="input-group-btn">
-                                                                <button type="submit" class="btn btn-default">Update</button>
+                                                                <button type="submit" class="button secondary">Update</button>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -66,7 +66,7 @@
                                                     {{ form.hidden('id', cartItem.id.hex) }}
 
                                                     <span class="cart-remove-item">
-                                                        <button type="submit" class="btn btn-link btn-xs">
+                                                        <button type="submit" class="button">
                                                             <i class="fa fa-trash"></i>
                                                             Remove item
                                                         </button>
@@ -114,7 +114,7 @@
                             <div class="input-group">
                             <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />
                               <span class="input-group-btn">
-                                  <button type="submit" class="btn btn-default" id="apply-coupon">apply</button>
+                                  <button type="submit" class="button secondary" id="apply-coupon">apply</button>
                               </span>
                         </div>
                         </form>

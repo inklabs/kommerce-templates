@@ -34,7 +34,7 @@
                                         {{ form.hidden('cartPriceRuleItemId', cartPriceRuleItem.id.hex) }}
 
                                         <div class="form-group col-sm-4 text-right">
-                                            <button type="submit" name="action" value="delete" class="btn btn-danger btn-xs" title="Delete Cart Price Rule Item"><i class="fa fa-remove"></i></button>
+                                            <button type="submit" name="action" value="delete" class="button alert" title="Delete Cart Price Rule Item"><i class="fa fa-remove"></i></button>
                                         </div>
                                     </form>
                                 {% elseif cartPriceRuleItem.tag is defined %}
@@ -54,7 +54,7 @@
                                         {{ form.hidden('cartPriceRuleItemId', cartPriceRuleItem.id.hex) }}
 
                                         <div class="form-group col-sm-4 text-right">
-                                            <button type="submit" name="action" value="delete" class="btn btn-danger btn-xs" title="Delete Cart Price Rule Item"><i class="fa fa-remove"></i></button>
+                                            <button type="submit" name="action" value="delete" class="button alert" title="Delete Cart Price Rule Item"><i class="fa fa-remove"></i></button>
                                         </div>
                                     </form>
                                 {% endif %}
@@ -79,7 +79,7 @@
 
                             <div class="form-group col-sm-2">
                                 <br>
-                                <button type="submit" class="btn btn-primary btn-sm pull-right" title="Add Cart Price Rule Product Item">
+                                <button type="submit" class="button" title="Add Cart Price Rule Product Item">
                                     <i class="fa fa-check-circle"></i>
                                     Create
                                 </button>
@@ -100,7 +100,7 @@
 
                             <div class="form-group col-sm-2">
                                 <br>
-                                <button type="submit" class="btn btn-primary btn-sm pull-right" title="Add Cart Price Rule Tag Item">
+                                <button type="submit" class="button" title="Add Cart Price Rule Tag Item">
                                     <i class="fa fa-check-circle"></i>
                                     Create
                                 </button>

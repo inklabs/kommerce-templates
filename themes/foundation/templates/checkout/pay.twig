@@ -112,7 +112,7 @@
                     </div>
                     {% if cart.shipmentRate.deliveryMethod is not null %}
                         {# TODO:
-                            <?=View::factory('cart/modify_zipcode_button')->set('class', 'btn btn-default btn-sm')->render()?>
+                            <?=View::factory('cart/modify_zipcode_button')->set('class', 'button secondary')->render()?>
                         #}
                     {% endif %}
                 </div>
@@ -346,10 +346,10 @@
                             </div>
                         {% endif %}
 
-                        <button class="btn btn-primary btn-lg pull-left" type="submit" data-loading-text="Loading...">
+                        <button class="button btn-lg pull-left" type="submit" data-loading-text="Loading...">
                             <i class="fa fa-lock"></i> Place your order
                         </button>
-                        <div class="pull-right">
+                        <div>
                             {% include '@theme/helper/secure-logos.twig' only %}
                         </div>
                     </form>

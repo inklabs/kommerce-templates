@@ -20,8 +20,14 @@
                         </div>
 
                         <div class="callout">
-                            <p title="Created">{{ product.createdFormatted }}</p>
-                            <p title="Updated">{{ product.updatedFormatted }}</p>
+                            <p title="Created">
+                                Created: 
+                                <small>{{ product.createdFormatted }}</small>
+                            </p>
+                            <p title="Updated">
+                                Updated: 
+                                <small>{{ product.updatedFormatted }}</small>
+                            </p>
 
                             <div>
                                 <button type="submit" class="button" data-loading-text="Saving...">

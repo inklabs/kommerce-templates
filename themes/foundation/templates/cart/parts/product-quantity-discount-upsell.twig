@@ -4,7 +4,7 @@
     This logic may need to be moved to kommerce-core
 #}
 {% if cartItem.product.productQuantityDiscounts is not empty %}
-    <div class="pull-right">
+    <div>
         {% for productQuantityDiscount in (cartItem.product.productQuantityDiscounts | reverse) %}
             {% if cartItem.quantity < productQuantityDiscount.quantity %}
                 {% set numberMore = productQuantityDiscount.quantity - cartItem.quantity %}
@@ -17,7 +17,7 @@
                         {{ form.hidden('id', cartItem.id.hex) }}
                         {{ form.hidden('quantity', productQuantityDiscount.quantity) }}
 
-                        <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i>
+                        <button type="submit" class="button success"><i class="fa fa-shopping-cart"></i>
                             Add {{ numberMore }} more
                         </button>
                         {% if priceEach > 0 %}

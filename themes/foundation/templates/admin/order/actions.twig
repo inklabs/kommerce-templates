@@ -33,14 +33,14 @@
                                 'required': 'true'
                             }
                         ) }}
-                        <button type="submit" class="btn btn-success btn-sm">Set Order Status</button>
+                        <button type="submit" class="button success">Set Order Status</button>
                     </div>
                 </form>
             </div>
 
-            <div class="pull-right">
+            <div>
                 <a href="{{ routeUrl('admin.order.add-shipment', {'orderId': order.id.getHex()}) }}"
-                   class="btn btn-success btn-sm">
+                   class="button success">
                     <i class="fa fa-truck"></i> Ship
                 </a>
             </div>

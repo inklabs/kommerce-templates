@@ -141,7 +141,7 @@
                                                         {{ form.csrf() }}
                                                         {{ form.hidden('attachmentId', attachment.id.hex) }}
                                                         {{ form.hidden('orderId', order.id.hex) }}
-                                                        <button type="submit" class="btn btn-danger btn-xs">
+                                                        <button type="submit" class="button alert">
                                                             <i class="fa fa-remove-sign"></i> Remove
                                                         </button>
                                                     </form>
@@ -162,7 +162,7 @@
                                                     {{ form.hidden('orderItemId', orderItem.id.hex) }}
 
                                                     <input type="file" name="image">
-                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+                                                    <button type="submit" class="button"><i class="fa fa-upload"></i> Upload</button>
                                                 </form>
                                             </div>
                                         </div>

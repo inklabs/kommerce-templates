@@ -22,15 +22,15 @@
                         </div>
 
                         <div class="well">
-                            <div class="pull-right text-muted text-right">
+                            <div class="text-muted text-right">
                                 <span title="Created">{{ attributeValue.createdFormatted }}</span><br>
                                 <span title="Updated">{{ attributeValue.updatedFormatted }}</span><br>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                            <button type="submit" class="button" data-loading-text="Saving...">
                                 <i class="fa fa-check-circle"></i> Save
                             </button>
-                            <a href="{{ routeUrl('admin.attribute.attribute-values', {'attributeId': attributeValue.attribute.id.hex}) }}" class="btn btn-default">Cancel</a>
+                            <a href="{{ routeUrl('admin.attribute.attribute-values', {'attributeId': attributeValue.attribute.id.hex}) }}" class="button secondary">Cancel</a>
                         </div>
                     </fieldset>
                 </form>

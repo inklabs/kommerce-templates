@@ -21,11 +21,11 @@
                             <td>
                                 <form action="{{ routeUrl('admin.option.delete-option-value') }}"
                                       method="post"
-                                      class="form pull-right">
+                                      class="form">
                                     {{ form.csrf() }}
                                     {{ form.hidden('optionId', option.id.hex) }}
                                     {{ form.hidden('optionValueId', optionValue.id.hex) }}
-                                    <button type="submit" class="btn btn-danger btn-xs" title="Delete Option Value"><i class="fa fa-remove"></i></button>
+                                    <button type="submit" class="button alert" title="Delete Option Value"><i class="fa fa-remove"></i></button>
                                 </form>
                             </td>
                         {% endblock %}
@@ -109,7 +109,7 @@
                             </div>
 
                             <div class="well">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="button">
                                     <i class="fa fa-plus"></i> Add
                                 </button>
                             </div>

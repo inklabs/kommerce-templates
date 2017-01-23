@@ -4,20 +4,16 @@
 {% block pageTitle %}Product Options - {{ product.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
 
-        {% include '@theme/admin/product/parts/header.twig' %}
+    {% include '@theme/admin/product/parts/header.twig' %}
 
-        <div class="row">
-            <div class="col-sm-12">
-                {% include '@theme/admin/product/parts/option-list.twig' with {'optionProducts': product.optionProducts} only %}
+    <div class="row column">
+            {% include '@theme/admin/product/parts/option-list.twig' with {'optionProducts': product.optionProducts} only %}
 
-                <hr />
-                <h2>Tag Options:</h2>
+            <hr />
+            <h2>Tag Options:</h2>
 
-                {% include '@theme/admin/tag/parts/option-list.twig' with {'options': product.options} only %}
-                {% include '@theme/admin/tag/parts/text-option-list.twig' with {'textOptions': product.textOptions} only %}
-            </div>
-        </div>
+            {% include '@theme/admin/tag/parts/option-list.twig' with {'options': product.options} only %}
+            {% include '@theme/admin/tag/parts/text-option-list.twig' with {'textOptions': product.textOptions} only %}
     </div>
 {% endblock %}

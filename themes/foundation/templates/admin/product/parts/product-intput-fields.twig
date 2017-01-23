@@ -1,6 +1,5 @@
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
 <h2>Required:</h2>
-
 <label for="product-name">
     Name
     <input type="text"
@@ -11,21 +10,18 @@
             required=""/>
 </label>
 
-
 <label for="product-unitPrice">
     Unit Price
         <div class="input-group">
-        
-        <span class="input-group-label">$</span>
-        <input type="text"
-                id="product-unitPrice"
-                name="product[unitPrice]"
-                value="{{ product.unitPrice|floatPrice('') }}"
-                class="input-group-field"
-                required=""/>
+            <span class="input-group-label">$</span>
+            <input type="text"
+                    id="product-unitPrice"
+                    name="product[unitPrice]"
+                    value="{{ product.unitPrice|floatPrice('') }}"
+                    class="input-group-field"
+                    required=""/>
         </div>
 </label>
-
 
 <label for="product-quantity">
     Quantity
@@ -36,7 +32,6 @@
                 required=""/>
 </label>
 
-
 <label for="product-shippingWeight">
     Shipping Weight (oz)
     <input type="text"
@@ -46,7 +41,6 @@
             maxlength="64"
             required=""/>
 </label>
-
 
 <div class="callout secondary">
 
@@ -59,7 +53,6 @@
         ) }}
     </label>
 
-
     <label for="product-isPriceVisible">
         Is Price Visible
         {{ form.checkbox(
@@ -68,7 +61,6 @@
             'product-isPriceVisible'
         ) }}
     </label>
-
 
     <label for="product-isActive">
         Is Active
@@ -79,7 +71,6 @@
         ) }}
     </label>
 
-
     <label for="product-isVisible">
         Is Visible
         {{ form.checkbox(
@@ -88,7 +79,6 @@
             'product-isVisible'
         ) }}
     </label>
-
 
     <label for="product-isTaxable">
         Is Taxable
@@ -99,7 +89,6 @@
         ) }}
     </label>
 
-
     <label for="product-isShippable">
         Is Shippable
         {{ form.checkbox(
@@ -108,7 +97,6 @@
             'product-isShippable'
         ) }}
     </label>
-
 
     <label for="product-areAttachmentsEnabled">
         Are Attachments Enabled

@@ -22,15 +22,15 @@
                         </div>
 
                         <div class="well">
-                            <div class="pull-right text-muted text-right">
+                            <div class="text-muted text-right">
                                 <span title="Created">{{ cartPriceRule.createdFormatted }}</span><br>
                                 <span title="Updated">{{ cartPriceRule.updatedFormatted }}</span><br>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                            <button type="submit" class="button" data-loading-text="Saving...">
                                 <i class="fa fa-check-circle"></i> Save
                             </button>
-                            <a href="{{ routeUrl('admin.cart-price-rule') }}" class="btn btn-default">Cancel</a>
+                            <a href="{{ routeUrl('admin.cart-price-rule') }}" class="button secondary">Cancel</a>
                         </div>
                     </fieldset>
                 </form>

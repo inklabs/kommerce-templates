@@ -20,12 +20,12 @@
                         <td>
                             <form action="{{ routeUrl('admin.option.remove-tag') }}"
                                   method="post"
-                                  class="form pull-right">
+                                  class="form">
                                 {{ form.csrf() }}
                                 {{ form.hidden('optionId', option.id.hex) }}
                                 {{ form.hidden('tagId', tag.id.hex) }}
 
-                                <button type="submit" class="btn btn-danger btn-xs" title="Remove Tag"><i class="fa fa-minus"></i></button>
+                                <button type="submit" class="button alert" title="Remove Tag"><i class="fa fa-minus"></i></button>
                             </form>
                         </td>
                     {% endblock %}
@@ -44,7 +44,7 @@
                                class="form-control typeahead"/>
 
                         <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-plus"></i> Add</button>
+                            <button type="submit" class="button secondary"><i class="fa fa-plus"></i> Add</button>
                         </span>
                     </div>
                 </form>

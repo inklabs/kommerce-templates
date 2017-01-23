@@ -20,11 +20,11 @@
                             <td>
                                 <form action="{{ routeUrl('admin.attribute.delete-product-attribute') }}"
                                       method="post"
-                                      class="form pull-right">
+                                      class="form">
                                     {{ form.csrf() }}
                                     {{ form.hidden('attributeValueId', attributeValue.id.hex) }}
                                     {{ form.hidden('productAttributeId', productAttribute.id.hex) }}
-                                    <button type="submit" class="btn btn-danger btn-xs" title="Remove Product"><i class="fa fa-minus"></i></button>
+                                    <button type="submit" class="button alert" title="Remove Product"><i class="fa fa-minus"></i></button>
                                 </form>
                             </td>
                         {% endblock %}

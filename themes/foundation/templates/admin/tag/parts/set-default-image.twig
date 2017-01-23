@@ -1,5 +1,5 @@
 {% if image.path == tag.defaultImage %}
-    <div class="label label-primary pull-right">Default</div>
+    <div class="label label-primary">Default</div>
 
     <form action="{{ routeUrl('admin.tag.unset-default-image') }}"
           method="post"
@@ -7,7 +7,7 @@
         {{ form.csrf() }}
         {{ form.hidden('tagId', tag.id.hex) }}
 
-        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-minus-circle"></i> Unset Default</button>
+        <button type="submit" class="button alert"><i class="fa fa-minus-circle"></i> Unset Default</button>
     </form>
 {% else %}
     <form action="{{ routeUrl('admin.tag.set-default-image') }}"
@@ -17,6 +17,6 @@
         {{ form.hidden('tagId', tag.id.hex) }}
         {{ form.hidden('imageId', image.id.hex) }}
 
-        <button type="submit" class="btn btn-default btn-xs">Set Default</button>
+        <button type="submit" class="button secondary">Set Default</button>
     </form>
 {% endif %}

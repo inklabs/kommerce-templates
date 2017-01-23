@@ -4,90 +4,84 @@
 {% block pageTitle %}Product Quantity Discounts - {{ product.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
 
         {% include '@theme/admin/product/parts/header.twig' %}
 
-        <div class="row">
-            <div class="col-sm-12">
-                <br>
+        <div class="row column">
 
-                <div class="fluid-control-group">
-                    {% for productQuantityDiscount in product.productQuantityDiscounts %}
-                        <div class="row">
-                            <div class="form-group col-sm-2">
-                                <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-quantity">Qty</label>
+            <div class="fluid-control-group">
+                {% for productQuantityDiscount in product.productQuantityDiscounts %}
+                    <div class="row">
+                        <div class="form-group col-sm-2">
+                            <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-quantity">Qty</label>
+                            <input type="text"
+                                id="{{ productQuantityDiscount.id.hex }}-quantity"
+                                name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][quantity]"
+                                value="{{ productQuantityDiscount.quantity }}"
+                                required=""/>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-value">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
                                 <input type="text"
-                                   id="{{ productQuantityDiscount.id.hex }}-quantity"
-                                   name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][quantity]"
-                                   value="{{ productQuantityDiscount.quantity }}"
-                                   class="form-control"
-                                   required=""/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-value">Price</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    <input type="text"
-                                       id="{{ productQuantityDiscount.id.hex }}-value"
-                                       name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][value]"
-                                       value="{{ productQuantityDiscount.value }}"
-                                       class="form-control"
-                                       required=""/>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-start">Start</label>
-                                <div class="input-group date datetimepicker col-sm-12">
-
-                                    <input type="datetime"
-                                       id="{{ productQuantityDiscount.id.hex }}-start"
-                                       name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][start]"
-                                       value="{{ productQuantityDiscount.startFormatted }}"
-                                       class="form-control"
-                                       data-date-format="yyyy-mm-dd"
-                                       required=""/>
-
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-end">End</label>
-                                <div class="input-group date datetimepicker col-sm-12">
-
-                                    <input type="datetime"
-                                       id="{{ productQuantityDiscount.id.hex }}-end"
-                                       name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][end]"
-                                       value="{{ productQuantityDiscount.endFormatted }}"
-                                       class="form-control"
-                                       data-date-format="yyyy-mm-dd"
-                                       required=""/>
-
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-1">
-                                <label class="control-label">&nbsp;</label>
-                                <div class="clearfix"></div>
-                                <form action="{{ routeUrl('admin.product.delete-quantity-discount') }}"
-                                      method="post"
-                                      role="form">
-                                    {{ form.csrf() }}
-                                    {{ form.hidden('productQuantityDiscountId', productQuantityDiscount.id.hex) }}
-
-                                    <button type="submit" class="btn btn-danger btn-xs">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
+                                    id="{{ productQuantityDiscount.id.hex }}-value"
+                                    name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][value]"
+                                    value="{{ productQuantityDiscount.value }}"
+                                    class="form-control"
+                                    required=""/>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
+                        <div class="form-group col-sm-3">
+                            <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-start">Start</label>
+                            <div class="input-group date datetimepicker col-sm-12">
+
+                                <input type="datetime"
+                                    id="{{ productQuantityDiscount.id.hex }}-start"
+                                    name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][start]"
+                                    value="{{ productQuantityDiscount.startFormatted }}"
+                                    class="form-control"
+                                    data-date-format="yyyy-mm-dd"
+                                    required=""/>
+
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label class="control-label" for="{{ productQuantityDiscount.id.hex }}-end">End</label>
+                            <div class="input-group date datetimepicker col-sm-12">
+
+                                <input type="datetime"
+                                    id="{{ productQuantityDiscount.id.hex }}-end"
+                                    name="productQuantityDiscount[{{ productQuantityDiscount.id.hex }}][end]"
+                                    value="{{ productQuantityDiscount.endFormatted }}"
+                                    class="form-control"
+                                    data-date-format="yyyy-mm-dd"
+                                    required=""/>
+
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-1">
+                            <label class="control-label">&nbsp;</label>
+                            <div class="clearfix"></div>
+                            <form action="{{ routeUrl('admin.product.delete-quantity-discount') }}"
+                                    method="post"
+                                    role="form">
+                                {{ form.csrf() }}
+                                {{ form.hidden('productQuantityDiscountId', productQuantityDiscount.id.hex) }}
+
+                                <button type="submit" class="button alert">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
 {% endblock %}

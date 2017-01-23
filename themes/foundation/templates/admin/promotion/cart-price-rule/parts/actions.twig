@@ -9,14 +9,14 @@
 
     <div class="col-sm-6">
         <div class="well well-sm">
-            <div class="pull-right">
+            <div>
                 <form action="{{ routeUrl('admin.cart-price-rule.delete') }}"
                       method="post"
                       role="form">
                     {{ form.csrf() }}
                     {{ form.hidden('cartPriceRuleId', cartPriceRule.id.getHex()) }}
 
-                    <button type="submit" class="btn btn-danger btn-xs">
+                    <button type="submit" class="button alert">
                         <i class="fa fa-trash"></i>
                         Delete Cart Price Rule
                     </button>

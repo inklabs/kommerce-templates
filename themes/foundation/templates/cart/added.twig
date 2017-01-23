@@ -22,7 +22,7 @@
 
                         {% include '@theme/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
 
-                        <div class="pull-right">Quantity in cart: {{ cartItem.quantity }}</div>
+                        <div>Quantity in cart: {{ cartItem.quantity }}</div>
 
                         {% include '@theme/helper/price.twig' with {'price': cartItem.price } only %}
 
@@ -37,8 +37,8 @@
                     <div class="alert alert-info">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="pull-right">
-                                    <a class="btn btn-default" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                                <div>
+                                    <a class="button secondary" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
 
                                     {% include '@theme/helper/checkout-button.twig' only %}
                                 </div>

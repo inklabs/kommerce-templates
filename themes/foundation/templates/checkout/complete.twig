@@ -35,9 +35,9 @@
                                 <strong>I just bought: "{{ orderItem.product.name }}"</strong><br />
                                 <small>{{ orderItem.product.description | truncate(117) }}</small>
                                 <br />
-                                <div class="pull-right">
+                                <div>
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ productUrl(orderItem.product) }}"
-                                       class="btn btn-primary btn-sm facebook-share"
+                                       class="button facebook-share"
                                        target="_blank">
                                         <i class="fa fa-share"></i> Share on Facebook
                                     </a>

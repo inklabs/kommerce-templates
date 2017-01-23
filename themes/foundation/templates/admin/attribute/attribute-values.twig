@@ -18,20 +18,20 @@
                     {% block tbody %}
                         <td class="text-right">
                             <a href="{{ routeUrl('admin.attribute.attribute-value.edit', {'attributeValueId': attributeValue.id.hex}) }}"
-                               class="btn btn-default btn-xs">
+                               class="button secondary">
                                 Edit
                             </a>
                             <a href="{{ routeUrl('admin.attribute.attribute-value.product-attributes', {'attributeValueId': attributeValue.id.hex}) }}"
-                               class="btn btn-default btn-xs">
+                               class="button secondary">
                                 Products
                             </a>
                             <form action="{{ routeUrl('admin.attribute.delete-attribute-value') }}"
                                   method="post"
-                                  class="form pull-right">
+                                  class="form">
                                 {{ form.csrf() }}
                                 {{ form.hidden('attributeId', attribute.id.hex) }}
                                 {{ form.hidden('attributeValueId', attributeValue.id.hex) }}
-                                <button type="submit" class="btn btn-danger btn-xs" title="Delete Attribute Value"><i class="fa fa-remove"></i></button>
+                                <button type="submit" class="button alert" title="Delete Attribute Value"><i class="fa fa-remove"></i></button>
                             </form>
                         </td>
                     {% endblock %}
@@ -98,7 +98,7 @@
                         </div>
 
                         <div class="well">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="button">
                                 <i class="fa fa-plus"></i> Add
                             </button>
                         </div>

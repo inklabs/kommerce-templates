@@ -4,29 +4,24 @@
 {% block pageTitle %}New Product{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>New Product</h3>
-                <form action="{{ routeUrl('admin.product.new.post') }}"
-                      method="post"
-                      class="form-horizontal"
-                      role="form">
-                    <fieldset>
-                        {{ form.csrf() }}
-                        <div class="well">
-                            {% include '@theme/admin/product/parts/product-intput-fields.twig' %}
-                        </div>
+    <div class="row column">
+        <h3>New Product</h3>
+        <form action="{{ routeUrl('admin.product.new.post') }}"
+                method="post"
+                role="form">
+            <fieldset>
+                {{ form.csrf() }}
+                <div class="callout">
+                    {% include '@theme/admin/product/parts/product-intput-fields.twig' %}
+                </div>
 
-                        <div class="well">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-check-circle"></i> Create
-                            </button>
-                            <a href="{{ routeUrl('admin.product') }}" class="btn btn-default">Cancel</a>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
+                <div class="callout">
+                    <button type="submit" class="button">
+                        <i class="fa fa-check-circle"></i> Create
+                    </button>
+                    <a href="{{ routeUrl('admin.product') }}" class="button alert">Cancel</a>
+                </div>
+            </fieldset>
+        </form>
     </div>
 {% endblock %}

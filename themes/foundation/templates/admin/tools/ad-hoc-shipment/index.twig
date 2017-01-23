@@ -9,9 +9,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="pull-right">
+                <div>
                     <a href="{{ routeUrl('admin.tools.ad-hoc-shipment.new') }}"
-                       class="btn btn-success btn-xs">
+                       class="button success">
                         <i class="fa fa-plus-circle"></i> New Ad Hoc Shipment
                     </a>
                 </div>
@@ -30,7 +30,7 @@
                     {% endblock %}
                     {% block tbody %}
                         <td>
-                            <a href="{{ routeUrl('admin.tools.ad-hoc-shipment.view', {'shipmentTrackerId': shipmentTracker.id.hex}) }}" class="btn btn-default btn-xs">
+                            <a href="{{ routeUrl('admin.tools.ad-hoc-shipment.view', {'shipmentTrackerId': shipmentTracker.id.hex}) }}" class="button secondary">
                                 View
                             </a>
                         </td>

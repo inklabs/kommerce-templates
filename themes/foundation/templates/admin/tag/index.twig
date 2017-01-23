@@ -6,27 +6,19 @@
 {% block pageTitle %}Tags{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="pull-right">
-                    <a href="{{ routeUrl('admin.tag.new') }}"
-                       class="btn btn-success btn-xs">
-                        <i class="fa fa-plus-circle"></i> New Tag
-                    </a>
-                </div>
+<div class="row column">
+    <a href="{{ routeUrl('admin.tag.new') }}" class="button success">
+        <i class="fa fa-plus-circle"></i> New Tag
+    </a>
 
-                <h1>Tags</h1>
-                <form action="{{ routeUrl('admin.tag') }}"
-                      method="get"
-                      class="form-search">
-                    {% include '@theme/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
-                </form>
+    <h1>Tags</h1>
+    <form action="{{ routeUrl('admin.tag') }}"
+            method="get">
+        {% include '@theme/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
+    </form>
 
-                {{ paginate.detailed(pagination) }}
-                {% include '@theme/admin/tag/parts/tag-list.twig' with {'tags': tags} only %}
-                {{ paginate.detailed(pagination) }}
-            </div>
-        </div>
-    </div>
+    {{ paginate.detailed(pagination) }}
+    {% include '@theme/admin/tag/parts/tag-list.twig' with {'tags': tags} only %}
+    {{ paginate.detailed(pagination) }}
+</div>
 {% endblock %}

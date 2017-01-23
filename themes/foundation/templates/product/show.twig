@@ -43,7 +43,7 @@
                         {% if product.areAttachmentsEnabled %}
                             {% if user is not empty %}
                                 <a href="{{ routeUrl('user.attachment.createForProduct', {'productId': product.id.hex}) }}"
-                                   class="btn btn-xs btn-success upload-attachment">
+                                   class="button success upload-attachment">
                                     <i class="fa fa-upload"></i> Upload Attachment
                                 </a>
                             {% endif %}
@@ -118,7 +118,7 @@
                             <div class="divider"></div>
                             <div class="actions">
                                 <input type="hidden" name="id" value="{{ product.id.getHex() }}" />
-                                <button type="submit" class="btn btn-success pull-right">
+                                <button type="submit" class="button success">
                                     <i class="fa fa-shopping-cart"></i> Add to Cart
                                 </button>
                                 <div class="input-group input-group-sm col-xs-4 medium-3">
@@ -183,7 +183,7 @@
                         <div class="other-actions">
                             <div id="social-actions">
                                 <a  href="https://www.facebook.com/sharer/sharer.php?u={{ product.fullUrl }}"
-                                    class="btn btn-primary btn-xs facebook-share"
+                                    class="button facebook-share"
                                     target="_blank">
                                     <i class="fa fa-share"></i> Share on Facebook
                                 </a>
