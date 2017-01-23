@@ -4,12 +4,10 @@
 {% block pageTitle %}Product - {{ product.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
 
         {% include '@theme/admin/product/parts/header.twig' %}
 
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row column">
                 <form action="{{ routeUrl('admin.product.edit.post') }}"
                       method="post"
                       class="form-horizontal"
@@ -17,24 +15,22 @@
                     <fieldset>
                         {{ form.csrf() }}
                         {{ form.hidden('productId', product.id.hex ) }}
-                        <div class="well">
+                        <div class="callout">
                             {% include '@theme/admin/product/parts/product-intput-fields.twig' %}
                         </div>
 
-                        <div class="well">
-                            <div class="pull-right text-muted text-right">
-                                <span title="Created">{{ product.createdFormatted }}</span><br>
-                                <span title="Updated">{{ product.updatedFormatted }}</span><br>
-                            </div>
+                        <div class="callout">
+                            <p title="Created">{{ product.createdFormatted }}</p>
+                            <p title="Updated">{{ product.updatedFormatted }}</p>
 
-                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
-                                <i class="fa fa-check-circle"></i> Save
-                            </button>
-                            <a href="{{ routeUrl('admin.product') }}" class="btn btn-default">Cancel</a>
+                            <div>
+                                <button type="submit" class="button" data-loading-text="Saving...">
+                                    <i class="fa fa-check-circle"></i> Save
+                                </button>
+                                <a href="{{ routeUrl('admin.product') }}" class="button warning">Cancel</a>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
-            </div>
         </div>
-    </div>
 {% endblock %}
