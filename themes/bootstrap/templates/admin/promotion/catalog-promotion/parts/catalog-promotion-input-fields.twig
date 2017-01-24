@@ -17,7 +17,7 @@
     <div class="col-sm-3">
         {{ form.select(
             'catalogPromotion[type]',
-            catalogPromotion.type.id,
+            catalogPromotion.type.slug,
             promotionTypes,
             'catalogPromotion-type',
             'form-control input-sm',
