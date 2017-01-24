@@ -1,13 +1,13 @@
 {# @var cartPriceRule \inklabs\kommerce\EntityDTO\CartPriceRuleDTO #}
 {% extends '@theme/layout/base-admin.twig' %}
 
-{% block pageTitle %}New Coupon{% endblock %}
+{% block pageTitle %}New Cart Price Rule{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3>New Coupon</h3>
+                <h3>New Cart Price Rule</h3>
                 <form action="{{ routeUrl('admin.cart-price-rule.new.post') }}"
                       method="post"
                       class="form-horizontal"
