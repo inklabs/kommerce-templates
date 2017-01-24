@@ -14,8 +14,6 @@ class AdminProductCest
         $I->wantTo('create/update/delete product');
         $I->amOnPage('/admin/product');
         $I->see('Products');
-        $I->click('New Product');
-        $I->see('New Product');
 
         $name = 'Test Product';
         $sku = 'TST-PRD';
@@ -24,6 +22,9 @@ class AdminProductCest
         $shippingWeightOz = '24';
 
         // Create
+        $I->click('New Product');
+        $I->see('New Product', 'title');
+        $I->see('New Product', 'h3');
         $I->fillField('Name', $name);
         $I->fillField('Unit Price', $unitPrice);
         $I->fillField('Quantity', $quantity);
