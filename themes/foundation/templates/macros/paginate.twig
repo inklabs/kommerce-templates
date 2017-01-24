@@ -3,7 +3,7 @@
 {% macro detailed(pagination) %}
     {# Previous 1 2 ... 12 13 14 [16] 17 18 19 ... 44 45 Next #}
 
-    <div class="well well-sm pagination-well">
+    <div class="callout secondary">
         {% set totalItems = max(0, pagination.total) %}
         {% if totalItems > 0 %}
             {% set lastPage = (totalItems / pagination.maxResults) | ceil %}
@@ -20,12 +20,12 @@
             {% set firstItem = min(((currentPage - 1) * pagination.maxResults) + 1, totalItems) %}
             {% set lastItem = min(firstItem + pagination.maxResults - 1, totalItems) %}
 
-            <div class="pull-left">
+            <div>
                 Showing {{ firstItem }} - {{ lastItem }}
                 of {{ totalItems }} Results
             </div>
 
-            <ul class="pagination pagination-sm">
+            <ul class="pagination" role="navigation" aria-label="Pagination">
                 {% if currentPage > 1 %}
                     <li><a href="{{ paginationPath }}{{ currentPage - 1 }}" rel="prev"><i class="fa fa-chevron-left"></i> Previous</a></li>
 
@@ -47,7 +47,7 @@
                     <li class="disabled"><a href="#" rel="prev"><i class="fa fa-chevron-left"></i> Previous</a></li>
                 {% endif %}
 
-                <li class="active"><a href="#">{{ currentPage }}</a></li>
+                <li class="current"><a href="#">{{ currentPage }}</a></li>
 
                 {% if currentPage < lastPage %}
                     {% for i in range(currentPage+1, currentPage + nearbyPagesLimit) if ( i <= lastPage ) %}
