@@ -9,7 +9,7 @@ class AdminTagCest
         $I->see('Tags');
     }
 
-    public function crudTags(AcceptanceTester $I)
+    public function crudTag(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete tag');
         $I->amOnPage('/admin/tag');
