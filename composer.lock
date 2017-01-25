@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1a2d743e1b8d789c14e16d2e1e141ed9",
-    "content-hash": "0d6f717b5d6bf213598fe9d46a0f4f93",
+    "hash": "19539e0fd0e58146af2fd67c62cbe16b",
+    "content-hash": "71446fe07bd3c1cb59b54731eb8a7f32",
     "packages": [
         {
             "name": "behat/gherkin",
@@ -1182,12 +1182,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/inklabs/kommerce-core.git",
-                "reference": "3d884c13797fe5524841fb7c5f24e520b3fbbdc3"
+                "reference": "38e27c670438f79f19a78c31d40817da7dd132c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inklabs/kommerce-core/zipball/3d884c13797fe5524841fb7c5f24e520b3fbbdc3",
-                "reference": "3d884c13797fe5524841fb7c5f24e520b3fbbdc3",
+                "url": "https://api.github.com/repos/inklabs/kommerce-core/zipball/38e27c670438f79f19a78c31d40817da7dd132c5",
+                "reference": "38e27c670438f79f19a78c31d40817da7dd132c5",
                 "shasum": ""
             },
             "require": {
@@ -1224,7 +1224,7 @@
                 "kommerce",
                 "zen"
             ],
-            "time": "2016-12-20 04:18:15"
+            "time": "2017-01-22 01:55:15"
         },
         {
             "name": "leafo/scssphp",
@@ -3626,6 +3626,45 @@
                 "validate"
             ],
             "time": "2016-11-23 20:04:58"
+        },
+        {
+            "name": "zurb/foundation",
+            "version": "v6.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zurb/foundation-sites.git",
+                "reference": "60566d1539325783ac3002ab5282a2b446a2c1a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zurb/foundation-sites/zipball/60566d1539325783ac3002ab5282a2b446a2c1a1",
+                "reference": "60566d1539325783ac3002ab5282a2b446a2c1a1",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ZURB, Inc.",
+                    "email": "foundation@zurb.com",
+                    "homepage": "http://zurb.com"
+                }
+            ],
+            "description": "The most advanced responsive front-end framework in the world.",
+            "homepage": "http://foundation.zurb.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "scss"
+            ],
+            "time": "2016-12-15 16:54:01"
         }
     ],
     "packages-dev": [],
