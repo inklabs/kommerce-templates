@@ -1,6 +1,6 @@
 <?php
 
-class AdminSettingCest
+class AdminSalesTaxRulesCest
 {
     public function viewAllSettings(AcceptanceTester $I)
     {

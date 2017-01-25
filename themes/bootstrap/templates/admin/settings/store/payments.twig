@@ -1,0 +1,20 @@
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Payment Configuration{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include '@theme/admin/settings/store/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Stripe</h3>
+                {% include '@theme/admin/settings/store/parts/configuration-input-form.twig' with {
+                    'name': 'Stripe API Key',
+                    'key': 'stripeApiKey',
+                    'configuration': configuration.stripeApiKey
+                } %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

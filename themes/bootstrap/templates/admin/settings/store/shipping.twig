@@ -1,0 +1,21 @@
+{% extends '@theme/layout/base-admin.twig' %}
+
+{% block pageTitle %}Shipping Configuration{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include '@theme/admin/settings/store/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>EasyPost</h3>
+                {% include '@theme/admin/settings/store/parts/configuration-input-form.twig' with {
+                    'action': routeUrl('admin.settings.store.shipping.post'),
+                    'name': 'EasyPost API Key',
+                    'key': 'easypostApiKey',
+                    'configuration': configuration.easypostApiKey
+                } %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
