@@ -1,0 +1,36 @@
+{# @var configurations array #}
+
+<form action="{{ routeUrl('admin.settings.store.post') }}"
+      method="post"
+      class="form-horizontal"
+      role="form">
+    {{ form.csrf() }}
+    <div class="well">
+        {% for configuration in configurations %}
+            {{ form.hidden('configuration[' ~ configuration.key ~'][key]', configuration.key) }}
+            <div class="row form-group">
+                <label for="configuration-{{ configuration.key }}-value" class="control-label col-sm-3">{{ configuration.name }}</label>
+                <div class="col-sm-5">
+                    <input type="text"
+                           id="configuration-{{ configuration.key }}-value"
+                           name="configuration[{{ configuration.key }}][value]"
+                           value="{{ configuration.value }}"
+                           class="form-control col-sm-3"
+                           maxlength="255"
+                           required=""/>
+                </div>
+                <div class="col-sm-4 text-muted text-right small">
+                    <span title="Created">{{ configuration.created|formatDate }}</span><br>
+                    <span title="Updated">{{ configuration.updated|formatDate }}</span><br>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="well">
+        <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+            <i class="fa fa-check-circle"></i> Save
+        </button>
+        <a href="{{ routeUrl('admin.settings.store') }}" class="btn btn-default">Cancel</a>
+    </div>
+</form>
