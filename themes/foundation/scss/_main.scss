@@ -1,6 +1,10 @@
-//body {
-//  background-color: tomato;
-//}
+@import "settings";
+@import "vendor/foundation-sites";
+
+body {
+  background-color: $dark-gray;
+}
+
 .card-section {
   height: 150px !important;
   text-align: center;
