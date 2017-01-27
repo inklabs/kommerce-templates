@@ -8,8 +8,4 @@ $config = new TwigThemeConfig(
     TwigThemeConfig::getBaseThemePath()
 );
 
-$config->addScssImportPath(
-    realpath(__DIR__ . '/../../../../../vendor') . '/zurb/foundation/scss'
-);
-
 return $config;
