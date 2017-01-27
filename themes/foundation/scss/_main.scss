@@ -1,6 +1,8 @@
 @import "settings";
 @import "vendor/foundation-sites";
 
+@include foundation-everything;
+
 body {
   background-color: $dark-gray;
 }
