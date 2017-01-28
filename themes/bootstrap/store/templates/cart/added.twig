@@ -1,0 +1,66 @@
+{# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
+{# @var cartItem \inklabs\kommerce\EntityDTO\CartItemDTO #}
+{# @var recommendedProducts \inklabs\kommerce\EntityDTO\ProductDTO[] #}
+{% extends '@store/layout/base.twig' %}
+
+{% block pageTitle %}{{ cartItem.product.name }}{% endblock %}
+
+{% block content %}
+    <div id="cart-added">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="thumbnail">
+                        <div class="pull-left" style="margin-right: 10px">
+                            <a href="{{ productUrl(cartItem.product) }}">
+                                <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
+                            </a>
+                        </div>
+                        <a href="{{ productUrl(cartItem.product) }}">
+                            <div class="product-name">{{ cartItem.product.name }}</div>
+                        </a>
+
+                        {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
+
+                        <div class="pull-right">Quantity in cart: {{ cartItem.quantity }}</div>
+
+                        {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
+
+                        <div class="table-cell">
+                            {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="alert alert-info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="pull-right">
+                                    <a class="btn btn-default" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
+
+                                    {% include '@store/helper/checkout-button.twig' only %}
+                                </div>
+                                <strong>Order subtotal:</strong> <span class="price-small">
+                                    {{ cart.cartTotal.subtotal | displayPrice }}
+                                </span>
+                                <br />
+                                <strong>{{ cart.totalItems }}</strong>
+                                {% trans %}
+                                    item in your Cart
+                                {% plural cart.totalItems %}
+                                    items in your Cart
+                                {% endtrans %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
+                {% block title %}Recommended for you{% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{# @var price \inklabs\kommerce\EntityDTO\PriceDTO #}
+{% if price.quantityPrice < price.origQuantityPrice %}
+    {% set promotionNames = [] %}
+
+    {% for catalogPromotion in price.catalogPromotions %}
+        {% set promotionNames = promotionNames | merge([catalogPromotion.name])  %}
+    {% endfor %}
+
+    {% for productQuantityDiscount in price.productQuantityDiscounts %}
+        {% set promotionNames = promotionNames | merge([productQuantityDiscount.name]) %}
+    {% endfor %}
+
+    <span class="price-strike" data-toggle="tooltip" title="{{ promotionNames | join(', ') }}">
+        {{ price.origQuantityPrice | displayPrice }}
+    </span>
+{% endif %}
+<span class="price">{{ price.quantityPrice | displayPrice }}</span>

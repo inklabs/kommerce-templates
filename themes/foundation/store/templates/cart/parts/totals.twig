@@ -1,0 +1,96 @@
+{# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
+
+<table class="totals-table table">
+    <tbody>
+    <tr class="cart-subtotal">
+        <td>Subtotal:</td>
+        <td class="text-right">{{ cart.cartTotal.subtotal | displayPrice }}</td>
+    </tr>
+    {% if cart.shipmentRate.deliveryMethod is null %}
+        <tr class="cart-shipping">
+            <td colspan="100%">
+                Shipping:
+
+                <div>
+                    {% include '@store/cart/parts/modify-shipping-button.twig' %}
+                </div>
+            </td>
+        </tr>
+    {% elseif cart.cartTotal.shipping == 0 %}
+        <tr class="cart-shipping cart-free-shipping">
+            <td><span data-toggle="tooltip" data-original-title="<?=Kommerce::display_price($cart->cartTotal->shipping)?> Value">Shipping:</span></td>
+            <td class="text-right">
+                FREE
+            </td>
+        </tr>
+    {% elseif cart.cartTotal.shipping > 0 %}
+        {% set shippingName = cart.shippingAddress.zip5 %}
+        {% if cart.shippingAddress.state is not empty %}
+            {% set shippingName =  shippingName ~ '-' ~ cart.shippingAddress.state %}
+        {% endif %}
+        <tr class="cart-shipping">
+            <td>
+                <span data-toggle="tooltip" data-original-title="{{ shippingName }}">
+                    Shipping &amp; Handling:
+                    <span class="text-muted">({{ cart.shipmentRate.deliveryMethod.name }})</span>
+                </span>
+            </td>
+            <td class="text-right">
+                {{ cart.cartTotal.shipping | displayPrice }}
+            </td>
+        </tr>
+    {% endif %}
+
+    {% if cart.cartTotal.coupons is not empty or cart.cartTotal.cartPriceRules is not empty %}
+        <tr class="cart-discounts">
+            <td>
+                Discounts
+                <div class="container-fluid">
+                    {% for cartPriceRule in cart.cartTotal.cartPriceRules %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                &nbsp;<i class="fa fa-minus"></i>&nbsp;
+                                {{ cartPriceRule.name }}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% for coupon in cart.cartTotal.coupons %}
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <form action="{{ routeUrl('cart.remove-coupon') }}"
+                                      method="post"
+                                      role="form">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('couponId', coupon.id.hex) }}
+
+                                    <button type="submit" class="button">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                    {{ coupon.name }}
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </td>
+            <td class="text-right">
+                ({{ cart.cartTotal.discount | displayPrice }})
+            </td>
+        </tr>
+    {% endif %}
+
+    {% if cart.cartTotal.tax is not empty %}
+        <tr>
+            <td>Tax:</td>
+            <td class="text-right">
+                {{ cart.cartTotal.tax | displayPrice }}
+            </td>
+        </tr>
+    {% endif %}
+    <tr class="cart-total-price info">
+        <td>Total:</td>
+        <td class="text-right price-small">{{ cart.cartTotal.total | displayPrice }}</td>
+    </tr>
+    </tbody>
+</table>

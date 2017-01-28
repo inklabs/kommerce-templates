@@ -1,5 +1,7 @@
 <?php
 
+use inklabs\kommerce\Lib\Uuid;
+
 class AdminTagCest
 {
     public function viewAllTags(AcceptanceTester $I)
@@ -16,7 +18,7 @@ class AdminTagCest
         $I->see('Tags');
 
         $name = 'Test Tag';
-        $code = 'TC';
+        $code = 'TC-' . Uuid::uuid4();
 
         // Create
         $I->click('New Tag');

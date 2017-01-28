@@ -1,0 +1,42 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Product - {{ product.name }}{% endblock %}
+
+{% block content %}
+
+        {% include '@admin/product/parts/header.twig' %}
+
+        <div class="zk-edit-product">
+                <form action="{{ routeUrl('admin.product.edit.post') }}"
+                      method="post"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('productId', product.id.hex ) }}
+                        
+                        <div class="callout">
+                            {% include '@admin/product/parts/product-intput-fields.twig' %}
+                        </div>
+
+                        <div class="callout">
+                            <p title="Created">
+                                Created: 
+                                <small>{{ product.createdFormatted }}</small>
+                            </p>
+                            <p title="Updated">
+                                Updated: 
+                                <small>{{ product.updatedFormatted }}</small>
+                            </p>
+
+                            <div>
+                                <button type="submit" class="button" data-loading-text="Saving...">
+                                    <i class="fa fa-check-circle"></i> Save
+                                </button>
+                                <a href="{{ routeUrl('admin.product') }}" class="button warning">Cancel</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+        </div>
+{% endblock %}

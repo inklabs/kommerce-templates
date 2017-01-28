@@ -1,0 +1,40 @@
+{# @var catalogPromotion \inklabs\kommerce\EntityDTO\CatalogPromotionDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}CatalogPromotion - {{ catalogPromotion.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/promotion/catalog-promotion/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.catalog-promotion.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('catalogPromotionId', catalogPromotion.id.hex ) }}
+                        <div class="well">
+                            {% include '@admin/promotion/catalog-promotion/parts/catalog-promotion-input-fields.twig' %}
+                        </div>
+
+                        <div class="well">
+                            <div class="text-muted text-right">
+                                <span title="Created">{{ catalogPromotion.createdFormatted }}</span><br>
+                                <span title="Updated">{{ catalogPromotion.updatedFormatted }}</span><br>
+                            </div>
+
+                            <button type="submit" class="button" data-loading-text="Saving...">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.catalog-promotion') }}" class="button secondary">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

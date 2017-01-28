@@ -1,0 +1,12 @@
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org",
+	"@type": "WebSite",
+	"url": "{{ routeUrl('home') }}",
+	"potentialAction": {
+		"@type": "SearchAction",
+		"target": "{{ routeUrl('search') }}?q={search_term}",
+		"query-input": "required name=search_term"
+	}
+}
+</script>

@@ -1,0 +1,14 @@
+{# @var coupon \inklabs\kommerce\EntityDTO\CouponDTO #}
+
+{% set navigation = [
+    {
+        'name': 'Edit',
+        'url' : routeUrl('admin.coupon.edit', {'couponId': coupon.id.hex})
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include '@admin/helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>

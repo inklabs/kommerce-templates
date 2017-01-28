@@ -1,0 +1,59 @@
+{% extends '@store/layout/base.twig' %}
+
+{% block pageTitle %}User Login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm12">
+                <h1>Please Sign In</h1>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <form action="{{ routeUrl('user.login.post') }}"
+                      method="post"
+                      id="login"
+                      class="form"
+                      role="form">
+                    {{ form.csrf() }}
+
+                    {% if formRedirect is defined %}
+                        {{ form.hidden('redirect', formRedirect) }}
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email Address</label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               value=""
+                               class="form-control"
+                               required=""
+                               autofocus="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               value=""
+                               class="form-control"
+                               required="">
+                    </div>
+
+                    <button type="submit" class="button success">Sign In <i class="fa fa-arrow-circle-right"></i></button>
+                </form>
+
+                <div class="login-forgot-password">
+                    <a href="{{ routeUrl('user.forgot-password') }}?email={{ email|url_encode }}"
+                       class="button">
+                        <em>Forgot your password?</em>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

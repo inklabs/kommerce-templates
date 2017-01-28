@@ -4,6 +4,7 @@ class GuestCheckoutCest
 {
     public function addProductToCartAndCheckout(AcceptanceTester $I)
     {
+        $I->wantTo('add a product to the cart and checkout');
         $I->addProductToCartAndCheckout();
     }
 

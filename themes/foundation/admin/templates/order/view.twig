@@ -1,0 +1,198 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Order #{{ order.referenceNumber }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/order/order-header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <strong>Shipping Address</strong>
+                            {% include '@admin/helper/billing-address.twig' with {'address': order.shippingAddress} only %}
+                            <hr>
+                            <strong>Billing Address</strong>
+                            {% include '@admin/helper/billing-address.twig' with {'address': order.billingAddress} only %}
+
+                        </div>
+                        <div class="col-sm-4">
+                            <strong>Payment Information</strong>
+                            <div>
+                                {% include '@admin/helper/order-payments.twig' %}
+                            </div>
+                            <hr>
+                            <strong>Chosen Shipping Option</strong>
+                            <div>
+                                {% include '@admin/helper/order-shipment-rate.twig' with {'shipmentRate': order.shipmentRate} only %}
+                                <?=View::factory('admin/order/shipment_rate')?>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <strong>Order Summary</strong>
+                            <table class="table stack totals-table">
+                                <tbody>
+                                <tr>
+                                    <td>Subtotal:</td>
+                                    <td class="text-right">
+                                        {{ order.total.subtotal | displayPrice }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping:</td>
+                                    <td class="text-right">
+                                        {{ order.total.shipping | displayPrice }}
+                                    </td>
+                                </tr>
+                                {% if order.total.discount > 0 %}
+                                    <tr class="cart-discounts">
+                                        <td>Discounts:</td>
+                                        <td class="text-right">
+                                            (
+                                                {{- order.total.discount | displayPrice -}}
+                                            )
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td>Tax:</td>
+                                    <td class="text-right">
+                                        {{ order.total.tax | displayPrice }}
+                                    </td>
+                                </tr>
+                                <tr class="cart-total-price info">
+                                    <td>Total:</td>
+                                    <td class="text-right">
+                                        {{ order.total.total | displayPrice }}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <hr>
+                            <strong>Discounts</strong>
+                            <div>
+                                {% if order.discountNames is empty %}
+                                    n/a
+                                {% else %}
+                                    {{ order.discountNames }}
+                                {% endif %}
+                            </div>
+
+                            <hr>
+                            <strong>Tax Rate</strong>
+                            <div>
+                                {% if order.taxRate is empty %}
+                                    n/a
+                                {% else %}
+                                    Rate: {{ order.taxRate.rate | displayPrice }}<br>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th></th>
+                            <th class="text-right">Qty</th>
+                            <th class="text-right hidden-xxs">Unit Price</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for orderItem in order.orderItems %}
+                            <tr>
+                                <td style="width: 75px">
+                                    {% if orderItem.product is not null %}
+                                        <img src="{{ productImageUrl(orderItem.product) }}">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if orderItem.product is not null %}
+                                        <a href="{{ productUrl(orderItem.product) }}">{{ orderItem.name }}</a>
+                                    {% else %}
+                                        {{ orderItem.name | nl2br }}
+                                    {% endif %}
+                                    <br>
+                                    <span class="small text-muted">{{ orderItem.sku }}</span><br>
+
+                                    {% include '@admin/helper/order-item-options.twig' with {'orderItem': orderItem} only %}
+
+                                    <div class="row">
+                                        {% for attachment in orderItem.attachments %}
+                                            <div class="col-md-4">
+                                                <div class="thumbnail" style="height: 180px">
+                                                    <img src="{{ attachmentImageUrl(attachment) }}" style="max-width: 150px; max-height: 150px" />
+                                                    <br>
+                                                    <form action="{{ routeUrl('admin.attachment.deleteAttachment') }}"
+                                                          method="post"
+                                                          id="deleteAttachmentForm">
+                                                        {{ form.csrf() }}
+                                                        {{ form.hidden('attachmentId', attachment.id.hex) }}
+                                                        {{ form.hidden('orderId', order.id.hex) }}
+                                                        <button type="submit" class="button alert">
+                                                            <i class="fa fa-remove-sign"></i> Remove
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="clear"></div>
+                                    {% if orderItem.areAttachmentsEnabled %}
+                                        <div class="well well-sm">
+                                            <h4>Upload Attachment</h4>
+                                            <div class="form-group">
+                                                <form action="{{ routeUrl('admin.attachment.createForOrderItem.post') }}"
+                                                      method="post"
+                                                      class="form"
+                                                      enctype="multipart/form-data">
+                                                    {{ form.csrf() }}
+                                                    {{ form.hidden('orderItemId', orderItem.id.hex) }}
+
+                                                    <input type="file" name="image">
+                                                    <button type="submit" class="button"><i class="fa fa-upload"></i> Upload</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="visible-xs">
+                                        <br>
+                                        {% include '@admin/helper/unit-price.twig' with {
+                                            'price': orderItem.price,
+                                            'discountNames': orderItem.discountNames
+                                        } only %}
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    {{ orderItem.quantity}}
+                                </td>
+                                <td class="text-right hidden-xs">
+                                    {% include '@admin/helper/unit-price.twig' with {
+                                        'price': orderItem.price,
+                                        'discountNames': orderItem.discountNames
+                                    } only %}
+                                </td>
+                                <td class="text-right">
+                                    {{ orderItem.price.quantityPrice | displayPrice }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

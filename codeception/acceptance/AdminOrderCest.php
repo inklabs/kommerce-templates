@@ -11,6 +11,7 @@ class AdminOrderCest
 
     public function addShipmentToNewOrder(AcceptanceTester $I)
     {
+        $I->wantTo('add shipment to new order');
         $I->addProductToCartAndCheckout();
         $orderId = $I->grabAttributeFrom('#new-order-number', 'data-order-id');
         $referenceNumber = $I->grabAttributeFrom('#new-order-number', 'data-reference-number');

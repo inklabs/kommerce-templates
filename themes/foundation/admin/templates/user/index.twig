@@ -1,0 +1,25 @@
+{# @var users \inklabs\kommerce\EntityDTO\UserDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Users{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Users</h1>
+                <form action="{{ routeUrl('admin.user') }}"
+                      method="get"
+                      class="form-search">
+                    {% include '@admin/helper/search-bar.twig' with {'placeholder': 'Search Name/Email', 'queryString': queryString} only %}
+                </form>
+
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+                {% include '@admin/user/parts/user-list.twig' with {'users': users} only %}
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

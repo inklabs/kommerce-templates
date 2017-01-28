@@ -184,14 +184,27 @@ class TwigExtension extends Twig_Extension
         return [
             new Twig_SimpleFunction(
                 'assetUrl',
-                function ($theme, $path) {
+                function ($theme, $section, $path) {
                     return $this->routeUrl->getRoute(
                         'asset.serve',
                         [
                             'theme' => $theme,
+                            'section' => $section,
                             'path' => $path,
                         ]
                     );
+                }
+            ),
+            new Twig_SimpleFunction(
+                'scssUrl',
+                function ($theme, $section, $file, $formatter = 'compact') {
+                    return $this->routeUrl->getRoute(
+                        'scss.serve',
+                        [
+                            'theme' => $theme,
+                            'section' => $section,
+                        ]
+                    ) . '?p=' . $file . '&formatter=' . $formatter;
                 }
             ),
             new Twig_SimpleFunction(
@@ -475,7 +488,8 @@ class TwigExtension extends Twig_Extension
         return $this->routeUrl->getRoute(
             'asset.serve',
             [
-                'theme' => 'base',
+                'theme' => 'foundation',
+                'section' => 'store',
                 'path' => 'img/placeholder.png',
             ]
         );

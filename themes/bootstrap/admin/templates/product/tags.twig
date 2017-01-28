@@ -1,0 +1,53 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Product Tags - {{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/product/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                {% embed '@admin/tag/parts/tag-list.twig' with {'tags': product.tags} %}
+                    {% block thead %}
+                        <th class="text-right">Actions</th>
+                    {% endblock %}
+                    {% block tbody %}
+                        <td>
+                            <form action="{{ routeUrl('admin.product.remove-tag') }}"
+                                  method="post"
+                                  class="form pull-right">
+                                {{ form.csrf() }}
+                                {{ form.hidden('productId', product.id.hex) }}
+                                {{ form.hidden('tagId', tag.id.hex) }}
+
+                                <button type="submit" class="btn btn-danger btn-xs pull-right"><i class="fa fa-minus"></i></button>
+                            </form>
+                        </td>
+                    {% endblock %}
+                {% endembed %}
+
+                <h4>Add Tag:</h4>
+                <form action="{{ routeUrl('admin.product.add-tag') }}"
+                      method="post">
+                    {{ form.csrf() }}
+                    {{ form.hidden('productId', product.id.hex) }}
+
+                    <div class="input-group col-sm-4">
+                        <input type="text"
+                               name="tagId"
+                               value=""
+                               class="form-control typeahead"/>
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-plus"></i> Add</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

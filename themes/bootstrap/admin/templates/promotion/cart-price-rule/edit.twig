@@ -1,0 +1,40 @@
+{# @var cartPriceRule \inklabs\kommerce\EntityDTO\CartPriceRuleDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Cart Price Rule - {{ cartPriceRule.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/promotion/cart-price-rule/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.cart-price-rule.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('cartPriceRuleId', cartPriceRule.id.hex ) }}
+                        <div class="well">
+                            {% include '@admin/promotion/cart-price-rule/parts/cart-price-rule-input-fields.twig' %}
+                        </div>
+
+                        <div class="well">
+                            <div class="pull-right text-muted text-right">
+                                <span title="Created">{{ cartPriceRule.createdFormatted }}</span><br>
+                                <span title="Updated">{{ cartPriceRule.updatedFormatted }}</span><br>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.cart-price-rule') }}" class="btn btn-default">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

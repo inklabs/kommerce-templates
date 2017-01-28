@@ -47,14 +47,14 @@ class TwigThemeConfig
         }
     }
 
-    public static function getBaseThemePath()
+    /**
+     * @param string $theme
+     * @param string $section
+     * @return string
+     */
+    public static function getThemePath($theme, $section)
     {
-        return realpath(__DIR__ . '/../..') . '/base-theme';
-    }
-
-    public static function getThemePath($theme)
-    {
-        return realpath(__DIR__ . '/../..') . '/themes/' . $theme;
+        return realpath(__DIR__ . '/../..') . '/themes/' . $theme . '/' . $section;
     }
 
     /**
@@ -63,6 +63,17 @@ class TwigThemeConfig
      */
     public static function loadConfig($themePath)
     {
+        return include($themePath . '/config.php');
+    }
+
+    /**
+     * @param string $theme
+     * @param string $section
+     * @return TwigThemeConfig
+     */
+    public static function loadConfigFromTheme($theme, $section)
+    {
+        $themePath = self::getThemePath($theme, $section);
         return include($themePath . '/config.php');
     }
 
