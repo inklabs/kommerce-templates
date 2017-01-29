@@ -3,12 +3,16 @@
 {% block pageTitle %}Welcome{% endblock %}
 
 {% block content %}
-    {% include '@store/helper/sitelinks-search.twig' only %}
+    {#{% include '@store/helper/sitelinks-search.twig' only %}#}
 
     <div class="row column">
-        <h1>Welcome</h1>
+        {% embed '@store/helper/recommended-products.twig' with {'products': newProducts } only %}
+            {% block title %}Our Newest Products{% endblock %}
+        {% endembed %}
+        <hr>
         {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
-            {% block title %}Recommended for you{% endblock %}
+            {% block blockSizes %}small-up-3 medium-up-6 large-up-6{% endblock %}
+            {% block title %}Recommended for You{% endblock %}
         {% endembed %}
     </div>
 {% endblock %}

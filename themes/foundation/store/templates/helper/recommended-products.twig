@@ -1,6 +1,24 @@
 {% if products is not empty %}
     <h2 class="text-center">{% block title %}You Might Also Like{% endblock %}</h2>
-    <div class="row small-up-2 medium-up-3 large-up-4">
-            {% include '@store/helper/product-grid-small.twig' with {'products': products } only %}
+    <div class="row {% block blockSizes %}small-up-2 medium-up-3 large-up-4{% endblock %}">
+        {% for product in products %}
+            <div class="product-container column column-block">
+
+                <a href="{{ productUrl(product) }}">
+                    <img src="{{ productImageUrl(product) }}">
+                    <div class="product-name">{{ product.name }}</div>
+                </a>
+
+                {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+
+                {% if not product.isInStock %}
+                    <div class="availability">
+                        <span class="out-of-stock">Out of Stock</span>
+                    </div>
+                {% elseif product.isPriceVisible %}
+                    {% include '@store/helper/price.twig' with {'price': product.price } only %}
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
 {% endif %}
