@@ -1,0 +1,32 @@
+{# @var catalogPromotions \inklabs\kommerce\EntityDTO\CatalogPromotionDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Catalog Promotion{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.catalog-promotion.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Catalog Promotion
+                    </a>
+                </div>
+
+                <h1>Catalog Promotions</h1>
+                <form action="{{ routeUrl('admin.catalog-promotion') }}"
+                      method="get"
+                      class="form-search">
+                    {% include '@admin/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
+                </form>
+
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+                {% include '@admin/promotion/catalog-promotion/parts/catalog-promotion-list.twig' with {'catalogPromotions': catalogPromotions} only %}
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

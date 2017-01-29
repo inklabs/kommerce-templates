@@ -1,0 +1,18 @@
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Store Configuration{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include '@admin/settings/store/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Theme</h3>
+                {% include '@admin/settings/store/parts/configuration-input-form.twig' with {
+                    'configurations': configurations
+                } %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

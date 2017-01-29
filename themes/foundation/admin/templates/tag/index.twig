@@ -1,0 +1,24 @@
+{# @var tags \inklabs\kommerce\EntityDTO\TagDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Tags{% endblock %}
+
+{% block content %}
+<div class="row column">
+    <a href="{{ routeUrl('admin.tag.new') }}" class="button success">
+        <i class="fa fa-plus-circle"></i> New Tag
+    </a>
+
+    <h1>Tags</h1>
+    <form action="{{ routeUrl('admin.tag') }}"
+            method="get">
+        {% include '@admin/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
+    </form>
+
+    {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+    {% include '@admin/tag/parts/tag-list.twig' with {'tags': tags} only %}
+    {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+</div>
+{% endblock %}

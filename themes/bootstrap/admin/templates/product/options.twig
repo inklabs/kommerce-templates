@@ -1,0 +1,23 @@
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Product Options - {{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/product/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% include '@admin/product/parts/option-list.twig' with {'optionProducts': product.optionProducts} only %}
+
+                <hr />
+                <h2>Tag Options:</h2>
+
+                {% include '@admin/tag/parts/option-list.twig' with {'options': product.options} only %}
+                {% include '@admin/tag/parts/text-option-list.twig' with {'textOptions': product.textOptions} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

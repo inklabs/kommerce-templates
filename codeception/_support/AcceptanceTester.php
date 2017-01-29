@@ -27,7 +27,6 @@ class AcceptanceTester extends \Codeception\Actor
     public function addProductToCart()
     {
         $I = $this;
-        $I->wantTo('add a product to the cart');
         $I->amOnPage('/t');
         $tagName = $I->grabTextFrom("//div[contains(@class,'tag-name')][1]");
         $I->click("//div[contains(@class,'tag-container')][1]//a");
@@ -105,7 +104,6 @@ class AcceptanceTester extends \Codeception\Actor
     public function addProductToCartAndCheckout()
     {
         $I = $this;
-        $I->wantTo('add a product to the cart and checkout');
         $I->addProductToCart();
         $I->estimateShippingAndTax();
         $cartTotal = $I->grabTextFrom("//tr[contains(@class,'cart-total-price')]//td[2]");

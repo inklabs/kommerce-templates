@@ -14,14 +14,12 @@ class TwigTemplate
     /** @var Twig_Environment */
     private $twigEnvironment;
 
-    /** @var TwigThemeConfig */
-    private $themeConfig;
-
     /** @var Twig_Profiler_Profile|null */
     private $profile;
 
     /**
-     * @param TwigThemeConfig $themeConfig
+     * @param TwigThemeConfig $storeThemeConfig
+     * @param TwigThemeConfig $adminThemeConfig
      * @param CSRFTokenGeneratorInterface $csrfTokenGenerator
      * @param RouteUrlInterface $routeUrl
      * @param string $timezone
@@ -31,7 +29,8 @@ class TwigTemplate
      * @param bool $debugEnabled
      */
     public function __construct(
-        TwigThemeConfig $themeConfig,
+        TwigThemeConfig $storeThemeConfig,
+        TwigThemeConfig $adminThemeConfig,
         CSRFTokenGeneratorInterface $csrfTokenGenerator,
         RouteUrlInterface $routeUrl,
         $timezone,
@@ -40,9 +39,9 @@ class TwigTemplate
         $profilerEnabled = false,
         $debugEnabled = false
     ) {
-        $this->themeConfig = $themeConfig;
         $twigLoader = new Twig_Loader_Filesystem();
-        $twigLoader->setPaths($themeConfig->getTwigTemplatePaths(), 'theme');
+        $twigLoader->setPaths($adminThemeConfig->getTwigTemplatePaths(), 'admin');
+        $twigLoader->setPaths($storeThemeConfig->getTwigTemplatePaths(), 'store');
 
         $this->twigEnvironment = new Twig_Environment($twigLoader);
 
@@ -74,7 +73,8 @@ class TwigTemplate
             $this->twigEnvironment->enableDebug();
         }
 
-        $this->addMacros();
+        $this->addMacros($storeThemeConfig, 'store');
+        $this->addMacros($adminThemeConfig, 'admin');
     }
 
     /**
@@ -91,9 +91,13 @@ class TwigTemplate
         $this->twigEnvironment->addGlobal($name, $value);
     }
 
-    private function addMacros()
+    /**
+     * @param TwigThemeConfig $themeConfig
+     * @param string $themeNamespace
+     */
+    private function addMacros(TwigThemeConfig $themeConfig, $themeNamespace)
     {
-        foreach ($this->getPathMacros() as $name => $path) {
+        foreach ($this->getPathMacros($themeConfig, $themeNamespace) as $name => $path) {
             $this->twigEnvironment->addGlobal(
                 $name,
                 $this->twigEnvironment->loadTemplate($path)
@@ -102,18 +106,20 @@ class TwigTemplate
     }
 
     /**
+     * @param TwigThemeConfig $themeConfig
+     * @param string $themeNamespace
      * @return \Generator
      */
-    private function getPathMacros()
+    private function getPathMacros(TwigThemeConfig $themeConfig, $themeNamespace)
     {
-        foreach (array_reverse($this->themeConfig->getTwigTemplatePaths()) as $path) {
+        foreach (array_reverse($themeConfig->getTwigTemplatePaths()) as $path) {
             $pathMacros = glob($path . '/macros/*');
 
             foreach ($pathMacros as $pathMacro) {
                 $name = basename($pathMacro, '.twig');
 
                 $filename = basename($pathMacro);
-                yield $name => '@theme/macros/' . $filename;
+                yield $name => '@' . $themeNamespace . '/macros/' . $filename;
             }
         }
     }

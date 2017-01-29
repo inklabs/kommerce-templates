@@ -1,0 +1,43 @@
+{# @var tag \inklabs\kommerce\EntityDTO\TagDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Tag - {{ tag.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/tag/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ routeUrl('admin.tag.edit.post') }}"
+                      method="post"
+                      class="form-horizontal"
+                      role="form">
+                    <fieldset>
+                        {{ form.csrf() }}
+                        {{ form.hidden('tagId', tag.id.hex ) }}
+
+                        <div class="well">
+                            {% include '@admin/tag/parts/tag-intput-fields.twig' %}
+                        </div>
+
+                        <div class="well">
+                            <div class="pull-right text-muted text-right">
+                                <span title="Created">{{ tag.createdFormatted }}</span><br>
+                                <span title="Updated">{{ tag.updatedFormatted }}</span><br>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
+                                <i class="fa fa-check-circle"></i> Save
+                            </button>
+                            <a href="{{ routeUrl('admin.tag') }}" class="btn btn-default">Cancel</a>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

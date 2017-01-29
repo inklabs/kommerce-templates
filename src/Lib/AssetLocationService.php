@@ -3,16 +3,10 @@ namespace inklabs\KommerceTemplates\Lib;
 
 class AssetLocationService
 {
-    public function getAssetFilePathByTheme($theme, $path)
+    public function getAssetFilePathByTheme($theme, $section, $path)
     {
         $kommerceTemplatesPath = realpath(__DIR__ . '/../..');
-        if ($theme == 'base') {
-            $basePath = $kommerceTemplatesPath . '/base-theme/assets/' . $path;
-            if (file_exists($basePath)) {
-                return $basePath;
-            }
-        }
 
-        return $kommerceTemplatesPath . '/themes/' . $theme . '/assets/' . $path;
+        return $kommerceTemplatesPath . '/themes/' . $theme . '/' . $section . '/assets/' . $path;
     }
 }

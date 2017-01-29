@@ -1,0 +1,31 @@
+{# @var cartPriceRules \inklabs\kommerce\EntityDTO\CartPriceRuleDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Cart Price Rules{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.cart-price-rule.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Cart Price Rule
+                    </a>
+                </div>
+
+                <h1>Cart Price Rules</h1>
+                <form action="{{ routeUrl('admin.cart-price-rule') }}"
+                      method="get"
+                      class="form-search">
+                    {% include '@admin/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
+                </form>
+
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+                {% include '@admin/promotion/cart-price-rule/parts/cart-price-rule-list.twig' with {'cartPriceRules': cartPriceRules} only %}
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

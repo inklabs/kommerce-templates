@@ -1,0 +1,32 @@
+{# @var attributes \inklabs\kommerce\EntityDTO\AttributeDTO[] #}
+{# @var pagination \inklabs\kommerce\EntityDTO\PaginationDTO #}
+{# @var queryString string #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Attributes{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <a href="{{ routeUrl('admin.attribute.new') }}"
+                       class="btn btn-success btn-xs">
+                        <i class="fa fa-plus-circle"></i> New Attribute
+                    </a>
+                </div>
+
+                <h1>Attributes</h1>
+                <form action="{{ routeUrl('admin.attribute') }}"
+                      method="get"
+                      class="form-search">
+                    {% include '@admin/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
+                </form>
+
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+                {% include '@admin/attribute/parts/attribute-list.twig' with {'attributes': attributes} only %}
+                {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

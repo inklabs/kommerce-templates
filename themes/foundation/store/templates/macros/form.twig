@@ -1,0 +1,72 @@
+{% macro csrf() -%}
+    {{ form.hidden('_token', CSRF_TOKEN) }}
+{%- endmacro %}
+
+{% macro hidden(name, value, id) -%}
+    {{ form.input(name, value, id, 'hidden') }}
+{%- endmacro %}
+
+{% macro checkbox(name, value, id, class, extra = {}) -%}
+    {% if value %}
+        {% set extra = extra|merge({'checked': 'checked'}) %}
+    {% endif %}
+    {{ form.input(name, '1', id, 'checkbox', class, extra) }}
+{%- endmacro %}
+
+{% macro radio(name, selectedValue, value, id, class, extra = {}) -%}
+    {% if selectedValue == value %}
+        {% set extra = extra|merge({'checked': 'checked'}) %}
+    {% endif %}
+    {{ form.input(name, value, id, 'radio', class, extra) }}
+{%- endmacro %}
+
+{% macro input(name, value, id, type, class, extra = {}) -%}
+    <input {{ htmlAttributes({
+            'type': type|default('text'),
+            'name': name,
+            'id': id|default(name),
+            'value': value,
+            'class': class
+        }|merge(extra)) }}>
+{%- endmacro %}
+
+{% macro textarea(name, value, class, extra = {}) -%}
+    <textarea {{ htmlAttributes({
+            'name': name,
+            'id': id|default(name),
+            'class': class
+        }|merge(extra)) }}>
+        {{- value -}}
+    </textarea>
+{%- endmacro %}
+
+{% macro label(id, content, class) -%}
+    <label {{ htmlAttributes({'for': id, 'class': class}) }}>
+        {{- content -}}
+    </label>
+{%- endmacro %}
+
+{% macro labelRaw(id, content, class) -%}
+    <label {{ htmlAttributes({'for': id, 'class': class}) }}>
+        {{- content|raw -}}
+    </label>
+{%- endmacro %}
+
+{% macro select(name, selectedValue, possibleValues, id, class, extra = {}) -%}
+    <select {{ htmlAttributes({
+        'name': name,
+        'id': id|default(name),
+        'class': class
+    }|merge(extra)) }}>
+        {% for value, name in possibleValues %}
+            {%- set optionExtra = {} -%}
+            {%- if selectedValue == value -%}
+                {% set optionExtra = {'selected': 'selected'} %}
+            {%- endif -%}
+
+            <option {{ htmlAttributes({'value': value}|merge(optionExtra)) }}>
+                {{- name -}}
+            </option>
+        {% endfor -%}
+    </select>
+{%- endmacro %}

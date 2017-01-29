@@ -1,0 +1,10 @@
+{# @var cartPriceRuleItem \inklabs\kommerce\EntityDTO\CartPriceRuleProductItemDTO #}
+<div class="form-group col-sm-4">
+    <label for="cartPriceRuleItem-productId" class="control-label">Product</label>
+    <input type="text"
+           id="cartPriceRuleItem-productId"
+           name="cartPriceRuleItem[productId]"
+           value="{{ cartPriceRuleItem.product.id.hex }}"
+           class="form-control"/>
+</div>
+{% include '@admin/promotion/cart-price-rule/parts/item-input-fields.twig' %}

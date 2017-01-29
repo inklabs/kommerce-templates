@@ -1,0 +1,27 @@
+{# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
+
+{% set navigation = [
+    {
+        'name': 'View',
+        'url' : routeUrl('admin.order.view', {'orderId': order.id.getHex()})
+    },
+    {
+        'name': 'Shipments <span class="badge">' ~ order.shipments | length ~ '</span>',
+        'url': routeUrl('admin.order.shipments', {'orderId': order.id.getHex()})
+    },
+    {
+        'name': 'Invoice',
+        'url': routeUrl('admin.order.invoice', {'orderId': order.id.getHex()})
+    },
+    {
+        'name': 'New Shipment',
+        'url': routeUrl('admin.order.add-shipment', {'orderId': order.id.getHex()}),
+        'onlyWhenActive': true
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include '@admin/helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>

@@ -1,0 +1,66 @@
+{# @var orders \inklabs\kommerce\EntityDTO\OrderDTO[] #}
+<table class="table stack">
+    <thead>
+        <tr>
+            <th>Reference #</th>
+            <th>User</th>
+            <th>Status</th>
+            <th class="hidden-xs">Total</th>
+            <th>Ship To</th>
+            <th class="hidden-xs">Email</th>
+            <th class="hidden-xs">Created</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>
+                    <a href="{{ adminOrderUrl(order) }}">
+                        <div class="order-number small">{{ order.referenceNumber }}</div>
+                    </a>
+                </td>
+                <td>
+                    {% if order.user is not null %}
+                        {{ order.user.firstName }}
+                        {{ order.user.lastName }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% include '@admin/helper/order-status.twig' with {'order': order} only %}
+                </td>
+                <td class="hidden-xs">{{ order.total.total | displayPrice }}</td>
+                <td>
+                    {{ order.shippingAddress.firstName }}
+                    {{ order.shippingAddress.lastName }}
+
+                    {% if order.shippingAddress.city is not null %}
+                        <span class="text-muted small">
+                            (
+                                {{- order.shippingAddress.city }},
+                                {{ order.shippingAddress.state -}}
+                            )
+                        </span>
+                    {% endif %}
+
+                    <div class="visible-xs">
+                        Total: {{ order.total.total | displayPrice }}<br>
+                        <span class="small text-muted">E-mail:
+                            {{ order.shippingAddress.email }}<br>
+                        </span>
+                        <span class="small text-muted">Created:
+                            {{ order.created | formatDate }}
+                        </span>
+                    </div>
+                </td>
+                <td class="hidden-xs small text-muted">
+                    {{ order.shippingAddress.email }}
+                </td>
+                <td class="hidden-xs small text-muted">{{ order.created | formatDate }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <td colspan="100%">No orders</td>
+        {% endfor %}
+    </tbody>
+</table>

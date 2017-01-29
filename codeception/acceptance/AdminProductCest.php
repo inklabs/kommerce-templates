@@ -1,5 +1,7 @@
 <?php
 
+use inklabs\kommerce\Lib\Uuid;
+
 class AdminProductCest
 {
     public function viewAllProducts(AcceptanceTester $I)
@@ -16,7 +18,7 @@ class AdminProductCest
         $I->see('Products');
 
         $name = 'Test Product';
-        $sku = 'TST-PRD';
+        $sku = 'TST-PRD-' . Uuid::uuid4();
         $unitPrice = '5.79';
         $quantity = '11';
         $shippingWeightOz = '24';

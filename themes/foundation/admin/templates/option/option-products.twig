@@ -1,0 +1,42 @@
+{# @var option \inklabs\kommerce\EntityDTO\OptionDTO #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Option Products - {{ option.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/option/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+
+                {% embed '@admin/option/parts/option-product-list.twig' with {'optionProducts': option.optionProducts} %}
+                    {% block thead %}
+                        <th class="text-right">Actions</th>
+                    {% endblock %}
+                    {% block tbody %}
+                        <td>
+                            <form action="{{ routeUrl('admin.option.delete-option-product') }}"
+                                  method="post"
+                                  class="form">
+                                {{ form.csrf() }}
+                                {{ form.hidden('optionId', option.id.hex) }}
+                                {{ form.hidden('optionProductId', optionProduct.id.hex) }}
+
+                                <button type="submit" class="button alert" title="Remove Product"><i class="fa fa-minus"></i></button>
+                            </form>
+                        </td>
+                    {% endblock %}
+                {% endembed %}
+
+                {% embed '@admin/product/parts/add-product-form.twig' with {'action': routeUrl('admin.option.add-option-product')} %}
+                    {% block formtop %}
+                        {{ form.hidden('optionId', option.id.hex) }}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

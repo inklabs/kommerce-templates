@@ -1,0 +1,18 @@
+.star0, .star0h, .star1, .star1h, .star2, .star2h, .star3, .star3h, .star4, .star4h, .star5, .star5h {
+	background: url(/a/base/img/stars.png) no-repeat;
+	width: 98px;
+	height: 22px;
+	display: inline-block;
+}
+.star0  { background-position: 0 0; }
+.star0h { background-position: 0 -22px; }
+.star1  { background-position: 0 -44px; }
+.star1h { background-position: 0 -66px; }
+.star2  { background-position: 0 -88px; }
+.star2h { background-position: 0 -110px; }
+.star3  { background-position: 0 -132px; }
+.star3h { background-position: 0 -154px; }
+.star4  { background-position: 0 -176px; }
+.star4h { background-position: 0 -198px; }
+.star5  { background-position: 0 -220px; }
+.star-red { background-position-x: -98px; }

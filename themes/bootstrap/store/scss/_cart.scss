@@ -1,0 +1,14 @@
+#cart .price, #checkout .price {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.cart-product-image { width: 120px; }
+.cart-product-title { border-bottom: 1px dotted #666; }
+.cart-free-shipping { color: #E75E10; }
+.cart-discounts { color: #E75E10; }
+.cart-total-price { font-weight: bold; }
+#cart-cta-box { text-align: center; padding: 15px 20px; }
+.cart-remove-item { font-size: 12px; }
