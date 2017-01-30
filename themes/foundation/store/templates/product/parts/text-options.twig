@@ -2,10 +2,10 @@
 {# @var selectedOptions array #}
 
 {% if textOption.type.isText %}
-    <label for="textOption_{{ textOption.id.getHex() }}" class="control-label">{{ textOption.name }}</label>
-    <br>
-    <input type="text"
-           name="textOption[{{ textOption.id.getHex() }}]"
-           id="textOption_{{ textOption.id.getHex() }}"
-           class="form-control">
+    <label for="textOption_{{ textOption.id.getHex() }}">
+        {{ textOption.name }}
+        <input type="text"
+            name="textOption[{{ textOption.id.getHex() }}]"
+            id="textOption_{{ textOption.id.getHex() }}">
+    </label>
 {% endif %}

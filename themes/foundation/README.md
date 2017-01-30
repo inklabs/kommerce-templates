@@ -17,7 +17,7 @@ When the command finishes, you can go ahead and run your first build command.
 
 ## Building
 
-If you peek in [package.json](./package.json) you will see a section similar to: 
+If you peek in [package.json](store/package.json) you will see a section similar to: 
 
 ```json
   "scripts": {

@@ -1,18 +1,20 @@
 {% if breadcrumbs is defined %}
     {% set currentUrl = currentUrl() %}
-        <div class="row column">
-            <ul class="breadcrumbs">
-                {% for name, url in breadcrumbs %}
-                    {% if currentUrl == url %}
-                        <li>{{ name }}</li>
-                    {% else %}
-                        {% if url is empty %}
-                            <li class="disabled">{{ name }}</li>
+        <div class="row">
+            <div class="column">
+                <ul class="breadcrumbs">
+                    {% for name, url in breadcrumbs %}
+                        {% if currentUrl == url %}
+                            <li>{{ name }}</li>
                         {% else %}
-                            <li><a href="{{ url }}">{{ name }}</a></li>
+                            {% if url is empty %}
+                                <li class="disabled">{{ name }}</li>
+                            {% else %}
+                                <li><a href="{{ url }}">{{ name }}</a></li>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </ul>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
 {% endif %}

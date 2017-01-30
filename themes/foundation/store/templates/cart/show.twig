@@ -9,23 +9,23 @@
         <div class="container">
             {% if cart.cartItems is empty %}
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="columns">
                         {% include '@store/cart/parts/empty-cart.twig' %}
                     </div>
                 </div>
             {% else %}
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="small-9 columns">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="columns">
                                 <h2>Shopping Cart</h2>
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th colspan="2">Item</th>
-                                        <th class="text-right">QTY</th>
+                                        <th>QTY</th>
                                         <th class="text-right hidden-xs">Unit Price</th>
-                                        <th class="text-right">Total</th>
+                                        <th>Total</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -47,7 +47,7 @@
 
                                                 {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
                                             </td>
-                                            <td class="text-right">
+                                            <td>
                                                 <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
                                                     {{ form.csrf() }}
                                                     {{ form.hidden('id', cartItem.id.hex) }}
@@ -60,27 +60,23 @@
                                                         </div>
                                                     </div>
                                                 </form>
-                                                <div class="clearfix"></div>
+                                            </td>
+                                            <td>
+                                                {% include '@admin/helper/unit-price.twig' with {'price': cartItem.price } only %}
+                                            </td>
+                                            <td>
+                                                {{ cartItem.price.quantityPrice | displayPrice }}
+                                            </td>
+                                            <td>
                                                 <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
                                                     {{ form.csrf() }}
                                                     {{ form.hidden('id', cartItem.id.hex) }}
 
-                                                    <span class="cart-remove-item">
                                                         <button type="submit" class="button">
                                                             <i class="fa fa-trash"></i>
                                                             Remove item
                                                         </button>
-                                                    </span>
                                                 </form>
-                                                <div class="visible-xs">
-                                                    {% include '@admin/helper/unit-price.twig' with {'price': cartItem.price } only %}
-                                                </div>
-                                            </td>
-                                            <td class="text-right hidden-xs">
-                                                {% include '@admin/helper/unit-price.twig' with {'price': cartItem.price } only %}
-                                            </td>
-                                            <td class="text-right">
-                                                {{ cartItem.price.quantityPrice | displayPrice }}
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -89,35 +85,36 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-7 col-sm-offset-5">
+                            <div class="small-7 small-offset-5 columns">
                                 {% include '@store/cart/parts/totals.twig' %}
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="alert alert-info" id="cart-cta-box">
-                            <strong>
-                                Total ({{ cart.totalItems }} items):
-                                <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
-                            </strong>
-                            <br /><br />
-                            {% include '@store/helper/checkout-button.twig' only %}
-                        </div>
-                        {% if cart.shipmentRate.rate is not null %}
-                            {% include '@store/cart/parts/modify-shipping-button.twig' with {'extraClass': 'btn-block'} %}
-                        {% endif %}
+                    <div class="small-3 columns">
+                        <div class="callout">
+                            <div id="cart-cta-box">
+                                <strong>
+                                    Total ({{ cart.totalItems }} items):
+                                    <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
+                                </strong>
+                                {% include '@store/helper/checkout-button.twig' only %}
+                            </div>
 
-                        <br>
-                        <form action="{{ routeUrl('cart.apply-coupon') }}" method="post">
-                            {{ form.csrf() }}
+                            {% if cart.shipmentRate.rate is not null %}
+                                {% include '@store/cart/parts/modify-shipping-button.twig' with {'extraClass': 'btn-block'} %}
+                            {% endif %}
 
-                            <div class="input-group">
-                            <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />
-                              <span class="input-group-btn">
-                                  <button type="submit" class="button secondary" id="apply-coupon">apply</button>
-                              </span>
+                            <form action="{{ routeUrl('cart.apply-coupon') }}" method="post">
+                                {{ form.csrf() }}
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="coupon_code" value="" placeholder="coupon code" />
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="button secondary" id="apply-coupon">apply</button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             {% endif %}

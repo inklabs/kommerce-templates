@@ -3,41 +3,58 @@
     <div class="title-bar-title">Menu</div>
 </div>
 
-<div class="top-bar" id="zk-menu">
-    <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">
-                {#<a class="navbar-brand" href="{{ routeUrl('home') }}">#}
-                    {{ SITE_NAME | default('Kommerce') }}
-                {#</a>#}
-            </li>
-            <li>
-                <a href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> Cart</a>
-                {# TODO:
-                    <?php if ($cart !== null && $cart->totalQuantity > 0) { ?>
-                        (<?=$cart->totalQuantity?>)
-                    <?php } ?>
-                #}
-            </li>
-            <li><input type="search" placeholder="Search"></li>
-            <li><button type="button" class="button">Search</button></li>
-        </ul>
+<div id="zk-menu">
+    <div class="top-bar" id="zk-topbar-search">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">
+                    {#<a class="navbar-brand" href="{{ routeUrl('home') }}">#}
+                        {{ SITE_NAME | default('Kommerce') }}
+                    {#</a>#}
+                </li>
+                <li>
+                    <div class="input-group">
+                        <input class="input-group-field" type="search" placeholder="Search">
+                        <div class="input-group-button">
+                            <input type="submit" class="button" value="Search">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+            </ul>
+        </div>
     </div>
-    <div class="top-bar-right">
-        <ul class="menu">
-            {% if user is not empty %}
+
+    <div class="top-bar" id="zk-topbar-menu">
+        <div class="top-bar-left">
+            <ul class="menu">
                 <li>
-                    <a href="{{ routeUrl('logout') }}">Sign Out</a>
+                    <a href="#">Products</a>
                 </li>
-                <li class="divider-vertical hidden-xs"></li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
                 <li>
-                    <a href="{{ routeUrl('user.account') }}">Account</a>
+                    <a href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> Cart</a>        
                 </li>
-            {% else %}
-                <li>
-                    <a href="{{ routeUrl('user.login') }}">Sign In</a>
-                </li>
-            {% endif %}
-        </ul>
+                {% if user is not empty %}
+                    <li>
+                        <a href="{{ routeUrl('logout') }}">Sign Out</a>
+                    </li>
+                    <li class="divider-vertical hidden-xs"></li>
+                    <li>
+                        <a href="{{ routeUrl('user.account') }}">Account</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ routeUrl('user.login') }}">Sign In</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </div>

@@ -14,7 +14,7 @@
                     width="100"
                     height="100"
                     style="'width: 100px; height: 100px; margin: 18px"
-                    class="pull-left">
+                    class="float-left">
             </div>
             <div class="col-sm-9">
                 <dl>
@@ -33,7 +33,7 @@
                 {% else %}
                     {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
 
-                    {% include '@store/helper/product-grid-small.twig' with {'products': products } only %}
+                    {% include '@store/helper/product-grid.twig' with {'products': products } only %}
 
                     <div class="clearfix"></div>
                     {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}

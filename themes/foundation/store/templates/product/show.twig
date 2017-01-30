@@ -6,39 +6,223 @@
 {% block pageDescription %}{{ product.description | nl2br }}{% endblock %}
 
 {% block content %}
+
+    <div class="row">
+      <div class="medium-6 columns">
+        <img class="thumbnail" src="{{ productImageUrl(product) }}">
+        <div class="row small-up-4">
+            {% for image in product.images %}
+                {% if image.path != product.defaultImage %}
+                    <div class="column">
+                        <a href="{{ image.pathUrl }}">
+                            <img src="{{ image.pathUrl }}" />
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+      </div>
+      <div class="medium-6 large-5 columns">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+
+        <pre> 
+        {{ product | json_encode }}
+        </pre>
+        {% if product.isInventoryRequired %}
+            Availability:
+            {% if product.quantity > 0 %}
+                <span class="in-stock">In stock</span>
+            {% else %}
+                <span class="out-of-stock">Out of stock</span>
+            {% endif %}
+        {% endif %}
+
+
+        {% if product.rating is not null %}
+            {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+        {% endif %}
+
+        {% if product.isInStock %}
+        <form action="{{ routeUrl('cart.add-item') }}"
+            id="cart_add_item"
+            class="form-inline"
+            method="post">
+                {{ form.csrf() }}
+        {% endif %}
+
+
+
+        {% if product.options is not empty or product.textOptions is not empty %}
+            {% for option in product.options %}
+                {% include '@store/product/parts/options.twig' with {'option': option } only %}
+            {% endfor %}
+
+            {% for textOption in product.textOptions %}
+                {% include '@store/product/parts/text-options.twig' with {'textOption': textOption } only %}
+            {% endfor %}
+        {% endif %}
+
+        {% if product.isInStock %}
+                <input type="hidden" name="id" value="{{ product.id.getHex() }}" />
+                    <label for="quantity">
+                        Qty:
+                        <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1" />
+                    </label>
+                <button type="submit" class="button success">
+                    <i class="fa fa-shopping-cart"></i> Add to Cart
+                </button>
+            </form>
+        {% endif %}
+
+{#
+        <label>Size
+        <select>
+          <option value="husker">Small</option>
+          <option value="starbuck">Medium</option>
+          <option value="hotdog">Large</option>
+          <option value="apollo">Yeti</option>
+        </select>
+        </label>
+        
         <div class="row">
-            <div class="medium-9 columns">
-                <div class="row">
-                    <div class="medium-5 columns text-center">
-                        <img id="product-image" src="{{ productImageUrl(product) }}" />
-                        {% if product.images is not empty %}
-                            <div class="row" style="margin-top: 5px">
-                                <div class="large-3 small-4 columns">
-                                    <a href="{{ productImageUrl(product) }}" class='product-image'>
-                                        <img src="{{ productImageUrl(product) }}" style="width: 100px;" />
-                                    </a>
-                                </div>
-                                {% for image in product.images %}
-                                    {% if image.path != product.defaultImage %}
-                                        <div class="large-3 small-4 columns">
-                                            <a href="{{ image.pathUrl }}" class='product-image'>
-                                                <img src="{{ image.pathUrl }}" style="width: 100px;" />
-                                            </a>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
+          <div class="small-3 columns">
+            <label for="middle-label" class="middle">Quantity</label>
+          </div>
+          <div class="small-9 columns">
+            <input type="text" id="middle-label" placeholder="One fish two fish">
+          </div>
+        </div>
 
-                        {% if product.rating is not null %}
-                            <div class="divider"></div>
+        <a href="#" class="button large expanded">Buy Now</a>
 
-                            <div class="review-actions">
-                                {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+        <div class="small secondary expanded button-group">
+            <a class="button">Facebook</a>
+            <a class="button">Twitter</a>
+            <a class="button">Yo</a>
+          </div>
+        </div>#}
+    </div>
 
-                                {# TODO: Render Reviews #}
-                            </div>
-                        {% endif %}
+    <div class="row">
+        <div class="column">
+            <ul class="tabs" data-tabs id="example-tabs">
+                <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Reviews</a></li>
+                <li class="tabs-title"><a href="#panel2">Similar Products</a></li>
+            </ul>
+            <div class="tabs-content" data-tabs-content="example-tabs">
+                <div class="tabs-panel is-active" id="panel1">
+                <h4>Reviews</h4>
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section">
+                    <img class="thumbnail" src="http://placehold.it/200x200">
+                    </div>
+                    <div class="media-object-section">
+                    <h5>Mike Stevenson</h5>
+                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you.</p>
+                    </div>
+                </div>
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section">
+                    <img class="thumbnail" src="http://placehold.it/200x200">
+                    </div>
+                    <div class="media-object-section">
+                    <h5>Mike Stevenson</h5>
+                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you</p>
+                    </div>
+                </div>
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section">
+                    <img class="thumbnail" src="http://placehold.it/200x200">
+                    </div>
+                    <div class="media-object-section">
+                    <h5>Mike Stevenson</h5>
+                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you</p>
+                    </div>
+                </div>
+                <label>
+                    My Review
+                    <textarea placeholder="None"></textarea>
+                </label>
+                <button class="button">Submit Review</button>
+                </div>
+                <div class="tabs-panel" id="panel2">
+                <div class="row medium-up-3 large-up-5">
+                    <div class="column">
+                        <img class="thumbnail" src="http://placehold.it/350x200">
+                        <h5>Other Product <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                    </div>
+                    <div class="column">
+                        <img class="thumbnail" src="http://placehold.it/350x200">
+                        <h5>Other Product <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                    </div>
+                    <div class="column">
+                        <img class="thumbnail" src="http://placehold.it/350x200">
+                        <h5>Other Product <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                    </div>
+                    <div class="column">
+                        <img class="thumbnail" src="http://placehold.it/350x200">
+                        <h5>Other Product <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                    </div>
+                    <div class="column">
+                        <img class="thumbnail" src="http://placehold.it/350x200">
+                        <h5>Other Product <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#
+
+
+
+
 
                         {% if product.areAttachmentsEnabled %}
                             {% if user is not empty %}
@@ -48,26 +232,12 @@
                                 </a>
                             {% endif %}
                         {% endif %}
-                    </div>
 
-                    <div class="medium-7 columns">
-                        <h1>{{ product.name }}</h1>
 
-                        {% if product.isInventoryRequired %}
-                            <div class="availability" style="margin-top: 20px; margin-bottom: 5px">Availability:
-                                {% if product.quantity > 0 %}
-                                    <span class="in-stock">In stock</span>
-                                {% else %}
-                                    <span class="out-of-stock">Out of stock</span>
-                                {% endif %}
-                            </div>
-                        {% endif %}
 
                         {% include '@store/helper/price.twig' with {'price': product.price } only %}
-                        <br />
 
                         {% if product.productQuantityDiscounts is not empty %}
-                            <div class="divider"></div>
                             <div class="discount-prices">
                                 {% for discount in (product.productQuantityDiscounts | reverse ) %}
                                     Buy {{ discount.quantity }} or more for
@@ -85,49 +255,7 @@
                             </div>
                         {% endif %}
 
-                        {% if product.isInStock %}
-                            <form action="{{ routeUrl('cart.add-item') }}"
-                                  id="cart_add_item"
-                                  class="form-inline"
-                                  method="post">
-                                {{ form.csrf() }}
-                        {% endif %}
 
-                        {% if product.options is not empty or product.textOptions is not empty %}
-                            <div class="divider"></div>
-                            <div class="actions">
-                                {% for option in product.options %}
-                                    <div class="row column">
-                                            <div class="control-group">
-                                                {% include '@store/product/parts/options.twig' with {'option': option } only %}
-                                            </div>
-                                    </div>
-                                {% endfor %}
-
-                                {% for textOption in product.textOptions %}
-                                    <div class="row column">
-                                            <div class="control-group">
-                                                {% include '@store/product/parts/text-options.twig' with {'textOption': textOption } only %}
-                                            </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-
-                        {% if product.isInStock %}
-                            <div class="divider"></div>
-                            <div class="actions">
-                                <input type="hidden" name="id" value="{{ product.id.getHex() }}" />
-                                <button type="submit" class="button success">
-                                    <i class="fa fa-shopping-cart"></i> Add to Cart
-                                </button>
-                                <div class="input-group input-group-sm col-xs-4 medium-3">
-                                    <span class="input-group-addon"><label for="quantity">Qty:</label></span>
-                                    <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1" />
-                                </div>
-                            </div>
-                            </form>
-                        {% endif %}
 
                         {% if product.productAttributes is not empty %}
                             <div class="divider"></div>
@@ -192,21 +320,12 @@
                     </div>
                 </div>
 
-                {# TODO:
-                <?php if ( ! empty($reviews)) { ?>
-                <div class="medium-9 columns" id="reviews">
-                    <h2>Reviews</h2>
-                </div>
-                <?php } ?>
-                #}
-            </div>
-            <div class="medium-3 columns">
                 {% if relatedProducts is not empty %}
                     <h2 class="text-center">You Might Also Like</h2>
 
-                    {% include '@store/helper/product-grid-small.twig' with {'products': relatedProducts, 'lg_slim': true } only %}
+                    {% include '@store/helper/product-grid.twig' with {'products': relatedProducts, 'lg_slim': true } only %}
 
                 {% endif %}
-            </div>
-        </div>
+#}
+
 {% endblock %}

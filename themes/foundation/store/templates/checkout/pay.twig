@@ -15,7 +15,7 @@
     <div id="checkout">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="small-6 columns">
                     <h2>Order Summary</h2>
                     <table class="table">
                         <thead>
@@ -116,7 +116,7 @@
                         #}
                     {% endif %}
                 </div>
-                <div class="col-sm-6">
+                <div class="small-6 columns">
                     <form action="{{ routeUrl('checkout.pay') }}" method="post" id="main-form" class="form" role="form">
                         {{ form.csrf() }}
 
@@ -127,7 +127,7 @@
                         <h2>Shipping</h2>
                         <div class="well">
                             <div class="row">
-                                <div class="form-group col-sm-6">
+                                <div class="form-group small-6 columns">
                                     <label for="shipping-firstName" class="control-label">First Name</label>
                                     <input type="text"
                                            id="shipping-firstName"
@@ -138,7 +138,7 @@
                                            required=""/>
                                 </div>
 
-                                <div class="form-group col-sm-6">
+                                <div class="form-group small-6 columns">
                                     <label for="shipping-lastName" class="control-label">Last Name</label>
                                     <input type="text"
                                            id="shipping-lastName"
@@ -150,7 +150,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-sm-12">
+                                <div class="form-group small-12 columns">
                                     <label for="shipping-company" class="control-label">
                                         Company Name <small class="text-muted">(optional)</small>
                                     </label>
@@ -163,7 +163,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-sm-12">
+                                <div class="form-group small-12 columns">
                                     <label for="shipping-address1" class="control-label">Street Address</label>
                                     <input type="text"
                                            id="shipping-address1"
@@ -175,7 +175,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-sm-12">
+                                <div class="form-group small-12 columns">
                                     <label for="shipping-address2" class="control-label">
                                         Street Address 2 <small class="text-muted">(optional)</small>
                                     </label>
@@ -188,7 +188,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-sm-12">
+                                <div class="form-group small-12 columns">
                                     <label for="shipping-isResidential" class="control-label">
                                         Residential Address?
 
@@ -202,7 +202,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-sm-4">
+                                <div class="form-group small-4 columns">
                                     <label for="shipping-city" class="control-label">City</label>
                                     <input type="text"
                                            id="shipping-city"
@@ -212,7 +212,7 @@
                                            required=""/>
                                 </div>
 
-                                <div class="form-group col-sm-4">
+                                <div class="form-group small-4 columns">
                                     <label for="shipping-state" class="control-label">State</label>
                                     <input type="text"
                                            id="shipping-state"
@@ -222,7 +222,7 @@
                                            required=""/>
                                 </div>
 
-                                <div class="form-group col-sm-4">
+                                <div class="form-group small-4 columns">
                                     <label for="shipping-zip5" class="control-label">Zipcode</label>
                                     <input type="text"
                                            id="shipping-zip5"
@@ -234,7 +234,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-sm-6">
+                                <div class="form-group small-6 columns">
                                     <label for="shipping-phone" class="control-label">Phone Number</label>
                                     <input type="text"
                                            id="shipping-phone"
@@ -244,7 +244,7 @@
                                            required=""/>
                                 </div>
 
-                                <div class="form-group col-sm-6">
+                                <div class="form-group small-6 columns">
                                     <label for="shipping-email" class="control-label">Email Address</label>
                                     <input type="text"
                                            id="shipping-email"
@@ -261,7 +261,7 @@
                             <div class="well" id="billing-well">
                                 <span class="payment-errors"></span>
                                 <div class="row">
-                                    <div class="form-group col-sm-8">
+                                    <div class="form-group small-8 columns">
                                         <label for="creditCard-name" class="control-label">Name on Card</label>
                                         <input type="text"
                                                id="creditCard-name"
@@ -271,7 +271,7 @@
                                                required=""/>
                                     </div>
 
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group small-4 columns">
                                         <label for="creditCard-zip5" class="control-label">Zipcode</label>
                                         <input type="text"
                                                id="creditCard-zip5"
@@ -283,7 +283,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group col-sm-8">
+                                    <div class="form-group small-8 columns">
                                         <label for="creditCard-number" class="control-label">Card Number</label>
                                         <input type="text"
                                                id="creditCard-number"
@@ -294,7 +294,7 @@
                                                required=""/>
                                     </div>
 
-                                    <div class="form-group col-sm-3">
+                                    <div class="form-group small-3 columns">
                                         <label for="creditCard-cvc" class="control-label">CVC</label>
                                         <input type="text"
                                                id="creditCard-cvc"
@@ -307,7 +307,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group col-sm-3">
+                                    <div class="form-group small-3 columns">
                                         <label for="creditCard-expirationMonth" class="control-label">Expires</label>
                                         {{ form.select(
                                             'creditCard[expirationMonth]',
@@ -321,7 +321,7 @@
                                         ) }}
                                     </div>
 
-                                    <div class="form-group col-sm-3">
+                                    <div class="form-group small-3 columns">
                                         <label for="creditCard-expirationYear" class="control-label">&nbsp;</label>
                                         {{ form.select(
                                             'creditCard[expirationYear]',
@@ -335,7 +335,7 @@
                                         ) }}
                                     </div>
 
-                                    <div class="col-sm-6" id="accepted-cards">
+                                    <div class="small-6 columns" id="accepted-cards">
                                         <img src="{{ assetUrl('foundation', 'store', 'img/cards.png') }}"
                                              width="180"
                                              height="24"
@@ -346,7 +346,7 @@
                             </div>
                         {% endif %}
 
-                        <button class="button btn-lg pull-left" type="submit" data-loading-text="Loading...">
+                        <button class="button btn-lg float-left" type="submit" data-loading-text="Loading...">
                             <i class="fa fa-lock"></i> Place your order
                         </button>
                         <div>

@@ -4,12 +4,13 @@
     <meta name="description" content="{{ pageDescription }}">
 {% endif %}
 <title>{% if pageTitle is empty %}Zen Kommerce{% else %}{{ pageTitle }} - Zen Kommerce{% endif %}</title>
+
 <link rel="icon" href="/favicon.ico" />
 <link rel="shortcut icon" href="/favicon.ico" />
+
 {% if pageCanonicalUrl is not empty %}
     <link rel="canonical" href="{{ pageCanonicalUrl }}" />
 {% endif %}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-
-<script src="{{ assetUrl('foundation', 'store', 'app.bundle.js') }}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="{{ assetUrl('foundation', 'store', 'css/app.css') }}">

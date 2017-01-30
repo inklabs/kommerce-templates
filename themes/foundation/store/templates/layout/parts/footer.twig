@@ -1,9 +1,6 @@
-<div class="row column">
-    <a href="{{ routeUrl('page.terms') }}">Terms of Use</a> | <a href="{{ routeUrl('page.privacy') }}">Privacy</a>
-    {# TODO: <?=SITE_COPY?> #}
+<div class="row">
+    <div class="column">
+        <a href="{{ routeUrl('page.terms') }}">Terms of Use</a> | <a href="{{ routeUrl('page.privacy') }}">Privacy</a>
+        {# TODO: SITE_COPY #}
+    </div>
 </div>
-{# TODO:
-    <?php if (Kommerce::isProfilingEnabled()) { ?>
-    <?=View::factory('profiler')?>
-    <?php } ?>
-#}

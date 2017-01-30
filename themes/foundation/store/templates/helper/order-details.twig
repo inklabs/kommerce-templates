@@ -8,68 +8,70 @@
     {% include '@admin/helper/order-status.twig' with {'order': order} only %}
 </div>
 
-<div class="row column">
-    <div class="callout">
-        <div class="row">
-            <div class="small-4">
-                <strong>Shipping Address</strong>
-                {% include '@admin/helper/order-address.twig' with {'address': order.shippingAddress } only %}
-                <hr>
-                <strong>Billing Address</strong>
-                {% include '@admin/helper/order-address.twig' with {'address': order.billingAddress } only %}
-            </div>
-            <div class="small-4">
-                <strong>Payment Information</strong>
-                <div>
-                    {% include '@admin/helper/order-payments.twig' %}
+<div class="row">
+    <div class="column">
+        <div class="callout">
+            <div class="row">
+                <div class="small-4 columns">
+                    <strong>Shipping Address</strong>
+                    {% include '@admin/helper/order-address.twig' with {'address': order.shippingAddress } only %}
+                    <hr>
+                    <strong>Billing Address</strong>
+                    {% include '@admin/helper/order-address.twig' with {'address': order.billingAddress } only %}
                 </div>
-            </div>
-            <div class="small-4">
-                <strong>Order Summary</strong>
-                <table class="table stack totals-table">
-                    <tbody>
-                    <tr>
-                        <td>Subtotal:</td>
-                        <td class="text-right">
-                            {{ order.total.subtotal | displayPrice }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Shipping:</td>
-                        <td class="text-right">
-                            {{ order.total.shipping | displayPrice }}
-                        </td>
-                    </tr>
-                    {% if order.total.discount > 0 %}
-                        <tr class="cart-discounts">
-                            <td>Discounts:</td>
+                <div class="small-4 columns">
+                    <strong>Payment Information</strong>
+                    <div>
+                        {% include '@admin/helper/order-payments.twig' %}
+                    </div>
+                </div>
+                <div class="small-4 columns">
+                    <strong>Order Summary</strong>
+                    <table class="table stack totals-table">
+                        <tbody>
+                        <tr>
+                            <td>Subtotal:</td>
                             <td class="text-right">
-                                ({{ order.total.discount | displayPrice }})
+                                {{ order.total.subtotal | displayPrice }}
                             </td>
                         </tr>
-                    {% endif %}
-                    <tr>
-                        <td>Tax:</td>
-                        <td class="text-right">
-                            {{ order.total.tax | displayPrice }}
-                        </td>
-                    </tr>
-                    <tr class="cart-total-price info">
-                        <td>Total:</td>
-                        <td class="text-right">
-                            {{ order.total.total | displayPrice }}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <tr>
+                            <td>Shipping:</td>
+                            <td class="text-right">
+                                {{ order.total.shipping | displayPrice }}
+                            </td>
+                        </tr>
+                        {% if order.total.discount > 0 %}
+                            <tr class="cart-discounts">
+                                <td>Discounts:</td>
+                                <td class="text-right">
+                                    ({{ order.total.discount | displayPrice }})
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Tax:</td>
+                            <td class="text-right">
+                                {{ order.total.tax | displayPrice }}
+                            </td>
+                        </tr>
+                        <tr class="cart-total-price info">
+                            <td>Total:</td>
+                            <td class="text-right">
+                                {{ order.total.total | displayPrice }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                {% if order.discountNames is not empty %}
-                    <hr>
-                    <strong>Discounts</strong>
-                    <div>
-                        {{ order.discountNames }}
-                    </div>
-                {% endif %}
+                    {% if order.discountNames is not empty %}
+                        <hr>
+                        <strong>Discounts</strong>
+                        <div>
+                            {{ order.discountNames }}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

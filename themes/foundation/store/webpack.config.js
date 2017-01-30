@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './assets'),
-        filename: '[name].bundle.js',
+        filename: 'js/[name].js',
     },
     module: {
         rules: [
@@ -23,24 +23,27 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader:  ExtractTextPlugin.extract({
-                    loader: 'css-loader?importLoaders=1',
-                }),
+                use: [
+                    'css-loader?importLoaders=1',
+                ]
             },
             {
                 test: /\.(sass|scss)$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader',
-                ]
-            }
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: "style-loader",
+                    loader: "css-loader!sass-loader",
+                }),
+            },
+            // {
+            //     test: /\.(sass|scss)$/,
+            //     use: ['css-loader', 'sass-loader']
+            // }
         ],
     },
     plugins: [
         new ExtractTextPlugin({
             path: path.resolve(__dirname, './assets'),
-            filename: 'bundle.css',
+            filename: 'css/[name].css',
             allChunks: true,
         }),
     ],
