@@ -7,8 +7,10 @@
 
 {% block content %}
 
-    <div class="row">
-      <div class="medium-6 columns">
+
+<div class="row">
+    
+    <div class="medium-6 columns">
         <img class="thumbnail" src="{{ productImageUrl(product) }}">
         <div class="row small-up-4">
             {% for image in product.images %}
@@ -21,123 +23,178 @@
                 {% endif %}
             {% endfor %}
         </div>
-      </div>
-      <div class="medium-6 large-5 columns">
+    </div>
+
+    <div class="medium-6 large-5 columns">
         <h3>{{ product.name }}</h3>
         <p>{{ product.description }}</p>
+        <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
 
-        <pre> 
-        {{ product | json_encode }}
-        </pre>
-        {% if product.isInventoryRequired %}
-            Availability:
-            {% if product.quantity > 0 %}
-                <span class="in-stock">In stock</span>
-            {% else %}
-                <span class="out-of-stock">Out of stock</span>
-            {% endif %}
+        {% if product.productQuantityDiscounts is not empty %}
+            <div class="zk-discount-prices">
+                {% for discount in (product.productQuantityDiscounts | reverse ) %}
+                    <div>
+                        Buy {{ discount.quantity }} or more for
+
+                        {% if product.price.unitPrice < discount.price.unitPrice %}
+                            <span class="price-strike">{{ discount.price.unitPrice | displayPrice }}</span>
+                            {{ product.price.unitPrice | displayPrice }}
+                        {% else %}
+                            {{ discount.price.unitPrice | displayPrice }}
+                        {% endif %}
+
+                        each
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
+    </div>
+</div>
 
+<div class="row">
+    <div class="column">
 
-        {% if product.rating is not null %}
-            {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+   {% if product.isInventoryRequired %}
+        Availability:
+        {% if product.quantity > 0 %}
+            <span class="in-stock">In stock</span>
+        {% else %}
+            <span class="out-of-stock">Out of stock</span>
         {% endif %}
+    {% endif %}
 
-        {% if product.isInStock %}
+    {% if product.rating is not null %}
+        {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+    {% endif %}
+
+    {% if product.isInStock %}
         <form action="{{ routeUrl('cart.add-item') }}"
             id="cart_add_item"
             class="form-inline"
             method="post">
                 {{ form.csrf() }}
-        {% endif %}
+    {% endif %}
 
+    {% if product.options is not empty or product.textOptions is not empty %}
+        {% for option in product.options %}
+            {% include '@store/product/parts/options.twig' with {'option': option } only %}
+        {% endfor %}
+        {% for textOption in product.textOptions %}
+            {% include '@store/product/parts/text-options.twig' with {'textOption': textOption } only %}
+        {% endfor %}
+    {% endif %}
 
-
-        {% if product.options is not empty or product.textOptions is not empty %}
-            {% for option in product.options %}
-                {% include '@store/product/parts/options.twig' with {'option': option } only %}
-            {% endfor %}
-
-            {% for textOption in product.textOptions %}
-                {% include '@store/product/parts/text-options.twig' with {'textOption': textOption } only %}
-            {% endfor %}
-        {% endif %}
-
-        {% if product.isInStock %}
-                <input type="hidden" name="id" value="{{ product.id.getHex() }}" />
-                    <label for="quantity">
-                        Qty:
-                        <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1" />
-                    </label>
-                <button type="submit" class="button success">
+    {% if product.isInStock %}
+            <input type="hidden" name="id" value="{{ product.id.getHex() }}" />
+                <label for="quantity">
+                    Qty:
+                    <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1" />
+                </label>
+                <button type="submit" class="button expanded success">
                     <i class="fa fa-shopping-cart"></i> Add to Cart
                 </button>
-            </form>
-        {% endif %}
+        </form>
+    {% endif %}
 
-{#
-        <label>Size
-        <select>
-          <option value="husker">Small</option>
-          <option value="starbuck">Medium</option>
-          <option value="hotdog">Large</option>
-          <option value="apollo">Yeti</option>
-        </select>
-        </label>
-        
-        <div class="row">
-          <div class="small-3 columns">
-            <label for="middle-label" class="middle">Quantity</label>
-          </div>
-          <div class="small-9 columns">
-            <input type="text" id="middle-label" placeholder="One fish two fish">
-          </div>
-        </div>
-
-        <a href="#" class="button large expanded">Buy Now</a>
-
-        <div class="small secondary expanded button-group">
-            <a class="button">Facebook</a>
-            <a class="button">Twitter</a>
-            <a class="button">Yo</a>
-          </div>
-        </div>#}
+    <div class="small secondary expanded button-group">
+        <a  href="https://www.facebook.com/sharer/sharer.php?u={{ product.fullUrl }}"
+        class="button"
+        target="_blank">
+            <i class="fa fa-facebook"></i> Facebook
+        </a>
+        <a class="button">Twitter</a>
+        <a class="button">Yo</a>
+    </div> 
+    
     </div>
+</div>
 
+
+<div class="row">
+    <div class="column">
+
+    {% if product.areAttachmentsEnabled %}
+        {% if user is not empty %}
+            <a href="{{ routeUrl('user.attachment.createForProduct', {'productId': product.id.hex}) }}" class="button success upload-attachment">
+                <i class="fa fa-upload"></i> Upload Attachment
+            </a>
+        {% endif %}
+    {% endif %}
+
+    {% if product.productAttributes is not empty %}
     <div class="row">
         <div class="column">
-            <ul class="tabs" data-tabs id="example-tabs">
-                <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Reviews</a></li>
-                <li class="tabs-title"><a href="#panel2">Similar Products</a></li>
-            </ul>
-            <div class="tabs-content" data-tabs-content="example-tabs">
-                <div class="tabs-panel is-active" id="panel1">
+            <h4>Attributes:</h4>
+            {% for productAttribute in product.productAttributes %}
+                <strong>{{ productAttribute.attribute.name }}:</strong>
+                {{ productAttribute.attributeValue.name }} <br>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if product.description is not empty %}
+        <dl>
+            <dt class="description-info">Description</dt>
+            <dd class="description-desc">{{ product.description | nl2br }}</dd>
+        </dl>
+    {% endif %}
+
+    </div>
+</div>
+
+    {#{% if relatedProducts is not empty %}
+    <h2 class="text-center">You Might Also Like</h2>
+
+    {% include '@store/helper/product-grid.twig' with {'products': relatedProducts, 'lg_slim': true } only %}
+
+    {% endif %}#}
+
+<div class="row">
+    <div class="column">
+        <ul class="tabs" data-tabs id="example-tabs">
+            <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Reviews</a></li>
+            <li class="tabs-title"><a href="#panel2">Similar Products</a></li>
+            <li class="tabs-title"><a href="#tags-panel">Tags Panel</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="example-tabs">
+            <div class="tabs-panel" id="tags-panel">
+                {% for tag in product.tags if tag.isVisible %}
+                    {% if tag.description is not empty %}
+                        <h2>Tag Description</h2>
+
+                        <dl>
+                            <dt class="tag-info">
+                                <a href="{{ tagUrl(tag) }}">{{ tag.name }}</a>
+                            </dt>
+                            <dd class="tag-desc">{{ tag.description | nl2br }}</dd>
+                        </dl>
+                    {% endif %}
+                {% endfor %}
+
+                <h2>Tag List</h2>
+                <ul id="tag-list">
+                    {% for tag in product.tags if tag.isVisible %}
+                        {% if tag.description is empty %}
+                            <li>
+                                <a href="{{ tagUrl(tag) }}">
+                                    {{ tag.name }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="tabs-panel is-active" id="panel1">
                 <h4>Reviews</h4>
                 <div class="media-object stack-for-small">
                     <div class="media-object-section">
-                    <img class="thumbnail" src="http://placehold.it/200x200">
+                        <img class="thumbnail" src="http://placehold.it/200x200">
                     </div>
                     <div class="media-object-section">
-                    <h5>Mike Stevenson</h5>
-                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you.</p>
-                    </div>
-                </div>
-                <div class="media-object stack-for-small">
-                    <div class="media-object-section">
-                    <img class="thumbnail" src="http://placehold.it/200x200">
-                    </div>
-                    <div class="media-object-section">
-                    <h5>Mike Stevenson</h5>
-                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you</p>
-                    </div>
-                </div>
-                <div class="media-object stack-for-small">
-                    <div class="media-object-section">
-                    <img class="thumbnail" src="http://placehold.it/200x200">
-                    </div>
-                    <div class="media-object-section">
-                    <h5>Mike Stevenson</h5>
-                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you</p>
+                        <h5>Mike Stevenson</h5>
+                        <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you.</p>
                     </div>
                 </div>
                 <label>
@@ -145,187 +202,36 @@
                     <textarea placeholder="None"></textarea>
                 </label>
                 <button class="button">Submit Review</button>
-                </div>
-                <div class="tabs-panel" id="panel2">
-                <div class="row medium-up-3 large-up-5">
-                    <div class="column">
-                        <img class="thumbnail" src="http://placehold.it/350x200">
-                        <h5>Other Product <small>$22</small></h5>
-                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                    </div>
-                    <div class="column">
-                        <img class="thumbnail" src="http://placehold.it/350x200">
-                        <h5>Other Product <small>$22</small></h5>
-                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                    </div>
-                    <div class="column">
-                        <img class="thumbnail" src="http://placehold.it/350x200">
-                        <h5>Other Product <small>$22</small></h5>
-                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                    </div>
-                    <div class="column">
-                        <img class="thumbnail" src="http://placehold.it/350x200">
-                        <h5>Other Product <small>$22</small></h5>
-                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                    </div>
-                    <div class="column">
-                        <img class="thumbnail" src="http://placehold.it/350x200">
-                        <h5>Other Product <small>$22</small></h5>
-                        <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-                    </div>
+            </div>
+
+            <div class="tabs-panel" id="panel2">
+                <div class="row medium-up-3 large-up-4">
+                    {% if relatedProducts is not empty %}
+                        {% for product in relatedProducts %}
+                            <div class="column">
+
+                                <a href="{{ productUrl(product) }}">
+                                    <img class="thumbnail" src="{{ productImageUrl(product) }}">
+                                    <div class="product-name">{{ product.name }}</div>
+                                    <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
+                                </a>
+
+                                {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+
+                                {% if not product.isInStock %}
+                                    <div class="availability">
+                                        <span class="out-of-stock">Out of Stock</span>
+                                    </div>
+                                {% elseif product.isPriceVisible %}
+                                    {% include '@store/helper/price.twig' with {'price': product.price } only %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
-      </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{#
-
-
-
-
-
-                        {% if product.areAttachmentsEnabled %}
-                            {% if user is not empty %}
-                                <a href="{{ routeUrl('user.attachment.createForProduct', {'productId': product.id.hex}) }}"
-                                   class="button success upload-attachment">
-                                    <i class="fa fa-upload"></i> Upload Attachment
-                                </a>
-                            {% endif %}
-                        {% endif %}
-
-
-
-                        {% include '@store/helper/price.twig' with {'price': product.price } only %}
-
-                        {% if product.productQuantityDiscounts is not empty %}
-                            <div class="discount-prices">
-                                {% for discount in (product.productQuantityDiscounts | reverse ) %}
-                                    Buy {{ discount.quantity }} or more for
-
-                                    {% if product.price.unitPrice < discount.price.unitPrice %}
-                                        <span class="price-strike">{{ discount.price.unitPrice | displayPrice }}</span>
-                                        {{ product.price.unitPrice | displayPrice }}
-                                    {% else %}
-                                        {{ discount.price.unitPrice | displayPrice }}
-                                    {% endif %}
-
-                                    each
-                                    <br />
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-
-
-
-                        {% if product.productAttributes is not empty %}
-                            <div class="divider"></div>
-                            <div class="row column">
-                                    <h4>Attributes:</h4>
-                                    {% for productAttribute in product.productAttributes %}
-                                        <strong>{{ productAttribute.attribute.name }}:</strong>
-                                        {{ productAttribute.attributeValue.name }} <br>
-                                    {% endfor %}
-                            </div>
-                        {% endif %}
-
-                        {% if product.description is not empty %}
-                            <div class="divider"></div>
-                            <dl>
-                                <dt class="description-info">Description</dt>
-                                <dd class="description-desc">{{ product.description | nl2br }}</dd>
-                            </dl>
-                        {% endif %}
-
-                        {% for tag in product.tags if tag.isVisible %}
-                            {% if loop.first %}
-                                <div class="divider"></div>
-                            {% endif %}
-
-                            {% if tag.description is not empty %}
-                                <dl>
-                                    <dt class="tag-info">
-                                        <a href="{{ tagUrl(tag) }}">
-                                            {{ tag.name }}
-                                        </a>
-                                    </dt>
-                                    <dd class="tag-desc">
-                                        {{ tag.description | nl2br }}
-                                    </dd>
-                                </dl>
-                            {% endif %}
-                        {% endfor %}
-
-                        <ul id="tag-list">
-                            {% for tag in product.tags if tag.isVisible %}
-                                {% if tag.description is empty %}
-                                    <li>
-                                        <a href="{{ tagUrl(tag) }}">
-                                            {{ tag.name }}
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-
-                        <div class="divider"></div>
-                        <div class="other-actions">
-                            <div id="social-actions">
-                                <a  href="https://www.facebook.com/sharer/sharer.php?u={{ product.fullUrl }}"
-                                    class="button facebook-share"
-                                    target="_blank">
-                                    <i class="fa fa-share"></i> Share on Facebook
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% if relatedProducts is not empty %}
-                    <h2 class="text-center">You Might Also Like</h2>
-
-                    {% include '@store/helper/product-grid.twig' with {'products': relatedProducts, 'lg_slim': true } only %}
-
-                {% endif %}
-#}
+</div>
 
 {% endblock %}
