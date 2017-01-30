@@ -11,12 +11,13 @@
     {% include '@store/layout/parts/header.twig' %}
     {% include '@store/layout/parts/flash-messages.twig' %}
     {% include '@store/layout/parts/breadcrumbs.twig' %}
-    <div id="body">
+    <div class="zk-body">
         {% block content %}{% endblock %}
     </div>
     {% include '@store/layout/parts/base-modal.twig' %}
     {% include '@store/layout/parts/footer.twig' %}
     {% include '@store/layout/parts/javascript.twig' %}
+    
     {% block extraScripts %}{% endblock %}
 </body>
 </html>

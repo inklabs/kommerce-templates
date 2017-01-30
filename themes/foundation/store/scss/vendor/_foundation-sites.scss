@@ -5,7 +5,7 @@
 // These will actually import the foundation elements code
 
 // Everything
-@include foundation-everything($flex: false);
+@include foundation-everything($flex: true);
 
 // Individual Components
 //@include foundation-global-styles;

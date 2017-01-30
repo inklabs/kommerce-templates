@@ -5,14 +5,16 @@
 {% block content %}
     {#{% include '@store/helper/sitelinks-search.twig' only %}#}
 
-    <div class="row column">
-        {% embed '@store/helper/recommended-products.twig' with {'products': newProducts } only %}
-            {% block title %}Our Newest Products{% endblock %}
-        {% endembed %}
-        <hr>
-        {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
-            {% block blockSizes %}small-up-3 medium-up-6 large-up-6{% endblock %}
-            {% block title %}Recommended for You{% endblock %}
-        {% endembed %}
+    <div class="row ">
+        <div class="column">
+            {% embed '@store/helper/recommended-products.twig' with {'products': newProducts } only %}
+                {% block title %}Our Newest Products{% endblock %}
+            {% endembed %}
+            <hr>
+            {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
+                {% block blockSizes %}small-up-3 medium-up-6 large-up-6{% endblock %}
+                {% block title %}Recommended for You{% endblock %}
+            {% endembed %}
+        </div>
     </div>
 {% endblock %}

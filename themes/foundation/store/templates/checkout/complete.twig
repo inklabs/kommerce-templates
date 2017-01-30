@@ -8,7 +8,7 @@
 {% block content %}
     <div id="checkout-complete" class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="small-6 columns">
                 <div class="alert alert-info">
                     <h3>Thank you, your order has been placed.</h3>
                     <p>An email confirmation has been sent to you.</p>
@@ -23,15 +23,15 @@
                     </p>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="small-6 columns">
                 <div class="thumbnail">
                     <h2>Share Your Purchase</h2>
                     {% for orderItem in order.orderItems %}
                         <div class="row">
-                            <div class="col-sm-2">
+                            <div class="small-2 columns">
                                 <img src="{{ productImageUrl(orderItem.product) }}" width="48" height="48" />
                             </div>
-                            <div class="col-sm-10">
+                            <div class="small-10 columns">
                                 <strong>I just bought: "{{ orderItem.product.name }}"</strong><br />
                                 <small>{{ orderItem.product.description | truncate(117) }}</small>
                                 <br />
