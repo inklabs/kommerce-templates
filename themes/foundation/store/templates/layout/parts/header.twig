@@ -1,20 +1,20 @@
-<div class="title-bar" data-responsive-toggle="zk-menu" data-hide-for="medium">
-    <button class="menu-icon" type="button" data-toggle="zk-menu"></button>
-    <div class="title-bar-title">Menu</div>
-</div>
+<nav class="zk-menu">
+    <div class="title-bar" data-responsive-toggle="zk-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="zk-menu"></button>
+        <div class="title-bar-title">Menu</div>
+    </div>
 
-<div id="zk-menu">
     <div class="top-bar" id="zk-topbar-search">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="menu-text">
-                    {#<a class="navbar-brand" href="{{ routeUrl('home') }}">#}
-                        {{ SITE_NAME | default('Kommerce') }}
-                    {#</a>#}
+                    <a class="zk-topbar-brand" href="{{ routeUrl('home') }}">
+                        {{ SITE_NAME | default('Kommerce Foundation') }}
+                    </a>
                 </li>
-                <li>
+                <li style="width:50%">
                     <div class="input-group">
-                        <input class="input-group-field" type="search" placeholder="Search">
+                        <input class="input-group-field" type="search" placeholder="Search" style="min-width:100%;">
                         <div class="input-group-button">
                             <input type="submit" class="button" value="Search">
                         </div>
@@ -57,4 +57,4 @@
             </ul>
         </div>
     </div>
-</div>
+</nav>

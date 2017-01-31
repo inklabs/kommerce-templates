@@ -1,0 +1,25 @@
+{% for tag in tags if tag.isVisible %}
+    {% if tag.description is not empty %}
+        <h2>Tag Description</h2>
+
+        <dl>
+            <dt class="tag-info">
+                <a href="{{ tagUrl(tag) }}">{{ tag.name }}</a>
+            </dt>
+            <dd class="tag-desc">{{ tag.description | nl2br }}</dd>
+        </dl>
+    {% endif %}
+{% endfor %}
+
+<h2>Tag List</h2>
+<ul id="tag-list">
+    {% for tag in tags if tag.isVisible %}
+        {% if tag.description is empty %}
+            <li>
+                <a href="{{ tagUrl(tag) }}">
+                    {{ tag.name }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

@@ -1,4 +1,38 @@
-.zk-body {
+%flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+html {
     height: 100%;
     width: 100%;
 }
+
+.zk-body {
+    width: 100%;
+    @extend %flex-column;
+}
+
+.zk-menu {
+    @extend %flex-column;
+}
+
+.zk-main-content {
+    @extend %flex-column;
+    flex: 1;
+    width: 100%;
+}
+
+.zk-footer {
+    @extend %flex-column;
+    min-height: 50px;
+    justify-content: center;
+}
+
+// FIXED BODY
+//.zk-body {
+//    height: 100%;
+//    .zk-main-content {
+//        overflow: auto;
+//    }
+//}

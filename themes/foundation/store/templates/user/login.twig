@@ -3,57 +3,47 @@
 {% block pageTitle %}User Login{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm12">
-                <h1>Please Sign In</h1>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-4">
-                <form action="{{ routeUrl('user.login.post') }}"
-                      method="post"
-                      id="login"
-                      class="form"
-                      role="form">
-                    {{ form.csrf() }}
+<div style="height: 100%;">
+    <div class="row align-center align-middle">
+        <div class="small-10 medium-8 large-6 column">
+            <h1>Please Sign In</h1>
+            <form action="{{ routeUrl('user.login.post') }}"
+                  method="post"
+                  id="zk-login"
+                  role="form">
+                {{ form.csrf() }}
 
-                    {% if formRedirect is defined %}
-                        {{ form.hidden('redirect', formRedirect) }}
-                    {% endif %}
+                {% if formRedirect is defined %}
+                    {{ form.hidden('redirect', formRedirect) }}
+                {% endif %}
 
-                    <div class="form-group">
-                        <label for="email" class="control-label">Email Address</label>
-                        <input type="email"
-                               id="email"
-                               name="email"
-                               value=""
-                               class="form-control"
-                               required=""
-                               autofocus="">
-                    </div>
+                <label for="email">
+                    Email Address
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           value=""
+                           required=""
+                           autofocus="">
+                </label>
 
-                    <div class="form-group">
-                        <label for="password" class="control-label">Password</label>
-                        <input type="password"
-                               id="password"
-                               name="password"
-                               value=""
-                               class="form-control"
-                               required="">
-                    </div>
+                <label for="password" class="control-label">
+                    Password
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           value=""
+                           required="">
+                </label>
+                <p class="help-text" id="passwordHelpText">
+                    <a href="{{ routeUrl('user.forgot-password') }}?email={{ email|url_encode }}">Forgot your password?</a>
+                </p>
 
-                    <button type="submit" class="button success">Sign In <i class="fa fa-arrow-circle-right"></i></button>
-                </form>
-
-                <div class="login-forgot-password">
-                    <a href="{{ routeUrl('user.forgot-password') }}?email={{ email|url_encode }}"
-                       class="button">
-                        <em>Forgot your password?</em>
-                    </a>
-                </div>
-            </div>
+                <button type="submit" class="button success">
+                    Sign In <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </form>
         </div>
     </div>
+</div>
 {% endblock %}
