@@ -9,6 +9,10 @@ Base templates utilizing [Zen Kommerce Core](https://github.com/inklabs/kommerce
 
 `vendor/bin/codecept run`
 
+## Foundation Theme
+
+Please refer to the foundation
+
 ## Contributing
 
 Thank you for considering contributing to the sample Laravel application! The contribution guide can be found in the [Core Project](https://github.com/inklabs/kommerce-core/blob/master/CONTRIBUTING.md).
