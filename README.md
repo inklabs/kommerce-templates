@@ -11,7 +11,7 @@ Base templates utilizing [Zen Kommerce Core](https://github.com/inklabs/kommerce
 
 ## Foundation Theme
 
-Please refer to the foundation
+Please refer to the README.md of [Foundation Theme](./themes/foundation), the [Foundation Store](./themes/foundation/store), or the [Foundation Admin](./themes/foundation/admin).
 
 ## Contributing
 
