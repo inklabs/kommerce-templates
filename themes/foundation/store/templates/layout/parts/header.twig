@@ -49,7 +49,11 @@
                 </li>
                 {% if user is not empty %}
                     <li>
-                        <a href="{{ routeUrl('logout') }}">Sign Out</a>
+                        <form action="{{ routeUrl('user.logout') }}"
+                              method="post">
+                            {{ form.csrf() }}
+                            <button type="submit" class="btn btn-link">Sign Out</button>
+                        </form>
                     </li>
                     <li class="divider-vertical hidden-xs"></li>
                     <li>

@@ -73,7 +73,13 @@
 
                     <li class="divider-vertical hidden-xs"></li>
 
-                    <li><a href="{{ routeUrl('logout') }}">Sign Out</a></li>
+                    <li>
+                        <form action="{{ routeUrl('admin.logout') }}"
+                              method="post">
+                            {{ form.csrf() }}
+                            <button type="submit" class="btn btn-link navbar-btn">Sign Out</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
