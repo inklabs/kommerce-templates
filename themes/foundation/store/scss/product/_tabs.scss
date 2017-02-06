@@ -1,0 +1,18 @@
+.zk-tabs {
+  display: flex;
+  flex-flow: row;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  li {
+    border-right: 1px solid $tab-background-active;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+  a {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+}

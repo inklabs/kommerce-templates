@@ -94,7 +94,7 @@
                         Qty:
                         <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1"/>
                     </label>
-                    <button type="submit" class="button expanded success">
+                    <button type="submit" class="button expanded">
                         <i class="fa fa-shopping-cart"></i> Add to Cart
                     </button>
                 </form>
@@ -120,7 +120,7 @@
             {% if product.areAttachmentsEnabled %}
                 {% if user is not empty %}
                     <a href="{{ routeUrl('user.attachment.createForProduct', {'productId': product.id.hex}) }}"
-                       class="button success upload-attachment">
+                       class="button upload-attachment">
                         <i class="fa fa-upload"></i> Upload Attachment
                     </a>
                 {% endif %}
@@ -141,27 +141,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <ul class="tabs" data-tabs id="example-tabs">
-                <li class="tabs-title is-active"><a href="#zk-product-tab-reviews" aria-selected="true">Reviews</a></li>
-                <li class="tabs-title"><a href="#zk-product-tab-tags">Similar Products</a></li>
-                <li class="tabs-title"><a href="#zk-product-tab-related">Tags Panel</a></li>
-            </ul>
-            <div class="tabs-content" data-tabs-content="example-tabs">
-                <div class="tabs-panel is-active" id="zk-product-tab-related">
-                    {% include '@store/product/parts/tab-related.twig' with { 'relatedProducts': relatedProducts } %}
-                </div>
+    {% include '@store/product/parts/tabset.twig' with { 'relatedProducts': relatedProducts, 'product': product } %}
 
-                <div class="tabs-panel" id="zk-product-tab-tags">
-                    {% include '@store/product/parts/tab-tags.twig' with { 'tags': product.tags } %}
-                </div>
-
-                <div class="tabs-panel" id="zk-product-tab-reviews">
-                    {% include '@store/product/parts/tab-reviews.twig' %}
-                </div>
-            </div>
-        </div>
-    </div>
 
 {% endblock %}

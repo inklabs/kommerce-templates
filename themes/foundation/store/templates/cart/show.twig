@@ -18,76 +18,78 @@
 
             <div class="row">
                 <div class="medium-9 columns">
-                    <div class="row">
-                        <div class="column">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th colspan="2">Item</th>
-                                    <th>QTY</th>
-                                    <th class="text-right hidden-xs">Unit Price</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for cartItem in cart.cartItems %}
-                                    <tr>
-                                        <td class="cart-product-image">
-                                            <a href="{{ productUrl(cartItem.product) }}">
-                                                <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ productUrl(cartItem.product) }}">
-                                                <span class="cart-product-title">{{ cartItem.product.name }}</span>
-                                            </a>
+                    <div class="row hide-for-small-only">
+                        <div class="medium-4 column">Item</div>
+                        <div class="medium-4 column">Quantity</div>
+                        <div class="medium-4 column">Unit Price</div>
+                    </div>
+                    {% for cartItem in cart.cartItems %}
+                        <div class="row">
+                            <div class="medium-4 columns" class="cart-product-image">
+                                <h5 class="hide-for-medium">
+                                    <strong>Item</strong>
+                                </h5>
 
-                                            <div class="hidden-sm text-muted">
-                                                <small>{{ cartItem.fullSku }}</small>
+                                <div>
+                                    <a href="{{ productUrl(cartItem.product) }}">
+                                        <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
+                                    </a>
+                                </div>
+
+                                <a href="{{ productUrl(cartItem.product) }}">
+                                    <span class="cart-product-title">{{ cartItem.product.name }}</span>
+                                </a>
+
+                                <div class="hidden-sm text-muted">
+                                    <small>{{ cartItem.fullSku }}</small>
+                                </div>
+
+                                {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+
+
+                                <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('id', cartItem.id.hex) }}
+
+                                    <input class="zk-submit-anchor" type="submit" value="Remove Item"/>
+                                </form>
+
+                            </div>
+                            <div class="medium-4 columns">
+                                <h5 class="hide-for-medium">
+                                    <strong>Quantity</strong>
+                                </h5>
+
+                                <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
+                                    {{ form.csrf() }}
+                                    {{ form.hidden('id', cartItem.id.hex) }}
+                                    <div style="width: 120px">
+
+                                        <div class="input-group">
+                                            <input class="zk-update-qty input-group-field" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
+                                            <div class="input-group-button">
+                                                <input type="submit" class="button" value="Update">
                                             </div>
+                                        </div>
+                                    </div>
+                                </form>
 
-                                            {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
 
 
-                                            <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
-                                                {{ form.csrf() }}
-                                                {{ form.hidden('id', cartItem.id.hex) }}
-
-                                                <button type="submit" class="button tiny alert">
-                                                    <i class="fa fa-trash"></i>
-                                                    Remove item
-                                                </button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <update-quantity></update-quantity>
-                                            <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
-                                                {{ form.csrf() }}
-                                                {{ form.hidden('id', cartItem.id.hex) }}
-                                                <div style="width: 120px">
-
-                                                    <div class="input-group">
-                                                        <input class="input-group-field update-qty" type="text" name="quantity" value="{{ cartItem.quantity }}" size="3" maxlength="3">
-                                                        <div class="input-group-button">
-                                                            <input type="submit" class="button" value="Update">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            {% include '@admin/helper/unit-price.twig' with {'price': cartItem.price } only %}
-                                        </td>
-                                        {#<td>#}
-                                        {#{{ cartItem.price.quantityPrice | displayPrice }}#}
-                                        {#</td>#}
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                            </div>
+                            <div class="medium-4 columns">
+                                <h5 class="hide-for-medium">
+                                    <strong>Unit Price</strong>
+                                </h5>
+                                {{ cartItem.price.quantityPrice | displayPrice }}
+                            </div>
+                            <div class="medium-4 columns">
+                                {% include '@admin/helper/unit-price.twig' with {'price': cartItem.price } only %}
+                            </div>
                         </div>
-                        <div class="medium-4 medium-offset-8 column">
-                            {% include '@store/cart/parts/totals.twig' %}
-                        </div>
+                    {% endfor %}
+                    <div class="column">
+                        {% include '@store/cart/parts/totals.twig' %}
                     </div>
                 </div>
 
@@ -95,7 +97,7 @@
                     <div class="callout">
                         <div id="cart-cta-box">
                             <strong>
-                                Total ({{ cart.totalItems }} items):
+                                Total ({{ cart.totalQuantity }} items):
                                 <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
                             </strong>
                             {% include '@store/helper/checkout-button.twig' only %}
