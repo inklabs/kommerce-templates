@@ -7,47 +7,39 @@
 
 {% block content %}
     <div class="row">
-        <div class="medium-5 columns">
-                <a href="{{ productUrl(cartItem.product) }}">
-                    <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
-                </a>
-
-                <a href="{{ productUrl(cartItem.product) }}">
-                    <div class="product-name">{{ cartItem.product.name }}</div>
-                </a>
-
-                {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
-
-                    <div>Quantity in cart: {{ cartItem.quantity }}</div>
-
-                {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
-
-                <div>
-                    {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
-                </div>
-
+        <div class="small-3 column">
+            <a href="{{ productUrl(cartItem.product) }}">
+                <img src="{{ productImageUrl(cartItem.product) }}" />
+            </a>
         </div>
-        <div class="medium-7 columns">
+        <div class="small-9 column">
+            <a href="{{ productUrl(cartItem.product) }}">
+                <div class="product-name">{{ cartItem.product.name }}</div>
+            </a>
+            {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
+            <span>Quantity in cart: {{ cartItem.quantity }}</span>
+            {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
+            {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+        </div>
+        <div class="column">
             <div class="alert alert-info">
-                <div>
-                    <div>
-                        <a class="button secondary" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                <a class="button small expanded" href="{{ routeUrl('cart.get.show') }}">
+                    <i class="fa fa-shopping-cart"></i>
+                    View Cart
+                </a>
 
-                        {% include '@store/helper/checkout-button.twig' only %}
-                    </div>
+                {% include '@store/helper/checkout-button.twig' only %}
 
-                    <strong>Order subtotal:</strong>
-                    <span class="price-small">{{ cart.cartTotal.subtotal | displayPrice }}</span>
+                <strong>Order subtotal:</strong>
+                <span class="price-small">{{ cart.cartTotal.subtotal | displayPrice }}</span>
 
-                    <strong>{{ cart.totalItems }}</strong>
+                <strong>{{ cart.totalItems }}</strong>
 
-                    {% trans %}
-                        item in your Cart
-                    {% plural cart.totalItems %}
-                        items in your Cart
-                    {% endtrans %}
-
-                </div>
+                {% trans %}
+                    item in your Cart
+                {% plural cart.totalItems %}
+                    items in your Cart
+                {% endtrans %}
             </div>
         </div>
     </div>

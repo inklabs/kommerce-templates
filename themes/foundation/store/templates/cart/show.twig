@@ -17,7 +17,7 @@
         {% else %}
 
             <div class="row">
-                <div class="small-9 columns">
+                <div class="medium-9 columns">
                     <div class="row">
                         <div class="column">
                             <table class="table">
@@ -59,6 +59,7 @@
                                             </form>
                                         </td>
                                         <td>
+                                            <update-quantity></update-quantity>
                                             <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
                                                 {{ form.csrf() }}
                                                 {{ form.hidden('id', cartItem.id.hex) }}
@@ -90,7 +91,7 @@
                     </div>
                 </div>
 
-                <div class="small-3 columns">
+                <div class="medium-3 columns">
                     <div class="callout">
                         <div id="cart-cta-box">
                             <strong>

@@ -18,17 +18,24 @@ html {
 .zk-main-content {
     flex: 1;
     width: 100%;
+    padding-top: 1rem;
 }
 
 .zk-footer {
     min-height: 50px;
     justify-content: center;
+
+    @include breakpoint(small only) {
+        display: none;
+    }
 }
 
 // FIXED BODY
-//.zk-body {
-//    height: 100%;
-//    .zk-main-content {
-//        overflow: auto;
-//    }
-//}
+@include breakpoint(small only) {
+    .zk-body {
+        height: 100%;
+        .zk-main-content {
+            overflow: auto;
+        }
+    }
+}
