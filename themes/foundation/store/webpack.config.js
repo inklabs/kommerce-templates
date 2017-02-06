@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './assets'),
-        filename: 'js/[name].js',
+        filename: 'js/[name].package.js',
     },
     module: {
         rules: [
@@ -43,7 +43,7 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin({
             path: path.resolve(__dirname, './assets'),
-            filename: 'css/[name].css',
+            filename: 'css/[name].package.css',
             allChunks: true,
         }),
     ],
