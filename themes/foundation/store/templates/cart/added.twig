@@ -6,56 +6,54 @@
 {% block pageTitle %}{{ cartItem.product.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="small-5 columns">
+    <div class="row">
+        <div class="medium-5 columns">
+                <a href="{{ productUrl(cartItem.product) }}">
+                    <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
+                </a>
+
+                <a href="{{ productUrl(cartItem.product) }}">
+                    <div class="product-name">{{ cartItem.product.name }}</div>
+                </a>
+
+                {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
+
+                    <div>Quantity in cart: {{ cartItem.quantity }}</div>
+
+                {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
+
+                <div>
+                    {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+                </div>
+
+        </div>
+        <div class="medium-7 columns">
+            <div class="alert alert-info">
+                <div>
                     <div>
-                        <a href="{{ productUrl(cartItem.product) }}">
-                            <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
-                        </a>
-                    </div>
-                    <a href="{{ productUrl(cartItem.product) }}">
-                        <div class="product-name">{{ cartItem.product.name }}</div>
-                    </a>
+                        <a class="button secondary" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
 
-                    {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
-
-                        <div>Quantity in cart: {{ cartItem.quantity }}</div>
-
-                    {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
-
-                    <div>
-                        {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+                        {% include '@store/helper/checkout-button.twig' only %}
                     </div>
 
-            </div>
-            <div class="small-7 columns">
-                <div class="alert alert-info">
-                    <div class="row">
-                        <div class="column">
-                            <div>
-                                <a class="button secondary" href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                    <strong>Order subtotal:</strong>
+                    <span class="price-small">{{ cart.cartTotal.subtotal | displayPrice }}</span>
 
-                                {% include '@store/helper/checkout-button.twig' only %}
-                            </div>
-                            <strong>Order subtotal:</strong> <span class="price-small">
-                                {{ cart.cartTotal.subtotal | displayPrice }}
-                            </span>
-                            <br />
-                            <strong>{{ cart.totalItems }}</strong>
-                            {% trans %}
-                                item in your Cart
-                            {% plural cart.totalItems %}
-                                items in your Cart
-                            {% endtrans %}
-                        </div>
-                    </div>
+                    <strong>{{ cart.totalItems }}</strong>
+
+                    {% trans %}
+                        item in your Cart
+                    {% plural cart.totalItems %}
+                        items in your Cart
+                    {% endtrans %}
+
                 </div>
             </div>
         </div>
-        <hr />
-        {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
-            {% block title %}Recommended for you{% endblock %}
-        {% endembed %}
     </div>
+
+    {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
+        {% block title %}Recommended for you{% endblock %}
+    {% endembed %}
+
 {% endblock %}

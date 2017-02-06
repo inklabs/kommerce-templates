@@ -1,11 +1,13 @@
 {# @var order \inklabs\kommerce\EntityDTO\OrderDTO #}
-<div class="row column">
-    <h2>Order Details</h2>
-    Ordered on {{ order.created | formatDate }}
-    |
-    Order #{{ order.referenceNumber }}
-    |
-    {% include '@admin/helper/order-status.twig' with {'order': order} only %}
+<div class="row">
+    <div class="column">
+        <h2>Order Details</h2>
+        Ordered on {{ order.created | formatDate }}
+        |
+        Order #{{ order.referenceNumber }}
+        |
+        {% include '@admin/helper/order-status.twig' with {'order': order} only %}
+    </div>
 </div>
 
 <div class="row">

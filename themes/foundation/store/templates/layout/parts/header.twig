@@ -1,70 +1,67 @@
-<nav class="zk-menu">
-    <div class="title-bar" data-responsive-toggle="zk-menu" data-hide-for="medium">
-        <button class="menu-icon" type="button" data-toggle="zk-menu"></button>
-        <div class="title-bar-title">Menu</div>
-    </div>
+<header class="zk-menu">
+    <nav class="zk-title-bar title-bar" data-responsive-toggle="zk-js-topbar" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle></button>
+        <div class="title-bar-title">{{ SITE_NAME | default('Kommerce Foundation') }}</div>
+    </nav>
 
-    <div class="top-bar" id="zk-topbar-search">
-        <div class="top-bar-left">
-            <ul class="dropdown menu" data-dropdown-menu>
-                <li class="menu-text">
-                    <a class="zk-topbar-brand" href="{{ routeUrl('home') }}">
-                        {{ SITE_NAME | default('Kommerce Foundation') }}
-                    </a>
-                </li>
-                <li style="width:50%">
-                    <div class="input-group">
-                        <input class="input-group-field" type="search" placeholder="Search" style="min-width:100%;">
-                        <div class="input-group-button">
-                            <input type="submit" class="button" value="Search">
+    <nav id="zk-js-topbar">
+        <div class="zk-topbar-search top-bar">
+            <div class="top-bar-left">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="menu-text hide-for-small-only">
+                        <a class="zk-topbar-brand" href="{{ routeUrl('home') }}">
+                            {{ SITE_NAME | default('Kommerce Foundation') }}
+                        </a>
+                    </li>
+                    <li style="width:50%">
+                        <div class="input-group">
+                            <input class="input-group-field" type="search" placeholder="Search" style="min-width:100%;">
+                            <div class="input-group-button">
+                                <input type="submit" class="button" value="Search">
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="top-bar-right">
-            <ul class="menu">
-            </ul>
-        </div>
-    </div>
-
-    <div class="top-bar" id="zk-topbar-menu">
-        <div class="top-bar-left">
-            <ul class="menu">
-                <li>
-                    <a href="#">Products</a>
-                </li>
-                <li>
-                    <a href="#">Tags</a>
-                </li>
-                <li>
-                    <a href="#">Categories</a>
-                </li>
-            </ul>
-        </div>
-        <div class="top-bar-right">
-            <ul class="menu">
-                <li>
-                    <a href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> Cart</a>        
-                </li>
-                {% if user is not empty %}
+        <div class="zk-topbar-menu top-bar">
+            <div class="top-bar-left">
+                <ul class="menu">
                     <li>
-                        <form action="{{ routeUrl('user.logout') }}"
+                        <a href="#">Products</a>
+                    </li>
+                    <li>
+                        <a href="#">Tags</a>
+                    </li>
+                    <li>
+                        <a href="#">Categories</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="menu">
+                    <li>
+                        <a href="{{ routeUrl('cart.get.show') }}"><i class="fa fa-shopping-cart"></i> Cart</a>
+                    </li>
+                    {% if user is not empty %}
+                        <li>
+			<form action="{{ routeUrl('user.logout') }}"
                               method="post">
                             {{ form.csrf() }}
                             <button type="submit" class="btn btn-link">Sign Out</button>
                         </form>
-                    </li>
-                    <li class="divider-vertical hidden-xs"></li>
-                    <li>
-                        <a href="{{ routeUrl('user.account') }}">Account</a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a href="{{ routeUrl('user.login') }}">Sign In</a>
-                    </li>
-                {% endif %}
-            </ul>
+                        </li>
+                        <li class="divider-vertical hidden-xs"></li>
+                        <li>
+                            <a href="{{ routeUrl('user.account') }}">Account</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ routeUrl('user.login') }}">Sign In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>

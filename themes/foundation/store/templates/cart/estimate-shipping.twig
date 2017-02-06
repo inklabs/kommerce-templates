@@ -1,3 +1,5 @@
+{#@TODO this should be a component that pops up#}
+
 {# @var shipmentRates \inklabs\kommerce\EntityDTO\ShipmentRateDTO[] #}
 {# @var shipping array #}
 
@@ -8,7 +10,7 @@
 {% block content %}
     <div class="row">
         <div class="column">
-            <div class="well well-sm">
+            <div class="callout">
                 <h5>Estimate Shipping &amp; Tax</h5>
                 <form action="{{ routeUrl('cart.estimate-shipping') }}" method="post">
                     {{ form.csrf() }}
