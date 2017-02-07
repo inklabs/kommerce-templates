@@ -2,18 +2,19 @@
 
 class AdminCouponCest
 {
-    public function viewAllCoupons(AcceptanceTester $I)
+    public function accessDeniedViewingCoupons(AcceptanceTester $I)
     {
-        $I->wantTo('view all coupons');
+        $I->wantTo('ensure admin-only access for coupons');
         $I->amOnPage('/admin/promotion/coupon');
-        $I->see('Coupons');
+        $I->seeAccessDenied();
     }
 
     public function crudCoupon(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete coupon');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/promotion/coupon');
-        $I->see('Coupons');
+        $I->see('Coupons', 'h1');
 
         $name = 'Test Coupon';
         $code = 'TC';

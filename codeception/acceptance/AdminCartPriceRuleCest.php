@@ -2,18 +2,19 @@
 
 class AdminCartPriceRuleCest
 {
-    public function viewAllCartPriceRules(AcceptanceTester $I)
+    public function accessDeniedViewingCartPriceRules(AcceptanceTester $I)
     {
-        $I->wantTo('view all cart price rules');
+        $I->wantTo('ensure admin-only access for cart price rules');
         $I->amOnPage('/admin/promotion/cart-price-rule');
-        $I->see('Cart Price Rules');
+        $I->seeAccessDenied();
     }
 
     public function crudCartPriceRule(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete cart price rule');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/promotion/cart-price-rule');
-        $I->see('Cart Price Rules');
+        $I->see('Cart Price Rules', 'h1');
 
         $name = 'Test CartPriceRule';
         $maxRedemptions = '100';

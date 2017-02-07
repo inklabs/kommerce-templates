@@ -2,18 +2,19 @@
 
 class AdminOptionCest
 {
-    public function viewAllOptions(AcceptanceTester $I)
+    public function accessDeniedViewingOptions(AcceptanceTester $I)
     {
-        $I->wantTo('view all options');
+        $I->wantTo('ensure admin-only access for options');
         $I->amOnPage('/admin/option');
-        $I->see('Options');
+        $I->seeAccessDenied();
     }
 
     public function crudOption(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete option');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/option');
-        $I->see('Options');
+        $I->see('Options', 'h1');
 
         $name = 'Test Option';
 

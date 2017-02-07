@@ -2,18 +2,19 @@
 
 class AdminAttributeCest
 {
-    public function viewAllAttributes(AcceptanceTester $I)
+    public function accessDeniedViewingAttributes(AcceptanceTester $I)
     {
-        $I->wantTo('view all attributes');
+        $I->wantTo('ensure admin-only access for attributes');
         $I->amOnPage('/admin/attribute');
-        $I->see('Attributes');
+        $I->seeAccessDenied();
     }
 
     public function crudAttribute(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete attribute');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/attribute');
-        $I->see('Attributes');
+        $I->see('Attributes', 'h1');
 
         $name = 'Test Attribute';
         $choiceType = 'Image Link';

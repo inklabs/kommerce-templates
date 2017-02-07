@@ -2,10 +2,10 @@
 
 class AdminUserCest
 {
-    public function viewAllUsers(AcceptanceTester $I)
+    public function accessDeniedViewingUsers(AcceptanceTester $I)
     {
-        $I->wantTo('view all users');
+        $I->wantTo('ensure admin-only access for users');
         $I->amOnPage('/admin/user');
-        $I->see('Users');
+        $I->seeAccessDenied();
     }
 }

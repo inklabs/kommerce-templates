@@ -19,7 +19,15 @@ class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
 
-        const SHIP_METHOD_SELECTOR = 'input[class="ship-method"]:nth-child(1)';
+    const SHIP_METHOD_SELECTOR = 'input[class="ship-method"]:nth-child(1)';
+    const ADMIN_EMAIL = 'aaron@example.com';
+    const ADMIN_PASS = 'Test123!';
+
+    public function seeAccessDenied()
+    {
+        $I = $this;
+        $I->see('Access Denied');
+    }
 
     /**
      * Define custom actions here
@@ -143,5 +151,16 @@ class AcceptanceTester extends \Codeception\Actor
         $I->click('Buy Shipping Label');
         $I->see('Added Shipping Label');
         $I->see('Shipped', '.order-status');
+    }
+
+    public function loginAsAdmin()
+    {
+        $I = $this;
+        $I->amOnPage('/admin/login');
+        $I->see('Please Sign In');
+        $I->fillField('Email Address', self::ADMIN_EMAIL);
+        $I->fillField('Password', self::ADMIN_PASS);
+        $I->click('Sign In', '#login');
+        $I->see('Orders');
     }
 }

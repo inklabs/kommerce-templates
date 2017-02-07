@@ -2,18 +2,19 @@
 
 class AdminCatalogPromtionCest
 {
-    public function viewAllCatalogPromotions(AcceptanceTester $I)
+    public function accessDeniedViewingCatalogPromotions(AcceptanceTester $I)
     {
-        $I->wantTo('view all catalog promotions');
+        $I->wantTo('ensure admin-only access for catalog promotions');
         $I->amOnPage('/admin/promotion/catalog-promotion');
-        $I->see('Catalog Promotions');
+        $I->see('Access denied');
     }
 
     public function crudCatalogPromotion(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete catalog promotion');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/promotion/catalog-promotion');
-        $I->see('Catalog Promotions');
+        $I->see('Catalog Promotions', 'h1');
 
         $name = 'Test CatalogPromotion';
         $discountType = 'Percent';

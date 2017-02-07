@@ -4,18 +4,20 @@ use inklabs\kommerce\Lib\Uuid;
 
 class AdminTagCest
 {
-    public function viewAllTags(AcceptanceTester $I)
+    public function accessDeniedViewingTags(AcceptanceTester $I)
     {
-        $I->wantTo('view all tags');
-        $I->amOnPage('/admin/tag');
-        $I->see('Tags');
+        // TODO:
+//        $I->wantTo('ensure admin-only access for tags');
+//        $I->amOnPage('/admin/tag');
+//        $I->seeAccessDenied();
     }
 
     public function crudTag(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete tag');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/tag');
-        $I->see('Tags');
+        $I->see('Tags', 'h1');
 
         $name = 'Test Tag';
         $code = 'TC-' . Uuid::uuid4();

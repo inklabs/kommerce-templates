@@ -4,16 +4,18 @@ use inklabs\kommerce\Lib\Uuid;
 
 class AdminProductCest
 {
-    public function viewAllProducts(AcceptanceTester $I)
+    public function accessDeniedViewingProducts(AcceptanceTester $I)
     {
-        $I->wantTo('view all products');
-        $I->amOnPage('/admin/product');
-        $I->see('Products');
+        // TODO:
+//        $I->wantTo('ensure admin-only access for products');
+//        $I->amOnPage('/admin/product');
+//        $I->seeAccessDenied();
     }
 
     public function crudProduct(AcceptanceTester $I)
     {
         $I->wantTo('create/update/delete product');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/product');
         $I->see('Products');
 

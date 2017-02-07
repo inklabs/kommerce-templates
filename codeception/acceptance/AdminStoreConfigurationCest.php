@@ -2,16 +2,17 @@
 
 class AdminStoreConfigurationCest
 {
-    public function viewAllSettings(AcceptanceTester $I)
+    public function accessDeniedViewingSettings(AcceptanceTester $I)
     {
-        $I->wantTo('view store configuration');
+        $I->wantTo('ensure admin-only access for store configuration');
         $I->amOnPage('/admin/settings/store');
-        $I->see('Configuration');
+        $I->seeAccessDenied();
     }
 
     public function viewShipping(AcceptanceTester $I)
     {
         $I->wantTo('view shipping configuration');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/settings/store');
         $I->see('Configuration');
         $I->click('Shipping');
@@ -21,6 +22,7 @@ class AdminStoreConfigurationCest
     public function viewPayment(AcceptanceTester $I)
     {
         $I->wantTo('view payment configuration');
+        $I->loginAsAdmin();
         $I->amOnPage('/admin/settings/store');
         $I->see('Configuration');
         $I->click('Payments');
