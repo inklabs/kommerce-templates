@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include '@store/layout/parts/head.twig' with {
+    'pageTitle': block('pageTitle'),
+    'pageDescription': block('pageDescription'),
+    'pageCanonicalUrl': block('pageCanonicalUrl')
+    } %}
+</head>
+<body class="zk-body-product">
+    <main class="zk-main-content-product">
+        {% include '@store/layout/parts/header.twig' %}
+        {% include '@store/layout/parts/base-modal.twig' %}
+        {% include '@store/layout/parts/flash-messages.twig' %}
+        {% include '@store/layout/parts/breadcrumbs.twig' %}
+        {% block content %}{% endblock %}
+        {% include '@store/layout/parts/footer.twig' %}
+    </main>
+    {% include '@store/helper/cart-sidebar.twig' with { 'cart': cart } %}
+    {% include '@store/layout/parts/javascript.twig' %}
+
+    {% block extraScripts %}{% endblock %}
+</body>
+</html>

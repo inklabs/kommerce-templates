@@ -1,0 +1,11 @@
+{# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
+{# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
+
+{% if cart.cartItems is not empty %}
+<aside class="zk-cart-sidebar show-for-large">
+    <h4>Your Cart</h4>
+    {% for product in cart.cartItems %}
+        {{ product.product | json_encode }}
+    {% endfor %}
+</aside>
+{% endif %}

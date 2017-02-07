@@ -12,13 +12,16 @@ html {
 }
 
 .zk-body {
+    min-height: 100%;
     width: 100%;
 }
 
 .zk-main-content {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    height: 100%;
     width: 100%;
-    padding-top: 1rem;
 }
 
 .zk-footer {

@@ -1,0 +1,20 @@
+.zk-body-product {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.zk-main-content-product {
+  display: block;
+  flex: 4;
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.zk-cart-sidebar {
+  flex: 1;
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
