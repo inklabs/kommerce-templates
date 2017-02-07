@@ -7,7 +7,6 @@
 {% block content %}
 
     <div id="zk-shopping-cart">
-        <update-quantity></update-quantity>
         {% if cart.cartItems is empty %}
             <div class="row">
                 <div class="columns">
@@ -17,45 +16,49 @@
         {% else %}
 
             <div class="row">
-                <div class="medium-9 columns">
-                    <div class="row hide-for-small-only">
-                        <div class="medium-4 column">Item</div>
-                        <div class="medium-4 column">Quantity</div>
-                        <div class="medium-4 column">Unit Price</div>
+                <div class="small-12 medium-9 columns">
+                    <div class="row hide-for-small-only" style="padding-bottom: 15px;">
+                        <div class="medium-6 column">Item</div>
+                        <div class="medium-3 column">Quantity</div>
+                        <div class="medium-3 column">Unit Price</div>
                     </div>
                     {% for cartItem in cart.cartItems %}
                         <div class="row">
-                            <div class="medium-4 columns" class="cart-product-image">
+                            <div class="small-12 medium-6 columns" class="cart-product-image">
                                 <h5 class="hide-for-medium">
                                     <strong>Item</strong>
                                 </h5>
 
-                                <div>
-                                    <a href="{{ productUrl(cartItem.product) }}">
-                                        <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
-                                    </a>
+                                <div class="media-object stack-for-small">
+                                    <div class="media-object-section">
+                                        <div class="thumbnail">
+                                            <a href="{{ productUrl(cartItem.product) }}">
+                                                <img src="{{ productImageUrl(cartItem.product) }}" width="110" height="110" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media-object-section">
+                                        <h4>
+                                            <a href="{{ productUrl(cartItem.product) }}">
+                                                <span class="cart-product-title">{{ cartItem.product.name }}</span>
+                                            </a>
+                                        </h4>
+                                        {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+
+                                        <div class="hidden-sm text-muted">
+                                            <small>{{ cartItem.fullSku }}</small>
+                                        </div>
+
+                                        <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
+                                            {{ form.csrf() }}
+                                            {{ form.hidden('id', cartItem.id.hex) }}
+                                            <input class="zk-submit-anchor" type="submit" value="Remove Item"/>
+                                        </form>
+                                    </div>
                                 </div>
-
-                                <a href="{{ productUrl(cartItem.product) }}">
-                                    <span class="cart-product-title">{{ cartItem.product.name }}</span>
-                                </a>
-
-                                <div class="hidden-sm text-muted">
-                                    <small>{{ cartItem.fullSku }}</small>
-                                </div>
-
-                                {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
-
-
-                                <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
-                                    {{ form.csrf() }}
-                                    {{ form.hidden('id', cartItem.id.hex) }}
-
-                                    <input class="zk-submit-anchor" type="submit" value="Remove Item"/>
-                                </form>
 
                             </div>
-                            <div class="medium-4 columns">
+                            <div class="small-12 medium-3 columns">
                                 <h5 class="hide-for-medium">
                                     <strong>Quantity</strong>
                                 </h5>
@@ -73,27 +76,24 @@
                                         </div>
                                     </div>
                                 </form>
-
-
-
                             </div>
-                            <div class="medium-4 columns">
+
+                            <div class="small-12 medium-3 columns">
                                 <h5 class="hide-for-medium">
                                     <strong>Unit Price</strong>
                                 </h5>
-                                {{ cartItem.price.quantityPrice | displayPrice }}
-                            </div>
-                            <div class="medium-4 columns">
-                                {% include '@admin/helper/unit-price.twig' with {'price': cartItem.price } only %}
+                                <p>{{ cartItem.price.quantityPrice | displayPrice }}</p>
+                                <p>{% include '@admin/helper/unit-price.twig' with {'price': cartItem.price } only %}</p>
                             </div>
                         </div>
+                        <hr>
                     {% endfor %}
                     <div class="column">
                         {% include '@store/cart/parts/totals.twig' %}
                     </div>
                 </div>
 
-                <div class="medium-3 columns">
+                <div class="small-12 medium-3 columns">
                     <div class="callout">
                         <div id="cart-cta-box">
                             <strong>

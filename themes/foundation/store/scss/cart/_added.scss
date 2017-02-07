@@ -1,0 +1,29 @@
+.zk-media-object {
+  img {
+    max-height: 100px;
+  }
+}
+
+.zk-cart-subtotal {
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid $light-gray;
+  min-height: rem-calc(125);
+}
+
+.zk-cart-1,
+.zk-cart-2 {
+  padding-right: 0.4rem;
+}
+
+.zk-cart-3 {
+  color: $alert-color;
+  font-weight: bold;
+  padding-right: 1rem;
+}
+
+.zk-cart-subtotal-menu {
+  margin-right: 1rem;
+}

@@ -6,43 +6,60 @@
 {% block pageTitle %}{{ cartItem.product.name }}{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="small-3 column">
-            <a href="{{ productUrl(cartItem.product) }}">
-                <img src="{{ productImageUrl(cartItem.product) }}" />
-            </a>
-        </div>
-        <div class="small-9 column">
-            <a href="{{ productUrl(cartItem.product) }}">
-                <div class="product-name">{{ cartItem.product.name }}</div>
-            </a>
-            {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
-            <span>Quantity in cart: {{ cartItem.quantity }}</span>
-            {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
-            {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
-        </div>
-        <div class="column">
-            <div class="alert alert-info">
-                <a class="button small expanded" href="{{ routeUrl('cart.get.show') }}">
-                    <i class="fa fa-shopping-cart"></i>
-                    View Cart
-                </a>
 
-                {% include '@store/helper/checkout-button.twig' only %}
-
-                <strong>Order subtotal:</strong>
-                <span class="price-small">{{ cart.cartTotal.subtotal | displayPrice }}</span>
-
-                <strong>{{ cart.totalItems }}</strong>
-
-                {% trans %}
-                    item in your Cart
-                {% plural cart.totalItems %}
-                    items in your Cart
-                {% endtrans %}
+    <div style="height:100%;">
+        <div class="zk-media-object media-object">
+            <div class="media-object-section">
+                <div class="thumbnail">
+                    <img src="{{ productImageUrl(cartItem.product) }}" />
+                </div>
+            </div>
+            <div class="media-object-section">
+                <h4>
+                    <a href="{{ productUrl(cartItem.product) }}">
+                        <div class="product-name">{{ cartItem.product.name }}</div>
+                    </a>
+                </h4>
+                <div>
+                    {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
+                    <span>Quantity in cart: {{ cartItem.quantity }}</span>
+                    {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
+                    {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+                </div>
             </div>
         </div>
     </div>
+
+    <section>
+        <div class="zk-cart-subtotal">
+            <span class="zk-cart-1">Cart subtotal</span>
+            <span class="zk-cart-2">
+                ({{ cart.totalItems }}
+                {% trans %}
+                    item):
+                {% plural cart.totalItems %}
+                    items):
+                {% endtrans %}
+            </span>
+            <span class="zk-cart-3">{{ cart.cartTotal.subtotal | displayPrice }}</span>
+            <div class="zk-cart-4">
+                <ul class="menu">
+                    <li class="zk-cart-subtotal-menu">
+                        <a class="button secondary hollow" href="{{ routeUrl('cart.get.show') }}">
+                            <i class="fa fa-shopping-cart"></i>
+                            View Cart
+                        </a>
+                    </li>
+                    <li>
+                        {% include '@store/helper/checkout-button.twig' only %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <hr>
 
     {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
         {% block title %}Recommended for you{% endblock %}

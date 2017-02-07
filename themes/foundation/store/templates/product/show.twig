@@ -11,7 +11,7 @@
 
 
         <div class="row">
-            <div class="medium-3 columns">
+            <div class="small-12 medium-3 columns">
                 <img class="thumbnail" src="{{ productImageUrl(product) }}">
                 <div class="row small-up-4">
                     {% for image in product.images %}
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="medium-6 columns">
+            <div class="small-12 medium-6 columns">
                 <h3>{{ product.name }}</h3>
 
                 {% if product.description is not empty %}
@@ -58,7 +58,7 @@
                 {% endif %}
             </div>
 
-            <div class="medium-3 column">
+            <div class="small-12 medium-3 column">
 
                 {% if product.isInventoryRequired %}
                     Availability:

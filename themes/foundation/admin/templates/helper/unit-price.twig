@@ -5,7 +5,6 @@
     <span class="price-strike" data-toggle="tooltip" title="{{ discountNames }}">
         {{ price.origUnitPrice | displayPrice }}
     </span>
-    <span> </span>
 {% elseif price.unitPrice < price.origUnitPrice %}
     {% set promotionNames = [] %}
 
