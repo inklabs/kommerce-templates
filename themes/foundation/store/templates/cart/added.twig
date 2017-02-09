@@ -6,42 +6,43 @@
 {% block pageTitle %}{{ cartItem.product.name }}{% endblock %}
 
 {% block content %}
-
-    <div style="height:100%;">
-        <div class="zk-media-object media-object">
-            <div class="media-object-section">
-                <div class="thumbnail">
-                    <img src="{{ productImageUrl(cartItem.product) }}" />
+    <section class="zk-cart-added">
+        <div class="zk-added-item">
+            <div class="zk-media-object media-object">
+                <div class="media-object-section">
+                    <div class="thumbnail">
+                        <img src="{{ productImageUrl(cartItem.product) }}" />
+                    </div>
                 </div>
-            </div>
-            <div class="media-object-section">
-                <h4>
-                    <a href="{{ productUrl(cartItem.product) }}">
-                        <div class="product-name">{{ cartItem.product.name }}</div>
-                    </a>
-                </h4>
-                <div>
-                    {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
-                    <span>Quantity in cart: {{ cartItem.quantity }}</span>
-                    {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
-                    {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+                <div class="media-object-section">
+                    <h4>
+                        <a href="{{ productUrl(cartItem.product) }}">
+                            <div class="product-name">{{ cartItem.product.name }}</div>
+                        </a>
+                    </h4>
+                    <div>
+                        {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
+                        <span>Quantity in cart: {{ cartItem.quantity }}</span>
+                        {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
+                        {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <section>
         <div class="zk-cart-subtotal">
-            <span class="zk-cart-1">Cart subtotal</span>
-            <span class="zk-cart-2">
+            <div>
+                <span class="zk-cart-1">Cart subtotal</span>
+                <span class="zk-cart-2">
                 ({{ cart.totalItems }}
-                {% trans %}
+                    {% trans %}
                     item):
-                {% plural cart.totalItems %}
+                    {% plural cart.totalItems %}
                     items):
-                {% endtrans %}
+                    {% endtrans %}
             </span>
-            <span class="zk-cart-3">{{ cart.cartTotal.subtotal | displayPrice }}</span>
+                <span class="zk-cart-3">{{ cart.cartTotal.subtotal | displayPrice }}</span>
+            </div>
             <div class="zk-cart-4">
                 <ul class="menu">
                     <li class="zk-cart-subtotal-menu">
