@@ -6,7 +6,7 @@ class AdminCouponCest
     {
         $I->wantTo('ensure admin-only access for coupons');
         $I->amOnPage('/admin/promotion/coupon');
-        $I->seeAccessDenied();
+        $I->seeAdminLoginPage();
     }
 
     public function crudCoupon(AcceptanceTester $I)

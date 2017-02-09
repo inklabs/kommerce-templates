@@ -6,7 +6,7 @@ class AdminOptionCest
     {
         $I->wantTo('ensure admin-only access for options');
         $I->amOnPage('/admin/option');
-        $I->seeAccessDenied();
+        $I->seeAdminLoginPage();
     }
 
     public function crudOption(AcceptanceTester $I)

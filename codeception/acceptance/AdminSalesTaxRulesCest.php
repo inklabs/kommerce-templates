@@ -6,6 +6,6 @@ class AdminSalesTaxRulesCest
     {
         $I->wantTo('ensure admin-only access for sales tax settings');
         $I->amOnPage('/admin/settings/sales-tax');
-        $I->seeAccessDenied();
+        $I->seeAdminLoginPage();
     }
 }

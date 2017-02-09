@@ -6,7 +6,7 @@ class AdminCatalogPromtionCest
     {
         $I->wantTo('ensure admin-only access for catalog promotions');
         $I->amOnPage('/admin/promotion/catalog-promotion');
-        $I->see('Access denied');
+        $I->seeAdminLoginPage();
     }
 
     public function crudCatalogPromotion(AcceptanceTester $I)

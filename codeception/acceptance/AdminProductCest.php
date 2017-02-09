@@ -6,10 +6,9 @@ class AdminProductCest
 {
     public function accessDeniedViewingProducts(AcceptanceTester $I)
     {
-        // TODO:
-//        $I->wantTo('ensure admin-only access for products');
-//        $I->amOnPage('/admin/product');
-//        $I->seeAccessDenied();
+        $I->wantTo('ensure admin-only access for products');
+        $I->amOnPage('/admin/product');
+        $I->seeAdminLoginPage();
     }
 
     public function crudProduct(AcceptanceTester $I)

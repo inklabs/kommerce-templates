@@ -6,7 +6,7 @@ class AdminOrderCest
     {
         $I->wantTo('ensure anonymous users cannot access the admin panel');
         $I->amOnPage('/admin/order');
-        $I->see('Access Denied');
+        $I->seeAdminLoginPage();
     }
 
     public function viewAllOrders(AcceptanceTester $I)

@@ -6,7 +6,7 @@ class AdminAttributeCest
     {
         $I->wantTo('ensure admin-only access for attributes');
         $I->amOnPage('/admin/attribute');
-        $I->seeAccessDenied();
+        $I->seeAdminLoginPage();
     }
 
     public function crudAttribute(AcceptanceTester $I)

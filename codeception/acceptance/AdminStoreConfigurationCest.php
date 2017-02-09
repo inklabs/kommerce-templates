@@ -6,7 +6,7 @@ class AdminStoreConfigurationCest
     {
         $I->wantTo('ensure admin-only access for store configuration');
         $I->amOnPage('/admin/settings/store');
-        $I->seeAccessDenied();
+        $I->seeAdminLoginPage();
     }
 
     public function viewShipping(AcceptanceTester $I)

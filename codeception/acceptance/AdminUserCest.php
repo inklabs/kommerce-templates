@@ -6,6 +6,6 @@ class AdminUserCest
     {
         $I->wantTo('ensure admin-only access for users');
         $I->amOnPage('/admin/user');
-        $I->seeAccessDenied();
+        $I->seeAdminLoginPage();
     }
 }

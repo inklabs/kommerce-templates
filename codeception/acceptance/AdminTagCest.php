@@ -6,10 +6,9 @@ class AdminTagCest
 {
     public function accessDeniedViewingTags(AcceptanceTester $I)
     {
-        // TODO:
-//        $I->wantTo('ensure admin-only access for tags');
-//        $I->amOnPage('/admin/tag');
-//        $I->seeAccessDenied();
+        $I->wantTo('ensure admin-only access for tags');
+        $I->amOnPage('/admin/tag');
+        $I->seeAdminLoginPage();
     }
 
     public function crudTag(AcceptanceTester $I)

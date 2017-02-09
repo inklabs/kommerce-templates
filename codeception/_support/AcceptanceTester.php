@@ -23,10 +23,10 @@ class AcceptanceTester extends \Codeception\Actor
     const ADMIN_EMAIL = 'aaron@example.com';
     const ADMIN_PASS = 'Test123!';
 
-    public function seeAccessDenied()
+    public function seeAdminLoginPage()
     {
         $I = $this;
-        $I->see('Access Denied');
+        $I->see('Please Sign In', 'h1');
     }
 
     /**

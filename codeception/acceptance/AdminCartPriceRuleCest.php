@@ -6,7 +6,7 @@ class AdminCartPriceRuleCest
     {
         $I->wantTo('ensure admin-only access for cart price rules');
         $I->amOnPage('/admin/promotion/cart-price-rule');
-        $I->seeAccessDenied();
+        $I->seeAdminLoginPage();
     }
 
     public function crudCartPriceRule(AcceptanceTester $I)
