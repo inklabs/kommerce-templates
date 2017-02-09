@@ -1,15 +1,18 @@
 .zk-cart-added {
-  border: {
-    top: 1px solid $light-gray;
-    bottom: 1px solid $light-gray;
-  }
+  margin-top: 1rem;
+  border-bottom: 1px solid $light-gray;
 
   > h2 {
+    font-size: rem-calc(24);
     text-align: center;
   }
 
   .zk-media-object {
     margin-bottom: 0;
+
+    h4 {
+      font-size: rem-calc(20);
+    }
 
     img {
       max-height: 75px;
@@ -37,7 +40,9 @@
   .zk-cart-3 {
     color: $alert-color;
     font-weight: bold;
-    padding-right: 1rem;
+    @include breakpoint(medium) {
+      padding-right: 1rem;
+    }
   }
 }
 

@@ -7,6 +7,7 @@
 
 {% block content %}
     <section class="zk-cart-added">
+        <h2>Added to Cart</h2>
         <div class="zk-added-item">
             <div class="zk-media-object media-object">
                 <div class="media-object-section">
@@ -17,13 +18,16 @@
                 <div class="media-object-section">
                     <h4>
                         <a href="{{ productUrl(cartItem.product) }}">
-                            <div class="product-name">{{ cartItem.product.name }}</div>
+                            {{ cartItem.product.name }}
                         </a>
+                        <small>
+                            {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
+                        </small>
                     </h4>
                     <div>
                         {% include '@store/helper/rating-stars.twig' with {'rating': cartItem.product.rating } only %}
                         <span>Quantity in cart: {{ cartItem.quantity }}</span>
-                        {% include '@store/helper/price.twig' with {'price': cartItem.price } only %}
+
                         {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': cartItem } only %}
                     </div>
                 </div>
@@ -64,6 +68,7 @@
 
     {% embed '@store/helper/recommended-products.twig' with {'products': recommendedProducts } only %}
         {% block title %}Recommended for you{% endblock %}
+        {% block blockSizes %}small-up-3 medium-up-4 large-up-6{% endblock %}
     {% endembed %}
 
 {% endblock %}

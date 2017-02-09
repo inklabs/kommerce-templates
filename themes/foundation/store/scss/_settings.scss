@@ -50,14 +50,14 @@ $global-width: 100%;
 $global-lineheight: 1.5;
 $foundation-palette: (
         primary: #20A39E,
-        secondary: #D6D9DB,
+        secondary: #A4A7A8,
         success: #6BF178,
         warning: #E8C547,
         alert: #F95738,
 );
-//$light-gray: #e6e6e6;
-//$medium-gray: #cacaca;
-//$dark-gray: #8a8a8a;
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$dark-gray: #8a8a8a;
 //$black: #0a0a0a;
 //$white: #fefefe;
 //$body-background: $white;
@@ -130,7 +130,7 @@ $foundation-palette: (
 //);
 //$header-text-rendering: optimizeLegibility;
 //$small-font-size: 80%;
-//$header-small-font-color: $medium-gray;
+$header-small-font-color: $dark-gray;
 //$paragraph-lineheight: 1.6;
 //$paragraph-margin-bottom: 1rem;
 //$paragraph-text-rendering: optimizeLegibility;
