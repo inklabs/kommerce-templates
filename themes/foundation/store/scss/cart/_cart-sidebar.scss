@@ -1,0 +1,32 @@
+.zk-cart-sidebar {
+  background-color: $light-gray;
+  padding: rem-calc(60 16 0);
+}
+
+.zk-cart-sidebar-products {
+  padding: 0.8rem 0;
+}
+
+.zk-cart-sidebar-product {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid $medium-gray;
+  background-color: $white;
+
+  img {
+    max-width: rem-calc(50);
+    //height: auto;
+  }
+
+  p {
+    margin: 0;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

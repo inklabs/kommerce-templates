@@ -1,6 +1,11 @@
 .zk-cart-added {
   margin-top: 1rem;
   border-bottom: 1px solid $light-gray;
+  padding: 0 1rem;
+
+  @include breakpoint(large) {
+    padding: 0;
+  }
 
   > h2 {
     font-size: rem-calc(24);
@@ -26,7 +31,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: rem-calc(15 0);
+  padding: rem-calc(15);
 
   @include breakpoint(small only) {
     flex-direction: column;
