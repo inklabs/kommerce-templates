@@ -1,24 +1,28 @@
-<div class="row medium-up-3 large-up-4">
-    {% if relatedProducts is not empty %}
-        {% for product in relatedProducts %}
-            <div class="column">
+<article class="zk-related-products">
+    <h5>Related Products</h5>
 
-                <a href="{{ productUrl(product) }}">
-                    <img class="thumbnail" src="{{ productImageUrl(product) }}">
-                    <div class="product-name">{{ product.name }}</div>
-                    <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
-                </a>
+    <div class="row medium-up-3 large-up-4">
+        {% if relatedProducts is not empty %}
+            {% for product in relatedProducts %}
+                <div class="column">
 
-                {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+                    <a href="{{ productUrl(product) }}">
+                        <img class="thumbnail" src="{{ productImageUrl(product) }}">
+                        <div class="product-name">{{ product.name }}</div>
+                        <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
+                    </a>
 
-                {% if not product.isInStock %}
-                    <div class="availability">
-                        <span class="out-of-stock">Out of Stock</span>
-                    </div>
-                {% elseif product.isPriceVisible %}
-                    {% include '@store/helper/price.twig' with {'price': product.price } only %}
-                {% endif %}
-            </div>
-        {% endfor %}
-    {% endif %}
-</div>
+                    {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+
+                    {% if not product.isInStock %}
+                        <div class="availability">
+                            <span class="out-of-stock">Out of Stock</span>
+                        </div>
+                    {% elseif product.isPriceVisible %}
+                        {% include '@store/helper/price.twig' with {'price': product.price } only %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</article>
