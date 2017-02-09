@@ -1,0 +1,14 @@
+<article class="zk-tags">
+    <h5>Tags</h5>
+    <ul class="zk-tag-list">
+        {% for tag in tags if tag.isVisible %}
+            {% if tag.description is not empty %}
+                <li>
+                    <a href="{{ tagUrl(tag) }}">
+                        {{ tag.name }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</article>
