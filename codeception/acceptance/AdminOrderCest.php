@@ -9,6 +9,14 @@ class AdminOrderCest
         $I->seeAdminLoginPage();
     }
 
+    public function accessDeniedForUser(AcceptanceTester $I)
+    {
+        $I->wantTo('ensure users cannot access the admin panel');
+        $I->loginAsUser();
+        $I->amOnPage('/admin/order');
+        $I->seeAccessDenied();
+    }
+
     public function viewAllOrders(AcceptanceTester $I)
     {
         $I->wantTo('view all orders');

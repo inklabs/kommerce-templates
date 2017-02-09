@@ -22,11 +22,19 @@ class AcceptanceTester extends \Codeception\Actor
     const SHIP_METHOD_SELECTOR = 'input[class="ship-method"]:nth-child(1)';
     const ADMIN_EMAIL = 'aaron@example.com';
     const ADMIN_PASS = 'Test123!';
+    const USER_EMAIL = 'charles@example.com';
+    const USER_PASS = 'Test123!';
 
     public function seeAdminLoginPage()
     {
         $I = $this;
         $I->see('Please Sign In', 'h1');
+    }
+
+    public function seeAccessDenied()
+    {
+        $I = $this;
+        $I->see('Access Denied');
     }
 
     /**
@@ -160,6 +168,17 @@ class AcceptanceTester extends \Codeception\Actor
         $I->see('Please Sign In');
         $I->fillField('Email Address', self::ADMIN_EMAIL);
         $I->fillField('Password', self::ADMIN_PASS);
+        $I->click('Sign In', '#login');
+        $I->see('Orders');
+    }
+
+    public function loginAsUser()
+    {
+        $I = $this;
+        $I->amOnPage('/user/login');
+        $I->see('Please Sign In');
+        $I->fillField('Email Address', self::USER_EMAIL);
+        $I->fillField('Password', self::USER_PASS);
         $I->click('Sign In', '#login');
         $I->see('Orders');
     }
