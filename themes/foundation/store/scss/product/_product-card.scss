@@ -1,0 +1,14 @@
+.zk-product-card {
+  @include card-container;
+}
+
+.zk-card-section {
+  @include card-section;
+  > h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

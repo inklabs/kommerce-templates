@@ -5,7 +5,7 @@
         {% if relatedProducts is not empty %}
             {% for product in relatedProducts %}
                 <div class="column">
-                    <a class="zk-related-product-card" href="{{ productUrl(product) }}">
+                    <a class="zk-product-card" href="{{ productUrl(product) }}">
                         <img src="{{ productImageUrl(product) }}">
                         <div class="zk-card-section">
                             <h4>{{ product.name }}</h4>
