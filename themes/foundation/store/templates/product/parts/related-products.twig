@@ -5,22 +5,24 @@
         {% if relatedProducts is not empty %}
             {% for product in relatedProducts %}
                 <div class="column">
+                    <a class="zk-related-product-card" href="{{ productUrl(product) }}">
+                        <img src="{{ productImageUrl(product) }}">
+                        <div class="zk-card-section">
+                            <h4>{{ product.name }}</h4>
+                            <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
 
-                    <a href="{{ productUrl(product) }}">
-                        <img class="thumbnail" src="{{ productImageUrl(product) }}">
-                        <div class="product-name">{{ product.name }}</div>
-                        <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
-                    </a>
+                            {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
 
-                    {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+                            {% if not product.isInStock %}
+                                <div class="availability">
+                                    <span class="out-of-stock">Out of Stock</span>
+                                </div>
+                            {% elseif product.isPriceVisible %}
+                                {% include '@store/helper/price.twig' with {'price': product.price } only %}
+                            {% endif %}
 
-                    {% if not product.isInStock %}
-                        <div class="availability">
-                            <span class="out-of-stock">Out of Stock</span>
                         </div>
-                    {% elseif product.isPriceVisible %}
-                        {% include '@store/helper/price.twig' with {'price': product.price } only %}
-                    {% endif %}
+                    </a>
                 </div>
             {% endfor %}
         {% endif %}
