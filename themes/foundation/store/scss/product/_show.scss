@@ -1,5 +1,42 @@
 .zk-product-show {
   width: 100%;
   min-height: 100%;
-  padding: 1rem 0.75rem;
+  padding-top: 1rem;
+  @include flex-grid-row;
+}
+
+.zk-product-image {
+  @include flex-column($gutter: true);
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 3)
+  }
+}
+
+.zk-product-main {
+  @include flex-column($gutter: false);
+
+  @include breakpoint(small only) {
+    @include grid-column-gutter;
+  }
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 6)
+  }
+}
+
+.zk-product-add-form {
+  @include flex-column($gutter: true);
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 3)
+  }
+}
+
+.zk-product-attachments {
+  @include flex-column($gutter: true);
+}
+
+.zk-product-tags {
+  @include flex-column($gutter: true);
 }

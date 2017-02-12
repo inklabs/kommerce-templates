@@ -9,138 +9,133 @@
 
     <section class="zk-product-show">
 
+        <article class="zk-product-image">
+            <img class="thumbnail" src="{{ productImageUrl(product) }}">
+            <div class="row small-up-4">
+                {% for image in product.images %}
+                    {% if image.path != product.defaultImage %}
+                        <div class="column">
+                            <a href="{{ image.pathUrl }}">
+                                <img src="{{ image.pathUrl }}" style="min-width:50px"/>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </article>
 
-        <div class="row">
-            <div class="small-12 medium-3 columns">
-                <img class="thumbnail" src="{{ productImageUrl(product) }}">
-                <div class="row small-up-4">
-                    {% for image in product.images %}
-                        {% if image.path != product.defaultImage %}
-                            <div class="column">
-                                <a href="{{ image.pathUrl }}">
-                                    <img src="{{ image.pathUrl }}" style="min-width:50px"/>
-                                </a>
-                            </div>
-                        {% endif %}
+        <article class="zk-product-main">
+            <h3>{{ product.name }}</h3>
+
+            {% if product.description is not empty %}
+                <dl>
+                    <dt class="description-info">Description</dt>
+                    <dd class="description-desc">{{ product.description | nl2br }}</dd>
+                </dl>
+            {% endif %}
+
+            <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
+
+            {% if product.productQuantityDiscounts is not empty %}
+                <div class="zk-discount-prices">
+                    {% for discount in (product.productQuantityDiscounts | reverse ) %}
+                        <div>
+                            Buy {{ discount.quantity }} or more for
+
+                            {% if product.price.unitPrice < discount.price.unitPrice %}
+                                <span class="price-strike">{{ discount.price.unitPrice | displayPrice }}</span>
+                                {{ product.price.unitPrice | displayPrice }}
+                            {% else %}
+                                {{ discount.price.unitPrice | displayPrice }}
+                            {% endif %}
+
+                            each
+                        </div>
                     {% endfor %}
                 </div>
-            </div>
+            {% endif %}
+        </article>
 
-            <div class="small-12 medium-6 columns">
-                <h3>{{ product.name }}</h3>
+        <article class="zk-product-add-form">
 
-                {% if product.description is not empty %}
-                    <dl>
-                        <dt class="description-info">Description</dt>
-                        <dd class="description-desc">{{ product.description | nl2br }}</dd>
-                    </dl>
+            {% if product.isInventoryRequired %}
+                Availability:
+                {% if product.quantity > 0 %}
+                    <span class="in-stock">In stock</span>
+                {% else %}
+                    <span class="out-of-stock">Out of stock</span>
+                {% endif %}
+            {% endif %}
+
+            {% if product.rating is not null %}
+                {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+            {% endif %}
+
+            {% if product.isInStock %}
+            <form action="{{ routeUrl('cart.add-item') }}"
+                  id="cart_add_item"
+                  class="form-inline"
+                  method="post">
+                {{ form.csrf() }}
                 {% endif %}
 
-                <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
-
-                {% if product.productQuantityDiscounts is not empty %}
-                    <div class="zk-discount-prices">
-                        {% for discount in (product.productQuantityDiscounts | reverse ) %}
-                            <div>
-                                Buy {{ discount.quantity }} or more for
-
-                                {% if product.price.unitPrice < discount.price.unitPrice %}
-                                    <span class="price-strike">{{ discount.price.unitPrice | displayPrice }}</span>
-                                    {{ product.price.unitPrice | displayPrice }}
-                                {% else %}
-                                    {{ discount.price.unitPrice | displayPrice }}
-                                {% endif %}
-
-                                each
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-
-            <div class="small-12 medium-3 column">
-
-                {% if product.isInventoryRequired %}
-                    Availability:
-                    {% if product.quantity > 0 %}
-                        <span class="in-stock">In stock</span>
-                    {% else %}
-                        <span class="out-of-stock">Out of stock</span>
-                    {% endif %}
-                {% endif %}
-
-                {% if product.rating is not null %}
-                    {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+                {% if product.options is not empty or product.textOptions is not empty %}
+                    {% for option in product.options %}
+                        {% include '@store/product/parts/options.twig' with {'option': option } only %}
+                    {% endfor %}
+                    {% for textOption in product.textOptions %}
+                        {% include '@store/product/parts/text-options.twig' with {'textOption': textOption } only %}
+                    {% endfor %}
                 {% endif %}
 
                 {% if product.isInStock %}
-                <form action="{{ routeUrl('cart.add-item') }}"
-                      id="cart_add_item"
-                      class="form-inline"
-                      method="post">
-                    {{ form.csrf() }}
-                    {% endif %}
+                <input type="hidden" name="id" value="{{ product.id.getHex() }}"/>
+                <label for="quantity">
+                    Qty:
+                    <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1"/>
+                </label>
+                <button type="submit" class="button expanded">
+                    <i class="fa fa-shopping-cart"></i> Add to Cart
+                </button>
+            </form>
+            {% endif %}
 
-                    {% if product.options is not empty or product.textOptions is not empty %}
-                        {% for option in product.options %}
-                            {% include '@store/product/parts/options.twig' with {'option': option } only %}
-                        {% endfor %}
-                        {% for textOption in product.textOptions %}
-                            {% include '@store/product/parts/text-options.twig' with {'textOption': textOption } only %}
-                        {% endfor %}
-                    {% endif %}
+            <div class="small secondary expanded button-group">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.fullUrl }}"
+                   class="button"
+                   target="_blank">
+                    <i class="fa fa-facebook"></i> Facebook
+                </a>
+                <a class="button">Twitter</a>
+                <a class="button">Yo</a>
+            </div>
 
-                    {% if product.isInStock %}
-                    <input type="hidden" name="id" value="{{ product.id.getHex() }}"/>
-                    <label for="quantity">
-                        Qty:
-                        <input class="form-control quantity" type="text" id="quantity" name="quantity" value="1"/>
-                    </label>
-                    <button type="submit" class="button expanded">
-                        <i class="fa fa-shopping-cart"></i> Add to Cart
-                    </button>
-                </form>
-                {% endif %}
+        </article>
 
-                <div class="small secondary expanded button-group">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.fullUrl }}"
-                       class="button"
-                       target="_blank">
-                        <i class="fa fa-facebook"></i> Facebook
+        <article class="zk-product-attachments">
+
+            {% if product.areAttachmentsEnabled %}
+                {% if user is not empty %}
+                    <a href="{{ routeUrl('user.attachment.createForProduct', {'productId': product.id.hex}) }}"
+                       class="button upload-attachment">
+                        <i class="fa fa-upload"></i> Upload Attachment
                     </a>
-                    <a class="button">Twitter</a>
-                    <a class="button">Yo</a>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="column">
-
-                {% if product.areAttachmentsEnabled %}
-                    {% if user is not empty %}
-                        <a href="{{ routeUrl('user.attachment.createForProduct', {'productId': product.id.hex}) }}"
-                           class="button upload-attachment">
-                            <i class="fa fa-upload"></i> Upload Attachment
-                        </a>
-                    {% endif %}
                 {% endif %}
+            {% endif %}
 
-                {% if product.productAttributes is not empty %}
-                    <div class="row">
-                        <div class="column">
-                            <h4>Attributes:</h4>
-                            {% for productAttribute in product.productAttributes %}
-                                <strong>{{ productAttribute.attribute.name }}:</strong>
-                                {{ productAttribute.attributeValue.name }} <br>
-                            {% endfor %}
-                        </div>
+            {% if product.productAttributes is not empty %}
+                <div class="row">
+                    <div class="column">
+                        <h4>Attributes:</h4>
+                        {% for productAttribute in product.productAttributes %}
+                            <strong>{{ productAttribute.attribute.name }}:</strong>
+                            {{ productAttribute.attributeValue.name }} <br>
+                        {% endfor %}
                     </div>
-                {% endif %}
+                </div>
+            {% endif %}
 
-            </div>
-        </div>
+        </article>
 
         {% include '@store/product/parts/tags.twig' with { 'tags': product.tags } %}
         {% include '@store/product/parts/related-products.twig' with { 'relatedProducts': relatedProducts, 'product': product } %}
