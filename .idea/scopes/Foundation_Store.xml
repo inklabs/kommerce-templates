@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Foundation Store" pattern="file[kommerce-templates]:themes/foundation/store//*" />
+</component>
