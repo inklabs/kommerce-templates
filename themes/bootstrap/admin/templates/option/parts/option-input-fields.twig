@@ -1,4 +1,5 @@
 {# @var option \inklabs\kommerce\EntityDTO\OptionDTO #}
+{# @var optionTypes array #}
 <h2>Required:</h2>
 
 <div class="row form-group">
@@ -13,7 +14,21 @@
                required=""/>
     </div>
 </div>
-
+<div class="row form-group">
+    <label for="option-type" class="control-label col-sm-3">Option Type</label>
+    <div class="col-sm-3">
+        {{ form.select(
+            'option[type]',
+            option.type.slug,
+            optionTypes,
+            'option-type',
+            'form-control input-sm',
+            {
+                'required': 'true'
+            }
+        ) }}
+    </div>
+</div>
 <h2>Optional:</h2>
 
 <div class="row form-group">
