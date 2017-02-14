@@ -142,7 +142,8 @@
             </div>
         </div>
 
-        {% include '@store/product/parts/tabset.twig' with { 'relatedProducts': relatedProducts, 'product': product } %}
+        {% include '@store/product/parts/tags.twig' with { 'tags': product.tags } %}
+        {% include '@store/product/parts/related-products.twig' with { 'relatedProducts': relatedProducts, 'product': product } %}
 
     </section>
 

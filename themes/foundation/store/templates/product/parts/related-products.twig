@@ -1,0 +1,30 @@
+<article class="zk-related-products">
+    <h5>Related Products</h5>
+
+    <div class="row medium-up-3 large-up-4">
+        {% if relatedProducts is not empty %}
+            {% for product in relatedProducts %}
+                <div class="column">
+                    <a class="zk-product-card" href="{{ productUrl(product) }}">
+                        <img src="{{ productImageUrl(product) }}">
+                        <div class="zk-card-section">
+                            <h4>{{ product.name }}</h4>
+                            <p>{% include '@store/helper/price.twig' with {'price': product.price } only %}</p>
+
+                            {% include '@store/helper/rating-stars.twig' with {'rating': product.rating } only %}
+
+                            {% if not product.isInStock %}
+                                <div class="availability">
+                                    <span class="out-of-stock">Out of Stock</span>
+                                </div>
+                            {% elseif product.isPriceVisible %}
+                                {% include '@store/helper/price.twig' with {'price': product.price } only %}
+                            {% endif %}
+
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</article>

@@ -1,0 +1,15 @@
+.zk-tags {
+  @include title-section;
+}
+
+.zk-tag-list {
+  @include menu-base;
+
+  @include breakpoint(medium) {
+    @include flex-align(center);
+  }
+
+  a:first-child {
+    padding-left: 0;
+  }
+}

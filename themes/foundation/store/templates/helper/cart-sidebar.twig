@@ -1,11 +1,26 @@
 {# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
 {# @var product \inklabs\kommerce\EntityDTO\ProductDTO #}
-
 {% if cart.cartItems is not empty %}
 <aside class="zk-cart-sidebar show-for-large">
     <h4>Your Cart</h4>
-    {% for product in cart.cartItems %}
-        {{ product.product | json_encode }}
-    {% endfor %}
+
+    <div>
+        Total ({{ cart.totalQuantity }} items):
+        <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
+    </div>
+
+    <div class="zk-cart-sidebar-products">
+        {% for product in cart.cartItems %}
+            <a href="{{ productUrl(product.product) }}" class="zk-cart-sidebar-product">
+                <img src="{{ product.product.defaultImage }}">
+                <p>
+                    {{ product.product.name }}<br>
+                    {% include '@store/helper/price.twig' with {'price': product.price } only %}
+                </p>
+            </a>
+        {% endfor %}
+    </div>
+
+    {% include '@store/helper/checkout-button.twig' only %}
 </aside>
 {% endif %}

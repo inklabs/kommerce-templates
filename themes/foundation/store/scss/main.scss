@@ -2,6 +2,7 @@
 @import "vendor/foundation-sites";
 
 @import "mixins/flex";
+@import "mixins/page-sections";
 
 @import "layout/base";
 @import "layout/topbar";
@@ -9,8 +10,10 @@
 @import "component/forms";
 
 @import "product/layout";
-@import "product/tabs";
+@import "product/related-product";
+@import "product/tags";
 @import "product/show";
 
 @import "cart/show";
 @import "cart/added";
+@import "cart/cart-sidebar";
