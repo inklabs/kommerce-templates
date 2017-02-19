@@ -13,8 +13,8 @@
             </article>
         {% else %}
             <article class="zk-shopping-cart-listing">
-                {% include '@store/cart/parts/product-list.twig' with { 'cartItems': cart.cartItems } %}
-                {#{% include '@store/cart/parts/totals.twig' %}#}
+                {% include '@store/cart/parts/cart-list.twig' with { 'cartItems': cart.cartItems } %}
+                {% include '@store/cart/parts/totals.twig' %}
             </article>
 
             <article class="zk-shopping-cart-totals-block">

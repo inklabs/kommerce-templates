@@ -1,0 +1,22 @@
+.zk-media-object {
+  @include media-object-container;
+  margin-bottom: 0;
+
+  img {
+    max-width: none;
+  }
+
+  &.stack-for-#{$-zf-zero-breakpoint} {
+    @include breakpoint($-zf-zero-breakpoint only) {
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.zk-media-object-section {
+  @include media-object-section;
+
+  &.main-section {
+    flex: 1 1 0px;
+  }
+}

@@ -1,0 +1,52 @@
+.zk-cart-list {
+
+  .zk-cart-list-header {
+    @include hide-for-only(small);
+    @include flex-grid-row($behavior: nest);
+    width: 100%;
+
+    h4 {
+      font-size: 1.1rem;
+    }
+  }
+
+  .zk-cart-list-item {
+    @include flex-grid-row($behavior: nest);
+    padding: {
+      top: 15px;
+      bottom: 15px;
+    }
+
+    &:nth-child(odd) {
+      background-color: $light-gray;
+    }
+  }
+}
+
+.zk-cart-list-product {
+  @include flex-column($gutter: true);
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 6);
+  }
+}
+
+.zk-cart-list-quantity {
+  @include flex-column($gutter: true);
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 3);
+  }
+}
+
+.zk-cart-list-price {
+  @include flex-column($gutter: true);
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 3);
+  }
+}
+
+.zk-cell header {
+  @include show-for-only(small);
+}

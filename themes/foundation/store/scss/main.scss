@@ -7,8 +7,6 @@
 @import "layout/base";
 @import "layout/topbar";
 
-@import "component/forms";
-
 @import "pages/product/layout";
 @import "pages/product/related-product";
 @import "pages/product/tags";
@@ -17,3 +15,7 @@
 @import "pages/cart/show";
 @import "pages/cart/added";
 @import "pages/cart/cart-sidebar";
+@import "pages/cart/cart-list";
+
+@import "component/forms";
+@import "component/media-object";
