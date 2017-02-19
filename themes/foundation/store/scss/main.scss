@@ -9,11 +9,11 @@
 
 @import "component/forms";
 
-@import "product/layout";
-@import "product/related-product";
-@import "product/tags";
-@import "product/show";
+@import "pages/product/layout";
+@import "pages/product/related-product";
+@import "pages/product/tags";
+@import "pages/product/show";
 
-@import "cart/show";
-@import "cart/added";
-@import "cart/cart-sidebar";
+@import "pages/cart/show";
+@import "pages/cart/added";
+@import "pages/cart/cart-sidebar";

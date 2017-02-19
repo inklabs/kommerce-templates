@@ -1,4 +1,8 @@
-@mixin flex-column {
-  display: flex;
-  flex-direction: column;
+@mixin flex-column($size: 12, $gutter: false) {
+  flex: flex-grid-column($size);
+  max-width: grid-column($size);
+
+  @if $gutter {
+    @include grid-column-gutter;
+  }
 }
