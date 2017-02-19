@@ -29,7 +29,7 @@
                     </div>
 
                     {% if cart.shipmentRate.rate is not null %}
-                        {% include '@store/cart/parts/modify-shipping-button.twig' with {'extraClass': 'btn-block'} %}
+                        {% include '@store/cart/parts/modify-shipping-button.twig' with {'extraClass': 'expanded'} %}
                     {% endif %}
 
                     <form action="{{ routeUrl('cart.apply-coupon') }}" method="post">

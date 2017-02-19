@@ -40,11 +40,11 @@
 
             <div class="form-actions">
                 {% if shipmentRates is empty %}
-                    <button type="submit" class="button btn-block">
+                    <button type="submit" class="button expanded">
                         Get Quote
                     </button>
                 {% else %}
-                    <button type="submit" class="button btn-block">
+                    <button type="submit" class="button expanded">
                         Update Zipcode
                     </button>
                 {% endif %}
@@ -87,7 +87,7 @@
                         <i class="fa fa-ok-sign"></i>
                         Update Total
                     </button>
-                    <a href="{{ routeUrl('cart.get.show') }}" class="btn">Cancel</a>
+                    <a href="{{ routeUrl('cart.get.show') }}" class="button">Cancel</a>
                 </div>
             </form>
         {% endif %}
