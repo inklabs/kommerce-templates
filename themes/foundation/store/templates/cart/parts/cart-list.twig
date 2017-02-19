@@ -9,7 +9,7 @@
             <h4>Quantity</h4>
         </div>
         <div class="zk-cart-list-price">
-            <h4>Unit Price</h4>
+            <h4>Price</h4>
         </div>
     </header>
     {% for item in cartItems %}
@@ -23,7 +23,7 @@
                 <div class="zk-media-object-section">
                     <div class="thumbnail">
                         <a href="{{ productUrl(item.product) }}">
-                            <img src="{{ productImageUrl(item.product) }}" width="110" height="110" />
+                            <img src="{{ productImageUrl(item.product) }}">
                         </a>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
             </div>
 
         </section>
-        <div class="zk-cart-list-quantity zk-cell">
+        <section class="zk-cart-list-quantity zk-cell">
             <header>
                 <h5>Quantity</h5>
             </header>
@@ -55,24 +55,18 @@
             <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
                 {{ form.csrf() }}
                 {{ form.hidden('id', item.id.hex) }}
-                <div style="width: 120px">
 
-                    <div class="input-group">
-                        <input class="zk-update-qty input-group-field" type="text" name="quantity" value="{{ item.quantity }}" size="3" maxlength="3">
-                        <div class="input-group-button">
-                            <input type="submit" class="button" value="Update">
-                        </div>
-                    </div>
-                </div>
+                <input class="zk-update-qty" type="text" name="quantity" value="{{ item.quantity }}" size="3" maxlength="3">
             </form>
-        </div>
-        <div class="zk-cart-list-price zk-cell">
+        </section>
+        <section class="zk-cart-list-price zk-cell">
             <header>
-                <h5>Unit Price</h5>
+                <h5>Price</h5>
             </header>
-            <p>{{ item.price.quantityPrice | displayPrice }}</p>
-            <p>{% include '@admin/helper/unit-price.twig' with {'price': item.price } only %}</p>
-        </div>
+            <p class="zk-cart-list-item-price">
+                {% include '@admin/helper/unit-price.twig' with {'price': item.price } only %}
+            </p>
+        </section>
     </article>
     {% endfor %}
 </section>

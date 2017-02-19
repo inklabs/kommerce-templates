@@ -12,7 +12,7 @@
 }
 
 .zk-shopping-cart-listing {
-  @include flex-column($gutter: true);
+  @include flex-column($gutter: false);
 
   @include breakpoint(medium) {
     @include flex-column($size: 8);

@@ -2,9 +2,9 @@
   @include media-object-container;
   margin-bottom: 0;
 
-  img {
-    max-width: none;
-  }
+  //img {
+  //  max-width: none;
+  //}
 
   &.stack-for-#{$-zf-zero-breakpoint} {
     @include breakpoint($-zf-zero-breakpoint only) {
