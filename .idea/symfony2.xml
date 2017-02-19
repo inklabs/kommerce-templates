@@ -3,8 +3,7 @@
   <component name="Symfony2PluginSettings">
     <option name="twigNamespaces">
       <list>
-        <twig_namespace custom="true" namespace="Foundation" namespaceType="ADD_PATH" path="themes/foundation" />
-        <twig_namespace custom="true" namespace="foundation-store" namespaceType="ADD_PATH" path="themes/foundation/store" />
+        <twig_namespace custom="true" namespace="store" namespaceType="ADD_PATH" path="themes/foundation/store" />
       </list>
     </option>
   </component>
