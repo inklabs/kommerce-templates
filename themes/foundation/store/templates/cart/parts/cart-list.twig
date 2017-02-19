@@ -28,52 +28,51 @@
                     </div>
                 </div>
                 <div class="zk-media-object-section">
-                    <h4>
+                    <h4 class="zk-cart-list-item-name">
                         <a href="{{ productUrl(item.product) }}">
                             <span class="cart-product-title">{{ item.product.name }}</span>
                         </a>
                     </h4>
-                    {% include '@store/cart/parts/cart-item-options.twig' with {'item': item } only %}
 
-                    <div class="hidden-sm text-muted">
-                        <small>{{ item.fullSku }}</small>
-                    </div>
+                    <p class="zk-cart-list-item-sku">{{ item.fullSku }}</p>
 
-                    <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
+                    {% include '@store/cart/parts/cart-item-options.twig' with {'cartItem': item } only %}
+
+                    <form action="{{ routeUrl('cart.delete-item') }}" method="post" role="form">
                         {{ form.csrf() }}
                         {{ form.hidden('id', item.id.hex) }}
-                        <input class="zk-submit-anchor" type="submit" value="Remove Item"/>
+                        <input class="zk-submit-anchor alert small" type="submit" value="Remove Item"/>
                     </form>
                 </div>
             </div>
 
         </section>
-        {#<div class="zk-cart-list-quantity zk-cell">#}
-            {#<header>#}
-                {#<h5>Quantity</h5>#}
-            {#</header>#}
+        <div class="zk-cart-list-quantity zk-cell">
+            <header>
+                <h5>Quantity</h5>
+            </header>
 
-            {#<form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">#}
-                {#{{ form.csrf() }}#}
-                {#{{ form.hidden('id', item.id.hex) }}#}
-                {#<div style="width: 120px">#}
+            <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
+                {{ form.csrf() }}
+                {{ form.hidden('id', item.id.hex) }}
+                <div style="width: 120px">
 
-                    {#<div class="input-group">#}
-                        {#<input class="zk-update-qty input-group-field" type="text" name="quantity" value="{{ item.quantity }}" size="3" maxlength="3">#}
-                        {#<div class="input-group-button">#}
-                            {#<input type="submit" class="button" value="Update">#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</form>#}
-        {#</div>#}
-        {#<div class="zk-cart-list-price zk-cell">#}
-            {#<header>#}
-                {#<h5>Unit Price</h5>#}
-            {#</header>#}
-            {#<p>{{ item.price.quantityPrice | displayPrice }}</p>#}
-            {#<p>{% include '@admin/helper/unit-price.twig' with {'price': item.price } only %}</p>#}
-        {#</div>#}
+                    <div class="input-group">
+                        <input class="zk-update-qty input-group-field" type="text" name="quantity" value="{{ item.quantity }}" size="3" maxlength="3">
+                        <div class="input-group-button">
+                            <input type="submit" class="button" value="Update">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="zk-cart-list-price zk-cell">
+            <header>
+                <h5>Unit Price</h5>
+            </header>
+            <p>{{ item.price.quantityPrice | displayPrice }}</p>
+            <p>{% include '@admin/helper/unit-price.twig' with {'price': item.price } only %}</p>
+        </div>
     </article>
     {% endfor %}
 </section>

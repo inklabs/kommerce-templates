@@ -40,3 +40,7 @@
 .zk-product-tags {
   @include flex-column($gutter: true);
 }
+
+.zk-related-products {
+  @include flex-column($gutter: true);
+}

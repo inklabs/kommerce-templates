@@ -1,22 +1,21 @@
 {# @var cartItem \inklabs\kommerce\EntityDTO\CartItemDTO #}
 
-{% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
-    <small>
-        {{ cartItemOptionProduct.optionProduct.option.name }}:
-        {{ cartItemOptionProduct.optionProduct.product.name }}
-    </small>
-{% endfor %}
+<ul class="zk-cart-list-item-options">
+    {% for cartItemOptionProduct in cartItem.cartItemOptionProducts %}
+        <li>
+            {{ cartItemOptionProduct.optionProduct.option.name }}: {{ cartItemOptionProduct.optionProduct.product.name }}
+        </li>
+    {% endfor %}
 
-{% for cartItemOptionValue in cartItem.cartItemOptionValues %}
-    <small>
-            {{ cartItemOptionValue.optionValue.option.name }}:
-            {{ cartItemOptionValue.optionValue.name }}
-    </small>
-{% endfor %}
+    {% for cartItemOptionValue in cartItem.cartItemOptionValues %}
+        <li>
+            {{ cartItemOptionValue.optionValue.option.name }}: {{ cartItemOptionValue.optionValue.name }}
+        </li>
+    {% endfor %}
 
-{% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
-    <small>
-            {{ cartItemTextOptionValue.textOption.name }}:
-            {{ cartItemTextOptionValue.textOptionValue }}
-    </small>
-{% endfor %}
+    {% for cartItemTextOptionValue in cartItem.cartItemTextOptionValues %}
+        <li>
+            {{ cartItemTextOptionValue.textOption.name }}: {{ cartItemTextOptionValue.textOptionValue }}
+        </li>
+    {% endfor %}
+</ul>

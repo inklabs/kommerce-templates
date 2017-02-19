@@ -50,3 +50,13 @@
 .zk-cell header {
   @include show-for-only(small);
 }
+
+.zk-cart-list-item-name {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.zk-cart-list-item-sku {
+  font-size: 0.8rem;
+  margin: 0;
+}
