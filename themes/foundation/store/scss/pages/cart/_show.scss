@@ -1,0 +1,49 @@
+.zk-update-qty {
+  min-width: 50px;
+}
+
+.zk-shopping-cart {
+  @include flex-grid-row;
+  margin: {
+    top: 15px;
+    bottom: 25px;
+  };
+}
+
+.zk-shopping-cart-listing {
+  @include flex-column($gutter: true);
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 8);
+  }
+
+  @include breakpoint(large) {
+    @include flex-column($size: 9);
+  }
+}
+
+.zk-shopping-cart-totals-block {
+  @include flex-column($gutter: true);
+
+  @include breakpoint(medium) {
+    @include flex-column($size: 4);
+  }
+
+  @include breakpoint(large) {
+    @include flex-column($size: 3);
+  }
+}
+
+
+.zk-shopping-cart-recommended-products {
+  @include flex-column($gutter: true);
+  @include grid-column-gutter;
+}
+
+//.zk-empty-cart {
+//  text-align: center;
+//  margin: {
+//    top: 15px;
+//    bottom: 35px;
+//  }
+//}

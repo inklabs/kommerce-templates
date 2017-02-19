@@ -1,0 +1,73 @@
+{# @var item \inklabs\kommerce\EntityDTO\ProductDTO #}
+
+<div class="row hide-for-small-only" style="padding-bottom: 15px;">
+    <div class="medium-6 column">Item</div>
+    <div class="medium-3 column">Quantity</div>
+    <div class="medium-3 column">Unit Price</div>
+</div>
+{% for item in cartItems %}
+    <div class="row">
+        <div class="small-12 medium-6 columns" class="cart-product-image">
+            <h5 class="hide-for-medium">
+                <strong>Item</strong>
+            </h5>
+
+            <div class="media-object stack-for-small">
+                <div class="media-object-section">
+                    <div class="thumbnail">
+                        <a href="{{ productUrl(item.product) }}">
+                            <img src="{{ productImageUrl(item.product) }}" width="110" height="110" />
+                        </a>
+                    </div>
+                </div>
+                <div class="media-object-section">
+                    <h4>
+                        <a href="{{ productUrl(item.product) }}">
+                            <span class="cart-product-title">{{ item.product.name }}</span>
+                        </a>
+                    </h4>
+                    {% include '@store/cart/parts/cart-item-options.twig' with {'item': item } only %}
+
+                    <div class="hidden-sm text-muted">
+                        <small>{{ item.fullSku }}</small>
+                    </div>
+
+                    <form action={{ routeUrl('cart.delete-item') }} method="post" role="form">
+                        {{ form.csrf() }}
+                        {{ form.hidden('id', item.id.hex) }}
+                        <input class="zk-submit-anchor" type="submit" value="Remove Item"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="small-12 medium-3 columns">
+            <h5 class="hide-for-medium">
+                <strong>Quantity</strong>
+            </h5>
+
+            <form action="{{ routeUrl('cart.update-quantity') }}" method="post" role="form">
+                {{ form.csrf() }}
+                {{ form.hidden('id', item.id.hex) }}
+                <div style="width: 120px">
+
+                    <div class="input-group">
+                        <input class="zk-update-qty input-group-field" type="text" name="quantity" value="{{ item.quantity }}" size="3" maxlength="3">
+                        <div class="input-group-button">
+                            <input type="submit" class="button" value="Update">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="small-12 medium-3 columns">
+            <h5 class="hide-for-medium">
+                <strong>Unit Price</strong>
+            </h5>
+            <p>{{ item.price.quantityPrice | displayPrice }}</p>
+            <p>{% include '@admin/helper/unit-price.twig' with {'price': item.price } only %}</p>
+        </div>
+    </div>
+    <hr>
+{% endfor %}
