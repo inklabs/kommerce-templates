@@ -6,53 +6,25 @@
 
 {% block content %}
 
-    <div class="zk-shopping-cart">
+    <section class="zk-shopping-cart">
         {% if cart.cartItems is empty %}
-            <div class="zk-empty-cart">
+            <article class="zk-empty-cart">
                 {% include '@store/cart/parts/empty-cart.twig' %}
-            </div>
+            </article>
         {% else %}
-            <div class="zk-shopping-cart-listing">
+            <article class="zk-shopping-cart-listing">
                 {% include '@store/cart/parts/product-list.twig' with { 'cartItems': cart.cartItems } %}
-                <div class="column">
-                    {% include '@store/cart/parts/totals.twig' %}
-                </div>
-            </div>
-            <div class="zk-shopping-cart-totals-block">
-                <div class="callout">
-                    <div id="cart-cta-box">
-                        <strong>
-                            Total ({{ cart.totalQuantity }} items):
-                            <span class="price-small">{{ cart.cartTotal.total | displayPrice }}</span>
-                        </strong>
-                        {% include '@store/helper/checkout-button.twig' only %}
-                    </div>
+                {#{% include '@store/cart/parts/totals.twig' %}#}
+            </article>
 
-                    {% if cart.shipmentRate.rate is not null %}
-                        {% include '@store/cart/parts/modify-shipping-button.twig' with {'extraClass': 'expanded'} %}
-                    {% endif %}
-
-                    <form action="{{ routeUrl('cart.apply-coupon') }}" method="post">
-                        {{ form.csrf() }}
-
-                        <div class="input-group">
-                            <input type="text" class="input-group-field" name="coupon_code" value="" placeholder="coupon code" />
-                            <span class="input-group-button">
-                                <button type="submit" class="button secondary" id="apply-coupon">Apply</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <article class="zk-shopping-cart-totals-block">
+                {% include '@store/cart/parts/totals-block.twig' with { 'cart': cart } %}
+            </article>
         {% endif %}
 
         <div class="zk-shopping-cart-recommended-products">
             {% include '@store/helper/recommended-products.twig' with {'products': recommendedProducts, 'size': 'small' } only %}
         </div>
-    </div>
+    </section>
 
-{% endblock %}
-
-{% block extraScripts %}
-    <script src="{{ assetUrl('foundation', 'store', 'js/shopping-cart.js') }}"></script>
 {% endblock %}
