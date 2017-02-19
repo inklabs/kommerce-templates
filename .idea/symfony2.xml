@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Symfony2PluginSettings">
+    <option name="pluginEnabled" value="true" />
     <option name="twigNamespaces">
       <list>
         <twig_namespace custom="true" namespace="store" namespaceType="ADD_PATH" path="themes/foundation/store" />
