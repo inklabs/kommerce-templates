@@ -7,6 +7,10 @@
 @import "layout/base";
 @import "layout/topbar";
 
+@import "component/button";
+@import "component/forms";
+@import "component/media-object";
+
 @import "pages/product/layout";
 @import "pages/product/related-product";
 @import "pages/product/tags";
@@ -18,6 +22,4 @@
 @import "pages/cart/cart-sidebar";
 @import "pages/cart/cart-list";
 @import "pages/cart/cart-item-options";
-
-@import "component/forms";
-@import "component/media-object";
+@import "pages/cart/modify-shipping-button";

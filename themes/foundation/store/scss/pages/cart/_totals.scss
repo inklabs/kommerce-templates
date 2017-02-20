@@ -6,13 +6,29 @@
 .zk-totals-row {
   @include flex-grid-row;
 
-  .zk-totals-key:nth-child(1) {
-    @include flex-column($size: 11, $gutter: true);
+  .zk-totals-key {
     text-align: right;
+    @include flex-column($size: 8, $gutter: true);
+
+    @include breakpoint(medium) {
+      @include flex-column($size: 8, $gutter: true);
+    }
+
+    @include breakpoint(large) {
+      @include flex-column($size: 9, $gutter: true);
+    }
   }
-  .zk-totals-value:nth-child(2) {
-    @include flex-column($size: 1, $gutter: true);
+  .zk-totals-value {
     font-weight: bold;
+    @include flex-column($size: 4, $gutter: true);
+
+    @include breakpoint(medium) {
+      @include flex-column($size: 4, $gutter: true);
+    }
+
+    @include breakpoint(large) {
+      @include flex-column($size: 3, $gutter: true);
+    }
   }
 }
 

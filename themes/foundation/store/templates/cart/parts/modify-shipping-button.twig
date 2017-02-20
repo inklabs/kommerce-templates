@@ -1,9 +1,9 @@
 {# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
 
-{% set class = 'button ' ~ extraClass %}
+{% set class = '' ~ extraClass %}
 
 {% if env.shippingType.isFlatRate %}
-    <a href="{{ routeUrl('cart.estimate-tax') }}" class="{{ class }} estimate-tax">
+    <a href="{{ routeUrl('cart.estimate-tax') }}" class="zk-estimate-tax {{ class }}">
         {% if cart.shipmentRate.rate.amount is null %}
             Estimate Tax
         {% else %}
@@ -11,7 +11,7 @@
         {% endif %}
     </a>
 {% else %}
-    <a href="{{ routeUrl('cart.estimate-shipping') }}" class="{{ class }} estimate-shipping">
+    <a href="{{ routeUrl('cart.estimate-shipping') }}" class="zk-estimate-shipping {{ class }}">
         {% if cart.shipmentRate.rate.amount is null %}
             Estimate Shipping & Tax
         {% else %}

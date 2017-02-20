@@ -11,7 +11,7 @@
                 Shipping:
             </div>
             <div class="zk-totals-value">
-                {% include '@store/cart/parts/modify-shipping-button.twig' %}
+                {% include '@store/cart/parts/modify-shipping-button.twig' with { 'extraClass': 'hollow small' } %}
             </div>
         {% elseif cart.cartTotal.shipping == 0 %}
             <div class="zk-totals-key">

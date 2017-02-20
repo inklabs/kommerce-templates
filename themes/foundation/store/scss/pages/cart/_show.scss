@@ -2,6 +2,15 @@
   min-width: 50px;
 }
 
+.zk-empty-cart {
+  width: 100%;
+  text-align: center;
+  margin: {
+    top: 15px;
+    bottom: 25px;
+  };
+}
+
 .zk-shopping-cart {
   @include flex-grid-row();
   width: 100%;

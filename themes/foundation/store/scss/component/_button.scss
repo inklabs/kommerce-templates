@@ -1,0 +1,51 @@
+.zk-button {
+  @extend %zk-button;
+}
+
+%zk-button {
+  @include button;
+
+  // Sizes
+  @each $size, $value in map-remove($button-sizes, default) {
+    &.#{$size} {
+      font-size: $value;
+    }
+  }
+
+  &.expanded { @include button-expand; }
+
+  // Colors
+  @each $name, $color in $button-palette {
+    &.#{$name} {
+      @include button-hollow-style($color);
+    }
+
+    &.#{$name}.dropdown::after {
+      border-top-color: $color;
+    }
+  }
+
+  // Hollow style
+  &.hollow {
+    @include button-hollow;
+    @include button-hollow-style;
+
+    @each $name, $color in $button-palette {
+      &.#{$name} {
+        @include button-hollow-style($color);
+      }
+    }
+  }
+
+  // Disabled style
+  &.disabled,
+  &[disabled] {
+    @include button-disabled;
+
+    @each $name, $color in $button-palette {
+      &.#{$name} {
+        @include button-disabled($color);
+      }
+    }
+  }
+}
