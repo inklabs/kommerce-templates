@@ -1,0 +1,25 @@
+.zk-cart-totals {
+  display: block;
+  max-width: 100%;
+}
+
+.zk-totals-row {
+  @include flex-grid-row;
+
+  .zk-totals-key:nth-child(1) {
+    @include flex-column($size: 11, $gutter: true);
+    text-align: right;
+  }
+  .zk-totals-value:nth-child(2) {
+    @include flex-column($size: 1, $gutter: true);
+    font-weight: bold;
+  }
+}
+
+.zk-cart-total-price {
+  font-size: 1.2rem;
+  margin: {
+    top: 10px;
+    bottom: 10px;
+  }
+}

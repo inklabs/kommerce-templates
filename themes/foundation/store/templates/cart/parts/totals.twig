@@ -1,96 +1,90 @@
 {# @var cart \inklabs\kommerce\EntityDTO\CartDTO #}
 
-<table class="totals-table table">
-    <tbody>
-    <tr class="cart-subtotal">
-        <td>Subtotal:</td>
-        <td class="text-right">{{ cart.cartTotal.subtotal | displayPrice }}</td>
-    </tr>
-    {% if cart.shipmentRate.deliveryMethod is null %}
-        <tr class="cart-shipping">
-            <td colspan="100%">
+<div class="zk-cart-totals">
+    <div class="zk-totals-row">
+        <div class="zk-totals-key">Subtotal ({{ cart.totalQuantity  }} items):</div>
+        <div class="zk-totals-value">{{ cart.cartTotal.subtotal | displayPrice }}</div>
+    </div>
+    <div class="zk-totals-row">
+        {% if cart.shipmentRate.deliveryMethod is null %}
+            <div class="zk-totals-key">
                 Shipping:
-
-                <div>
-                    {% include '@store/cart/parts/modify-shipping-button.twig' %}
-                </div>
-            </td>
-        </tr>
-    {% elseif cart.cartTotal.shipping == 0 %}
-        <tr class="cart-shipping cart-free-shipping">
-            <td><span data-toggle="tooltip" data-original-title="<?=Kommerce::display_price($cart->cartTotal->shipping)?> Value">Shipping:</span></td>
-            <td class="text-right">
+            </div>
+            <div class="zk-totals-value">
+                {% include '@store/cart/parts/modify-shipping-button.twig' %}
+            </div>
+        {% elseif cart.cartTotal.shipping == 0 %}
+            <div class="zk-totals-key">
+                Shipping:
+            </div>
+            <div class="zk-totals-value">
                 FREE
-            </td>
-        </tr>
-    {% elseif cart.cartTotal.shipping > 0 %}
-        {% set shippingName = cart.shippingAddress.zip5 %}
-        {% if cart.shippingAddress.state is not empty %}
-            {% set shippingName =  shippingName ~ '-' ~ cart.shippingAddress.state %}
-        {% endif %}
-        <tr class="cart-shipping">
-            <td>
-                <span data-toggle="tooltip" data-original-title="{{ shippingName }}">
-                    Shipping &amp; Handling:
-                    <span class="text-muted">({{ cart.shipmentRate.deliveryMethod.name }})</span>
-                </span>
-            </td>
-            <td class="text-right">
+            </div>
+        {% elseif cart.cartTotal.shipping > 0 %}
+            {% set shippingName = cart.shippingAddress.zip5 %}
+
+            {% if cart.shippingAddress.state is not empty %}
+                {% set shippingName =  shippingName ~ '-' ~ cart.shippingAddress.state %}
+            {% endif %}
+
+            <div class="zk-totals-key">
+                {{ shippingName }}
+                Shipping &amp; Handling:
+                ({{ cart.shipmentRate.deliveryMethod.name }})
+            </div>
+            <div class="zk-totals-value">
                 {{ cart.cartTotal.shipping | displayPrice }}
-            </td>
-        </tr>
-    {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
 
     {% if cart.cartTotal.coupons is not empty or cart.cartTotal.cartPriceRules is not empty %}
-        <tr class="cart-discounts">
-            <td>
+        <div class="zk-totals-row">
+            <div class="zk-totals-key">
                 Discounts
-                <div class="container-fluid">
-                    {% for cartPriceRule in cart.cartTotal.cartPriceRules %}
-                        <div class="row">
-                            <div class="columns">
-                                &nbsp;<i class="fa fa-minus"></i>&nbsp;
-                                {{ cartPriceRule.name }}
-                            </div>
-                        </div>
-                    {% endfor %}
+                {% for cartPriceRule in cart.cartTotal.cartPriceRules %}
+                    <i class="fa fa-minus"></i>
+                    {{ cartPriceRule.name }}
+                {% endfor %}
 
-                    {% for coupon in cart.cartTotal.coupons %}
-                        <div class="row">
-                            <div class="small-10 columns">
-                                <form action="{{ routeUrl('cart.remove-coupon') }}"
-                                      method="post"
-                                      role="form">
-                                    {{ form.csrf() }}
-                                    {{ form.hidden('couponId', coupon.id.hex) }}
+                {% for coupon in cart.cartTotal.coupons %}
+                    <form action="{{ routeUrl('cart.remove-coupon') }}"
+                          method="post"
+                          role="form">
+                        {{ form.csrf() }}
+                        {{ form.hidden('couponId', coupon.id.hex) }}
 
-                                    <button type="submit" class="button">
-                                        <i class="fa fa-remove"></i>
-                                    </button>
-                                    {{ coupon.name }}
-                                </form>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </td>
-            <td class="text-right">
+                        <button type="submit" class="button">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                        {{ coupon.name }}
+                    </form>
+                {% endfor %}
+            </div>
+            <div class="zk-totals-value">
                 ({{ cart.cartTotal.discount | displayPrice }})
-            </td>
-        </tr>
+            </div>
+        </div>
     {% endif %}
 
     {% if cart.cartTotal.tax is not empty %}
-        <tr>
-            <td>Tax:</td>
-            <td class="text-right">
-                {{ cart.cartTotal.tax | displayPrice }}
-            </td>
-        </tr>
+    <div class="zk-totals-row">
+        <div class="zk-totals-key">
+            Tax:
+        </div>
+        <div class="zk-totals-value">
+            {{ cart.cartTotal.tax | displayPrice }}
+        </div>
+    </div>
     {% endif %}
-    <tr class="cart-total-price info">
-        <td>Total:</td>
-        <td class="text-right price-small">{{ cart.cartTotal.total | displayPrice }}</td>
-    </tr>
-    </tbody>
-</table>
+
+    <div class="zk-cart-total-price zk-totals-row">
+        <div class="zk-totals-key">
+            Total:
+        </div>
+        <div class="zk-totals-value">
+            {{ cart.cartTotal.total | displayPrice }}
+        </div>
+    </div>
+</div>
