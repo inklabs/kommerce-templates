@@ -1,0 +1,30 @@
+{# @var warehouses \inklabs\kommerce\EntityDTO\WarehouseDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Warehouse</th>
+            <th>Address</th>
+            <th>Location</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for warehouse in warehouses %}
+            <tr>
+                <td>{{ warehouse.name }}</td>
+                <td>
+                    {{ warehouse.address.address1 }}
+                    {{ warehouse.address.address2 }}
+                </td>
+                <td>
+                    {{ warehouse.address.city }},
+                    {{ warehouse.address.state }}
+                    {{ warehouse.address.zip5 }}
+                </td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr><td colspan="100%">No warehouses</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
