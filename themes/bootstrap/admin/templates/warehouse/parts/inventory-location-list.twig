@@ -1,0 +1,25 @@
+{# @var inventoryLocations \inklabs\kommerce\EntityDTO\InventoryLocationDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for inventoryLocation in inventoryLocations %}
+            <tr>
+                <td>{{ inventoryLocation.name }}</td>
+                <td>{{ inventoryLocation.code }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <span class="text-muted">No inventory locations.</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -4,6 +4,10 @@
     {
         'name': 'Edit',
         'url' : routeUrl('admin.warehouse.edit', {'warehouseId': warehouse.id.hex})
+    },
+    {
+        'name': 'Inventory Locations <span class="text-muted">(' ~ warehouse.inventoryLocations|length ~ ')</span>',
+        'url' : routeUrl('admin.warehouse.inventory-locations', {'warehouseId': warehouse.id.hex})
     }
 ] %}
 
