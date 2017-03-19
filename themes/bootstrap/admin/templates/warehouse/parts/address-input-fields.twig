@@ -1,0 +1,119 @@
+{# @var objectName string #}
+{# @var address \inklabs\kommerce\EntityDTO\AddressDTO #}
+<div class="row form-group">
+    <label for="{{ objectName }}-address-attention" class="control-label col-sm-3">Attention</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-attention"
+               name="{{ objectName }}[address][attention]"
+               value="{{ address.attention }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-company" class="control-label col-sm-3">Company</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-company"
+               name="{{ objectName }}[address][company]"
+               value="{{ address.company }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-address1" class="control-label col-sm-3">Address 1</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-address1"
+               name="{{ objectName }}[address][address1]"
+               value="{{ address.address1 }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-address2" class="control-label col-sm-3">Address 2</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-address2"
+               name="{{ objectName }}[address][address2]"
+               value="{{ address.address2 }}"
+               class="form-control"/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-city" class="control-label col-sm-3">City</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-city"
+               name="{{ objectName }}[address][city]"
+               value="{{ address.city }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-state" class="control-label col-sm-3">State</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-state"
+               name="{{ objectName }}[address][state]"
+               value="{{ address.state }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-zip5" class="control-label col-sm-3">Zip5</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-zip5"
+               name="{{ objectName }}[address][zip5]"
+               value="{{ address.zip5 }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-zip4" class="control-label col-sm-3">Zip4</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-zip4"
+               name="{{ objectName }}[address][zip4]"
+               value="{{ address.zip4 }}"
+               class="form-control"/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-point-latitude" class="control-label col-sm-3">Latitude</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-point-latitude"
+               name="{{ objectName }}[address][point][latitude]"
+               value="{{ address.point.latitude }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="{{ objectName }}-address-point-longitude" class="control-label col-sm-3">Longitude</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="{{ objectName }}-address-point-longitude"
+               name="{{ objectName }}[address][point][longitude]"
+               value="{{ address.point.longitude }}"
+               class="form-control"
+               required=""/>
+    </div>
+</div>

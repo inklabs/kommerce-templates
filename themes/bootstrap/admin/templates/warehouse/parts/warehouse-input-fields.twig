@@ -1,0 +1,17 @@
+{# @var warehouse \inklabs\kommerce\EntityDTO\WarehouseDTO #}
+{# @var promotionTypes array #}
+<div class="row form-group">
+    <label for="warehouse-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="warehouse-name"
+               name="warehouse[name]"
+               value="{{ warehouse.name }}"
+               class="form-control"
+               maxlength="255"
+               autofocus=""
+               required=""/>
+    </div>
+</div>
+
+{% include '@admin/warehouse/parts/address-input-fields.twig' with {'objectName': 'warehouse', 'address': warehouse.address} %}

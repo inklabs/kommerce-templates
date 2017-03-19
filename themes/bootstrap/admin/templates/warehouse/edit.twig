@@ -1,36 +1,36 @@
-{# @var attributeValue \inklabs\kommerce\EntityDTO\AttributeValueDTO #}
+{# @var warehouse \inklabs\kommerce\EntityDTO\WarehouseDTO #}
 {% extends '@admin/layout/base.twig' %}
 
-{% block pageTitle %}Attribute Value - {{ attributeValue.name }}{% endblock %}
+{% block pageTitle %}Warehouse - {{ warehouse.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
 
-        {% include '@admin/attribute/attribute-value/parts/header.twig' %}
+        {% include '@admin/warehouse/parts/header.twig' %}
 
         <div class="row">
             <div class="col-sm-12">
-                <form action="{{ routeUrl('admin.attribute.attribute-value.edit.post') }}"
+                <form action="{{ routeUrl('admin.warehouse.edit.post') }}"
                       method="post"
                       class="form-horizontal"
                       role="form">
                     <fieldset>
                         {{ form.csrf() }}
-                        {{ form.hidden('attributeValueId', attributeValue.id.hex ) }}
+                        {{ form.hidden('warehouseId', warehouse.id.hex ) }}
                         <div class="well">
-                            {% include '@admin/attribute/attribute-value/parts/attribute-value-input-fields.twig' %}
+                            {% include '@admin/warehouse/parts/warehouse-input-fields.twig' %}
                         </div>
 
                         <div class="well">
                             <div class="pull-right text-muted text-right">
-                                <span title="Created">{{ attributeValue.createdFormatted }}</span><br>
-                                <span title="Updated">{{ attributeValue.updatedFormatted }}</span><br>
+                                <span title="Created">{{ warehouse.createdFormatted }}</span><br>
+                                <span title="Updated">{{ warehouse.updatedFormatted }}</span><br>
                             </div>
 
                             <button type="submit" class="btn btn-primary" data-loading-text="Saving...">
                                 <i class="fa fa-check-circle"></i> Save
                             </button>
-                            <a href="{{ routeUrl('admin.attribute.attribute-values', {'attributeId': attributeValue.attribute.id.hex}) }}" class="btn btn-default">Cancel</a>
+                            <a href="{{ routeUrl('admin.warehouse') }}" class="btn btn-default">Cancel</a>
                         </div>
                     </fieldset>
                 </form>

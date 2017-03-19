@@ -10,21 +10,21 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="pull-right">
-                    <a href="{{ routeUrl('admin.inventory.warehouse.new') }}"
+                    <a href="{{ routeUrl('admin.warehouse.new') }}"
                        class="btn btn-success btn-xs">
                         <i class="fa fa-plus-circle"></i> New Warehouse
                     </a>
                 </div>
 
                 <h1>Warehouses</h1>
-                <form action="{{ routeUrl('admin.inventory.warehouse') }}"
+                <form action="{{ routeUrl('admin.warehouse') }}"
                       method="get"
                       class="form-search">
                     {% include '@admin/helper/search-bar.twig' with {'placeholder': 'Search Name', 'queryString': queryString} only %}
                 </form>
 
                 {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
-                {% include '@admin/inventory/warehouse/parts/warehouse-list.twig' with {'warehouses': warehouses} only %}
+                {% include '@admin/warehouse/parts/warehouse-list.twig' with {'warehouses': warehouses} only %}
                 {% include '@store/helper/pagination/pagination-detailed.twig' with {'pagination': pagination} only %}
             </div>
         </div>

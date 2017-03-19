@@ -1,0 +1,29 @@
+{# @var warehouse \inklabs\kommerce\EntityDTO\WarehouseDTO #}
+
+<div class="row">
+    <div class="col-sm-6">
+        Warehouse - {{ warehouse.name }}
+        <br>
+        <br>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="well well-sm">
+            <div class="pull-right">
+                <form action="{{ routeUrl('admin.warehouse.delete') }}"
+                      method="post"
+                      role="form">
+                    {{ form.csrf() }}
+                    {{ form.hidden('warehouseId', warehouse.id.getHex()) }}
+
+                    <button type="submit" class="btn btn-danger btn-xs">
+                        <i class="fa fa-trash"></i>
+                        Delete Warehouse
+                    </button>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

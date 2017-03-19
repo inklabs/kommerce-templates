@@ -11,7 +11,11 @@
     <tbody>
         {% for warehouse in warehouses %}
             <tr>
-                <td>{{ warehouse.name }}</td>
+                <td>
+                    <a href="{{ routeUrl('admin.warehouse.edit', {'warehouseId': warehouse.id.hex}) }}">
+                        {{ warehouse.name }}
+                    </a>
+                </td>
                 <td>
                     {{ warehouse.address.address1 }}
                     {{ warehouse.address.address2 }}
