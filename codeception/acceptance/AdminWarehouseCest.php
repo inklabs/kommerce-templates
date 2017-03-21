@@ -65,6 +65,18 @@ class AdminWarehouseCest
         $I->see('Warehouse has been saved');
         $I->seeInField('Name', $name);
 
+        // Add/Delete Inventory Location
+        $name = 'Zone 77 | Bin 33';
+        $code = 'Z77-B33';
+        $I->click('Inventory Locations');
+        $I->fillField('Name', $name);
+        $I->fillField('Code', $code);
+        $I->click('Add');
+        $I->see($name, 'table');
+        $I->see($code, 'table');
+        $I->click('table tr:nth-child(1) .delete-inventory-location > button');
+        $I->see('Success deleting inventory location');
+
         // Delete
         $I->click('Delete Warehouse');
         $I->see('Success removing warehouse');

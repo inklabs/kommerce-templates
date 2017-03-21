@@ -20,7 +20,7 @@
                         <td>
                             <form action="{{ routeUrl('admin.warehouse.remove-inventory-location') }}"
                                   method="post"
-                                  class="form pull-right">
+                                  class="form pull-right delete-inventory-location">
                                 {{ form.csrf() }}
                                 {{ form.hidden('warehouseId', warehouse.id.hex) }}
                                 {{ form.hidden('inventoryLocationId', inventoryLocation.id.hex) }}
