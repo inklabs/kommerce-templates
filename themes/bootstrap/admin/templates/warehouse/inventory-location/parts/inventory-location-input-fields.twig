@@ -1,0 +1,25 @@
+{# @var inventoryLocation \inklabs\kommerce\EntityDTO\InventoryLocationDTO #}
+<div class="row form-group">
+    <label for="inventoryLocation-name" class="control-label col-sm-3">Name</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="inventoryLocation-name"
+               name="inventoryLocation[name]"
+               value="{{ inventoryLocation.name }}"
+               class="form-control col-sm-3"
+               maxlength="255"
+               required=""/>
+    </div>
+</div>
+
+<div class="row form-group">
+    <label for="inventoryLocation-code" class="control-label col-sm-3">Code</label>
+    <div class="col-sm-8">
+        <input type="text"
+               id="inventoryLocation-code"
+               name="inventoryLocation[code]"
+               value="{{ inventoryLocation.code }}"
+               class="form-control col-sm-3"
+               maxlength="64"/>
+    </div>
+</div>

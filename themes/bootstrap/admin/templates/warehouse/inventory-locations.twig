@@ -11,13 +11,20 @@
         <div class="row">
             <div class="col-sm-12">
                 <br>
-
                 {% embed '@admin/warehouse/parts/inventory-location-list.twig' with {'inventoryLocations': warehouse.inventoryLocations} %}
                     {% block thead %}
                         <th class="text-right">Actions</th>
                     {% endblock %}
                     {% block tbody %}
-                        <td>
+                        <td class="text-right">
+                            <a href="{{ routeUrl('admin.warehouse.inventory-location.edit', {'inventoryLocationId': inventoryLocation.id.hex}) }}"
+                               class="btn btn-default btn-xs edit-inventory-location">
+                                Edit
+                            </a>
+                            <a href="{{ routeUrl('admin.warehouse.inventory-location.products', {'inventoryLocationId': inventoryLocation.id.hex}) }}"
+                               class="btn btn-default btn-xs">
+                                Products
+                            </a>
                             <form action="{{ routeUrl('admin.warehouse.remove-inventory-location') }}"
                                   method="post"
                                   class="form pull-right delete-inventory-location">
@@ -32,7 +39,6 @@
                 {% endembed %}
 
                 <hr>
-
                 <h4>Add Inventory Location:</h4>
                 <form action="{{ routeUrl('admin.warehouse.add-inventory-location') }}"
                       method="post"
@@ -42,30 +48,7 @@
                         {{ form.hidden('warehouseId', warehouse.id.hex) }}
 
                         <div class="well">
-                            <div class="row form-group">
-                                <label for="inventoryLocation-name" class="control-label col-sm-3">Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text"
-                                           id="inventoryLocation-name"
-                                           name="inventoryLocation[name]"
-                                           value=""
-                                           class="form-control col-sm-3"
-                                           maxlength="255"
-                                           required=""/>
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <label for="inventoryLocation-code" class="control-label col-sm-3">Code</label>
-                                <div class="col-sm-8">
-                                    <input type="text"
-                                           id="inventoryLocation-code"
-                                           name="inventoryLocation[code]"
-                                           value=""
-                                           class="form-control col-sm-3"
-                                           maxlength="64"/>
-                                </div>
-                            </div>
+                            {% include '@admin/warehouse/inventory-location/parts/inventory-location-input-fields.twig' %}
                         </div>
 
                         <div class="well">

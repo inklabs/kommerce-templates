@@ -1,0 +1,35 @@
+{# @var inventoryLocation \inklabs\kommerce\EntityDTO\InventoryLocationDTO #}
+
+<div class="row">
+    <div class="col-sm-6">
+        Warehouse -
+        <a href="{{ routeUrl('admin.warehouse.inventory-locations', {'warehouseId': inventoryLocation.warehouse.id.hex}) }}">
+            {{ inventoryLocation.warehouse.name }}
+        </a>
+        <br>
+        Inventory Location - {{ inventoryLocation.name }}
+        <br>
+        <br>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="well well-sm">
+            <div class="pull-right">
+                <form action="{{ routeUrl('admin.warehouse.remove-inventory-location') }}"
+                      method="post"
+                      role="form">
+                    {{ form.csrf() }}
+                    {{ form.hidden('warehouseId', inventoryLocation.warehouse.id.getHex()) }}
+                    {{ form.hidden('inventoryLocationId', inventoryLocation.id.getHex()) }}
+
+                    <button type="submit" class="btn btn-danger btn-xs">
+                        <i class="fa fa-trash"></i>
+                        Delete Inventory Location
+                    </button>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

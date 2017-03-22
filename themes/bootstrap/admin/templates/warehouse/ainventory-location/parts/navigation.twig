@@ -1,0 +1,18 @@
+{# @var inventoryLocation \inklabs\kommerce\EntityDTO\InventoryLocationDTO #}
+
+{% set navigation = [
+    {
+        'name': 'Edit',
+        'url' : routeUrl('admin.warehouse.inventory-location.edit', {'inventoryLocationId': inventoryLocation.id.hex})
+    },
+    {
+        'name': 'Products',
+        'url' : routeUrl('admin.warehouse.inventory-location.products', {'inventoryLocationId': inventoryLocation.id.hex})
+    }
+] %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include '@admin/helper/tab-navigation.twig' with {'navigation': navigation} %}
+    </div>
+</div>
