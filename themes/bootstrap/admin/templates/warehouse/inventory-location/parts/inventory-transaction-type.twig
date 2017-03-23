@@ -1,0 +1,13 @@
+{# @var inventoryTransaction \inklabs\kommerce\EntityDTO\InventoryTransactionDTO #}
+
+{% if inventoryTransaction.type.isHold or inventoryTransaction.type.isMove or inventoryTransaction.type.isShipped %}
+    {% set labelName = 'primary' %}
+{% elseif inventoryTransaction.type.isPromotion %}
+    {% set labelName = 'info' %}
+{% elseif inventoryTransaction.type.isNewProducts %}
+    {% set labelName = 'success' %}
+{% elseif inventoryTransaction.type.isReturned or inventoryTransaction.type.isDamaged or inventoryTransaction.type.isShrinkage %}
+    {% set labelName = 'warning' %}
+{% endif %}
+
+<span class="label label-{{ labelName }} inventory-transaction-type">{{ inventoryTransaction.type.name }}</span>

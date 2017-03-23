@@ -2,8 +2,7 @@
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>debitQuantity</th>
-            <th>creditQuantity</th>
+            <th>Quantity</th>
             <th>Memo</th>
             <th>Type</th>
             {% block thead %}{% endblock %}
@@ -12,10 +11,9 @@
     <tbody>
         {% for inventoryTransaction in inventoryTransactions %}
             <tr>
-                <td>{{ inventoryTransaction.debitQuantity }}</td>
-                <td>{{ inventoryTransaction.creditQuantity }}</td>
+                <td>{% include '@admin/warehouse/inventory-location/parts/inventory-transaction-quantity.twig' %}</td>
                 <td>{{ inventoryTransaction.memo }}</td>
-                <td>{{ inventoryTransaction.type.name }}</td>
+                <td>{% include '@admin/warehouse/inventory-location/parts/inventory-transaction-type.twig' %}</td>
                 {% block tbody %}{% endblock %}
             </tr>
         {% else %}
