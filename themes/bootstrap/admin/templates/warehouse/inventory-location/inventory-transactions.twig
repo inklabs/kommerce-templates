@@ -1,0 +1,19 @@
+{# @var inventoryLocation \inklabs\kommerce\EntityDTO\InventoryLocationDTO #}
+{# @var inventoryTransactions \inklabs\kommerce\EntityDTO\InventoryTransactionDTO[] #}
+{% extends '@admin/layout/base.twig' %}
+
+{% block pageTitle %}Inventory Transactions - {{ inventoryLocation.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% include '@admin/warehouse/inventory-location/parts/header.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                {% include '@admin/warehouse/inventory-location/parts/inventory-transactions-list.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

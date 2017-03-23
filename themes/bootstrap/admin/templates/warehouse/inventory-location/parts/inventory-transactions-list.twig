@@ -1,0 +1,29 @@
+{# @var inventoryTransactions \inklabs\kommerce\EntityDTO\InventoryTransactionDTO[] #}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>debitQuantity</th>
+            <th>creditQuantity</th>
+            <th>Memo</th>
+            <th>Type</th>
+            {% block thead %}{% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for inventoryTransaction in inventoryTransactions %}
+            <tr>
+                <td>{{ inventoryTransaction.debitQuantity }}</td>
+                <td>{{ inventoryTransaction.creditQuantity }}</td>
+                <td>{{ inventoryTransaction.memo }}</td>
+                <td>{{ inventoryTransaction.type.name }}</td>
+                {% block tbody %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <span class="text-muted">No inventory transactions.</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
