@@ -3,6 +3,8 @@
     <thead>
         <tr>
             <th>Quantity</th>
+            <th>SKU</th>
+            <th>Name</th>
             <th>Memo</th>
             <th>Type</th>
             {% block thead %}{% endblock %}
@@ -11,7 +13,19 @@
     <tbody>
         {% for inventoryTransaction in inventoryTransactions %}
             <tr>
-                <td>{% include '@admin/warehouse/inventory-location/parts/inventory-transaction-quantity.twig' %}</td>
+                <td class="lead">
+                    <strong>{% include '@admin/warehouse/inventory-location/parts/inventory-transaction-quantity.twig' %}</strong>
+                </td>
+                <td>
+                    <a href="{{ adminProductUrl(inventoryTransaction.product) }}">
+                        <img src="{{ productImageUrl(inventoryTransaction.product) }}"
+                             width="50"
+                             height="50"
+                             style="width: 50px; height: 50px;">
+                    </a>
+                </td>
+                <td>{{ inventoryTransaction.product.sku }}</td>
+                <td><a href="{{ adminProductUrl(inventoryTransaction.product) }}">{{ inventoryTransaction.product.name }}</a></td>
                 <td>{{ inventoryTransaction.memo }}</td>
                 <td>{% include '@admin/warehouse/inventory-location/parts/inventory-transaction-type.twig' %}</td>
                 {% block tbody %}{% endblock %}
