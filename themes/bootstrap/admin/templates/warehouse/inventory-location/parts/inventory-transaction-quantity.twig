@@ -1,8 +1,7 @@
 {# @var inventoryTransaction \inklabs\kommerce\EntityDTO\InventoryTransactionDTO #}
-{% if inventoryTransaction.debitQuantity > 0 %}
-    <span class="label label-danger"><i class="fa fa-arrow-down"></i></span>
-    {{ inventoryTransaction.debitQuantity }}
-{% else %}
+{% if inventoryTransaction.quantity > 0 %}
     <span class="label label-success"><i class="fa fa-arrow-up"></i></span>
-    {{ inventoryTransaction.creditQuantity }}
+{% else %}
+    <span class="label label-danger"><i class="fa fa-arrow-down"></i></span>
 {% endif %}
+{{ inventoryTransaction.quantity }}
