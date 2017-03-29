@@ -1,8 +1,8 @@
 {# @var inventoryTransaction \inklabs\kommerce\EntityDTO\InventoryTransactionDTO #}
 
-{% if inventoryTransaction.type.isHold or inventoryTransaction.type.isMove or inventoryTransaction.type.isShipped %}
+{% if inventoryTransaction.type.isMove or inventoryTransaction.type.isShipped or inventoryTransaction.type.isPromotion %}
     {% set labelName = 'primary' %}
-{% elseif inventoryTransaction.type.isPromotion %}
+{% elseif inventoryTransaction.type.isHold %}
     {% set labelName = 'info' %}
 {% elseif inventoryTransaction.type.isNewProducts %}
     {% set labelName = 'success' %}
