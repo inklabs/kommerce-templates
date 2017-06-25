@@ -45,7 +45,7 @@ class TwigTemplate
 
         $this->twigEnvironment = new Twig_Environment($twigLoader);
 
-        $this->twigEnvironment->addglobal(
+        $this->twigEnvironment->addGlobal(
             'config',
             [
                 'timezone' => $timezone
