@@ -2,10 +2,12 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <img src="{{ tagImageUrl(tag) }}"
-             width="35"
-             height="35"
-             style="margin: 0 10px"/>
+        {% if tag.defaultImage is not null %}
+            <img src="{{ tagImageUrl(tag) }}"
+                 width="35"
+                 height="35"
+                 style="margin: 0 10px"/>
+        {% endif %}
         Tag - {{ tag.name }}
         <br>
         <br>
